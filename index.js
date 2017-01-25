@@ -1,1 +1,0 @@
-import Suggestor from './src/components/suggestor/Suggestor';
