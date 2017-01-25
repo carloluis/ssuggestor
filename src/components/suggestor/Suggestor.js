@@ -39,10 +39,16 @@ export class Suggestor extends Component {
 
 		switch (e.keyCode) {
 			case KEY_CODES.ENTER:
-				this.setState({ open: !open && suggestions, value: suggestions? list[index]: value });
+				this.setState({ open: !open && suggestions });
+				if (suggestions) {
+					this.changeValue(list[index]);	
+				}
 				break;
 			case KEY_CODES.ESCAPE:
-				this.setState({ open: false, value: open? value: EMPTY_STR });
+				this.setState({ open: false });
+				if (!open) {
+					this.changeValue(EMPTY_STR);
+				}
 				break;
 			case KEY_CODES.DOWN: {
 				let next = (index + open) % list.length;
@@ -61,7 +67,7 @@ export class Suggestor extends Component {
 		e.preventDefault();
 	}
 	handleItemClick(value) {
-		this.setState({ value });
+		this.changeValue(value);
 	}
 	handleItemMouseEnter(index) {
 		this.setState({ index });
@@ -69,10 +75,15 @@ export class Suggestor extends Component {
 	handleChange(e) {
 		e.stopPropagation();
 		let value = e.target.value;
-		this.setState({ value, open: this.props.list.some(item => item.includes(value)) });
+		this.setState({ open: this.props.list.some(item => item.includes(value)) });
+		this.changeValue(value);
 	}
 	removeItem() {
-		this.setState({ value: EMPTY_STR });
+		this.changeValue(EMPTY_STR);
+	}
+	changeValue(value) {
+		this.setState({ value });
+		this.props.onChange(value);
 	}
 	filter() {
 		return this.props.list.filter(item => item.includes(this.state.value));
@@ -97,10 +108,12 @@ Suggestor.propTypes = {
 	list: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
 	item: React.PropTypes.string,
 	style: React.PropTypes.object,
-	placeholder: React.PropTypes.string
+	placeholder: React.PropTypes.string,
+	onChange: React.PropTypes.func
 };
 Suggestor.defaultProps = {
-	item: EMPTY_STR
+	item: EMPTY_STR,
+	onChange: f=>f
 };
 
 export default withClickOut(Suggestor);
