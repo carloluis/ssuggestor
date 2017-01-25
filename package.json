@@ -1,6 +1,6 @@
 {
   "name": "ssuggestor",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "react simple-suggestor",
   "main": "dist/react-ssuggestor.js",
   "scripts": {

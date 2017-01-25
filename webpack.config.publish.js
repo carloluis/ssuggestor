@@ -10,13 +10,6 @@ const envPluginConfig = new webpack.DefinePlugin({
 		'NODE_ENV': JSON.stringify(NODE_ENV)
 	}
 });
-var uglifyJsPluginConfig = new webpack.optimize.UglifyJsPlugin({
-	compress: {
-		warnings: true
-	},
-	mangle: true,
-	comments: false
-});
 
 module.exports = {
 	entry: {
@@ -52,7 +45,7 @@ module.exports = {
 			}
 		]
 	},
-	plugins: [envPluginConfig, uglifyJsPluginConfig],
+	plugins: [envPluginConfig],
 	resolve: {
 		extensions: ['', '.js']
 	},
