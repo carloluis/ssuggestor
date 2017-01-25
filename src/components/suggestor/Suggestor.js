@@ -33,7 +33,7 @@ export class Suggestor extends Component {
 		this.setState({ open: !this.state.open && !!this.filter().length });
 	}
 	handleKeyDown(e) {
-		let { open, index, value } = this.state;
+		let { open, index } = this.state;
 		let list = this.filter();
 		let suggestions = !!list.length;
 
