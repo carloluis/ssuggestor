@@ -30,11 +30,11 @@ export class Suggestor extends Component {
 		this.setState({ open: false });
 	}
 	handleClick() {
-		this.setState({ open: !this.state.open });
+		this.setState({ open: !this.state.open && !!this.filter().length });
 	}
 	handleKeyDown(e) {
 		let { open, index, value } = this.state;
-		let list = this.filter(this.props.list, value);
+		let list = this.filter();
 		let suggestions = !!list.length;
 
 		switch (e.keyCode) {
@@ -85,7 +85,7 @@ export class Suggestor extends Component {
 		return (
 			<div className="input-group" style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} tabIndex="0" >
 				<input type="text" className="form-control" onChange={this.handleChange} value={value} placeholder={placeholder} />
-				<span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} />
+				{ !!list.length && <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} /> }
 				{ value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.removeItem}/> }
 				<List {...{ list, open, index }} onItemClick={this.handleItemClick} onItemMouseEnter={this.handleItemMouseEnter} />
 			</div>
