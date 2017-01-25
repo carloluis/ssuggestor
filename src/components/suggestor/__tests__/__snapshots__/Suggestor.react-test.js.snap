@@ -11,19 +11,23 @@ exports[`<Suggestor /> initial render with no suggestions 1`] = `
     placeholder={undefined}
     type="text"
     value="" />
-  
-  <ul
-    className="dropdown-menu"
+  <span
+    className="glyphicon glyphicon-triangle-bottom"
     style={
       Object {
+        "bottom": 0,
+        "color": "#ccc",
         "cursor": "pointer",
-        "display": "none",
-        "maxHeight": 250,
-        "minWidth": 30,
-        "overflow": "auto",
-        "width": "inherit",
+        "fontSize": 16,
+        "height": 14,
+        "margin": "auto",
+        "position": "absolute",
+        "right": 10,
+        "top": 0,
+        "zIndex": 4,
       }
     } />
+  
 </div>
 `;
 
