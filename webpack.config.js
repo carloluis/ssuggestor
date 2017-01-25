@@ -29,6 +29,13 @@ module.exports = {
 		publicPath: '/'
 	},
 	module: {
+		preLoaders: [
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				loader: 'eslint'
+			}
+		],
 		loaders: [
 			{
 				test: /\.js$/,

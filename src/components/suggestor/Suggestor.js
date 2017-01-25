@@ -29,7 +29,7 @@ export class Suggestor extends Component {
 	handleClickOut() {
 		this.setState({ open: false });
 	}
-	handleClick(e) {
+	handleClick() {
 		this.setState({ open: !this.state.open });
 	}
 	handleKeyDown(e) {
@@ -44,14 +44,16 @@ export class Suggestor extends Component {
 			case KEY_CODES.ESCAPE:
 				this.setState({ open: false, value: open? value: EMPTY_STR });
 				break;
-			case KEY_CODES.DOWN:
+			case KEY_CODES.DOWN: {
 				let next = (index + open) % list.length;
 				this.setState({ open: suggestions, index: next });
 				break;
-			case KEY_CODES.UP:
+			}
+			case KEY_CODES.UP: {
 				let prev = (index || list.length) - 1;
 				this.setState({ open: suggestions, index: prev });
 				break;
+			}
 			default:
 				return;
 		}
@@ -94,7 +96,8 @@ export class Suggestor extends Component {
 Suggestor.propTypes = {
 	list: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
 	item: React.PropTypes.string,
-	style: React.PropTypes.object
+	style: React.PropTypes.object,
+	placeholder: React.PropTypes.string
 };
 Suggestor.defaultProps = {
 	item: EMPTY_STR

@@ -7,6 +7,13 @@ const ListItem = ({ item, onItemClick, onItemMouseEnter, index, overItem }) => (
 		<a>{item}</a>
 	</li>
 );
+ListItem.propTypes = {
+	item: React.PropTypes.string.isRequired,
+	index: React.PropTypes.number.isRequired,
+	overItem: React.PropTypes.bool.isRequired,
+	onItemClick: React.PropTypes.func.isRequired,
+	onItemMouseEnter: React.PropTypes.func.isRequired
+};
 
 export const List = ({ open, list, index, onItemClick, onItemMouseEnter }) => (
 	<ul className="dropdown-menu" style={getListStyles(open)}>
