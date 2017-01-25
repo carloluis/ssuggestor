@@ -19,7 +19,7 @@ export const X_STYLES = {
 
 export const getListStyles = visible => ({
 	display: visible? 'block':'none',
-	maxHeight: 190,
+	maxHeight: 250,
 	minWidth: 30,
 	width: 'inherit',
 	overflow: 'auto',
