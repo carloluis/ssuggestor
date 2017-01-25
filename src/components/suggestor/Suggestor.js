@@ -4,6 +4,7 @@ import { SPIN_STYLES, X_STYLES } from './styles';
 import List from './List';
 
 const KEY_CODES = {
+	TAB: 9,
 	ENTER: 13,
 	ESCAPE: 27,
 	DOWN: 40,
@@ -70,6 +71,9 @@ export class Suggestor extends Component {
 					this.changeValue(list[index]);	
 				}
 				break;
+			case KEY_CODES.TAB:
+				this.handleClose();
+				return;
 			case KEY_CODES.ESCAPE:
 				this.handleClose();
 				if (!open) {
@@ -124,7 +128,7 @@ export class Suggestor extends Component {
 		let { style, placeholder, arrow, nox } = this.props;
 
 		return (
-			<div className="input-group" style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} tabIndex="0" >
+			<div className="input-group" style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown}>
 				<input type="text" className="form-control" onChange={this.handleChange} value={value} placeholder={placeholder} />
 				{ arrow && <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} /> }
 				{ !nox && value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.removeItem}/> }
