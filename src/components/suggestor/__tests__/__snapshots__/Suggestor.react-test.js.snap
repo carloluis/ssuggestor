@@ -1,0 +1,87 @@
+exports[`<Suggestor /> initial render with no suggestions 1`] = `
+<div
+  className="input-group"
+  onClick={[Function]}
+  onKeyDown={[Function]}
+  style={undefined}
+  tabIndex="0">
+  <input
+    className="form-control"
+    onChange={[Function]}
+    placeholder={undefined}
+    type="text"
+    value="" />
+  
+  <ul
+    className="dropdown-menu"
+    style={
+      Object {
+        "cursor": "pointer",
+        "display": "none",
+        "maxHeight": 250,
+        "minWidth": 30,
+        "overflow": "auto",
+        "width": "inherit",
+      }
+    } />
+</div>
+`;
+
+exports[`<Suggestor /> initial render with suggestions 1`] = `
+<div
+  className="input-group"
+  onClick={[Function]}
+  onKeyDown={[Function]}
+  style={undefined}
+  tabIndex="0">
+  <input
+    className="form-control"
+    onChange={[Function]}
+    placeholder={undefined}
+    type="text"
+    value="" />
+  <span
+    className="glyphicon glyphicon-triangle-bottom"
+    style={
+      Object {
+        "bottom": 0,
+        "color": "#ccc",
+        "cursor": "pointer",
+        "fontSize": 16,
+        "height": 14,
+        "margin": "auto",
+        "position": "absolute",
+        "right": 10,
+        "top": 0,
+        "zIndex": 4,
+      }
+    } />
+  
+  <ul
+    className="dropdown-menu"
+    style={
+      Object {
+        "cursor": "pointer",
+        "display": "none",
+        "maxHeight": 250,
+        "minWidth": 30,
+        "overflow": "auto",
+        "width": "inherit",
+      }
+    }>
+    <li
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#f5f5f5",
+        }
+      }
+      value="suggest-1">
+      <a>
+        suggest-1
+      </a>
+    </li>
+  </ul>
+</div>
+`;
