@@ -4,6 +4,7 @@ import { SPIN_STYLES, X_STYLES } from './styles';
 import List from './List';
 
 const KEY_CODES = {
+	TAB: 9,
 	ENTER: 13,
 	ESCAPE: 27,
 	DOWN: 40,
@@ -70,6 +71,9 @@ export class Suggestor extends Component {
 					this.changeValue(list[index]);	
 				}
 				break;
+			case KEY_CODES.TAB:
+				this.handleClose();
+				return;
 			case KEY_CODES.ESCAPE:
 				this.handleClose();
 				if (!open) {
@@ -124,11 +128,11 @@ export class Suggestor extends Component {
 	}
 	render() {
 		let { open, value, index, filter:list } = this.state;
-		let { style, placeholder, arrow, nox } = this.props;
+		let { style, placeholder, arrow, nox, className } = this.props;
 
 		return (
-			<div className="input-group" style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} tabIndex="0" >
-				<input type="text" className="form-control" onChange={this.handleChange} value={value} placeholder={placeholder} ref="input" />
+			<div className={ className || 'input-group' } style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown}>
+				<input type="text" className="form-control" onChange={this.handleChange} value={value} placeholder={placeholder} ref="input"/>
 				{ arrow && <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} /> }
 				{ !nox && value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.removeItem}/> }
 				<List {...{ list, open, index }} onItemClick={this.handleItemClick} onItemMouseEnter={this.handleItemMouseEnter} />
@@ -144,7 +148,8 @@ Suggestor.propTypes = {
 	placeholder: React.PropTypes.string,
 	arrow: React.PropTypes.bool,
 	nox: React.PropTypes.bool,
-	onChange: React.PropTypes.func
+	onChange: React.PropTypes.func,
+	className: React.PropTypes.string
 };
 Suggestor.defaultProps = {
 	value: EMPTY_STR,

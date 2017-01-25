@@ -20,7 +20,7 @@ ReactDOM.render(
 		<h4>Simple Suggestor</h4>
 		<SSuggestor value="unos" list={suggestions} onChange={value=>console.info(value)} placeholder="type something..." style={{width:400}} />
 		<Sep />
-		<SSuggestor list={suggestions} placeholder="suggestor 2..." style={{width:400}} onChange={value=>console.info(value)} nox />
+		<SSuggestor list={suggestions} placeholder="suggestor 2..." style={{width:400}} onChange={value=>console.info(value)} nox className="input-group suggestor" />
 		<Sep />
 		<SSuggestor list={suggestions} placeholder="suggestor 3..." style={{width:400}} onChange={value=>console.info(value)} arrow={false} nox />
 		<Sep />
