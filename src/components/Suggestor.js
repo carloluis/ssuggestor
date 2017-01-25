@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import withClickOut from './withClickOut';
 
 const SPIN_STYLES = {
 	position: 'absolute',
@@ -17,6 +18,7 @@ const X_STYLES = {
 	fontSize: 14,
 	right: 30
 };
+
 const getListStyles = visible => ({
 	display: visible? 'block':'none',
 	maxHeight: 190,
@@ -34,6 +36,19 @@ const KEY_CODES = {
 };
 
 const EMPTY_STR = '';
+
+const ListItem = ({ item, onItemClick, onItemMouseEnter, index, overItem }) => (
+	<li value={item} onClick={() => onItemClick(item)} onMouseEnter={()=>onItemMouseEnter(index, item)} 
+		style={{ backgroundColor: overItem && '#f5f5f5' }}>
+		<a>{item}</a>
+	</li>
+);
+
+const List = ({ open, list, index, onItemClick, onItemMouseEnter }) => (
+	<ul className="dropdown-menu" style={getListStyles(open)}>
+		{ list.map((item, i) => <ListItem key={i} {...{ item, onItemClick, onItemMouseEnter, index:i, overItem:index===i }} />) }
+	</ul>
+);
 
 export class Suggestor extends Component {
 	constructor(props){
@@ -76,11 +91,14 @@ export class Suggestor extends Component {
 				let prev = (index || list.length) - 1;
 				this.setState({ open: true, index: prev });
 				break;
+			default:
+				return;
 		}
+
+		e.preventDefault();
 	}
-	handleItemClick(index){
-		let list = this.filter(this.props.list, this.state.value);
-		this.setState({ value: list[index] });
+	handleItemClick(value){
+		this.setState({ value });
 	}
 	handleItemMouseEnter(index){
 		this.setState({ index });
@@ -92,27 +110,22 @@ export class Suggestor extends Component {
 	removeItem(){
 		this.setState({ value: EMPTY_STR });
 	}
-	filter(list, value) {
-		return list.filter(item => item.includes(value));
-	}
-	_render(open, list, value){
-		return (
-			<ul className="dropdown-menu" style={getListStyles(open)}>
-				{ this.filter(list, value).map((item, i) => <li key={i} value={item} onClick={()=>this.setState({value:item})}><a>{item}</a></li>) }
-			</ul>
-		);
+	filter() {
+		return this.props.list.filter(item => item.includes(this.state.value));
 	}
 	render() {
 		let { open, value, index } = this.state;
-		let { list, style, placeholder } = this.props;
-		let _list = this.filter(list, value);
+		let { style, placeholder } = this.props;
+		let list = this.filter();
 
 		return (
 			<div className="input-group" style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} tabIndex="0" >
 				<input type="text" className="form-control" onChange={this.handleChange} value={value} placeholder={placeholder} />
 				<span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} />
 				{ !open && value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.removeItem}/> }
-				{ this._render(open, list, value) }
+				<List list={list} open={open} index={index} 
+					onItemClick={this.handleItemClick} 
+					onItemMouseEnter={this.handleItemMouseEnter} />
 			</div>
 		);
 	}
@@ -127,4 +140,4 @@ Suggestor.defaultProps = {
 	item: EMPTY_STR
 };
 
-export default Suggestor;
+export default withClickOut(Suggestor);
