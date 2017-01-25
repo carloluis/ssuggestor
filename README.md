@@ -1,6 +1,6 @@
 # SSuggestor
 ----
-react simple-suggestor
+react simple-suggestor (using bootstrap styles)
 
 ## Instalation
 `npm install ssuggestor`
@@ -8,7 +8,7 @@ react simple-suggestor
 ## Usage 
 
 ```js
-import Suggestor from 'SSuggestor';
+import { Suggestor } from 'SSuggestor';
 
 <Suggestor 
 	list={['list', 'of', 'suggestions']}
