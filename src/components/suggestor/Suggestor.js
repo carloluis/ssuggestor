@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { SPIN_STYLES, X_STYLES } from './styles';
-import withClickOut from '../withClickOut';
 import List from './List';
 
 const KEY_CODES = {
@@ -15,10 +15,11 @@ const EMPTY_STR = '';
 export class Suggestor extends Component {
 	constructor(props){
 		super(props);
-		this._bind('handleClickOut', 'handleClick', 'handleChange', 'removeItem', 'handleKeyDown', 'handleItemClick', 'handleItemMouseEnter');
+		this._bind('handleClick', 'handleChange', 'removeItem', 'handleKeyDown', 'handleItemClick', 'handleItemMouseEnter', 'handleDocClick');
 
 		this.state = {
 			value: EMPTY_STR,
+			filter: props.list,
 			open: false,
 			index: 0
 		};
@@ -26,38 +27,58 @@ export class Suggestor extends Component {
 	_bind(...methods) {
 		methods.forEach(method => this[method] = this[method].bind(this));
 	}
-	handleClickOut() {
-		this.setState({ open: false });
+	componentDidMount() {
+		document.addEventListener('click', this.handleDocClick);
+	}
+	componentWillUnmount() {
+		document.removeEventListener('click', this.handleDocClick);
+	}
+	handleDocClick(e) {
+		let node = ReactDOM.findDOMNode(this);
+		if (!node.contains(e.target)) {
+			this.handleClose();
+		}
+	}
+	handleClose() {
+		this.setState({ open: false, filter:this.props.list, index:0 });
+	}
+	toggleList() {
+		if(this.state.open) {
+			this.handleClose();
+		}
+		else {
+			this.setState({
+				open: true
+			});
+		}
 	}
 	handleClick() {
-		this.setState({ open: !this.state.open && !!this.filter().length });
+		this.toggleList();
 	}
 	handleKeyDown(e) {
-		let { open, index } = this.state;
-		let list = this.filter();
-		let suggestions = !!list.length;
+		let { open, index, value, filter:list } = this.state;
 
 		switch (e.keyCode) {
 			case KEY_CODES.ENTER:
-				this.setState({ open: !open && suggestions });
-				if (suggestions) {
+				this.toggleList();
+				if (open && !!list.length) {
 					this.changeValue(list[index]);	
 				}
 				break;
 			case KEY_CODES.ESCAPE:
-				this.setState({ open: false });
+				this.handleClose();
 				if (!open) {
 					this.changeValue(EMPTY_STR);
 				}
 				break;
 			case KEY_CODES.DOWN: {
 				let next = (index + open) % list.length;
-				this.setState({ open: suggestions, index: next });
+				this.setState({ open:true, index: next });
 				break;
 			}
 			case KEY_CODES.UP: {
 				let prev = (index || list.length) - 1;
-				this.setState({ open: suggestions, index: prev });
+				this.setState({ open: true, index: prev });
 				break;
 			}
 			default:
@@ -75,7 +96,11 @@ export class Suggestor extends Component {
 	handleChange(e) {
 		e.stopPropagation();
 		let value = e.target.value;
-		this.setState({ open: this.props.list.some(item => item.includes(value)) });
+		let filter = this.filter(value);
+		this.setState({ open: true, filter });
+		if(!filter.length) {
+			this.handleClose();
+		}
 		this.changeValue(value);
 	}
 	removeItem() {
@@ -85,18 +110,17 @@ export class Suggestor extends Component {
 		this.setState({ value });
 		this.props.onChange(value);
 	}
-	filter() {
-		return this.props.list.filter(item => item.includes(this.state.value));
+	filter(value) {
+		return this.props.list.filter(item => item.includes(value));
 	}
 	render() {
-		let { open, value, index } = this.state;
+		let { open, value, index, filter:list } = this.state;
 		let { style, placeholder } = this.props;
-		let list = this.filter();
 
 		return (
 			<div className="input-group" style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} tabIndex="0" >
 				<input type="text" className="form-control" onChange={this.handleChange} value={value} placeholder={placeholder} />
-				{ !!list.length && <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} /> }
+				{ <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} /> }
 				{ value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.removeItem}/> }
 				<List {...{ list, open, index }} onItemClick={this.handleItemClick} onItemMouseEnter={this.handleItemMouseEnter} />
 			</div>
@@ -114,4 +138,4 @@ Suggestor.defaultProps = {
 	onChange: f=>f
 };
 
-export default withClickOut(Suggestor);
+export default Suggestor;

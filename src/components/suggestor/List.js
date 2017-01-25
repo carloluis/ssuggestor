@@ -16,7 +16,7 @@ ListItem.propTypes = {
 };
 
 export const List = ({ open, list, index, onItemClick, onItemMouseEnter }) => (
-	<ul className="dropdown-menu" style={getListStyles(open)}>
+	!!list.length && <ul className="dropdown-menu" style={getListStyles(open)}>
 		{ list.map((item, i) => <ListItem key={i} {...{ item, onItemClick, onItemMouseEnter, index:i, overItem:index===i }} />) }
 	</ul>
 );
