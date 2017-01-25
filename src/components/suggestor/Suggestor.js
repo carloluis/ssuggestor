@@ -106,13 +106,11 @@ export class Suggestor extends Component {
 
 Suggestor.propTypes = {
 	list: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
-	item: React.PropTypes.string,
 	style: React.PropTypes.object,
 	placeholder: React.PropTypes.string,
 	onChange: React.PropTypes.func
 };
 Suggestor.defaultProps = {
-	item: EMPTY_STR,
 	onChange: f=>f
 };
 
