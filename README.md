@@ -3,7 +3,7 @@
 react simple-suggestor
 
 ## Instalation
-...
+`npm install ssuggestor`
 
 ## Usage 
 
