@@ -19,7 +19,7 @@ module.exports = {
 		filename: 'react-ssuggestor.js',
 		sourceMapFilename: '[file].map',
 		path: __dirname + '/dist',
-		libraryTarget: 'commonjs'
+		libraryTarget: 'commonjs2'
 	},
 	externals: {
 		'react': 'react',
