@@ -30,7 +30,7 @@ module.exports = {
 		vendor: Object.keys(packages.dependencies)
 	},
 	output: {
-		filename: '[name].lib.js',
+		filename: 'react-ssuggestor.js',
 		sourceMapFilename: '[file].map',
 		path: __dirname + '/dist'
 	},
@@ -38,6 +38,7 @@ module.exports = {
 		'react': 'react',
 		'react-dom': 'react-dom'
 	},
+	target: 'node',
 	module: {
 		preLoaders: [
 			{
