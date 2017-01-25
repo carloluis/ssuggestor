@@ -1,32 +1,7 @@
 import React, { Component } from 'react';
-import withClickOut from './withClickOut';
-
-const SPIN_STYLES = {
-	position: 'absolute',
-	cursor: 'pointer',
-	margin: 'auto',
-	color: '#ccc',
-	fontSize:16,
-	right:10,
-	top: 0,
-	bottom: 0,
-	height: 14,
-	zIndex:4
-};
-const X_STYLES = {
-	...SPIN_STYLES,
-	fontSize: 14,
-	right: 30
-};
-
-const getListStyles = visible => ({
-	display: visible? 'block':'none',
-	maxHeight: 190,
-	minWidth: 30,
-	width: 'inherit',
-	overflow: 'auto',
-	cursor: 'pointer'
-});
+import { SPIN_STYLES, X_STYLES } from './styles';
+import withClickOut from '../withClickOut';
+import List from './List';
 
 const KEY_CODES = {
 	ENTER: 13,
@@ -37,34 +12,19 @@ const KEY_CODES = {
 
 const EMPTY_STR = '';
 
-const ListItem = ({ item, onItemClick, onItemMouseEnter, index, overItem }) => (
-	<li value={item} onClick={() => onItemClick(item)} onMouseEnter={()=>onItemMouseEnter(index, item)} 
-		style={{ backgroundColor: overItem && '#f5f5f5' }}>
-		<a>{item}</a>
-	</li>
-);
-
-const List = ({ open, list, index, onItemClick, onItemMouseEnter }) => (
-	<ul className="dropdown-menu" style={getListStyles(open)}>
-		{ list.map((item, i) => <ListItem key={i} {...{ item, onItemClick, onItemMouseEnter, index:i, overItem:index===i }} />) }
-	</ul>
-);
-
 export class Suggestor extends Component {
 	constructor(props){
 		super(props);
+		this._bind('handleClickOut', 'handleClick', 'handleChange', 'removeItem', 'handleKeyDown', 'handleItemClick', 'handleItemMouseEnter');
+
 		this.state = {
 			value: EMPTY_STR,
 			open: false,
 			index: 0
 		};
-		this.handleClickOut = this.handleClickOut.bind(this);
-		this.handleClick = this.handleClick.bind(this);
-		this.handleChange = this.handleChange.bind(this);
-		this.removeItem = this.removeItem.bind(this);
-		this.handleKeyDown = this.handleKeyDown.bind(this);
-		this.handleItemClick = this.handleItemClick.bind(this);
-		this.handleItemMouseEnter = this.handleItemMouseEnter.bind(this);
+	}
+	_bind(...methods){
+		methods.forEach(method => this[method] = this[method].bind(this));
 	}
 	handleClickOut(){
 		this.setState({ open: false });

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SSuggestor from './components/Suggestor';
+import SSuggestor from './components/suggestor/Suggestor';
 
 ReactDOM.render(
 	<div>
