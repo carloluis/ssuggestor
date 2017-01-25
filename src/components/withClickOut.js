@@ -26,6 +26,7 @@ export const withClickOut = WrappedComponent => {
 		}
 	}
 	Wrapper.displayName = `ClickOut(${WrappedComponent.displayName || WrappedComponent.name})`;
+	return Wrapper;
 };
 
 export default withClickOut;
