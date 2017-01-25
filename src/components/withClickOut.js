@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+// Todo: check this https://facebook.github.io/react/warnings/refs-must-have-owner.html
+
 export const withClickOut = WrappedComponent => {
 	class Wrapper extends Component {
-		//static displayName = `ClickOut(${WrappedComponent.displayName || WrappedComponent.name})`
 		constructor(...args){
 			super(...args);
 			this.handleClick = this.handleClick.bind(this);
