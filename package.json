@@ -1,17 +1,18 @@
 {
   "name": "ssuggestor",
-  "version": "0.0.9",
+  "version": "0.0.11",
   "description": "react simple-suggestor",
   "main": "dist/react-ssuggestor.js",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
     "dev": "webpack-dev-server",
-    "build": "webpack --config webpack.config.publish.js -p",
+    "build": "webpack --config webpack.config.publish.js",
     "prepublish": "npm run build"
   },
   "files": [
-    "dist"
+    "dist",
+    "src/components"
   ],
   "repository": {
     "type": "git",
