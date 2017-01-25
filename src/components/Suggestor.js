@@ -122,10 +122,8 @@ export class Suggestor extends Component {
 			<div className="input-group" style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} tabIndex="0" >
 				<input type="text" className="form-control" onChange={this.handleChange} value={value} placeholder={placeholder} />
 				<span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} />
-				{ !open && value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.removeItem}/> }
-				<List list={list} open={open} index={index} 
-					onItemClick={this.handleItemClick} 
-					onItemMouseEnter={this.handleItemMouseEnter} />
+				{ value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.removeItem}/> }
+				<List {...{ list, open, index }} onItemClick={this.handleItemClick} onItemMouseEnter={this.handleItemMouseEnter} />
 			</div>
 		);
 	}
