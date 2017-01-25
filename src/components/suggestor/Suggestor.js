@@ -15,7 +15,7 @@ const EMPTY_STR = '';
 export class Suggestor extends Component {
 	constructor(props){
 		super(props);
-		this._bind('handleClick', 'handleChange', 'removeItem', 'handleKeyDown', 'handleItemClick', 'handleItemMouseEnter', 'handleDocClick');
+		this._bind('handleClick', 'handleChange', 'removeItem', 'handleKeyDown', 'handleItemClick', 'handleItemMouseEnter', 'handleDocClick', 'focus');
 
 		this.state = {
 			value: props.value,
@@ -119,13 +119,16 @@ export class Suggestor extends Component {
 		value = value.toLowerCase();
 		return this.props.list.filter(item => item.toLowerCase().indexOf(value) !== -1);
 	}
+	focus() {
+		this.refs.input.focus();
+	}
 	render() {
 		let { open, value, index, filter:list } = this.state;
 		let { style, placeholder, arrow, nox } = this.props;
 
 		return (
 			<div className="input-group" style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} tabIndex="0" >
-				<input type="text" className="form-control" onChange={this.handleChange} value={value} placeholder={placeholder} />
+				<input type="text" className="form-control" onChange={this.handleChange} value={value} placeholder={placeholder} ref="input" />
 				{ arrow && <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} /> }
 				{ !nox && value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.removeItem}/> }
 				<List {...{ list, open, index }} onItemClick={this.handleItemClick} onItemMouseEnter={this.handleItemMouseEnter} />
