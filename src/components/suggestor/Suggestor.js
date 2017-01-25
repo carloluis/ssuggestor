@@ -121,12 +121,12 @@ export class Suggestor extends Component {
 	}
 	render() {
 		let { open, value, index, filter:list } = this.state;
-		let { style, placeholder, nox } = this.props;
+		let { style, placeholder, arrow, nox } = this.props;
 
 		return (
 			<div className="input-group" style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} tabIndex="0" >
 				<input type="text" className="form-control" onChange={this.handleChange} value={value} placeholder={placeholder} />
-				{ <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} /> }
+				{ arrow && <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} /> }
 				{ !nox && value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.removeItem}/> }
 				<List {...{ list, open, index }} onItemClick={this.handleItemClick} onItemMouseEnter={this.handleItemMouseEnter} />
 			</div>
@@ -139,12 +139,14 @@ Suggestor.propTypes = {
 	value: React.PropTypes.string,
 	style: React.PropTypes.object,
 	placeholder: React.PropTypes.string,
+	arrow: React.PropTypes.bool,
 	nox: React.PropTypes.bool,
 	onChange: React.PropTypes.func
 };
 Suggestor.defaultProps = {
 	value: EMPTY_STR,
 	onChange: f=>f,
+	arrow: true,
 	nox: false
 };
 
