@@ -1,6 +1,6 @@
 {
   "name": "ssuggestor",
-  "version": "0.0.4",
+  "version": "0.0.8",
   "description": "react simple-suggestor",
   "main": "dist/react-ssuggestor.js",
   "scripts": {
@@ -10,6 +10,9 @@
     "build": "webpack --config webpack.config.publish.js -p",
     "prepublish": "npm run build"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/carloluis/ssuggestor.git"

@@ -1,7 +1,6 @@
 'use strict';
 
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const packages = require('./package.json');
 
 const NODE_ENV = 'production';
@@ -18,21 +17,16 @@ var uglifyJsPluginConfig = new webpack.optimize.UglifyJsPlugin({
 	mangle: true,
 	comments: false
 });
-const htmlWebpackPluginConfig = new HtmlWebpackPlugin({
-	template: __dirname + '/src/index.html',
-	filename: 'index.html',
-	inject: 'body'
-});
 
 module.exports = {
 	entry: {
-		ssugestor: __dirname + '/src/components/suggestor/Suggestor.js',
-		vendor: Object.keys(packages.dependencies)
+		ssugestor: __dirname + '/src/components/suggestor/Suggestor.js'
 	},
 	output: {
 		filename: 'react-ssuggestor.js',
 		sourceMapFilename: '[file].map',
-		path: __dirname + '/dist'
+		path: __dirname + '/dist',
+		libraryTarget: 'commonjs'
 	},
 	externals: {
 		'react': 'react',
@@ -54,12 +48,11 @@ module.exports = {
 				loader: 'babel-loader',
 				query: {
 					presets: ['react', 'es2015', 'stage-2']
-				},
-				cacheDirectory: true
+				}
 			}
 		]
 	},
-	plugins: [envPluginConfig, uglifyJsPluginConfig, htmlWebpackPluginConfig],
+	plugins: [envPluginConfig, uglifyJsPluginConfig],
 	resolve: {
 		extensions: ['', '.js']
 	},
