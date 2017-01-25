@@ -18,7 +18,7 @@ export class Suggestor extends Component {
 		this._bind('handleClick', 'handleChange', 'removeItem', 'handleKeyDown', 'handleItemClick', 'handleItemMouseEnter', 'handleDocClick');
 
 		this.state = {
-			value: EMPTY_STR,
+			value: props.value,
 			filter: props.list,
 			open: false,
 			index: 0
@@ -37,6 +37,11 @@ export class Suggestor extends Component {
 		let node = ReactDOM.findDOMNode(this);
 		if (!node.contains(e.target)) {
 			this.handleClose();
+		}
+	}
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.value !== this.props.value) {
+			this.setState({ value: nextProps.value });
 		}
 	}
 	handleClose() {
@@ -111,7 +116,8 @@ export class Suggestor extends Component {
 		this.props.onChange(value);
 	}
 	filter(value) {
-		return this.props.list.filter(item => item.includes(value));
+		value = value.toLowerCase();
+		return this.props.list.filter(item => item.toLowerCase().indexOf(value) !== -1);
 	}
 	render() {
 		let { open, value, index, filter:list } = this.state;
@@ -130,12 +136,14 @@ export class Suggestor extends Component {
 
 Suggestor.propTypes = {
 	list: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+	value: React.PropTypes.string,
 	style: React.PropTypes.object,
 	placeholder: React.PropTypes.string,
 	nox: React.PropTypes.bool,
 	onChange: React.PropTypes.func
 };
 Suggestor.defaultProps = {
+	value: EMPTY_STR,
 	onChange: f=>f,
 	nox: false
 };
