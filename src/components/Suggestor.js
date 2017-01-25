@@ -105,7 +105,8 @@ export class Suggestor extends Component {
 	}
 	handleChange(e){
 		e.stopPropagation();
-		this.setState({ value: e.target.value, open: true });
+		let value = e.target.value;
+		this.setState({ value, open: this.props.list.some(item => item.includes(value)) });
 	}
 	removeItem(){
 		this.setState({ value: EMPTY_STR });
