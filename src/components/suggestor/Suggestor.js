@@ -61,7 +61,7 @@ export class Suggestor extends Component {
 		this.toggleList();
 	}
 	handleKeyDown(e) {
-		let { open, index, value, filter:list } = this.state;
+		let { open, index, filter:list } = this.state;
 
 		switch (e.keyCode) {
 			case KEY_CODES.ENTER:
