@@ -23,33 +23,34 @@ export class Suggestor extends Component {
 			index: 0
 		};
 	}
-	_bind(...methods){
+	_bind(...methods) {
 		methods.forEach(method => this[method] = this[method].bind(this));
 	}
-	handleClickOut(){
+	handleClickOut() {
 		this.setState({ open: false });
 	}
-	handleClick(e){
+	handleClick(e) {
 		this.setState({ open: !this.state.open });
 	}
-	handleKeyDown(e){
+	handleKeyDown(e) {
 		let { open, index, value } = this.state;
 		let list = this.filter(this.props.list, value);
+		let suggestions = !!list.length;
 
 		switch (e.keyCode) {
 			case KEY_CODES.ENTER:
-				this.setState({ open: !open, value: list[index] });
+				this.setState({ open: !open && suggestions, value: suggestions? list[index]: value });
 				break;
 			case KEY_CODES.ESCAPE:
 				this.setState({ open: false, value: open? value: EMPTY_STR });
 				break;
 			case KEY_CODES.DOWN:
 				let next = (index + open) % list.length;
-				this.setState({ open: true, index: next });
+				this.setState({ open: suggestions, index: next });
 				break;
 			case KEY_CODES.UP:
 				let prev = (index || list.length) - 1;
-				this.setState({ open: true, index: prev });
+				this.setState({ open: suggestions, index: prev });
 				break;
 			default:
 				return;
@@ -57,18 +58,18 @@ export class Suggestor extends Component {
 
 		e.preventDefault();
 	}
-	handleItemClick(value){
+	handleItemClick(value) {
 		this.setState({ value });
 	}
-	handleItemMouseEnter(index){
+	handleItemMouseEnter(index) {
 		this.setState({ index });
 	}
-	handleChange(e){
+	handleChange(e) {
 		e.stopPropagation();
 		let value = e.target.value;
 		this.setState({ value, open: this.props.list.some(item => item.includes(value)) });
 	}
-	removeItem(){
+	removeItem() {
 		this.setState({ value: EMPTY_STR });
 	}
 	filter() {
