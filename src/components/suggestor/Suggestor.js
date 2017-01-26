@@ -20,7 +20,7 @@ export class Suggestor extends Component {
 
 		this.state = {
 			value: props.value,
-			filter: props.list,
+			filtered: props.list,
 			open: false,
 			index: 0
 		};
@@ -46,7 +46,7 @@ export class Suggestor extends Component {
 		}
 	}
 	handleClose() {
-		this.setState({ open: false, filter: this.props.list, index: 0 });
+		this.setState({ open: false, filtered: this.props.list, index: 0 });
 	}
 	toggleList() {
 		if (this.state.open) {
@@ -62,7 +62,7 @@ export class Suggestor extends Component {
 		this.toggleList();
 	}
 	handleKeyDown(e) {
-		let { open, index, filter:list } = this.state;
+		let { open, index, filtered:list } = this.state;
 
 		switch (e.keyCode) {
 			case KEY_CODES.ENTER:
@@ -71,9 +71,6 @@ export class Suggestor extends Component {
 					this.changeValue(list[index]);	
 				}
 				break;
-			case KEY_CODES.TAB:
-				this.handleClose();
-				return;
 			case KEY_CODES.ESCAPE:
 				this.handleClose();
 				if (!open) {
@@ -90,6 +87,9 @@ export class Suggestor extends Component {
 				this.setState({ open: true, index: prev });
 				break;
 			}
+			case KEY_CODES.TAB:
+				this.handleClose();
+				return;
 			default:
 				return;
 		}
@@ -105,9 +105,9 @@ export class Suggestor extends Component {
 	handleChange(e) {
 		e.stopPropagation();
 		let value = e.target.value;
-		let filter = this.filter(value);
-		this.setState({ open: true, filter });
-		if(!filter.length) {
+		let filtered = this.filter(value);
+		this.setState({ open: true, filtered });
+		if(!filtered.length) {
 			this.handleClose();
 		}
 		this.changeValue(value);
@@ -127,7 +127,7 @@ export class Suggestor extends Component {
 		this.refs.input.focus();
 	}
 	render() {
-		let { open, value, index, filter:list } = this.state;
+		let { open, value, index, filtered:list } = this.state;
 		let { style, placeholder, arrow, nox, className } = this.props;
 
 		return (
