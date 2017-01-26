@@ -46,10 +46,10 @@ export class Suggestor extends Component {
 		}
 	}
 	handleClose() {
-		this.setState({ open: false, filter:this.props.list, index:0 });
+		this.setState({ open: false, filter: this.props.list, index: 0 });
 	}
 	toggleList() {
-		if(this.state.open) {
+		if (this.state.open) {
 			this.handleClose();
 		}
 		else {
@@ -131,7 +131,7 @@ export class Suggestor extends Component {
 		let { style, placeholder, arrow, nox, className } = this.props;
 
 		return (
-			<div className={ className || 'input-group' } style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown}>
+			<div className={className} style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown}>
 				<input type="text" className="form-control" onChange={this.handleChange} value={value} placeholder={placeholder} ref="input"/>
 				{ arrow && <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} /> }
 				{ !nox && value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.removeItem}/> }
@@ -143,15 +143,16 @@ export class Suggestor extends Component {
 
 Suggestor.propTypes = {
 	list: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+	className: React.PropTypes.string,
 	value: React.PropTypes.string,
-	style: React.PropTypes.object,
+	onChange: React.PropTypes.func,
 	placeholder: React.PropTypes.string,
+	style: React.PropTypes.object,
 	arrow: React.PropTypes.bool,
 	nox: React.PropTypes.bool,
-	onChange: React.PropTypes.func,
-	className: React.PropTypes.string
 };
 Suggestor.defaultProps = {
+	className: 'input-group',
 	value: EMPTY_STR,
 	onChange: f=>f,
 	arrow: true,
