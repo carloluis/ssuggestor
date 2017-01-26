@@ -8,7 +8,7 @@ react-simple-suggestor (using bootstrap styles)
 ## Usage 
 
 ```javascript
-import SSuggestor from 'SSuggestor';
+import SSuggestor from 'ssuggestor';
 
 <SSuggestor 
 	list={['list', 'of', 'suggestions']}
