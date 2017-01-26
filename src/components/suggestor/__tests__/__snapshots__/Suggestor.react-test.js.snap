@@ -3,8 +3,7 @@ exports[`<Suggestor /> initial render with no suggestions 1`] = `
   className="input-group"
   onClick={[Function]}
   onKeyDown={[Function]}
-  style={undefined}
-  tabIndex="0">
+  style={undefined}>
   <input
     className="form-control"
     onChange={[Function]}
@@ -36,8 +35,7 @@ exports[`<Suggestor /> initial render with suggestions 1`] = `
   className="input-group"
   onClick={[Function]}
   onKeyDown={[Function]}
-  style={undefined}
-  tabIndex="0">
+  style={undefined}>
   <input
     className="form-control"
     onChange={[Function]}
