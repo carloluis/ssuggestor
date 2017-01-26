@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export const withClickOut = WrappedComponent => {
+const withClickOut = WrappedComponent => {
 	class Wrapper extends Component {
 		constructor(...args){
 			super(...args);

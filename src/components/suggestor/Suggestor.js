@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import withClickOut from '../withClickOut';
 import { SPIN_STYLES, X_STYLES } from './styles';
 import List from './List';
 
@@ -15,7 +16,7 @@ const EMPTY_STR = '';
 export class Suggestor extends Component {
 	constructor(props){
 		super(props);
-		this._bind('handleClick', 'handleChange', 'removeItem', 'handleKeyDown', 'handleItemClick', 'handleItemMouseEnter', 'handleDocClick', 'focus');
+		this._bind('handleClick', 'handleChange', 'removeItem', 'handleKeyDown', 'handleItemClick', 'handleItemMouseEnter', 'handleClickOut', 'focus');
 
 		this.state = {
 			value: props.value,
@@ -27,16 +28,8 @@ export class Suggestor extends Component {
 	_bind(...methods) {
 		methods.forEach(method => this[method] = this[method].bind(this));
 	}
-	componentDidMount() {
-		document.addEventListener('click', this.handleDocClick);
-	}
-	componentWillUnmount() {
-		document.removeEventListener('click', this.handleDocClick);
-	}
-	handleDocClick(e) {
-		if (!this.refs.root.contains(e.target)) {
-			this.handleClose();
-		}
+	handleClickOut() {
+		this.handleClose();
 	}
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.value !== this.props.value) {
@@ -129,7 +122,7 @@ export class Suggestor extends Component {
 		let { style, placeholder, arrow, nox, className } = this.props;
 
 		return (
-			<div className={className} style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} ref="root">
+			<div className={className} style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} ref={this.props.reference}>
 				<input type="text" className="form-control" onChange={this.handleChange} value={value} placeholder={placeholder} ref="input"/>
 				{ arrow && <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} /> }
 				{ !nox && value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.removeItem}/> }
@@ -142,6 +135,7 @@ export class Suggestor extends Component {
 Suggestor.propTypes = {
 	list: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
 	className: React.PropTypes.string,
+	reference: React.PropTypes.func,
 	value: React.PropTypes.string,
 	onChange: React.PropTypes.func,
 	placeholder: React.PropTypes.string,
@@ -157,4 +151,4 @@ Suggestor.defaultProps = {
 	nox: false
 };
 
-export default Suggestor;
+export default withClickOut(Suggestor);
