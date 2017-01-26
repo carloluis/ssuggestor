@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { SPIN_STYLES, X_STYLES } from './styles';
 import List from './List';
 
@@ -35,8 +34,7 @@ export class Suggestor extends Component {
 		document.removeEventListener('click', this.handleDocClick);
 	}
 	handleDocClick(e) {
-		let node = ReactDOM.findDOMNode(this);
-		if (!node.contains(e.target)) {
+		if (!this.refs.root.contains(e.target)) {
 			this.handleClose();
 		}
 	}
@@ -131,7 +129,7 @@ export class Suggestor extends Component {
 		let { style, placeholder, arrow, nox, className } = this.props;
 
 		return (
-			<div className={className} style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown}>
+			<div className={className} style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} ref="root">
 				<input type="text" className="form-control" onChange={this.handleChange} value={value} placeholder={placeholder} ref="input"/>
 				{ arrow && <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} /> }
 				{ !nox && value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.removeItem}/> }
