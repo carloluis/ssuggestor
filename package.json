@@ -1,7 +1,7 @@
 {
   "name": "ssuggestor",
-  "version": "0.0.14",
-  "description": "react simple-suggestor",
+  "version": "0.0.15",
+  "description": "react-simple-suggestor",
   "main": "dist/react-ssuggestor.js",
   "scripts": {
     "test": "jest",
