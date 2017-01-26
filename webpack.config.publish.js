@@ -17,23 +17,14 @@ module.exports = {
 	},
 	output: {
 		filename: 'react-ssuggestor.js',
-		sourceMapFilename: '[file].map',
 		path: __dirname + '/dist',
 		libraryTarget: 'commonjs2'
 	},
 	externals: {
-		'react': 'react',
-		'react-dom': 'react-dom'
+		'react': 'react'
 	},
 	target: 'node',
 	module: {
-		preLoaders: [
-			{
-				test: /\.js$/,
-				exclude: /node_modules/,
-				loader: 'eslint'
-			}
-		],
 		loaders: [
 			{
 				test: /\.js$/,
@@ -48,6 +39,5 @@ module.exports = {
 	plugins: [envPluginConfig],
 	resolve: {
 		extensions: ['', '.js']
-	},
-	devtool: '#source-map'
+	}
 };
