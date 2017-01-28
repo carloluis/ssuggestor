@@ -91,6 +91,9 @@ export class Suggestor extends Component {
 	}
 	handleItemClick(value) {
 		this.changeValue(value);
+		if(!this.props.openOnClick) {
+			this.toggleList();
+		}
 	}
 	handleItemMouseEnter(index) {
 		this.setState({ index });
@@ -129,7 +132,7 @@ export class Suggestor extends Component {
 				<input type="text" className="form-control" onChange={this.handleChange} value={value} placeholder={placeholder} ref="input"/>
 				{ arrow && <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} /> }
 				{ !nox && value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.removeItem}/> }
-				<List {...{ list, open, index }} onItemClick={this.handleItemClick} onItemMouseEnter={this.handleItemMouseEnter} />
+				<List {...{ list, index, open }} onItemClick={this.handleItemClick} onItemMouseEnter={this.handleItemMouseEnter} />
 			</div>
 		);
 	}
