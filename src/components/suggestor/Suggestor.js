@@ -3,6 +3,8 @@ import withClickOut from '../withClickOut';
 import { SPIN_STYLES, X_STYLES } from './styles';
 import List from './List';
 
+const EMPTY_STR = '';
+
 const KEY_CODES = {
 	TAB: 9,
 	ENTER: 13,
@@ -10,8 +12,6 @@ const KEY_CODES = {
 	DOWN: 40,
 	UP: 38
 };
-
-const EMPTY_STR = '';
 
 export class Suggestor extends Component {
 	constructor(props){
@@ -97,7 +97,8 @@ export class Suggestor extends Component {
 		e.stopPropagation();
 		let value = e.target.value;
 		let filtered = this.filter(value);
-		this.setState({ open: true, filtered });
+		let open = value.length >= this.props.suggestOn;
+		this.setState({ open, filtered });
 		if(!filtered.length) {
 			this.handleClose();
 		}
@@ -134,19 +135,21 @@ export class Suggestor extends Component {
 
 Suggestor.propTypes = {
 	list: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
-	className: React.PropTypes.string,
 	reference: React.PropTypes.func,
-	value: React.PropTypes.string,
 	onChange: React.PropTypes.func,
+	value: React.PropTypes.string,
+	suggestOn: React.PropTypes.number,
 	placeholder: React.PropTypes.string,
+	className: React.PropTypes.string,
 	style: React.PropTypes.object,
 	arrow: React.PropTypes.bool,
 	nox: React.PropTypes.bool,
 };
 Suggestor.defaultProps = {
 	className: 'input-group',
+	onChange: f => f,
 	value: EMPTY_STR,
-	onChange: f=>f,
+	suggestOn: 0,
 	arrow: true,
 	nox: false
 };
