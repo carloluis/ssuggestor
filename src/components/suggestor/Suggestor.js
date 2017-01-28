@@ -50,7 +50,9 @@ export class Suggestor extends Component {
 		}
 	}
 	handleClick() {
-		this.toggleList();
+		if (this.props.openOnClick) {
+			this.toggleList();
+		}
 	}
 	handleKeyDown(e) {
 		let { open, index, filtered:list } = this.state;
@@ -138,6 +140,7 @@ Suggestor.propTypes = {
 	reference: React.PropTypes.func,
 	onChange: React.PropTypes.func,
 	value: React.PropTypes.string,
+	openOnClick: React.PropTypes.bool,
 	suggestOn: React.PropTypes.number,
 	placeholder: React.PropTypes.string,
 	className: React.PropTypes.string,
@@ -149,6 +152,7 @@ Suggestor.defaultProps = {
 	className: 'input-group',
 	onChange: f => f,
 	value: EMPTY_STR,
+	openOnClick: true,
 	suggestOn: 0,
 	arrow: true,
 	nox: false
