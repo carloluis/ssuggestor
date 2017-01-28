@@ -98,8 +98,8 @@ export class Suggestor extends Component {
 	handleChange(e) {
 		e.stopPropagation();
 		let value = e.target.value;
-		let filtered = this.filter(value);
 		let open = value.length >= this.props.suggestOn;
+		let filtered = open? this.filter(value): this.state.filtered;
 		this.setState({ open, filtered });
 		if(!filtered.length) {
 			this.handleClose();
@@ -121,8 +121,8 @@ export class Suggestor extends Component {
 		this.refs.input.focus();
 	}
 	render() {
-		let { open, value, index, filtered:list } = this.state;
 		let { style, placeholder, arrow, nox, className } = this.props;
+		let { open, value, index, filtered:list } = this.state;
 
 		return (
 			<div className={className} style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} ref={this.props.reference}>
