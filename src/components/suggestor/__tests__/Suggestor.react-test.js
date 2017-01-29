@@ -18,3 +18,40 @@ describe('<Suggestor />', () => {
 		expect(tree).toMatchSnapshot();
 	});
 });
+
+const LIST = ['suggest-1', 'suggest-2'];
+
+test('Suggestor renders with closed list (open:false)', () => {
+	// setup: arrange
+	const component = ReactTestUtils.renderIntoDocument(<Suggestor list={LIST} />);
+
+	// assert
+	expect(component.refs.wrapped.state.open).toBeFalsy();
+});
+
+test('Suggestor change input\'s value => stores in state', () => {
+	// setup: arrange
+	const value = 'suggest';
+	const component = ReactTestUtils.renderIntoDocument(<Suggestor list={LIST} />);
+
+	// execute (act)
+	let input = ReactTestUtils.findRenderedDOMComponentWithTag(component, 'input');
+	input.value = value;
+	ReactTestUtils.Simulate.change(input);
+
+	// assert
+	expect(component.refs.wrapped.state.value).toBe(value);
+});
+
+test('Suggestor change value => open suggestions list', () => {
+	// setup: arrange & precondition...
+	const component = ReactTestUtils.renderIntoDocument(<Suggestor list={LIST} />);
+
+	// execute (act)
+	let input = ReactTestUtils.findRenderedDOMComponentWithTag(component, 'input');
+	input.value = 'suggest';
+	ReactTestUtils.Simulate.change(input);
+
+	// assert
+	expect(component.refs.wrapped.state.open).toBeTruthy();
+});
