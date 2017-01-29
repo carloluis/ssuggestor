@@ -118,14 +118,14 @@ export class Suggestor extends Component {
 		this.refs.input.focus();
 	}
 	render() {
-		let { style, placeholder, arrow, nox, className } = this.props;
+		let { style, placeholder, arrow, x, className } = this.props;
 		let { open, value, index, filtered:list } = this.state;
 
 		return (
 			<div className={className} style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} ref={this.props.reference}>
 				<input type="text" className="form-control" onChange={this.handleChange} value={value} placeholder={placeholder} ref="input"/>
 				{ arrow && <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} /> }
-				{ !nox && value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.removeItem}/> }
+				{ x && value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.removeItem}/> }
 				<List {...{ list, index, open, value }} onItemClick={this.handleItemClick} onItemMouseEnter={this.handleItemMouseEnter} />
 			</div>
 		);
@@ -144,7 +144,7 @@ Suggestor.propTypes = {
 	className: React.PropTypes.string,
 	style: React.PropTypes.object,
 	arrow: React.PropTypes.bool,
-	nox: React.PropTypes.bool,
+	x: React.PropTypes.bool,
 };
 Suggestor.defaultProps = {
 	className: 'input-group',
@@ -152,9 +152,9 @@ Suggestor.defaultProps = {
 	value: EMPTY_STR,
 	openOnClick: true,
 	selectOnTab: false,
-	suggestOn: 0,
+	suggestOn: 1,
 	arrow: true,
-	nox: false
+	x: true
 };
 
 export default withClickOut(Suggestor);
