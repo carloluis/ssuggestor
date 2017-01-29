@@ -19,16 +19,12 @@ const Example = () => (
 		<h1><strong>SSuggestor</strong> - React Simple Suggestor</h1>
 		<pre>
 			{
-`import SSuggestor from 'SSuggestor';
-
-// ...
-
-<SSuggestor value="of" list={['list', 'of', 'suggestions']} 
+`<SSuggestor value="of" list={['list', 'of', 'suggestions']} 
 	onChange={value=>console.info(value)} 
 	placeholder="type something..." 
+	style={{width:400}} 
 	openOnClik={true}
 	suggestOn={1}
-	style={{width:400}} 
 	arrow={true} 
 	x={true}
 	/>`
@@ -40,16 +36,17 @@ const Example = () => (
 		<SSuggestor value="of" list={['list', 'of', 'suggestions']} onChange={value=>console.info('SS1', value)} placeholder="type something..." style={{width:400}} />
 		
 		<Sep />
-		<h4>Suggestor (with custom classname)</h4>
-		<SSuggestor className="input-group suggestor" list={SUGGESTIONS} placeholder="type a|b|c..." onChange={value=>console.info('SS2', value)} x={false} />
+		<h4>Suggestor (custom classname, select on `tab`)</h4>
+		<SSuggestor className="input-group suggestor" list={SUGGESTIONS} placeholder="type a|b|c..." onChange={value=>console.info('SS2', value)} selectOnTab />
 		
 		<Sep />
 		<h4>Suggestor (no close on clickout)</h4>
-		<Suggestor list={SUGGESTIONS} placeholder="suggestor..." style={STYLE} onChange={value=>console.info('SS4', value)} />
+		<Suggestor list={SUGGESTIONS} placeholder="suggestor..." tooltip="red text" style={STYLE} onChange={value=>console.info('SS4', value)} />
 		<Sep />
 
-		<h4>Suggest with two or more chars (2K suggestions)</h4>
-		<SSuggestor list={TWOK_SUGGS} placeholder="type two digits..." style={STYLE} onChange={value=>console.info('SS3', value)} 
+		<h4>Suggest when two or more chars (2K suggestions)</h4>
+		<SSuggestor list={TWOK_SUGGS} placeholder="type two digits..." tooltip="numbers between 0 and 2000. (no arrow, no x, no keys)" 
+			style={STYLE} onChange={value=>console.info('SS3', value)} useKeys={false} 
 			suggestOn={2} openOnClick={false} arrow={false} x={false} />
 		<Sep />
 	</div>
