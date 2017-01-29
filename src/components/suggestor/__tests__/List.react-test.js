@@ -1,6 +1,35 @@
 import React from 'react';
+import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 import List from '../List';
+
+describe('<List />', () => {
+	let props;
+	beforeEach(() => {
+		props = {
+			list: [],
+			open: false,
+			index: 0,
+			onItemClick: _=>_,
+			onItemMouseEnter: _=>_,
+			value: ''
+		};
+	});
+	it('initial render with no suggestions list', () => {
+		const tree = renderer.create(<List {...props} />);
+		expect(tree).toMatchSnapshot();
+	});
+	it('initial render with suggestions list (open:false)', () => {
+		props = { ...props, list: ['suggest-1'] };
+		const tree = renderer.create(<List {...props} />);
+		expect(tree).toMatchSnapshot();
+	});
+	it('initial render with suggestions list (open:true)', () => {
+		props = { ...props, list: ['suggest-1'], open:true };
+		const tree = renderer.create(<List {...props} />);
+		expect(tree).toMatchSnapshot();
+	});
+});
 
 test('List with open:false => no renders ul.dropdown-menu', () => {
 	const props = { list: [], open: false, index: 0, onItemClick: f => f, onItemMouseEnter: f => f, value: '' };

@@ -1,0 +1,38 @@
+exports[`<List /> initial render with no suggestions list 1`] = `null`;
+
+exports[`<List /> initial render with suggestions list (open:false) 1`] = `null`;
+
+exports[`<List /> initial render with suggestions list (open:true) 1`] = `
+<ul
+  className="dropdown-menu"
+  style={
+    Object {
+      "cursor": "pointer",
+      "display": "block",
+      "maxHeight": 250,
+      "minWidth": 30,
+      "overflow": "auto",
+      "width": "inherit",
+    }
+  }>
+  <li
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#f5f5f5",
+      }
+    }
+    value="suggest-1">
+    <a>
+      <span>
+        
+        <strong>
+          
+        </strong>
+        suggest-1
+      </span>
+    </a>
+  </li>
+</ul>
+`;
