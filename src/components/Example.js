@@ -2,6 +2,7 @@ import React from 'react';
 import SSuggestor, { Suggestor } from './suggestor/Suggestor';
 
 const SUGGESTIONS = ['a', 'aa', 'aaa', 'aaaa', 'aaaaa', 'ab', 'aab', 'aaab', 'AC', 'ac', 'aAC', 'aaaC', 'aaaac', 'aáa'];
+const LONG_SUGGS = Array.from(new Array(5000), (x,i) => ''+i);
 
 const STYLE = {width:200};
 
@@ -41,7 +42,7 @@ const Example = () => (
 		
 		<Sep />
 		<h4>Suggest only when text.length >= 2</h4>
-		<SSuggestor list={SUGGESTIONS} placeholder="type ac..." style={STYLE} onChange={value=>console.info('SS3', value)} 
+		<SSuggestor list={LONG_SUGGS} placeholder="type two digits..." style={STYLE} onChange={value=>console.info('SS3', value)} 
 			suggestOn={2} openOnClick={false} arrow={false} nox />
 		<Sep />
 
