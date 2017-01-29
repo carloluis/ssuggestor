@@ -2,7 +2,10 @@ import React from 'react';
 import SSuggestor, { Suggestor } from './suggestor/Suggestor';
 
 const SUGGESTIONS = ['a', 'aa', 'aaa', 'aaaa', 'aaaaa', 'ab', 'aab', 'aaab', 'AC', 'ac', 'aAC', 'aaaC', 'aaaac', 'aáa'];
-const LONG_SUGGS = Array.from(new Array(5000), (x,i) => ''+i);
+const TWOK_SUGGS = [];
+for (var i = 0; i < 2000; i++) {
+	TWOK_SUGGS.push(''+i);
+}
 
 const STYLE = {width:200};
 
@@ -27,7 +30,7 @@ const Example = () => (
 	suggestOn={1}
 	style={{width:400}} 
 	arrow={true} 
-	nox={false}
+	x={true}
 	/>`
 			}
 		</pre>
@@ -38,16 +41,16 @@ const Example = () => (
 		
 		<Sep />
 		<h4>Suggestor (with custom classname)</h4>
-		<SSuggestor list={SUGGESTIONS} placeholder="type a|b|c..." onChange={value=>console.info('SS2', value)} nox className="input-group suggestor" />
+		<SSuggestor className="input-group suggestor" list={SUGGESTIONS} placeholder="type a|b|c..." onChange={value=>console.info('SS2', value)} x={false} />
 		
 		<Sep />
-		<h4>Suggest only when text.length >= 2</h4>
-		<SSuggestor list={LONG_SUGGS} placeholder="type two digits..." style={STYLE} onChange={value=>console.info('SS3', value)} 
-			suggestOn={2} openOnClick={false} arrow={false} nox />
-		<Sep />
-
 		<h4>Suggestor (no close on clickout)</h4>
 		<Suggestor list={SUGGESTIONS} placeholder="suggestor..." style={STYLE} onChange={value=>console.info('SS4', value)} />
+		<Sep />
+
+		<h4>Suggest with two or more chars (2K suggestions)</h4>
+		<SSuggestor list={TWOK_SUGGS} placeholder="type two digits..." style={STYLE} onChange={value=>console.info('SS3', value)} 
+			suggestOn={2} openOnClick={false} arrow={false} x={false} />
 		<Sep />
 	</div>
 );
