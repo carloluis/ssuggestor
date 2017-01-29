@@ -15,18 +15,22 @@ react-simple-suggestor (using bootstrap styles)
 ## Usage 
 
 ```javascript
+import React from 'react';
+import { render } from 'react-dom';
 import SSuggestor from 'ssuggestor';
 
-//...
+render(
+	<SSuggestor 
+		list={['list', 'of', 'suggestions']}
+		onChange={value => console.log(value)}
+		placeholder="type something..."
+		styles={{width:100}}
+		arrow={true}
+		x={true}
+	/>,
+	document.body
+);
 
-<SSuggestor 
-	list={['list', 'of', 'suggestions']}
-	onChange={value => console.log(value)}
-	placeholder="type something..."
-	styles={{width:100}}
-	arrow={true}
-	x={true}
-	/>
 ```
 
 ## Description
@@ -35,6 +39,8 @@ SSuggestor (Simple Suggestor) exports two components:
 * __SSuggestor__: `import SSuggestor from 'suggestor'`
 	* default export handles clicks outside of DOM component
 * __Suggestor__: `import { Suggestor } from 'ssuggestor'`
+
+note: _**ssuggest**or_ highlights search pattern on **suggest**ions list.
 
 #### Props: 
 - list ([strings] required)
@@ -62,6 +68,12 @@ SSuggestor (Simple Suggestor) exports two components:
 - x (bool)
   * :x: icon (enabled by default)
   * deletes current value
+
+#### Bootstrap
+
+SSuggestor uses some bootstrap classes: 
+
+`input-group`, `form-control`, `glyphicon` (with `glyphicon-triangle-bottom` and `glyphicon-remove`), and `dropdown-menu`
 
 ###### Links
 * [github](https://github.com/carloluis/ssuggestor "suggestpr@github")

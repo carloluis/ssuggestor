@@ -1,6 +1,6 @@
 {
   "name": "ssuggestor",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "react-simple-suggestor",
   "main": "dist/react-ssuggestor.js",
   "scripts": {
@@ -20,7 +20,11 @@
   },
   "keywords": [
     "suggestor",
-    "react"
+    "react",
+    "bootstrap",
+    "search",
+    "highlight",
+    "select"
   ],
   "author": "carloluis <carloluisr@gmail.com>",
   "license": "ISC",
