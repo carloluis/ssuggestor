@@ -58,9 +58,15 @@ export class Suggestor extends Component {
 		let { open, index, filtered:list } = this.state;
 
 		switch (e.keyCode) {
+			case KEY_CODES.TAB:
+				if (this.props.selectOnTab && open && list[index]) {
+					this.changeValue(list[index]);
+				}
+				this.handleClose();
+				return;
 			case KEY_CODES.ENTER:
 				this.toggleList();
-				if (open && !!list.length) {
+				if (open && list[index]) {
 					this.changeValue(list[index]);	
 				}
 				break;
@@ -80,9 +86,6 @@ export class Suggestor extends Component {
 				this.setState({ open: true, index: prev });
 				break;
 			}
-			case KEY_CODES.TAB:
-				this.handleClose();
-				return;
 			default:
 				return;
 		}
@@ -144,6 +147,7 @@ Suggestor.propTypes = {
 	onChange: React.PropTypes.func,
 	value: React.PropTypes.string,
 	openOnClick: React.PropTypes.bool,
+	selectOnTab: React.PropTypes.bool,
 	suggestOn: React.PropTypes.number,
 	placeholder: React.PropTypes.string,
 	className: React.PropTypes.string,
@@ -156,6 +160,7 @@ Suggestor.defaultProps = {
 	onChange: f => f,
 	value: EMPTY_STR,
 	openOnClick: true,
+	selectOnTab: false,
 	suggestOn: 0,
 	arrow: true,
 	nox: false
