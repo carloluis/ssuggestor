@@ -83,13 +83,7 @@ exports[`<Suggestor /> initial render with suggestions (open list) 1`] = `
       }
       value="suggest-1">
       <a>
-        <span>
-          
-          <strong>
-            
-          </strong>
-          suggest-1
-        </span>
+        suggest-1
       </a>
     </li>
     <li
@@ -102,13 +96,7 @@ exports[`<Suggestor /> initial render with suggestions (open list) 1`] = `
       }
       value="suggest-2">
       <a>
-        <span>
-          
-          <strong>
-            
-          </strong>
-          suggest-2
-        </span>
+        suggest-2
       </a>
     </li>
   </ul>

@@ -15,17 +15,27 @@ describe('<List />', () => {
 			value: ''
 		};
 	});
-	it('initial render with no suggestions list', () => {
+	it('render with no suggestions list', () => {
 		const tree = renderer.create(<List {...props} />);
 		expect(tree).toMatchSnapshot();
 	});
-	it('initial render with suggestions list (open:false)', () => {
+	it('render with suggestions list (open:false)', () => {
 		props = { ...props, list: ['suggest-1'] };
 		const tree = renderer.create(<List {...props} />);
 		expect(tree).toMatchSnapshot();
 	});
-	it('initial render with suggestions list (open:true)', () => {
+	it('render with suggestions list (open:true)', () => {
 		props = { ...props, list: ['suggest-1'], open:true };
+		const tree = renderer.create(<List {...props} />);
+		expect(tree).toMatchSnapshot();
+	});
+	it('render with suggestions list (open:true, index:0)', () => {
+		props = { ...props, list: ['suggest-0', 'suggest-1'], open:true };
+		const tree = renderer.create(<List {...props} />);
+		expect(tree).toMatchSnapshot();
+	});
+	it('render with suggestions list (open:true, index:1)', () => {
+		props = { ...props, list: ['suggest-0', 'suggest-1'], open:true, index:1 };
 		const tree = renderer.create(<List {...props} />);
 		expect(tree).toMatchSnapshot();
 	});
