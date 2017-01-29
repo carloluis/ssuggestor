@@ -1,6 +1,6 @@
 {
   "name": "ssuggestor",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "react-simple-suggestor",
   "main": "dist/react-ssuggestor.js",
   "scripts": {
@@ -12,7 +12,7 @@
   },
   "files": [
     "dist",
-    "src/components"
+    "src"
   ],
   "repository": {
     "type": "git",
