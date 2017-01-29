@@ -9,7 +9,7 @@ const MarkMatch = ({ item, search }) => {
 		<a>
 			{
 				index >= 0? 
-					<span> { item.substr(0, index) }
+					<span>{ item.substr(0, index) }
 					<strong>{item.substr(index, searchLength)}</strong>
 					{ item.substr(index+searchLength, item.length) }
 					</span>
