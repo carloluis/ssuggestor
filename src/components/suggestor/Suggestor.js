@@ -46,6 +46,9 @@ export class Suggestor extends Component {
 		}
 	}
 	handleKeyDown(e) {
+		if (!this.props.useKeys) {
+			return;
+		}
 		let { open, index, filtered:list } = this.state;
 
 		switch (e.keyCode) {
@@ -118,12 +121,12 @@ export class Suggestor extends Component {
 		this.refs.input.focus();
 	}
 	render() {
-		let { style, placeholder, arrow, x, className } = this.props;
+		let { style, placeholder, arrow, x, className, tooltip } = this.props;
 		let { open, value, index, filtered:list } = this.state;
 
 		return (
-			<div className={className} style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} ref={this.props.reference}>
-				<input type="text" className="form-control" onChange={this.handleChange} value={value} placeholder={placeholder} ref="input"/>
+			<div className={className} style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} ref={this.props.reference} >
+				<input type="text" className="form-control" onChange={this.handleChange} value={value} ref="input" placeholder={placeholder} title={tooltip} />
 				{ arrow && <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} /> }
 				{ x && value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.removeItem}/> }
 				<List {...{ list, index, open, value }} onItemClick={this.handleItemClick} onItemMouseEnter={this.handleItemMouseEnter} />
@@ -140,7 +143,9 @@ Suggestor.propTypes = {
 	openOnClick: React.PropTypes.bool,
 	selectOnTab: React.PropTypes.bool,
 	suggestOn: React.PropTypes.number,
+	useKeys: React.PropTypes.bool,
 	placeholder: React.PropTypes.string,
+	tooltip: React.PropTypes.string,
 	className: React.PropTypes.string,
 	style: React.PropTypes.object,
 	arrow: React.PropTypes.bool,
@@ -153,6 +158,7 @@ Suggestor.defaultProps = {
 	openOnClick: true,
 	selectOnTab: false,
 	suggestOn: 1,
+	useKeys: true,
 	arrow: true,
 	x: true
 };
