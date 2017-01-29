@@ -12,20 +12,9 @@ describe('<Suggestor />', () => {
 		const tree = renderer.create(<Suggestor list={["suggest-1"]} />);
 		expect(tree).toMatchSnapshot();
 	});
-});
-
-describe('Suggestor', () => {
-	it('if suggestor value => open suggestions list', () => {
-		// arrange & precondition...
-		const component = ReactTestUtils.renderIntoDocument(<Suggestor list={['suggest-1', 'suggest-2']} />);
-		expect(component.refs.wrapped.state.open).toBeFalsy();
-
-		// act
-		let input = ReactTestUtils.findRenderedDOMComponentWithTag(component, 'input');
-		input.value = 'suggest';
-		ReactTestUtils.Simulate.change(input);
-
-		// expect
-		expect(component.refs.wrapped.state.open).toBeTruthy();
+	it('initial render with suggestions (open list)', () => {
+		const tree = renderer.create(<Suggestor list={["suggest-1", "suggest-2"]} />);		
+		tree.getInstance().refs.wrapped.handleClick();
+		expect(tree).toMatchSnapshot();
 	});
 });
