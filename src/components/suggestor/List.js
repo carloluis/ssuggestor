@@ -1,13 +1,18 @@
-import React from 'react';
-import MarkMatch from './MarkItem';
+import React, { PureComponent } from 'react';
+import MarkItem from './MarkItem';
 import { getListStyles } from './styles';
 
-const ListItem = ({ item, onItemClick, onItemMouseEnter, index, overItem, search }) => (
-	<li value={item} onClick={() => onItemClick(item)} onMouseEnter={()=>onItemMouseEnter(index, item)} 
-		style={{ backgroundColor: overItem && '#f5f5f5' }}>
-		<MarkMatch {...{ item, search }} />
-	</li>
-);
+class ListItem extends PureComponent {
+	render() {
+		let { item, onItemClick, onItemMouseEnter, index, overItem, search } = this.props;
+		return (
+			<li value={item} onClick={() => onItemClick(item)} onMouseEnter={() => onItemMouseEnter(index, item)} 
+				style={{ backgroundColor: overItem && '#f5f5f5' }}>
+				<MarkItem {...{ item, search }} />
+			</li>
+		);
+	}
+}
 ListItem.propTypes = {
 	item: React.PropTypes.string.isRequired,
 	index: React.PropTypes.number.isRequired,
