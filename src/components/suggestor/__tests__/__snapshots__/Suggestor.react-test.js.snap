@@ -8,6 +8,7 @@ exports[`<Suggestor /> initial render with no suggestions 1`] = `
     className="form-control"
     onChange={[Function]}
     placeholder={undefined}
+    title={undefined}
     type="text"
     value="" />
   <span
@@ -40,6 +41,7 @@ exports[`<Suggestor /> initial render with suggestions 1`] = `
     className="form-control"
     onChange={[Function]}
     placeholder={undefined}
+    title={undefined}
     type="text"
     value="" />
   <span
