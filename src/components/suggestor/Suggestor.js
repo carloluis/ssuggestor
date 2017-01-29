@@ -98,12 +98,15 @@ export class Suggestor extends Component {
 	handleChange(e) {
 		e.stopPropagation();
 		let value = e.target.value;
-		let open = value.length >= this.props.suggestOn;
-		let filtered = open? this.filter(value): this.state.filtered;
-		this.setState({ open, filtered });
-		if(!filtered.length) {
+		let suggest = value.length >= this.props.suggestOn;
+		let filtered = this.filter(value);
+		let nextState = { filtered };
+		if(!filtered.length || !suggest) {
 			this.handleClose();
+		} else{
+			nextState.open = true;
 		}
+		this.setState(nextState);
 		this.changeValue(value);
 	}
 	removeItem() {
