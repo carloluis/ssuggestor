@@ -1,32 +1,6 @@
 import React from 'react';
+import MarkMatch from './MarkItem';
 import { getListStyles } from './styles';
-
-const MarkMatch = ({ item, search }) => {
-	if (!search) {
-		return <a>{ item }</a>;
-	}
-
-	let index = item.toLowerCase().indexOf(search.toLowerCase());
-	if (index === -1) {
-		return <a>{ item }</a>;	
-	}
-
-	let searchLength = search.length;
-
-	return (
-		<a>
-			<span>
-				{ item.substr(0, index) }
-				<strong>{ item.substr(index, searchLength) }</strong>
-				{ item.substr(index+searchLength, item.length) }
-			</span>
-		</a>
-	);
-};
-MarkMatch.propTypes = {
-	item: React.PropTypes.string.isRequired,
-	search: React.PropTypes.string.isRequired
-};
 
 const ListItem = ({ item, onItemClick, onItemMouseEnter, index, overItem, search }) => (
 	<li value={item} onClick={() => onItemClick(item)} onMouseEnter={()=>onItemMouseEnter(index, item)} 
