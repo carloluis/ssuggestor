@@ -1,17 +1,8 @@
 import React, { Component } from 'react';
-import withClickOut from '../withClickOut';
+import { EMPTY_STR, KEY_CODES } from '../../utils/values';
 import { SPIN_STYLES, X_STYLES } from './styles';
+import withClickOut from '../withClickOut';
 import List from './List';
-
-const EMPTY_STR = '';
-
-const KEY_CODES = {
-	TAB: 9,
-	ENTER: 13,
-	ESCAPE: 27,
-	DOWN: 40,
-	UP: 38
-};
 
 export class Suggestor extends Component {
 	constructor(props){
