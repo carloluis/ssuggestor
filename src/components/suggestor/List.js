@@ -1,26 +1,6 @@
-import React, { PureComponent } from 'react';
-import MarkItem from './MarkItem';
+import React from 'react';
+import ListItem from './ListItem';
 import { getListStyles } from './styles';
-
-class ListItem extends PureComponent {
-	render() {
-		let { item, onItemClick, onItemMouseEnter, index, overItem, search } = this.props;
-		return (
-			<li value={item} onClick={() => onItemClick(item)} onMouseEnter={() => onItemMouseEnter(index, item)} 
-				style={{ backgroundColor: overItem && '#f5f5f5' }}>
-				<MarkItem {...{ item, search }} />
-			</li>
-		);
-	}
-}
-ListItem.propTypes = {
-	item: React.PropTypes.string.isRequired,
-	index: React.PropTypes.number.isRequired,
-	overItem: React.PropTypes.bool.isRequired,
-	onItemClick: React.PropTypes.func.isRequired,
-	onItemMouseEnter: React.PropTypes.func.isRequired,
-	search: React.PropTypes.string.isRequired
-};
 
 export const List = ({ open, list, index, value, onItemClick, onItemMouseEnter }) => (
 	(open && !!list.length) && <ul className="dropdown-menu" style={getListStyles(open)}>
