@@ -2,7 +2,7 @@
   "name": "ssuggestor",
   "version": "0.0.17",
   "description": "react-simple-suggestor",
-  "main": "dist/react-ssuggestor.js",
+  "main": "dist/ssuggestor.js",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",

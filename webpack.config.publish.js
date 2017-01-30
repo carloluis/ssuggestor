@@ -16,10 +16,10 @@ module.exports = {
 		ssugestor: __dirname + '/src/components/suggestor/Suggestor.js'
 	},
 	output: {
-		filename: 'react-ssuggestor.js',
+		filename: 'ssuggestor.js',
 		path: __dirname + '/dist',
-		libraryTarget: 'commonjs2',
-		library: 'ReactSSuggestor'
+		libraryTarget: 'umd',
+		library: 'SSuggestor'
 	},
 	externals: {
 		'react': 'react'
