@@ -39,3 +39,12 @@ jspm_packages
 # generated files
 dist
 *.tgz
+
+# gh-pages (ignore all)
+*
+# include
+!.gitignore
+!index.html
+!index.js
+!app.bundle.js
+!vendor.bundle.js
