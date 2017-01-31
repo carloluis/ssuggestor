@@ -9,6 +9,9 @@
 
 react-simple-suggestor (using bootstrap styles)
 
+## Demo
+Live demo: [carloluis.github.io/ssuggestor](https://carloluis.github.io/ssuggestor/)
+
 ## Instalation
 `npm install ssuggestor --save`
 
