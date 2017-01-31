@@ -40,8 +40,6 @@ jspm_packages
 dist
 *.tgz
 
-# gh-pages (ignore all)
-*
 # include
 !.gitignore
 !index.html
