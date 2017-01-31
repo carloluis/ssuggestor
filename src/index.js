@@ -4,5 +4,5 @@ import Example from './components/Example';
 
 ReactDOM.render(
 	<Example />, 
-	document.getElementById('app')
+	document.getElementById('example')
 );

@@ -1,54 +1,84 @@
 import React from 'react';
 import SSuggestor, { Suggestor } from './suggestor/Suggestor';
+import Section from './Section';
 
-const SUGGESTIONS = ['a', 'aa', 'aaa', 'aaaa', 'aaaaa', 'ab', 'aab', 'aaab', 'AC', 'ac', 'aAC', 'aaaC', 'aaaac', 'aáa'];
-const TWOK_SUGGS = [];
+const SUGGESTIONS = [
+	'a', 'aa', 'aaa', 'aaaa', 'aaaaa', 
+	'b', 'bb', 'bbb', 'bbbb', 'bbbbb',
+	'c', 'cc', 'ccc', 'cccc', 'ccccc',
+	'abc', 'aABC', 'AaBbCc',
+	'A', 'B', 'C'
+];
+const BIG_DATA = [];
 for (var i = 0; i < 2000; i++) {
-	TWOK_SUGGS.push(''+i);
+	BIG_DATA.push(''+i);
 }
+const handleSSuggestorChange = (value) => console.info(value);
 
-const STYLE = {width:200};
-
-const Sep = ({ top=100 }) => <div style={{paddingTop:top}} />;
-Sep.propTypes = {
-	top: React.PropTypes.number
-};
+const STYLE_WIDTH = { width:'100%' };
 
 const Example = () => (
-	<div style={{padding:20, margin:'auto', maxWidth:700}}>
-		<h1><strong>SSuggestor</strong> - React Simple Suggestor</h1>
+	<div style={{padding:'20px 0 200px'}}>
+		<Section title="Code Example">
 		<pre>
 			{
-`<SSuggestor value="of" list={['list', 'of', 'suggestions']} 
-	onChange={value=>console.info(value)} 
+`<SSuggestor list={['list', 'of', 'suggestions', ...]} 
 	placeholder="type something..." 
-	style={{width:400}} 
-	openOnClik={true}
-	suggestOn={1}
-	arrow={true} 
-	x={true}
+	style={{width:'100%''}} 
 	/>`
 			}
-		</pre>
+		</pre>	
+		</Section>
 
-		<Sep top={20} />
-		<h4>Simple Suggestor (previuos code - clickout support)</h4>
-		<SSuggestor value="of" list={['list', 'of', 'suggestions']} onChange={value=>console.info('SS1', value)} placeholder="type something..." style={{width:400}} />
-		
-		<Sep />
-		<h4>Suggestor (custom classname, select on `tab`)</h4>
-		<SSuggestor className="input-group suggestor" list={SUGGESTIONS} placeholder="type a|b|c..." onChange={value=>console.info('SS2', value)} selectOnTab />
-		
-		<Sep />
-		<h4>Suggestor (no close on clickout)</h4>
-		<Suggestor list={SUGGESTIONS} placeholder="suggestor..." tooltip="red text" style={STYLE} onChange={value=>console.info('SS4', value)} />
-		<Sep />
+		<Section title="Suggestor with initial value" description="Use `value` prop to set initial value. Hit `x` to delete current value. Use (up, down) keys to select values.">
+			<SSuggestor value="default" list={['list', 'of', 'suggestions', 'with', 'default', 'value']} 
+				onChange={handleSSuggestorChange} placeholder="..." style={STYLE_WIDTH} />
+		</Section>
 
-		<h4>Suggest when two or more chars (2K suggestions)</h4>
-		<SSuggestor list={TWOK_SUGGS} placeholder="type two digits..." tooltip="numbers between 0 and 2000. (no arrow, no x, no keys)" 
-			style={STYLE} onChange={value=>console.info('SS3', value)} useKeys={false} 
-			suggestOn={2} openOnClick={false} arrow={false} x={false} />
-		<Sep />
+		<Section title="Suggestor with `select on tab`" description="Select element hovered pressing `tab`.">
+			<SSuggestor list={SUGGESTIONS} placeholder="type a|b|c..." onChange={handleSSuggestorChange} selectOnTab style={STYLE_WIDTH} />
+		</Section>
+		
+		<Section title="Suggestor with custom styles" description="Use `className` prop and css to change component appearance.">
+			<SSuggestor className="input-group suggestor" list={SUGGESTIONS} placeholder="type a|b|c..." 
+			onChange={handleSSuggestorChange} style={STYLE_WIDTH} />
+		</Section>
+
+		<Section title="Suggestor with tooltip" description="tooltip prop.">
+			<SSuggestor list={SUGGESTIONS} placeholder="type a|b|c..." tooltip="type a|b|c..."
+			onChange={handleSSuggestorChange} style={STYLE_WIDTH} />
+		</Section>
+
+		<Section title="Suggestor without keys navigation" description="useKeys prop.">
+			<SSuggestor list={SUGGESTIONS} placeholder="type a|b|c..." tooltip="no keys navigation"
+			onChange={handleSSuggestorChange} style={STYLE_WIDTH} useKeys={false} />
+		</Section>
+
+		<Section title="Suggestor without icons" description="arrow and x props.">
+			<SSuggestor list={SUGGESTIONS} placeholder="type a|b|c..." tooltip="no arrow and no x"
+			onChange={handleSSuggestorChange} style={STYLE_WIDTH} arrow={false} x={false} />
+		</Section>
+
+		<Section title="Suggestor start suggestions on two characters" description="suggestOn prop.">
+			<SSuggestor list={SUGGESTIONS} placeholder="type a|b|c..." tooltip="display suggestions on 2nd char."
+			onChange={handleSSuggestorChange} style={STYLE_WIDTH} suggestOn={2} />
+		</Section>
+
+		<Section title="Suggestor without click support" description="openOnClick prop.">
+			<SSuggestor list={SUGGESTIONS} placeholder="type a|b|c..." tooltip="type something (or use navigation keys) to display suggestions"
+			onChange={handleSSuggestorChange} style={STYLE_WIDTH} openOnClick={false} />
+		</Section>
+
+		<Section title="Suggestor with 2K suggestions" description="Long suggestion list... (using keys, waiting until 2nd char for suggestions)">
+			<SSuggestor list={BIG_DATA} placeholder="enter two digits..." tooltip="numbers between 0 and 2000. (no arrow, no x, no keys)" 
+				useKeys={true} suggestOn={2} openOnClick={false} arrow={false} x={false}
+				style={STYLE_WIDTH} onChange={handleSSuggestorChange} />
+		</Section>
+
+		<Section title="Suggestor without clickout support" description="This one doesn`t close on click outside component.">
+			<Suggestor list={SUGGESTIONS} placeholder="type a|b|c..." tooltip="only support clicks on component" 
+				style={STYLE_WIDTH} onChange={handleSSuggestorChange} />
+		</Section>
 	</div>
 );
 

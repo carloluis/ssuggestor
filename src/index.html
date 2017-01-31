@@ -3,14 +3,35 @@
 <head>
 	<meta charset="UTF-8">
 	<title>SSuggestor</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="react,reactjs,react component,component,suggestor,ssuggestor,select,form,autocomplete,javascript">
+	<meta name="description" content="SSuggestor - React Simple Suggestor">
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<style>
-		.suggestor {
-			width: 300px;
+		.container {
+			padding:20;
+			margin: auto;
+			max-width: 500px;
 		}
+		header {
+			background-color: #1DA1F2 !important;
+		}
+		header .container {
+			padding: 10px 0 30px;
+			text-align: center;
+			color: white;
+		}
+		.info {
+			background-color: #eaeaea;
+			height: 40px;
+			text-align: center;
+			padding: 10px;
+		}
+	</style>
+	<style>
 		.suggestor input {
-			color: red;
 			font-weight: 600;
+			color: red;
 		}
 		.suggestor ::-webkit-input-placeholder {
 			font-weight: normal;
@@ -18,6 +39,22 @@
 	</style>
 </head>
 <body>
-	<div id="app">Loading...</div>
+	<header>
+		<div class="container">
+			<h1>SSuggestor</h1>
+			<h3>React Simple Suggestor</h3>
+		</div>
+		<div class="info">
+			<span><a href="https://github.com/carloluis/ssuggestor" target="_blank">Code and Docs on GitHub</a></span>
+		</div>
+	</header>
+	<div class="container">
+		<div id="example">Loading...</div>
+	</div>
+	<footer>
+		<div class="info">
+			<span>Copyright &copy; <a href="https://twitter.com/carloluis_" target="_blank">Carloluis</a> 2017. MIT Licensed.</span>
+		</div>
+	</footer>
 </body>
 </html>
