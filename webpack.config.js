@@ -11,6 +11,7 @@ const envPluginConfig = new webpack.DefinePlugin({
 		'NODE_ENV': JSON.stringify(NODE_ENV)
 	}
 });
+const commonsChunkConfig = new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js');
 const htmlWebpackPluginConfig = new HtmlWebpackPlugin({
 	template: __dirname + '/src/index.html',
 	filename: 'index.html',
@@ -48,7 +49,7 @@ module.exports = {
 			}
 		]
 	},
-	plugins: [envPluginConfig, htmlWebpackPluginConfig],
+	plugins: [envPluginConfig, commonsChunkConfig, htmlWebpackPluginConfig],
 	resolve: {
 		extensions: ['', '.js']
 	},
