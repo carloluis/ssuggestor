@@ -10,9 +10,11 @@
 react-simple-suggestor (using bootstrap styles)
 
 ## Demo
+
 Live demo: [carloluis.github.io/ssuggestor](https://carloluis.github.io/ssuggestor/)
 
 ## Instalation
+
 `npm install ssuggestor --save`
 
 ## Usage 
@@ -45,7 +47,8 @@ SSuggestor (Simple Suggestor) exports two components:
 
 note: _**ssuggest**or_ highlights search pattern on **suggest**ions list.
 
-#### Props: 
+#### Props:
+
 - list ([strings] required)
   * note: searches on _suggestions list_ are casE insensitivE
 - onChange (func)
@@ -72,11 +75,18 @@ note: _**ssuggest**or_ highlights search pattern on **suggest**ions list.
   * :x: icon (enabled by default)
   * deletes current value
 
+#### Methods
+
+Only has a public method: `focus()`. It focuses the control input element.
+```javascript
+instance.focus();
+```
+
 #### Bootstrap
 
 SSuggestor uses some bootstrap classes: 
 
-`input-group`, `form-control`, `glyphicon` (with `glyphicon-triangle-bottom` and `glyphicon-remove`), and `dropdown-menu`
+`input-group`, `form-control`, `dropdown-menu` and `glyphicon` (`glyphicon-triangle-bottom` & `glyphicon-remove`) 
 
 ###### Links
 * [github](https://github.com/carloluis/ssuggestor "suggestpr@github")
