@@ -1,6 +1,6 @@
 {
   "name": "ssuggestor",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "react-simple-suggestor",
   "main": "dist/ssuggestor.js",
   "scripts": {
@@ -52,13 +52,16 @@
     "html-webpack-plugin": "^2.26.0",
     "jest": "^18.1.0",
     "react-addons-test-utils": "^15.4.2",
+    "react-dom": "^15.4.2",
     "react-test-renderer": "^15.4.2",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react": "^15.4.2"
+  },
+  "peerDependencies": {
+    "react": "^15.0.0"
   },
   "jest": {
     "moduleFileExtensions": [

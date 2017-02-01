@@ -22,7 +22,12 @@ module.exports = {
 		library: 'SSuggestor'
 	},
 	externals: {
-		'react': 'react'
+		react: {
+			root: 'React',
+			commonjs2: 'react',
+			commonjs: 'react',
+			amd: 'react'
+		}
 	},
 	target: 'node',
 	module: {
