@@ -2,7 +2,6 @@
 
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const packages = require('./package.json');
 const path = require('path');
 
 const PATHS = {
@@ -28,7 +27,7 @@ const htmlWebpackPluginConfig = new HtmlWebpackPlugin({
 module.exports = {
 	entry: {
 		app: PATHS.example + '/index.js',
-		vendor: [...Object.keys(packages.dependencies), "react-dom"]
+		vendor: ["react", "react-dom"]
 	},
 	output: {
 		filename: '[name].bundle.js',
