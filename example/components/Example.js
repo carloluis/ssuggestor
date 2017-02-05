@@ -1,5 +1,5 @@
 import React from 'react';
-import SSuggestor, { Suggestor } from './suggestor/Suggestor';
+import SSuggestor, { Suggestor } from '../../src/suggestor/Suggestor';
 import Section from './Section';
 
 const SUGGESTIONS = [

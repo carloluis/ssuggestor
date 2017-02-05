@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { EMPTY_STR, KEY_CODES } from '../../utils/values';
+import { EMPTY_STR, KEY_CODES } from '../utils/values';
 import { SPIN_STYLES, X_STYLES } from './styles';
-import withClickOut from '../withClickOut';
+import withClickOut from '../utils/withClickOut';
 import List from './List';
 
 export class Suggestor extends Component {
@@ -166,4 +166,6 @@ Suggestor.defaultProps = {
 	x: true
 };
 
-export default withClickOut(Suggestor);
+export const SSuggestor = withClickOut(Suggestor);
+
+export default SSuggestor;

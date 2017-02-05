@@ -13,7 +13,7 @@ const envPluginConfig = new webpack.DefinePlugin({
 
 module.exports = {
 	entry: {
-		ssugestor: __dirname + '/src/components/suggestor/Suggestor.js'
+		ssugestor: __dirname + '/src/suggestor/Suggestor.js'
 	},
 	output: {
 		filename: 'ssuggestor.js',

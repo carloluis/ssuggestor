@@ -13,14 +13,14 @@ const envPluginConfig = new webpack.DefinePlugin({
 });
 const commonsChunkConfig = new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js');
 const htmlWebpackPluginConfig = new HtmlWebpackPlugin({
-	template: __dirname + '/src/index.html',
+	template: __dirname + '/example/index.html',
 	filename: 'index.html',
 	inject: 'body'
 });
 
 module.exports = {
 	entry: {
-		app: './src/index.js',
+		app: './example/index.js',
 		vendor: Object.keys(packages.dependencies)
 	},
 	output: {
