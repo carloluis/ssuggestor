@@ -2,22 +2,37 @@
 
 const webpack = require('webpack');
 const packages = require('./package.json');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const path = require('path');
 
 const NODE_ENV = 'production';
+
+const PATHS = {
+	src: path.join(__dirname, 'src'),
+	example: path.join(__dirname, 'example'),
+	dist: path.join(__dirname, 'dist'),
+	cwd: __dirname
+};
 
 const envPluginConfig = new webpack.DefinePlugin({
 	'process.env': {
 		'NODE_ENV': JSON.stringify(NODE_ENV)
 	}
 });
+const cleanWebpackConfig = new CleanWebpackPlugin(['dist'], {
+	root: PATHS.cwd,
+	verbose: true,
+	dry: false,
+	exclude: ['ssuggestor.js']
+});
 
 module.exports = {
 	entry: {
-		ssugestor: __dirname + '/src/suggestor/Suggestor.js'
+		ssugestor: PATHS.src + '/suggestor/Suggestor.js'
 	},
 	output: {
 		filename: 'ssuggestor.js',
-		path: __dirname + '/dist',
+		path: PATHS.dist,
 		libraryTarget: 'umd',
 		library: 'SSuggestor'
 	},
@@ -42,7 +57,7 @@ module.exports = {
 			}
 		]
 	},
-	plugins: [envPluginConfig],
+	plugins: [cleanWebpackConfig, envPluginConfig],
 	resolve: {
 		extensions: ['', '.js']
 	}
