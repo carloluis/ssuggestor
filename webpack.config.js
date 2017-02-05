@@ -3,30 +3,37 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const packages = require('./package.json');
+const path = require('path');
 
-const NODE_ENV = 'development';
+const PATHS = {
+	example: path.join(__dirname, 'example'),
+	dist: path.join(__dirname, 'dist')
+};
+
+const productionFlag = process.argv.indexOf('-p') !== -1;
+const NODE_ENV = productionFlag? 'production': 'development';
 
 const envPluginConfig = new webpack.DefinePlugin({
 	'process.env': {
-		'NODE_ENV': JSON.stringify(NODE_ENV)
+		NODE_ENV: JSON.stringify(NODE_ENV)
 	}
 });
 const commonsChunkConfig = new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js');
 const htmlWebpackPluginConfig = new HtmlWebpackPlugin({
-	template: __dirname + '/example/index.html',
+	template: PATHS.example + '/index.html',
 	filename: 'index.html',
 	inject: 'body'
 });
 
 module.exports = {
 	entry: {
-		app: './example/index.js',
-		vendor: Object.keys(packages.dependencies)
+		app: PATHS.example + '/index.js',
+		vendor: [...Object.keys(packages.dependencies), "react-dom"]
 	},
 	output: {
 		filename: '[name].bundle.js',
 		sourceMapFilename: '[file].map',
-		path: __dirname + '/dist',
+		path: PATHS.dist,
 		publicPath: '/'
 	},
 	module: {

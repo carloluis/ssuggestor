@@ -7,6 +7,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "dev": "webpack-dev-server",
+    "example": "webpack -p",
     "build": "npm run build:main & npm run build:prod",
     "build:main": "webpack --config webpack.config.publish.js",
     "build:prod": "webpack --config webpack.config.publish.js -p --output-filename ssuggestor.min.js",

@@ -9,7 +9,6 @@ const NODE_ENV = 'production';
 
 const PATHS = {
 	src: path.join(__dirname, 'src'),
-	example: path.join(__dirname, 'example'),
 	dist: path.join(__dirname, 'dist'),
 	cwd: __dirname
 };
