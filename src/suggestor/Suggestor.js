@@ -7,7 +7,7 @@ import List from './List';
 export class Suggestor extends Component {
 	constructor(props){
 		super(props);
-		this._bind('handleClick', 'handleChange', 'removeItem', 'handleKeyDown', 'handleItemClick', 'handleItemMouseEnter', 'handleClickOut', 'focus');
+		this._bind('handleClick', 'handleChange', 'remove', 'handleKeyDown', 'handleItemClick', 'handleItemMouseEnter', 'handleClickOut', 'focus');
 
 		this.state = {
 			value: props.value,
@@ -109,7 +109,7 @@ export class Suggestor extends Component {
 		this.setState(nextState);
 		this.changeValue(value);
 	}
-	removeItem() {
+	remove() {
 		this.changeValue(EMPTY_STR);
 	}
 	changeValue(value) {
@@ -124,14 +124,14 @@ export class Suggestor extends Component {
 		this.refs.input.focus();
 	}
 	render() {
-		let { style, placeholder, arrow, x, className, tooltip } = this.props;
+		let { className, style, placeholder, arrow, close, tooltip } = this.props;
 		let { open, value, index, filtered:list } = this.state;
 
 		return (
 			<div className={className} style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} ref={this.props.reference} >
 				<input type="text" className="form-control" onChange={this.handleChange} value={value} ref="input" placeholder={placeholder} title={tooltip} />
 				{ arrow && <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} /> }
-				{ x && value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.removeItem}/> }
+				{ close && value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.remove}/> }
 				<List {...{ list, index, open, value }} onItemClick={this.handleItemClick} onItemMouseEnter={this.handleItemMouseEnter} />
 			</div>
 		);
@@ -152,7 +152,7 @@ Suggestor.propTypes = {
 	className: React.PropTypes.string,
 	style: React.PropTypes.object,
 	arrow: React.PropTypes.bool,
-	x: React.PropTypes.bool,
+	close: React.PropTypes.bool,
 };
 Suggestor.defaultProps = {
 	className: 'input-group',
@@ -163,7 +163,7 @@ Suggestor.defaultProps = {
 	suggestOn: 1,
 	useKeys: true,
 	arrow: true,
-	x: true
+	close: true
 };
 
 export const SSuggestor = withClickOut(Suggestor);

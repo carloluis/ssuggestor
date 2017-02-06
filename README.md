@@ -26,12 +26,12 @@ import SSuggestor from 'ssuggestor';
 
 render(
 	<SSuggestor 
-		list={['list', 'of', 'suggestions']}
+		list={['list', 'of', 'string', 'suggestions']}
 		onChange={value => console.log(value)}
 		placeholder="type something..."
 		styles={{width:100}}
 		arrow={true}
-		x={true}
+		close={true}
 	/>,
 	document.body
 );
@@ -71,8 +71,9 @@ note: _**ssuggest**or_ highlights search pattern on **suggest**ions list.
   * use navigation (up/down), select (enter) and delete (escape) keys (true by default)
 - arrow (bool)
   * :small_red_triangle_down: icon (enabled by default)
-- x (bool)
-  * :x: icon (enabled by default)
+  * opens list of suggestions
+- close (bool)
+  * :x: icon (enabled by default) 
   * deletes current value
 
 #### Methods
