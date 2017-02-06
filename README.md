@@ -13,11 +13,17 @@ react-simple-suggestor (using bootstrap styles)
 
 Live demo: [carloluis.github.io/ssuggestor](https://carloluis.github.io/ssuggestor/)
 
+Code example: [codepen.io](http://codepen.io/carloluis/pen/rjpLYw)
+
 ## Instalation
 
-`npm install ssuggestor --save`
+```javascript
+npm install ssuggestor --save
+```
 
 ## Usage 
+
+### npm
 
 ```javascript
 import React from 'react';
@@ -38,43 +44,45 @@ render(
 
 ```
 
+### browser
+
+Include `react.js` dependency script and `ssuggestor.js` 
+
+```html
+<script src="https://unpkg.com/react@15.4.2/dist/react.min.js"></script>
+<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.min.js"></script>
+<script src="https://unpkg.com/ssuggestor@0.0.19/dist/ssuggestor.min.js"></script>
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+```
+
 ## Description
 
 SSuggestor (Simple Suggestor) exports two components:
-* __SSuggestor__: `import SSuggestor from 'suggestor'`
-	* default export handles clicks outside of DOM component
+* __SSuggestor__: `import { SSuggestor } from 'suggestor'`
+	* default export handles clicks outside of DOM component: `import SSuggestor from 'ssuggestor'`
 * __Suggestor__: `import { Suggestor } from 'ssuggestor'`
 
 note: _**ssuggest**or_ highlights search pattern on **suggest**ions list.
 
 #### Props:
 
-- list ([strings] required)
-  * note: searches on _suggestions list_ are casE insensitivE
-- onChange (func)
-  * callback to retrieve component's value (on every update)
-- value (string)
-  * initial value for suggestor (empty by default)
-- className (string)
-  * css classes to use in component's root element ('input-group' by default)
-- style ([object](https://facebook.github.io/react/docs/dom-elements.html#style "react docs: style object"))
-  * inline styles for component's root element
-- placeholder (string)
-  * suggestor's input placholder text
-- tooltip (string)
-  * suggestor's input title text
-- openOnClick (bool)
-  * indicates whether or not to open suggestion list on click (true by default)
-- selectOnTab (bool)
-  * select hovered suggestion when press `tab` key (false by default)
-- useKeys (bool)
-  * use navigation (up/down), select (enter) and delete (escape) keys (true by default)
-- arrow (bool)
-  * :small_red_triangle_down: icon (enabled by default)
-  * opens list of suggestions
-- close (bool)
-  * :x: icon (enabled by default) 
-  * deletes current value
+Property | Type | Default | Description
+:--------|:-----|:--------|:-----------
+list     | array | -- | array of string suggestions (required)
+onChange | func | `_ => _` | onChange handler: `(new_value) => { }`
+value    | string | `''` | initial value
+className| string | `input-group` | css classes for component's root element
+style    | [object](https://facebook.github.io/react/docs/dom-elements.html#style "react style object") | undefined | inline styles for component's root element
+placeholder | string | `''` | input placeholder text
+tooltip  | string | `''` | input title text (simple tooltip)
+suggestOn| number | 1 | minimum length of search string to show suggestions
+openOnClick | bool | `true` | whether suggestion list opens on click or not
+selctOnTab | bool | `false` | whether suggestion is selected by hit `tab` key or not
+useKeys  | bool | `true` | whether to use keys (`up`/`down`, `enter`, `escape`) or not
+arrow    | bool | `true` | :small_red_triangle_down: icon
+close    | bool | `true` | :x: icon - deletes current value
+
 
 #### Methods
 
@@ -89,6 +97,17 @@ SSuggestor uses some bootstrap classes:
 
 `input-group`, `form-control`, `dropdown-menu` and `glyphicon` (`glyphicon-triangle-bottom` & `glyphicon-remove`) 
 
+## Development
+
+In order to build locally, clone this repo, then run:
+```javascript
+npm install
+npm run dev
+```
+
+Then open browser on [localhost:9000](http://localhost:9000/)
+
 ###### Links
-* [github](https://github.com/carloluis/ssuggestor "suggestpr@github")
+* [live-demo](https://carloluis.github.io/ssuggestor/)
+* [codepen](http://codepen.io/carloluis/pen/rjpLYw)
 * [npm](https://www.npmjs.com/package/ssuggestor "ssuggestor@npm")
