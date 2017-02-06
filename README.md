@@ -60,7 +60,8 @@ Include `react.js` dependency script and `ssuggestor.js`
 
 SSuggestor (Simple Suggestor) exports two components:
 * __SSuggestor__: `import { SSuggestor } from 'suggestor'`
-	* default export handles clicks outside of DOM component: `import SSuggestor from 'ssuggestor'`
+	* default export handles clicks outside of DOM component: 
+  * `import SSuggestor from 'ssuggestor'`
 * __Suggestor__: `import { Suggestor } from 'ssuggestor'`
 
 note: _**ssuggest**or_ highlights search pattern on **suggest**ions list.
@@ -76,7 +77,7 @@ className| string | `input-group` | css classes for component's root element
 style    | [object](https://facebook.github.io/react/docs/dom-elements.html#style "react style object") | undefined | inline styles for component's root element
 placeholder | string | `''` | input placeholder text
 tooltip  | string | `''` | input title text (simple tooltip)
-suggestOn| number | 1 | minimum length of search string to show suggestions
+suggestOn| number | `1` | minimum length of search string to show suggestions
 openOnClick | bool | `true` | whether suggestion list opens on click or not
 selctOnTab | bool | `false` | whether suggestion is selected by hit `tab` key or not
 useKeys  | bool | `true` | whether to use keys (`up`/`down`, `enter`, `escape`) or not
@@ -99,7 +100,7 @@ SSuggestor uses some bootstrap classes:
 
 ## Development
 
-In order to build locally, clone this repo, then run:
+In order to build locally: clone this repo, then run:
 ```javascript
 npm install
 npm run dev
