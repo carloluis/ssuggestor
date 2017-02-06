@@ -10,7 +10,7 @@
     "example": "webpack -p",
     "build": "npm run build:main & npm run build:prod",
     "build:main": "webpack --config webpack.config.publish.js",
-    "build:prod": "webpack --config webpack.config.publish.js -p --output-filename ssuggestor.min.js",
+    "build:prod": "npm run build:main -- -p --output-filename ssuggestor.min.js",
     "prepublish": "npm run build"
   },
   "files": [
