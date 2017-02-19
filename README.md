@@ -11,9 +11,9 @@ react-simple-suggestor (using bootstrap styles)
 
 ## Demo
 
-Live demo: [carloluis.github.io/ssuggestor](https://carloluis.github.io/ssuggestor/)
+Live Demo: [carloluis.github.io/ssuggestor](https://carloluis.github.io/ssuggestor/)
 
-Code example: [codepen.io](http://codepen.io/carloluis/pen/rjpLYw)
+See the Pen [ssuggestor-example](http://codepen.io/carloluis/pen/rjpLYw/) on [CodePen](http://codepen.io)
 
 ## Instalation
 
@@ -51,7 +51,7 @@ Include `react.js` dependency script and `ssuggestor.js`
 ```html
 <script src="https://unpkg.com/react@15.4.2/dist/react.min.js"></script>
 <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.min.js"></script>
-<script src="https://unpkg.com/ssuggestor@0.0.19/dist/ssuggestor.min.js"></script>
+<script src="https://unpkg.com/ssuggestor@0.0.20/dist/ssuggestor.min.js"></script>
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 ```
@@ -109,6 +109,6 @@ npm run dev
 Then open browser on [localhost:9000](http://localhost:9000/)
 
 ###### Links
-* [live-demo](https://carloluis.github.io/ssuggestor/)
-* [codepen](http://codepen.io/carloluis/pen/rjpLYw)
+* [ssuggestor github page](https://carloluis.github.io/ssuggestor/)
+* [ssuggestor-example](http://codepen.io/carloluis/pen/rjpLYw/)
 * [npm](https://www.npmjs.com/package/ssuggestor "ssuggestor@npm")
