@@ -58,16 +58,14 @@ export class Suggestor extends Component {
 		switch (e.keyCode) {
 			case KEY_CODES.TAB:
 				if (this.props.selectOnTab && open && list[index]) {
-					this.changeValue(list[index]);
-					this.props.onSelect(list[index]);
+					this.changeValue(list[index], true);
 				}
 				this.handleClose();
 				return;
 			case KEY_CODES.ENTER:
 				this.toggleList();
 				if (open && list[index]) {
-					this.changeValue(list[index]);
-					this.props.onSelect(list[index]);
+					this.changeValue(list[index], true);
 				}
 				break;
 			case KEY_CODES.ESCAPE:
@@ -93,8 +91,7 @@ export class Suggestor extends Component {
 		e.preventDefault();
 	}
 	handleItemClick(value) {
-		this.changeValue(value);
-		this.props.onSelect(value);
+		this.changeValue(value, true);
 		if(!this.props.openOnClick) {
 			this.toggleList();
 		}
@@ -117,12 +114,14 @@ export class Suggestor extends Component {
 		this.changeValue(value);
 	}
 	remove() {
-		this.changeValue(EMPTY_STR);
-		this.props.onSelect(EMPTY_STR);
+		this.changeValue(EMPTY_STR, true);
 	}
-	changeValue(value) {
+	changeValue(value, select=false) {
 		this.setState({ value });
 		this.props.onChange(value);
+		if(select) {
+			this.props.onSelect(value);
+		}
 	}
 	filter(value) {
 		value = value.toLowerCase();
