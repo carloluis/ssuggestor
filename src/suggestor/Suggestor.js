@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { EMPTY_STR, KEY_CODES } from '../utils/values';
 import { SPIN_STYLES, X_STYLES } from './styles';
 import withClickOut from '../utils/withClickOut';
 import List from './List';
 
-export class Suggestor extends Component {
+export class Suggestor extends PureComponent {
 	constructor(props){
 		super(props);
 		this._bind('handleClick', 'handleChange', 'remove', 'handleKeyDown', 'handleItemClick', 'handleItemMouseEnter', 'handleClickOut', 'handleBlur', 'focus');
@@ -28,7 +28,7 @@ export class Suggestor extends Component {
 		}
 	}
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.value !== this.props.value) {
+		if (nextProps.value !== this.state.value) {
 			this.setState({ value: nextProps.value });
 		}
 	}
@@ -119,11 +119,12 @@ export class Suggestor extends Component {
 		this.changeValue(EMPTY_STR, true);
 	}
 	changeValue(value, select=false) {
-		this.setState({ value });
-		this.props.onChange(value);
-		if(select) {
-			this.props.onSelect(value);
-		}
+		this.setState({ value }, () => {
+			this.props.onChange(value);
+			if(select) {
+				this.props.onSelect(value);
+			}
+		});
 	}
 	filter(value) {
 		value = value.toLowerCase();
