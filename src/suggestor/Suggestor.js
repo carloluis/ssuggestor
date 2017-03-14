@@ -23,7 +23,9 @@ export class Suggestor extends Component {
 		this.handleClose();
 	}
 	handleBlur() {
-		this.props.onSelect(this.state.value);
+		if (this.props.selectOnBlur) {
+			this.changeValue(this.state.value, true);
+		}
 	}
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.value !== this.props.value) {
