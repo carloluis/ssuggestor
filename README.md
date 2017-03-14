@@ -51,7 +51,7 @@ Include `react.js` dependency script and `ssuggestor.js`
 ```html
 <script src="https://unpkg.com/react@15.4.2/dist/react.min.js"></script>
 <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.min.js"></script>
-<script src="https://unpkg.com/ssuggestor@0.0.23/dist/ssuggestor.min.js"></script>
+<script src="https://unpkg.com/ssuggestor@0.0.24/dist/ssuggestor.min.js"></script>
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 ```
