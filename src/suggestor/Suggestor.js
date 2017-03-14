@@ -46,6 +46,7 @@ export class Suggestor extends Component {
 		}
 	}
 	handleKeyDown(e) {
+		this.props.onKey(e);
 		if (!this.props.useKeys) {
 			return;
 		}
@@ -142,6 +143,7 @@ Suggestor.propTypes = {
 	list: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
 	reference: React.PropTypes.func,
 	onChange: React.PropTypes.func,
+	onKey: React.PropTypes.func,
 	value: React.PropTypes.string,
 	openOnClick: React.PropTypes.bool,
 	selectOnTab: React.PropTypes.bool,
@@ -154,9 +156,13 @@ Suggestor.propTypes = {
 	arrow: React.PropTypes.bool,
 	close: React.PropTypes.bool,
 };
+
+const nop = _ => _;
+
 Suggestor.defaultProps = {
 	className: 'input-group',
-	onChange: f => f,
+	onChange: nop,
+	onKey: nop,
 	value: EMPTY_STR,
 	openOnClick: true,
 	selectOnTab: false,
