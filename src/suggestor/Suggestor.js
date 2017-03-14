@@ -7,7 +7,7 @@ import List from './List';
 export class Suggestor extends PureComponent {
 	constructor(props){
 		super(props);
-		this._bind('handleClick', 'handleChange', 'remove', 'handleKeyDown', 'handleItemClick', 'handleItemMouseEnter', 'handleClickOut', 'handleBlur', 'focus');
+		this._bind('handleClick', 'handleChange', 'remove', 'handleKeyDown', 'handleItemClick', 'handleItemMouseEnter', 'handleClickOut', 'focus');
 
 		this.state = {
 			value: props.value,
@@ -21,11 +21,6 @@ export class Suggestor extends PureComponent {
 	}
 	handleClickOut() {
 		this.handleClose();
-	}
-	handleBlur() {
-		if (this.props.selectOnBlur) {
-			this.changeValue(this.state.value, true);
-		}
 	}
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.value !== this.state.value) {
@@ -138,7 +133,7 @@ export class Suggestor extends PureComponent {
 		let { open, value, index, filtered:list } = this.state;
 
 		return (
-			<div className={className} style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} ref={this.props.reference} onBlur={this.handleBlur} >
+			<div className={className} style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} ref={this.props.reference} >
 				<input type="text" className="form-control" onChange={this.handleChange} value={value} ref="input" placeholder={placeholder} title={tooltip} required={required} />
 				{ arrow && <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} /> }
 				{ close && value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.remove}/> }
@@ -157,7 +152,6 @@ Suggestor.propTypes = {
 	value: React.PropTypes.string,
 	openOnClick: React.PropTypes.bool,
 	selectOnTab: React.PropTypes.bool,
-	selectOnBlur: React.PropTypes.bool,
 	placeholder: React.PropTypes.string,
 	tooltip: React.PropTypes.string,
 	className: React.PropTypes.string,
@@ -179,7 +173,6 @@ Suggestor.defaultProps = {
 	value: EMPTY_STR,
 	openOnClick: true,
 	selectOnTab: false,
-	selectOnBlur: false,
 	suggestOn: 1,
 	required: false,
 	useKeys: true,

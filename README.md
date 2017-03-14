@@ -82,7 +82,6 @@ tooltip  | string | `''` | input title text (simple tooltip)
 suggestOn| number | `1` | minimum length of search string to show suggestions
 openOnClick | bool | `true` | whether suggestion list opens on click or not
 selectOnTab | bool | `false` | whether suggestion is selected by hit `tab` key or not
-selectOnBlur | bool | `false` | whether suggestion is selected when on blur event fires or not
 required | bool | `false` | wheater to set required prop on input element or not
 useKeys  | bool | `true` | whether to use keys (`up`/`down`, `enter`, `escape`) or not
 arrow    | bool | `true` | :small_red_triangle_down: icon
