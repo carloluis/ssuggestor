@@ -133,12 +133,12 @@ export class Suggestor extends Component {
 		this.refs.input.focus();
 	}
 	render() {
-		let { className, style, placeholder, arrow, close, tooltip } = this.props;
+		let { className, style, placeholder, arrow, close, tooltip, required } = this.props;
 		let { open, value, index, filtered:list } = this.state;
 
 		return (
 			<div className={className} style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} ref={this.props.reference} onBlur={this.handleBlur} >
-				<input type="text" className="form-control" onChange={this.handleChange} value={value} ref="input" placeholder={placeholder} title={tooltip} />
+				<input type="text" className="form-control" onChange={this.handleChange} value={value} ref="input" placeholder={placeholder} title={tooltip} required={required} />
 				{ arrow && <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} /> }
 				{ close && value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.remove}/> }
 				<List {...{ list, index, open, value }} onItemClick={this.handleItemClick} onItemMouseEnter={this.handleItemMouseEnter} />
@@ -157,14 +157,15 @@ Suggestor.propTypes = {
 	openOnClick: React.PropTypes.bool,
 	selectOnTab: React.PropTypes.bool,
 	selectOnBlur: React.PropTypes.bool,
-	suggestOn: React.PropTypes.number,
-	useKeys: React.PropTypes.bool,
 	placeholder: React.PropTypes.string,
 	tooltip: React.PropTypes.string,
 	className: React.PropTypes.string,
+	suggestOn: React.PropTypes.number,
 	style: React.PropTypes.object,
+	required: React.PropTypes.bool,
+	useKeys: React.PropTypes.bool,
 	arrow: React.PropTypes.bool,
-	close: React.PropTypes.bool,
+	close: React.PropTypes.bool
 };
 
 const nop = _ => _;
@@ -179,6 +180,7 @@ Suggestor.defaultProps = {
 	selectOnTab: false,
 	selectOnBlur: false,
 	suggestOn: 1,
+	required: false,
 	useKeys: true,
 	arrow: true,
 	close: true
