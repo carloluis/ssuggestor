@@ -56,13 +56,15 @@ export class Suggestor extends Component {
 			case KEY_CODES.TAB:
 				if (this.props.selectOnTab && open && list[index]) {
 					this.changeValue(list[index]);
+					this.props.onSelect(list[index]);
 				}
 				this.handleClose();
 				return;
 			case KEY_CODES.ENTER:
 				this.toggleList();
 				if (open && list[index]) {
-					this.changeValue(list[index]);	
+					this.changeValue(list[index]);
+					this.props.onSelect(list[index]);
 				}
 				break;
 			case KEY_CODES.ESCAPE:
@@ -89,6 +91,7 @@ export class Suggestor extends Component {
 	}
 	handleItemClick(value) {
 		this.changeValue(value);
+		this.props.onSelect(value);
 		if(!this.props.openOnClick) {
 			this.toggleList();
 		}
@@ -128,6 +131,8 @@ export class Suggestor extends Component {
 		let { className, style, placeholder, arrow, close, tooltip } = this.props;
 		let { open, value, index, filtered:list } = this.state;
 
+		//Todo: selectOnBlur...
+
 		return (
 			<div className={className} style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} ref={this.props.reference} >
 				<input type="text" className="form-control" onChange={this.handleChange} value={value} ref="input" placeholder={placeholder} title={tooltip} />
@@ -143,6 +148,7 @@ Suggestor.propTypes = {
 	list: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
 	reference: React.PropTypes.func,
 	onChange: React.PropTypes.func,
+	onSelect: React.PropTypes.func,
 	onKey: React.PropTypes.func,
 	value: React.PropTypes.string,
 	openOnClick: React.PropTypes.bool,
@@ -161,6 +167,7 @@ const nop = _ => _;
 
 Suggestor.defaultProps = {
 	className: 'input-group',
+	onSelect: nop,
 	onChange: nop,
 	onKey: nop,
 	value: EMPTY_STR,
