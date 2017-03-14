@@ -1,6 +1,7 @@
 exports[`<Suggestor /> initial render with no suggestions 1`] = `
 <div
   className="input-group"
+  onBlur={[Function]}
   onClick={[Function]}
   onKeyDown={[Function]}
   style={undefined}>
@@ -34,6 +35,7 @@ exports[`<Suggestor /> initial render with no suggestions 1`] = `
 exports[`<Suggestor /> initial render with suggestions (open list) 1`] = `
 <div
   className="input-group"
+  onBlur={[Function]}
   onClick={[Function]}
   onKeyDown={[Function]}
   style={undefined}>
@@ -106,6 +108,7 @@ exports[`<Suggestor /> initial render with suggestions (open list) 1`] = `
 exports[`<Suggestor /> initial render with suggestions 1`] = `
 <div
   className="input-group"
+  onBlur={[Function]}
   onClick={[Function]}
   onKeyDown={[Function]}
   style={undefined}>
