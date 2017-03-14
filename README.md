@@ -72,6 +72,7 @@ Property | Type | Default | Description
 :--------|:-----|:--------|:-----------
 list     | array | -- | array of string suggestions (required)
 onChange | func | `_ => _` | onChange handler: `(new_value) => { }`
+onKey	 | func | `_ => _` | onKey handler: `(keyEvent) => { }`
 value    | string | `''` | initial value
 className| string | `input-group` | css classes for component's root element
 style    | [object](https://facebook.github.io/react/docs/dom-elements.html#style "react style object") | undefined | inline styles for component's root element
