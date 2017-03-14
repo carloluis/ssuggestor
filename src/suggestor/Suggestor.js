@@ -50,7 +50,7 @@ export class Suggestor extends PureComponent {
 		if (!this.props.useKeys) {
 			return;
 		}
-		let { open, index, filtered:list } = this.state;
+		let { open, index, filtered:list, value } = this.state;
 
 		switch (e.keyCode) {
 			case KEY_CODES.TAB:
@@ -63,6 +63,8 @@ export class Suggestor extends PureComponent {
 				this.toggleList();
 				if (open && list[index]) {
 					this.changeValue(list[index], true);
+				} else {
+					this.props.onSelect(value);
 				}
 				break;
 			case KEY_CODES.ESCAPE:
