@@ -7,7 +7,7 @@ import List from './List';
 export class Suggestor extends Component {
 	constructor(props){
 		super(props);
-		this._bind('handleClick', 'handleChange', 'remove', 'handleKeyDown', 'handleItemClick', 'handleItemMouseEnter', 'handleClickOut', 'focus');
+		this._bind('handleClick', 'handleChange', 'remove', 'handleKeyDown', 'handleItemClick', 'handleItemMouseEnter', 'handleClickOut', 'handleBlur', 'focus');
 
 		this.state = {
 			value: props.value,
@@ -21,6 +21,9 @@ export class Suggestor extends Component {
 	}
 	handleClickOut() {
 		this.handleClose();
+	}
+	handleBlur() {
+		this.props.onSelect(this.state.value);
 	}
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.value !== this.props.value) {
@@ -115,6 +118,7 @@ export class Suggestor extends Component {
 	}
 	remove() {
 		this.changeValue(EMPTY_STR);
+		this.props.onSelect(EMPTY_STR);
 	}
 	changeValue(value) {
 		this.setState({ value });
@@ -131,10 +135,8 @@ export class Suggestor extends Component {
 		let { className, style, placeholder, arrow, close, tooltip } = this.props;
 		let { open, value, index, filtered:list } = this.state;
 
-		//Todo: selectOnBlur...
-
 		return (
-			<div className={className} style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} ref={this.props.reference} >
+			<div className={className} style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} ref={this.props.reference} onBlur={this.handleBlur} >
 				<input type="text" className="form-control" onChange={this.handleChange} value={value} ref="input" placeholder={placeholder} title={tooltip} />
 				{ arrow && <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} /> }
 				{ close && value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.remove}/> }
@@ -153,6 +155,7 @@ Suggestor.propTypes = {
 	value: React.PropTypes.string,
 	openOnClick: React.PropTypes.bool,
 	selectOnTab: React.PropTypes.bool,
+	selectOnBlur: React.PropTypes.bool,
 	suggestOn: React.PropTypes.number,
 	useKeys: React.PropTypes.bool,
 	placeholder: React.PropTypes.string,
@@ -173,6 +176,7 @@ Suggestor.defaultProps = {
 	value: EMPTY_STR,
 	openOnClick: true,
 	selectOnTab: false,
+	selectOnBlur: false,
 	suggestOn: 1,
 	useKeys: true,
 	arrow: true,
