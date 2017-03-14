@@ -51,7 +51,7 @@ Include `react.js` dependency script and `ssuggestor.js`
 ```html
 <script src="https://unpkg.com/react@15.4.2/dist/react.min.js"></script>
 <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.min.js"></script>
-<script src="https://unpkg.com/ssuggestor@0.0.22/dist/ssuggestor.min.js"></script>
+<script src="https://unpkg.com/ssuggestor@0.0.23/dist/ssuggestor.min.js"></script>
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 ```
@@ -83,6 +83,7 @@ suggestOn| number | `1` | minimum length of search string to show suggestions
 openOnClick | bool | `true` | whether suggestion list opens on click or not
 selectOnTab | bool | `false` | whether suggestion is selected by hit `tab` key or not
 selectOnBlur | bool | `false` | whether suggestion is selected when on blur event fires or not
+required | bool | `false` | wheater to set required prop on input element or not
 useKeys  | bool | `true` | whether to use keys (`up`/`down`, `enter`, `escape`) or not
 arrow    | bool | `true` | :small_red_triangle_down: icon
 close    | bool | `true` | :x: icon - deletes current value
