@@ -84,6 +84,7 @@ openOnClick | bool | `true` | whether suggestion list opens on click or not
 selectOnTab | bool | `false` | whether suggestion is selected by hit `tab` key or not
 required | bool | `false` | wheater to set required prop on input element or not
 useKeys  | bool | `true` | whether to use keys (`up`/`down`, `enter`, `escape`, `tab`) or not
+accents	 | bool | `false`| whether to differentiate chars with accents or not
 arrow    | bool | `true` | :small_red_triangle_down: icon
 close    | bool | `true` | :x: icon - deletes current value
 

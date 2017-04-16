@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { EMPTY_STR, KEY_CODES } from '../utils/values';
 import { SPIN_STYLES, X_STYLES } from './styles';
 import withClickOut from '../utils/withClickOut';
+import remove from '../utils/remove-accents';
 import List from './List';
 
 export class Suggestor extends PureComponent {
@@ -125,7 +126,11 @@ export class Suggestor extends PureComponent {
 	}
 	filter(value) {
 		value = value.toLowerCase();
-		return this.props.list.filter(item => item.toLowerCase().indexOf(value) !== -1);
+		let { accents, list } = this.props;
+		if (!accents) {
+			value = remove(value);
+		}
+		return list.filter(item => item.toLowerCase().indexOf(value) !== -1);
 	}
 	focus() {
 		this.refs.input.focus();
@@ -161,6 +166,7 @@ Suggestor.propTypes = {
 	style: React.PropTypes.object,
 	required: React.PropTypes.bool,
 	useKeys: React.PropTypes.bool,
+	accents: React.PropTypes.bool,
 	arrow: React.PropTypes.bool,
 	close: React.PropTypes.bool
 };
@@ -177,6 +183,7 @@ Suggestor.defaultProps = {
 	selectOnTab: false,
 	suggestOn: 1,
 	required: false,
+	accents: false,
 	useKeys: true,
 	arrow: true,
 	close: true
