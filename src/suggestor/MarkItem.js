@@ -1,13 +1,14 @@
 import React from 'react';
 
 const MarkItem = ({ item, search }) => {
+	let { index, word } = item;
+
 	if (!search) {
-		return <a>{ item }</a>;
+		return <a>{ word }</a>;
 	}
 
-	let index = item.toLowerCase().indexOf(search.toLowerCase());
 	if (index === -1) {
-		return <a>{ item }</a>;	
+		return <a>{ word }</a>;
 	}
 
 	let searchLength = search.length;
@@ -15,15 +16,19 @@ const MarkItem = ({ item, search }) => {
 	return (
 		<a>
 			<span>
-				{ item.substr(0, index) }
-				<strong>{ item.substr(index, searchLength) }</strong>
-				{ item.substr(index+searchLength, item.length) }
+				{ word.substr(0, index) }
+				<strong>{ word.substr(index, searchLength) }</strong>
+				{ word.substr(index+searchLength, item.length) }
 			</span>
 		</a>
 	);
 };
+
 MarkItem.propTypes = {
-	item: React.PropTypes.string.isRequired,
+	item: React.PropTypes.shape({
+		index: React.PropTypes.number.isRequired,
+		word: React.PropTypes.string.isRequired
+	}).isRequired,
 	search: React.PropTypes.string.isRequired
 };
 

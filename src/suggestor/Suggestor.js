@@ -12,7 +12,7 @@ export class Suggestor extends PureComponent {
 
 		this.state = {
 			value: props.value,
-			filtered: props.list,
+			filtered: this.filter(),
 			open: false,
 			index: 0
 		};
@@ -29,7 +29,8 @@ export class Suggestor extends PureComponent {
 		}
 	}
 	handleClose() {
-		this.setState({ open: false, filtered: this.props.list, index: 0 });
+		let filtered = this.filter();
+		this.setState({ open: false, filtered, index: 0 });
 	}
 	toggleList() {
 		if (this.state.open) {
@@ -51,7 +52,8 @@ export class Suggestor extends PureComponent {
 		if (!this.props.useKeys) {
 			return;
 		}
-		let { open, index, filtered:list, value } = this.state;
+		let { open, index, filtered, value } = this.state;
+		let list = filtered.map(item => item.word);
 
 		switch (e.keyCode) {
 			case KEY_CODES.TAB:
@@ -90,8 +92,8 @@ export class Suggestor extends PureComponent {
 
 		e.preventDefault();
 	}
-	handleItemClick(value) {
-		this.changeValue(value, true);
+	handleItemClick({ word }) {
+		this.changeValue(word, true);
 		if(!this.props.openOnClick) {
 			this.toggleList();
 		}
@@ -124,27 +126,28 @@ export class Suggestor extends PureComponent {
 			}
 		});
 	}
-	filter(value) {
+	filter(value = '') {
 		value = value.toLowerCase();
 		let { accents, list } = this.props;
 		if (!accents) {
 			value = remove(value);
 		}
-		return list.filter(item => item.toLowerCase().indexOf(value) !== -1);
+		return list.map(word => ({ word, index: word.toLowerCase().indexOf(value) }))
+					.filter(item => item.index !== -1);
 	}
 	focus() {
 		this.refs.input.focus();
 	}
 	render() {
 		let { className, style, placeholder, arrow, close, tooltip, required } = this.props;
-		let { open, value, index, filtered:list } = this.state;
+		let { open, value, index, filtered } = this.state;
 
 		return (
 			<div className={className} style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} ref={this.props.reference} >
 				<input type="text" className="form-control" onChange={this.handleChange} value={value} ref="input" placeholder={placeholder} title={tooltip} required={required} />
 				{ arrow && <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} /> }
 				{ close && value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.remove}/> }
-				<List {...{ list, index, open, value }} onItemClick={this.handleItemClick} onItemMouseEnter={this.handleItemMouseEnter} />
+				<List {...{ filtered, index, open, value }} onItemClick={this.handleItemClick} onItemMouseEnter={this.handleItemMouseEnter} />
 			</div>
 		);
 	}
