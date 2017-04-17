@@ -22,12 +22,6 @@ exports[`<List /> render with suggestions list (open:true) 1`] = `
       Object {
         "backgroundColor": "#f5f5f5",
       }
-    }
-    value={
-      Object {
-        "index": 0,
-        "word": "suggest-1",
-      }
     }>
     <a>
       suggest-1
@@ -56,12 +50,6 @@ exports[`<List /> render with suggestions list (open:true, index:0) 1`] = `
       Object {
         "backgroundColor": "#f5f5f5",
       }
-    }
-    value={
-      Object {
-        "index": 0,
-        "word": "suggest-0",
-      }
     }>
     <a>
       suggest-0
@@ -73,12 +61,6 @@ exports[`<List /> render with suggestions list (open:true, index:0) 1`] = `
     style={
       Object {
         "backgroundColor": false,
-      }
-    }
-    value={
-      Object {
-        "index": 0,
-        "word": "suggest-1",
       }
     }>
     <a>
@@ -108,12 +90,6 @@ exports[`<List /> render with suggestions list (open:true, index:1) 1`] = `
       Object {
         "backgroundColor": false,
       }
-    }
-    value={
-      Object {
-        "index": 0,
-        "word": "suggest-0",
-      }
     }>
     <a>
       suggest-0
@@ -125,12 +101,6 @@ exports[`<List /> render with suggestions list (open:true, index:1) 1`] = `
     style={
       Object {
         "backgroundColor": "#f5f5f5",
-      }
-    }
-    value={
-      Object {
-        "index": 0,
-        "word": "suggest-1",
       }
     }>
     <a>
