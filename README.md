@@ -51,7 +51,7 @@ Include `react.js` dependency script and `ssuggestor.js`
 ```html
 <script src="https://unpkg.com/react@15.4.2/dist/react.min.js"></script>
 <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.min.js"></script>
-<script src="https://unpkg.com/ssuggestor@0.0.25/dist/ssuggestor.min.js"></script>
+<script src="https://unpkg.com/ssuggestor@0.0.28/dist/ssuggestor.min.js"></script>
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 ```
@@ -64,7 +64,10 @@ SSuggestor (Simple Suggestor) exports two components:
   * `import SSuggestor from 'ssuggestor'`
 * __Suggestor__: `import { Suggestor } from 'ssuggestor'`
 
-note: _**ssuggest**or_ highlights search pattern on **suggest**ions list.
+Notes: 
+* _**ssuggest**or_ highlights search pattern on **suggest**ions list.
+* case insensitive search: **sSUGGEST**or 
+* strip accents on search: **ssúggèst**or
 
 #### Props:
 
