@@ -3,22 +3,18 @@ import React from 'react';
 const MarkItem = ({ item, search }) => {
 	let { index, word } = item;
 
-	if (!search) {
+	if (!search || index === -1) {
 		return <a>{ word }</a>;
 	}
 
-	if (index === -1) {
-		return <a>{ word }</a>;
-	}
-
-	let searchLength = search.length;
+	let length = search.length;
 
 	return (
 		<a>
 			<span>
 				{ word.substr(0, index) }
-				<strong>{ word.substr(index, searchLength) }</strong>
-				{ word.substr(index+searchLength, item.length) }
+				<strong>{ word.substr(index, length) }</strong>
+				{ word.substr(index + length, word.length) }
 			</span>
 		</a>
 	);
