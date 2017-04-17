@@ -7,14 +7,14 @@ const MarkItem = ({ item, search }) => {
 		return <a>{ word }</a>;
 	}
 
-	let length = search.length;
+	let { length } = search;
 
 	return (
 		<a>
 			<span>
 				{ word.substr(0, index) }
 				<strong>{ word.substr(index, length) }</strong>
-				{ word.substr(index + length, word.length) }
+				{ word.substr(index + length) }
 			</span>
 		</a>
 	);
