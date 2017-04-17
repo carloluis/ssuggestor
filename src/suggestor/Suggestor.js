@@ -11,8 +11,8 @@ export class Suggestor extends PureComponent {
 		this._bind('handleClick', 'handleChange', 'remove', 'handleKeyDown', 'handleItemClick', 'handleItemMouseEnter', 'handleClickOut', 'focus');
 
 		this.state = {
+			filtered: this.filter(props.value, false),
 			value: props.value,
-			filtered: this.filter(),
 			open: false,
 			index: 0
 		};
@@ -29,7 +29,7 @@ export class Suggestor extends PureComponent {
 		}
 	}
 	handleClose() {
-		let filtered = this.filter();
+		let filtered = this.filter(this.state.value, false);
 		this.setState({ open: false, filtered, index: 0 });
 	}
 	toggleList() {
@@ -59,8 +59,9 @@ export class Suggestor extends PureComponent {
 			case KEY_CODES.TAB:
 				if (this.props.selectOnTab && open && list[index]) {
 					this.changeValue(list[index], true);
+				} else {
+					this.handleClose();
 				}
-				this.handleClose();
 				return;
 			case KEY_CODES.ENTER:
 				this.toggleList();
@@ -119,21 +120,26 @@ export class Suggestor extends PureComponent {
 		this.changeValue(EMPTY_STR, true);
 	}
 	changeValue(value, select=false) {
-		this.setState({ value }, () => {
+		let filtered = this.filter(value);
+		this.setState({ value, filtered }, () => {
 			this.props.onChange(value);
-			if(select) {
+			if (select) {
 				this.props.onSelect(value);
+				this.handleClose();
 			}
 		});
 	}
-	filter(value = '') {
+	filter(value = '', onlyMatch = true) {
 		value = value.toLowerCase();
 		let { accents, list } = this.props;
 		if (!accents) {
 			value = remove(value);
 		}
-		return list.map(word => ({ word, index: word.toLowerCase().indexOf(value) }))
-					.filter(item => item.index !== -1);
+		let mapped = list.map(word => ({ word, index: word.toLowerCase().indexOf(value) }));
+		if (onlyMatch) {
+			mapped = mapped.filter(item => item.index !== -1);
+		}
+		return mapped;
 	}
 	focus() {
 		this.refs.input.focus();
