@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { EMPTY_STR, KEY_CODES } from '../utils/values';
 import { SPIN_STYLES, X_STYLES } from './styles';
 import withClickOut from '../utils/withClickOut';
-import remove from '../utils/remove-accents';
+import removeAccents from '../utils/remove-accents';
 import List from './List';
 
 export class Suggestor extends PureComponent {
@@ -130,7 +130,8 @@ export class Suggestor extends PureComponent {
 		value = value.toLowerCase();
 		let { accents, list } = this.props;
 		if (!accents) {
-			value = remove(value);
+			//todo: same transform for suggestions..
+			value = removeAccents(value);
 		}
 		let mapped = list.map(word => ({ word, index: word.toLowerCase().indexOf(value) }));
 		if (onlyMatch) {
