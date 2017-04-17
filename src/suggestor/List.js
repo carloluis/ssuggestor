@@ -5,7 +5,8 @@ import { getListStyles } from './styles';
 export const List = ({ open, filtered, index, value, onItemClick, onItemMouseEnter }) => (
 	(open && !!filtered.length) && 
 	<ul className="dropdown-menu" style={getListStyles(open)}>
-		{ filtered.map((item, i) => <ListItem key={i} {...{ item, onItemClick, onItemMouseEnter, search:value, index:i, overItem:index===i }} />) }
+		{ filtered.map((item, i) => 
+			<ListItem key={item.word} {...{ item, onItemClick, onItemMouseEnter, search:value, index:i, overItem:i===index }} />) }
 	</ul>
 );
 
