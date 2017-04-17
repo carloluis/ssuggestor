@@ -2,10 +2,25 @@ import React, { PureComponent } from 'react';
 import MarkItem from './MarkItem';
 
 class ListItem extends PureComponent {
+	constructor(props) {
+		super(props);
+
+		this.handleClick = e => {
+			e.stopPropagation();
+			let { item, onItemClick } = props;
+			onItemClick(item);
+		};
+
+		this.handleMouseEnter = e => {
+			e.stopPropagation();
+			let { index, onItemMouseEnter } = props;
+			onItemMouseEnter(index);
+		};
+	}
 	render() {
-		let { item, onItemClick, onItemMouseEnter, index, overItem, search } = this.props;
+		let { item, overItem, search } = this.props;
 		return (
-			<li value={item} onClick={() => onItemClick(item)} onMouseEnter={() => onItemMouseEnter(index)} 
+			<li value={item} onClick={this.handleClick} onMouseEnter={this.handleMouseEnter} 
 				style={{ backgroundColor: overItem && '#f5f5f5' }}>
 				<MarkItem {...{ item, search }} />
 			</li>

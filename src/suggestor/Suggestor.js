@@ -29,8 +29,10 @@ export class Suggestor extends PureComponent {
 		}
 	}
 	handleClose() {
-		let filtered = this.filter(this.state.value, false);
-		this.setState({ open: false, filtered, index: 0 });
+		if (this.state.open) {
+			let filtered = this.filter(this.state.value, false);
+			this.setState({ open: false, filtered, index: 0 });
+		}
 	}
 	toggleList() {
 		if (this.state.open) {
@@ -73,7 +75,7 @@ export class Suggestor extends PureComponent {
 				break;
 			case KEY_CODES.ESCAPE:
 				this.handleClose();
-				if (!open) {
+				if (!open && value) {
 					this.changeValue(EMPTY_STR);
 				}
 				break;
@@ -95,25 +97,14 @@ export class Suggestor extends PureComponent {
 	}
 	handleItemClick({ word }) {
 		this.changeValue(word, true);
-		if(!this.props.openOnClick) {
-			this.toggleList();
-		}
 	}
 	handleItemMouseEnter(index) {
 		this.setState({ index });
 	}
 	handleChange(e) {
 		e.stopPropagation();
+		
 		let value = e.target.value;
-		let suggest = value.length >= this.props.suggestOn;
-		let filtered = this.filter(value);
-		let nextState = { filtered };
-		if(!filtered.length || !suggest) {
-			this.handleClose();
-		} else{
-			nextState.open = true;
-		}
-		this.setState(nextState);
 		this.changeValue(value);
 	}
 	remove() {
@@ -121,10 +112,16 @@ export class Suggestor extends PureComponent {
 	}
 	changeValue(value, select=false) {
 		let filtered = this.filter(value);
-		this.setState({ value, filtered }, () => {
+		
+		let suggest = value.length >= this.props.suggestOn;
+		let open = !!filtered.length && suggest;
+
+		this.setState({ value, filtered, open }, () => {
 			this.props.onChange(value);
 			if (select) {
 				this.props.onSelect(value);
+				this.handleClose();
+			} else if (!open) {
 				this.handleClose();
 			}
 		});
