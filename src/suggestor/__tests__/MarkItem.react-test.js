@@ -6,19 +6,31 @@ import MarkItem from '../MarkItem';
 describe('<MarkItem />', () => {
 	let props;
 	beforeEach(() => {
-		props = { item: 'abcdefghijklmnopqrstuvwxyz', search: '' };
+		props = { 
+			item: {
+				word: 'abcdefghijklmnopqrstuvwxyz',
+				index: 0
+			},
+			search: '' 
+		};
 	});
 	it('if no search => render plain item (<a>{item}</a>)', () => {
 		const tree = renderer.create(<MarkItem {...props} />);
 		expect(tree).toMatchSnapshot();
 	});
 	it('if search but no match => render plain item', () => {
-		let _props = { ...props, search:'no-match' };
+		let _props = { 
+			item: { ...props.item, index: -1 },
+			search:'no-match'
+		};
 		const tree = renderer.create(<MarkItem {..._props} />);
 		expect(tree).toMatchSnapshot();
 	});
 	it('if search, then render pattern inside <strong>', () => {
-		let _props = { ...props, search:'x' };
+		let _props = { 
+			item: { ...props.item, index: 23 },
+			search:'x'
+		};
 		const tree = renderer.create(<MarkItem {..._props} />);
 		expect(tree).toMatchSnapshot();
 	});

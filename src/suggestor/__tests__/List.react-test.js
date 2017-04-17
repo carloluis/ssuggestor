@@ -7,7 +7,7 @@ describe('<List />', () => {
 	let props;
 	beforeEach(() => {
 		props = {
-			list: [],
+			filtered: [],
 			open: false,
 			index: 0,
 			onItemClick: _=>_,
@@ -20,29 +20,29 @@ describe('<List />', () => {
 		expect(tree).toMatchSnapshot();
 	});
 	it('render with suggestions list (open:false)', () => {
-		props = { ...props, list: ['suggest-1'] };
+		props = { ...props, filtered: [{ word:'suggest-1', index:0 }] };
 		const tree = renderer.create(<List {...props} />);
 		expect(tree).toMatchSnapshot();
 	});
 	it('render with suggestions list (open:true)', () => {
-		props = { ...props, list: ['suggest-1'], open:true };
+		props = { ...props, filtered: [{ word:'suggest-1', index:0 }], open:true };
 		const tree = renderer.create(<List {...props} />);
 		expect(tree).toMatchSnapshot();
 	});
 	it('render with suggestions list (open:true, index:0)', () => {
-		props = { ...props, list: ['suggest-0', 'suggest-1'], open:true };
+		props = { ...props, filtered: [{ word:'suggest-0', index:0 }, { word:'suggest-1', index:0 }], open:true };
 		const tree = renderer.create(<List {...props} />);
 		expect(tree).toMatchSnapshot();
 	});
 	it('render with suggestions list (open:true, index:1)', () => {
-		props = { ...props, list: ['suggest-0', 'suggest-1'], open:true, index:1 };
+		props = { ...props, filtered: [{ word:'suggest-0', index:0 }, { word:'suggest-1', index:0 }], open:true, index:1 };
 		const tree = renderer.create(<List {...props} />);
 		expect(tree).toMatchSnapshot();
 	});
 });
 
 test('List with open:false => no renders ul.dropdown-menu', () => {
-	const props = { list: [], open: false, index: 0, onItemClick: f => f, onItemMouseEnter: f => f, value: '' };
+	const props = { filtered: [], open: false, index: 0, onItemClick: f => f, onItemMouseEnter: f => f, value: '' };
 
 	const wrapper = mount(<List {...props} />);
 
@@ -50,7 +50,7 @@ test('List with open:false => no renders ul.dropdown-menu', () => {
 });
 
 test('List with empty list => no renders ul.dropdown-menu', () => {
-	const props = { list: [], open: true, index: 0, onItemClick: f => f, onItemMouseEnter: f => f, value: '' };
+	const props = { filtered: [], open: true, index: 0, onItemClick: f => f, onItemMouseEnter: f => f, value: '' };
 
 	const wrapper = mount(<List {...props} />);
 
@@ -58,7 +58,7 @@ test('List with empty list => no renders ul.dropdown-menu', () => {
 });
 
 test('List with open:true and not empty list => renders ul.dropdown-menu', () => {
-	const props = { list: ['x'], open: true, index: 0, onItemClick: f => f, onItemMouseEnter: f => f, value: '' };
+	const props = { filtered: [{ word:'x', index:0 }], open: true, index: 0, onItemClick: f => f, onItemMouseEnter: f => f, value: '' };
 
 	const wrapper = mount(<List {...props} />);
 
@@ -69,7 +69,7 @@ describe('List Component', () => {
 	let props;
 	beforeEach(() => {
 		props = {
-			list: [],
+			filtered: [],
 			value: '',
 			open: true,
 			index: 0,
@@ -78,16 +78,16 @@ describe('List Component', () => {
 		};
 	});
 	describe('List with item X', () => {
-		const ITEM = 'X';
+		const ITEM = { word: 'X', index: 0 };
 		beforeEach(() => {
-			props.list.push(ITEM);
+			props.filtered.push(ITEM);
 		});
 
 		it(`li's text should match item`, () => {
 			const wrapper = mount(<List {...props} />);
 
 			const li = wrapper.find('li');
-			expect(li.text()).toBe(ITEM);
+			expect(li.text()).toBe(ITEM.word);
 		});
 
 		describe('when click on li', () => {
