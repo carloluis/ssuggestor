@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { EMPTY_STR, KEY_CODES } from '../utils/values';
 import { SPIN_STYLES, X_STYLES } from './styles';
 import withClickOut from '../utils/withClickOut';
@@ -158,24 +159,24 @@ export class Suggestor extends PureComponent {
 }
 
 Suggestor.propTypes = {
-	list: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
-	reference: React.PropTypes.func,
-	onChange: React.PropTypes.func,
-	onSelect: React.PropTypes.func,
-	onKey: React.PropTypes.func,
-	value: React.PropTypes.string,
-	openOnClick: React.PropTypes.bool,
-	selectOnTab: React.PropTypes.bool,
-	placeholder: React.PropTypes.string,
-	tooltip: React.PropTypes.string,
-	className: React.PropTypes.string,
-	suggestOn: React.PropTypes.number,
-	style: React.PropTypes.object,
-	required: React.PropTypes.bool,
-	useKeys: React.PropTypes.bool,
-	accents: React.PropTypes.bool,
-	arrow: React.PropTypes.bool,
-	close: React.PropTypes.bool
+	list: PropTypes.arrayOf(PropTypes.string).isRequired,
+	reference: PropTypes.func,
+	onChange: PropTypes.func,
+	onSelect: PropTypes.func,
+	onKey: PropTypes.func,
+	value: PropTypes.string,
+	openOnClick: PropTypes.bool,
+	selectOnTab: PropTypes.bool,
+	placeholder: PropTypes.string,
+	tooltip: PropTypes.string,
+	className: PropTypes.string,
+	suggestOn: PropTypes.number,
+	style: PropTypes.object,
+	required: PropTypes.bool,
+	useKeys: PropTypes.bool,
+	accents: PropTypes.bool,
+	arrow: PropTypes.bool,
+	close: PropTypes.bool
 };
 
 const nop = _ => _;

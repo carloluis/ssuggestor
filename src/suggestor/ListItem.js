@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import MarkItem from './MarkItem';
 
 class ListItem extends PureComponent {
@@ -28,12 +29,12 @@ class ListItem extends PureComponent {
 	}
 }
 ListItem.propTypes = {
-	item: React.PropTypes.object.isRequired,
-	index: React.PropTypes.number.isRequired,
-	overItem: React.PropTypes.bool.isRequired,
-	onItemClick: React.PropTypes.func.isRequired,
-	onItemMouseEnter: React.PropTypes.func.isRequired,
-	search: React.PropTypes.string.isRequired
+	item: PropTypes.object.isRequired,
+	index: PropTypes.number.isRequired,
+	overItem: PropTypes.bool.isRequired,
+	onItemClick: PropTypes.func.isRequired,
+	onItemMouseEnter: PropTypes.func.isRequired,
+	search: PropTypes.string.isRequired
 };
 
 export default ListItem;
