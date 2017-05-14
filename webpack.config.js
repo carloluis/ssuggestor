@@ -27,7 +27,7 @@ const htmlWebpackPluginConfig = new HtmlWebpackPlugin({
 module.exports = {
 	entry: {
 		app: PATHS.example + '/index.js',
-		vendor: ["react", "react-dom"]
+		vendor: ["prop-types", "react", "react-dom"]
 	},
 	output: {
 		filename: '[name].bundle.js',

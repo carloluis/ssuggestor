@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Suggestor from '../Suggestor';
-import ReactTestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 
 describe('<Suggestor />', () => {
 	it('initial render with no suggestions', () => {

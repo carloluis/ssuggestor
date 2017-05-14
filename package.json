@@ -61,6 +61,7 @@
     "webpack-dev-server": "^1.16.2"
   },
   "peerDependencies": {
+    "prop-types": "^15.5.8",
     "react": "15.x"
   },
   "jest": {

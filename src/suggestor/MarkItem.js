@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const MarkItem = ({ item, search }) => {
 	let { index, word } = item;
@@ -21,11 +22,11 @@ const MarkItem = ({ item, search }) => {
 };
 
 MarkItem.propTypes = {
-	item: React.PropTypes.shape({
-		index: React.PropTypes.number.isRequired,
-		word: React.PropTypes.string.isRequired
+	item: PropTypes.shape({
+		index: PropTypes.number.isRequired,
+		word: PropTypes.string.isRequired
 	}).isRequired,
-	search: React.PropTypes.string.isRequired
+	search: PropTypes.string.isRequired
 };
 
 export default MarkItem;

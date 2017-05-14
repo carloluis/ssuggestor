@@ -5,7 +5,8 @@ const packages = require('./package.json');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
 
-const NODE_ENV = 'production';
+const productionFlag = process.argv.indexOf('-p') !== -1;
+const NODE_ENV = productionFlag? 'production': 'development';
 
 const PATHS = {
 	src: path.join(__dirname, 'src'),
@@ -41,6 +42,12 @@ module.exports = {
 			commonjs2: 'react',
 			commonjs: 'react',
 			amd: 'react'
+		},
+		'prop-types': {
+			root: 'PropTypes',
+			commonjs2: 'prop-types',
+			commonjs: 'prop-types',
+			amd: 'prop-types'
 		}
 	},
 	target: 'node',
