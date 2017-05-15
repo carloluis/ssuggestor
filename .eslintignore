@@ -1,0 +1,4 @@
+dist/*
+**/*webpack*
+**/__tests__/*
+node_modules/*
