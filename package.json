@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
+    "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "dev": "webpack-dev-server",
     "example": "webpack -p",
     "build": "npm run build:main & npm run build:prod",
@@ -13,6 +14,10 @@
     "build:prod": "npm run build:main -- -p --output-filename ssuggestor.min.js",
     "prepublish": "npm run build"
   },
+  "pre-commit": [
+    "precommit-msg",
+    "test"
+  ],
   "files": [
     "dist",
     "src"
@@ -53,6 +58,7 @@
     "eslint-plugin-react": "^6.9.0",
     "html-webpack-plugin": "^2.26.0",
     "jest": "^18.1.0",
+    "pre-commit": "^1.2.2",
     "react": "^15.4.2",
     "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",
