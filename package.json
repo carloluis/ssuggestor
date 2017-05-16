@@ -7,19 +7,15 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "eslint .  --cache --ext .js --ignore-path .eslintignore --ignore-pattern '**/__tests__/*'",
-    "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "dev": "webpack-dev-server",
     "example": "webpack -p",
     "build": "npm run build:main & npm run build:prod",
     "build:main": "webpack --config webpack.config.publish.js",
     "build:prod": "npm run build:main -- -p --output-filename ssuggestor.min.js",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "precommit": "npm run lint",
+    "prepush": "npm run test"
   },
-  "pre-commit": [
-    "precommit-msg",
-    "lint",
-    "test"
-  ],
   "files": [
     "dist",
     "src"
@@ -59,8 +55,8 @@
     "eslint-loader": "^1.6.1",
     "eslint-plugin-react": "^6.9.0",
     "html-webpack-plugin": "^2.26.0",
+    "husky": "^0.13.3",
     "jest": "^18.1.0",
-    "pre-commit": "^1.2.2",
     "react": "^15.4.2",
     "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",
