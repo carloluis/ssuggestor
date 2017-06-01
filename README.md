@@ -7,13 +7,13 @@
 [![npm](https://img.shields.io/npm/dt/ssuggestor.svg)](https://npm-stat.com/charts.html?package=ssuggestor)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/carloluis/ssuggestor/master/LICENSE)
 
-react-simple-suggestor (using bootstrap styles)
+`<SSuggestor />` is a React component that enables users to quickly find and select from a pre-populated list of values as they type. It uses [Bootstrap](http://getbootstrap.com/) styles.
 
 ## Demo
 
 Live Demo: [carloluis.github.io/ssuggestor](https://carloluis.github.io/ssuggestor/)
 
-See the Pen [ssuggestor-example](http://codepen.io/carloluis/pen/rjpLYw/) on [CodePen](http://codepen.io)
+CodePen example: [ssuggestor-example](http://codepen.io/carloluis/pen/rjpLYw/) on [CodePen](http://codepen.io)
 
 ## Instalation
 
@@ -59,7 +59,7 @@ Include `react.js` dependency script and `ssuggestor.js`
 ## Description
 
 SSuggestor (Simple Suggestor) exports two components:
-* __SSuggestor__: `import { SSuggestor } from 'suggestor'`
+* __SSuggestor__: `import { SSuggestor } from 'ssuggestor'`
 	* default export handles clicks outside of DOM component: 
   * `import SSuggestor from 'ssuggestor'`
 * __Suggestor__: `import { Suggestor } from 'ssuggestor'`
