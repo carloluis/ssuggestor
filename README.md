@@ -59,7 +59,7 @@ Include `react.js` dependency script and `ssuggestor.js`
 ## Description
 
 SSuggestor (Simple Suggestor) exports two components:
-* __SSuggestor__: `import { SSuggestor } from 'suggestor'`
+* __SSuggestor__: `import { SSuggestor } from 'ssuggestor'`
 	* default export handles clicks outside of DOM component: 
   * `import SSuggestor from 'ssuggestor'`
 * __Suggestor__: `import { Suggestor } from 'ssuggestor'`
