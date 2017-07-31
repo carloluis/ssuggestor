@@ -1,9 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<Suggestor /> initial render with no suggestions 1`] = `
 <div
   className="input-group"
   onClick={[Function]}
   onKeyDown={[Function]}
-  style={undefined}>
+  style={undefined}
+>
   <input
     className="form-control"
     onChange={[Function]}
@@ -11,7 +14,8 @@ exports[`<Suggestor /> initial render with no suggestions 1`] = `
     required={false}
     title={undefined}
     type="text"
-    value="" />
+    value=""
+  />
   <span
     className="glyphicon glyphicon-triangle-bottom"
     style={
@@ -27,7 +31,8 @@ exports[`<Suggestor /> initial render with no suggestions 1`] = `
         "top": 0,
         "zIndex": 4,
       }
-    } />
+    }
+  />
   
 </div>
 `;
@@ -37,7 +42,8 @@ exports[`<Suggestor /> initial render with suggestions (open list) 1`] = `
   className="input-group"
   onClick={[Function]}
   onKeyDown={[Function]}
-  style={undefined}>
+  style={undefined}
+>
   <input
     className="form-control"
     onChange={[Function]}
@@ -45,7 +51,8 @@ exports[`<Suggestor /> initial render with suggestions (open list) 1`] = `
     required={false}
     title={undefined}
     type="text"
-    value="" />
+    value=""
+  />
   <span
     className="glyphicon glyphicon-triangle-bottom"
     style={
@@ -61,7 +68,8 @@ exports[`<Suggestor /> initial render with suggestions (open list) 1`] = `
         "top": 0,
         "zIndex": 4,
       }
-    } />
+    }
+  />
   
   <ul
     className="dropdown-menu"
@@ -74,7 +82,8 @@ exports[`<Suggestor /> initial render with suggestions (open list) 1`] = `
         "overflow": "auto",
         "width": "inherit",
       }
-    }>
+    }
+  >
     <li
       onClick={[Function]}
       onMouseEnter={[Function]}
@@ -82,7 +91,8 @@ exports[`<Suggestor /> initial render with suggestions (open list) 1`] = `
         Object {
           "backgroundColor": "#f5f5f5",
         }
-      }>
+      }
+    >
       <a>
         suggest-1
       </a>
@@ -94,7 +104,8 @@ exports[`<Suggestor /> initial render with suggestions (open list) 1`] = `
         Object {
           "backgroundColor": false,
         }
-      }>
+      }
+    >
       <a>
         suggest-2
       </a>
@@ -108,7 +119,8 @@ exports[`<Suggestor /> initial render with suggestions 1`] = `
   className="input-group"
   onClick={[Function]}
   onKeyDown={[Function]}
-  style={undefined}>
+  style={undefined}
+>
   <input
     className="form-control"
     onChange={[Function]}
@@ -116,7 +128,8 @@ exports[`<Suggestor /> initial render with suggestions 1`] = `
     required={false}
     title={undefined}
     type="text"
-    value="" />
+    value=""
+  />
   <span
     className="glyphicon glyphicon-triangle-bottom"
     style={
@@ -132,7 +145,8 @@ exports[`<Suggestor /> initial render with suggestions 1`] = `
         "top": 0,
         "zIndex": 4,
       }
-    } />
+    }
+  />
   
 </div>
 `;
