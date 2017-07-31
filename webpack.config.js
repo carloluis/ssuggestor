@@ -6,7 +6,8 @@ const path = require('path');
 
 const PATHS = {
 	example: path.join(__dirname, 'example'),
-	dist: path.join(__dirname, 'dist')
+	dist: path.join(__dirname, 'dist'),
+	src: path.join(__dirname, 'src')
 };
 
 const productionFlag = process.argv.indexOf('-p') !== -1;
@@ -17,7 +18,12 @@ const envPluginConfig = new webpack.DefinePlugin({
 		NODE_ENV: JSON.stringify(NODE_ENV)
 	}
 });
-const commonsChunkConfig = new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js');
+
+const commonsChunkConfig = new webpack.optimize.CommonsChunkPlugin({
+	name: 'vendor',
+	minChunks: module => /node_modules/.test(module.resource)
+});
+
 const htmlWebpackPluginConfig = new HtmlWebpackPlugin({
 	template: PATHS.example + '/index.html',
 	filename: 'index.html',
@@ -26,8 +32,8 @@ const htmlWebpackPluginConfig = new HtmlWebpackPlugin({
 
 module.exports = {
 	entry: {
-		app: PATHS.example + '/index.js',
-		vendor: ["prop-types", "react", "react-dom"]
+		app: path.join(PATHS.example, 'index.js'),
+		vendor: ['prop-types', 'react', 'react-dom']
 	},
 	output: {
 		filename: '[name].bundle.js',
@@ -36,36 +42,35 @@ module.exports = {
 		publicPath: '/'
 	},
 	module: {
-		preLoaders: [
+		rules: [
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				loader: 'eslint'
-			}
-		],
-		loaders: [
+				include: PATHS.src,
+				loader: 'eslint-loader',
+				enforce: 'pre'
+			},
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				loader: 'babel-loader',
+				loader: 'babel-loader?cacheDirectory',
 				query: {
 					presets: ['react', 'es2015', 'stage-2']
-				},
-				cacheDirectory: true
+				}
 			}
 		]
 	},
 	plugins: [envPluginConfig, commonsChunkConfig, htmlWebpackPluginConfig],
 	resolve: {
-		extensions: ['', '.js']
+		extensions: ['.js', '.jsx']
 	},
-	devtool: '#source-map',
+	devtool: 'eval-source-map',
 	devServer: {
-		inline: true,
+		contentBase: PATHS.dist,
+		host: '0.0.0.0',
 		port: 9000,
-		colors: true,
-		progress: true,
-		contentBase: './dist',
+		openPage: '',
+		inline: true,
 		open: true
 	}
 };

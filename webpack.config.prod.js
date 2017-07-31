@@ -23,12 +23,12 @@ const cleanWebpackConfig = new CleanWebpackPlugin(['dist'], {
 	root: PATHS.cwd,
 	verbose: true,
 	dry: false,
-	exclude: ['ssuggestor.js']
+	exclude: ['ssuggestor.js', 'ssuggestor.min.js']
 });
 
 module.exports = {
 	entry: {
-		ssugestor: PATHS.src + '/suggestor/Suggestor.js'
+		ssugestor: path.join(PATHS.src, 'suggestor/Suggestor.js')
 	},
 	output: {
 		filename: 'ssuggestor.js',
@@ -52,7 +52,7 @@ module.exports = {
 	},
 	target: 'node',
 	module: {
-		loaders: [
+		rules: [
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
@@ -65,6 +65,6 @@ module.exports = {
 	},
 	plugins: [cleanWebpackConfig, envPluginConfig],
 	resolve: {
-		extensions: ['', '.js']
+		extensions: ['.js']
 	}
 };

@@ -10,7 +10,7 @@
     "dev": "webpack-dev-server",
     "example": "webpack -p",
     "build": "npm run build:main & npm run build:prod",
-    "build:main": "webpack --config webpack.config.publish.js",
+    "build:main": "webpack --config webpack.config.prod.js",
     "build:prod": "npm run build:main -- -p --output-filename ssuggestor.min.js",
     "prepublish": "npm run build",
     "precommit": "npm run lint",
@@ -57,12 +57,13 @@
     "html-webpack-plugin": "^2.29.0",
     "husky": "^0.14.3",
     "jest": "^20.0.4",
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-addons-test-utils": "^15.6.0",
     "react-dom": "^15.6.1",
     "react-test-renderer": "^15.6.1",
-    "webpack": "^1.14.0",
-    "webpack-dev-server": "^1.16.2"
+    "webpack": "^3.4.1",
+    "webpack-dev-server": "^2.6.1"
   },
   "peerDependencies": {
     "prop-types": "^15.5.8",
