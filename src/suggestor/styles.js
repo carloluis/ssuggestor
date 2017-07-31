@@ -3,12 +3,12 @@ export const SPIN_STYLES = {
 	cursor: 'pointer',
 	margin: 'auto',
 	color: '#ccc',
-	fontSize:16,
-	right:10,
+	fontSize: 16,
+	right: 10,
 	top: 0,
 	bottom: 0,
 	height: 14,
-	zIndex:4
+	zIndex: 4
 };
 
 export const X_STYLES = {
@@ -18,7 +18,7 @@ export const X_STYLES = {
 };
 
 export const getListStyles = visible => ({
-	display: visible? 'block':'none',
+	display: visible ? 'block' : 'none',
 	maxHeight: 250,
 	minWidth: 30,
 	width: 'inherit',
