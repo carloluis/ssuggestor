@@ -149,7 +149,7 @@ export class Suggestor extends PureComponent {
 		return mapped;
 	}
 	focus() {
-		this.refs.input.focus();
+		this.input.focus();
 	}
 	render() {
 		let { className, style, placeholder, arrow, close, tooltip, required } = this.props;
@@ -168,7 +168,9 @@ export class Suggestor extends PureComponent {
 					className="form-control"
 					onChange={this.handleChange}
 					value={value}
-					ref="input"
+					ref={input => {
+						this.input = input;
+					}}
 					placeholder={placeholder}
 					title={tooltip}
 					required={required}

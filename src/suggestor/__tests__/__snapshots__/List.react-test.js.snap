@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<List /> render with no suggestions list 1`] = `null`;
 
 exports[`<List /> render with suggestions list (open:false) 1`] = `null`;
@@ -14,7 +16,8 @@ exports[`<List /> render with suggestions list (open:true) 1`] = `
       "overflow": "auto",
       "width": "inherit",
     }
-  }>
+  }
+>
   <li
     onClick={[Function]}
     onMouseEnter={[Function]}
@@ -22,7 +25,8 @@ exports[`<List /> render with suggestions list (open:true) 1`] = `
       Object {
         "backgroundColor": "#f5f5f5",
       }
-    }>
+    }
+  >
     <a>
       suggest-1
     </a>
@@ -42,7 +46,8 @@ exports[`<List /> render with suggestions list (open:true, index:0) 1`] = `
       "overflow": "auto",
       "width": "inherit",
     }
-  }>
+  }
+>
   <li
     onClick={[Function]}
     onMouseEnter={[Function]}
@@ -50,7 +55,8 @@ exports[`<List /> render with suggestions list (open:true, index:0) 1`] = `
       Object {
         "backgroundColor": "#f5f5f5",
       }
-    }>
+    }
+  >
     <a>
       suggest-0
     </a>
@@ -62,7 +68,8 @@ exports[`<List /> render with suggestions list (open:true, index:0) 1`] = `
       Object {
         "backgroundColor": false,
       }
-    }>
+    }
+  >
     <a>
       suggest-1
     </a>
@@ -82,7 +89,8 @@ exports[`<List /> render with suggestions list (open:true, index:1) 1`] = `
       "overflow": "auto",
       "width": "inherit",
     }
-  }>
+  }
+>
   <li
     onClick={[Function]}
     onMouseEnter={[Function]}
@@ -90,7 +98,8 @@ exports[`<List /> render with suggestions list (open:true, index:1) 1`] = `
       Object {
         "backgroundColor": false,
       }
-    }>
+    }
+  >
     <a>
       suggest-0
     </a>
@@ -102,7 +111,8 @@ exports[`<List /> render with suggestions list (open:true, index:1) 1`] = `
       Object {
         "backgroundColor": "#f5f5f5",
       }
-    }>
+    }
+  >
     <a>
       suggest-1
     </a>

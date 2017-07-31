@@ -14,14 +14,14 @@ const withClickOut = WrappedComponent => {
 			document.removeEventListener('click', this.handleClick);
 		}
 		handleClick(e) {
-			const wrapped = this.refs.wrapped;
+			const wrapped = this.wrapped;
 			if (!this.node.contains(e.target) && typeof wrapped.handleClickOut === 'function') {
 				wrapped.handleClickOut(e);
 			}
 		}
 		focus() {
 			// todo: refactor to hoc withFocus (keep in mind nested components)
-			this.refs.wrapped.focus();
+			this.wrapped.focus();
 		}
 		render() {
 			return (
@@ -29,7 +29,9 @@ const withClickOut = WrappedComponent => {
 					reference={node => {
 						this.node = node;
 					}}
-					ref="wrapped"
+					ref={wrapped => {
+						this.wrapped = wrapped;
+					}}
 					{...this.props}
 				/>
 			);
