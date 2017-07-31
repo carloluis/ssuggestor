@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 const withClickOut = WrappedComponent => {
 	class Wrapper extends Component {
-		constructor(...args){
+		constructor(...args) {
 			super(...args);
 			this.handleClick = this.handleClick.bind(this);
 			this.focus = this.focus.bind(this);
@@ -14,17 +14,25 @@ const withClickOut = WrappedComponent => {
 			document.removeEventListener('click', this.handleClick);
 		}
 		handleClick(e) {
-			let wrapped = this.refs.wrapped;			
+			const wrapped = this.refs.wrapped;
 			if (!this.node.contains(e.target) && typeof wrapped.handleClickOut === 'function') {
 				wrapped.handleClickOut(e);
 			}
 		}
 		focus() {
-			//todo: refactor to hoc withFocus (keep in mind nested components)
+			// todo: refactor to hoc withFocus (keep in mind nested components)
 			this.refs.wrapped.focus();
 		}
 		render() {
-			return <WrappedComponent reference={node=>this.node=node} ref='wrapped' {...this.props} />;
+			return (
+				<WrappedComponent
+					reference={node => {
+						this.node = node;
+					}}
+					ref="wrapped"
+					{...this.props}
+				/>
+			);
 		}
 	}
 	Wrapper.displayName = `ClickOut(${WrappedComponent.displayName || WrappedComponent.name})`;

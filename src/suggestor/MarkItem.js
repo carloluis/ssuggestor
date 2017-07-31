@@ -5,7 +5,9 @@ const MarkItem = ({ item, search }) => {
 	let { index, word } = item;
 
 	if (!search || index === -1) {
-		return <a>{ word }</a>;
+		return (
+			<a>{word}</a>
+		);
 	}
 
 	let { length } = search;
@@ -13,9 +15,11 @@ const MarkItem = ({ item, search }) => {
 	return (
 		<a>
 			<span>
-				{ word.substr(0, index) }
-				<strong>{ word.substr(index, length) }</strong>
-				{ word.substr(index + length) }
+				{word.substr(0, index)}
+				<strong>
+					{word.substr(index, length)}
+				</strong>
+				{word.substr(index + length)}
 			</span>
 		</a>
 	);

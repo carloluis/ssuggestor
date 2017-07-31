@@ -7,9 +7,18 @@ import removeAccents from '../utils/remove-accents';
 import List from './List';
 
 export class Suggestor extends PureComponent {
-	constructor(props){
+	constructor(props) {
 		super(props);
-		this._bind('handleClick', 'handleChange', 'remove', 'handleKeyDown', 'handleItemClick', 'handleItemMouseEnter', 'handleClickOut', 'focus');
+		this._bind(
+			'handleClick',
+			'handleChange',
+			'remove',
+			'handleKeyDown',
+			'handleItemClick',
+			'handleItemMouseEnter',
+			'handleClickOut',
+			'focus'
+		);
 
 		this.state = {
 			filtered: this.filter(props.value, false),
@@ -19,7 +28,7 @@ export class Suggestor extends PureComponent {
 		};
 	}
 	_bind(...methods) {
-		methods.forEach(method => this[method] = this[method].bind(this));
+		methods.forEach(method => (this[method] = this[method].bind(this)));
 	}
 	handleClickOut() {
 		this.handleClose();
@@ -38,8 +47,7 @@ export class Suggestor extends PureComponent {
 	toggleList() {
 		if (this.state.open) {
 			this.handleClose();
-		}
-		else {
+		} else {
 			this.setState({
 				open: true
 			});
@@ -82,7 +90,7 @@ export class Suggestor extends PureComponent {
 				break;
 			case KEY_CODES.DOWN: {
 				let next = (index + open) % list.length;
-				this.setState({ open:true, index: next });
+				this.setState({ open: true, index: next });
 				break;
 			}
 			case KEY_CODES.UP: {
@@ -104,16 +112,16 @@ export class Suggestor extends PureComponent {
 	}
 	handleChange(e) {
 		e.stopPropagation();
-		
+
 		let value = e.target.value;
 		this.changeValue(value);
 	}
 	remove() {
 		this.changeValue(EMPTY_STR, true);
 	}
-	changeValue(value, select=false) {
+	changeValue(value, select = false) {
 		let filtered = this.filter(value);
-		
+
 		let suggest = value.length >= this.props.suggestOn;
 		let open = !!filtered.length && suggest;
 
@@ -131,7 +139,7 @@ export class Suggestor extends PureComponent {
 		value = value.toLowerCase();
 		let { accents, list } = this.props;
 		if (!accents) {
-			//todo: same transform for suggestions..
+			// todo: same transform for suggestions..
 			value = removeAccents(value);
 		}
 		let mapped = list.map(word => ({ word, index: word.toLowerCase().indexOf(value) }));
@@ -148,11 +156,32 @@ export class Suggestor extends PureComponent {
 		let { open, value, index, filtered } = this.state;
 
 		return (
-			<div className={className} style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown} ref={this.props.reference} >
-				<input type="text" className="form-control" onChange={this.handleChange} value={value} ref="input" placeholder={placeholder} title={tooltip} required={required} />
-				{ arrow && <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} /> }
-				{ close && value && <span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.remove}/> }
-				<List {...{ filtered, index, open, value }} onItemClick={this.handleItemClick} onItemMouseEnter={this.handleItemMouseEnter} />
+			<div
+				className={className}
+				style={style}
+				onClick={this.handleClick}
+				onKeyDown={this.handleKeyDown}
+				ref={this.props.reference}
+			>
+				<input
+					type="text"
+					className="form-control"
+					onChange={this.handleChange}
+					value={value}
+					ref="input"
+					placeholder={placeholder}
+					title={tooltip}
+					required={required}
+				/>
+				{arrow && <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} />}
+				{close &&
+					value &&
+					<span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.remove} />}
+				<List
+					{...{ filtered, index, open, value }}
+					onItemClick={this.handleItemClick}
+					onItemMouseEnter={this.handleItemMouseEnter}
+				/>
 			</div>
 		);
 	}

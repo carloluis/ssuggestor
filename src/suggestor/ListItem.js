@@ -21,8 +21,11 @@ class ListItem extends PureComponent {
 	render() {
 		let { item, overItem, search } = this.props;
 		return (
-			<li onClick={this.handleClick} onMouseEnter={this.handleMouseEnter} 
-				style={{ backgroundColor: overItem && '#f5f5f5' }}>
+			<li
+				onClick={this.handleClick}
+				onMouseEnter={this.handleMouseEnter}
+				style={{ backgroundColor: overItem && '#f5f5f5' }}
+			>
 				<MarkItem {...{ item, search }} />
 			</li>
 		);

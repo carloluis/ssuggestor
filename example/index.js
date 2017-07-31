@@ -3,6 +3,6 @@ import ReactDOM from 'react-dom';
 import Example from './components/Example';
 
 ReactDOM.render(
-	<Example />, 
+	<Example />,
 	document.getElementById('example')
 );
