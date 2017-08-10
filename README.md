@@ -130,16 +130,10 @@ In order to build locally, first clone this repo and then run:
 ```bash
 git clone https://github.com/carloluis/ssuggestor.git
 cd ssuggestor
-yarn
-yarn dev
+yarn && yarn dev
 ```
 
 Finally open browser on [localhost:9000](http://localhost:9000/)
-
-## Links
-* [ssuggestor github page](https://carloluis.github.io/ssuggestor/)
-* [ssuggestor-example](http://codepen.io/carloluis/pen/rjpLYw/)
-* [npm](https://www.npmjs.com/package/ssuggestor "ssuggestor@npm")
 
 ## License
 
