@@ -1,11 +1,12 @@
 # SSuggestor
 
 [![Travis branch](https://img.shields.io/travis/carloluis/ssuggestor/master.svg)](https://travis-ci.org/carloluis/ssuggestor)
-[![GitHub issues](https://img.shields.io/github/issues/carloluis/ssuggestor.svg)](https://github.com/carloluis/ssuggestor/issues)
-[![GitHub forks](https://img.shields.io/github/forks/carloluis/ssuggestor.svg)](https://github.com/carloluis/ssuggestor/network)
-[![npm](https://img.shields.io/npm/v/ssuggestor.svg)](https://www.npmjs.com/package/ssuggestor)
 [![npm](https://img.shields.io/npm/dt/ssuggestor.svg)](https://npm-stat.com/charts.html?package=ssuggestor)
+[![GitHub forks](https://img.shields.io/github/forks/carloluis/ssuggestor.svg)](https://github.com/carloluis/ssuggestor/network)
+[![GitHub issues](https://img.shields.io/github/issues/carloluis/ssuggestor.svg)](https://github.com/carloluis/ssuggestor/issues)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/carloluis/ssuggestor/master/LICENSE)
+[![npm](https://img.shields.io/npm/v/ssuggestor.svg)](https://www.npmjs.com/package/ssuggestor)
+[![Package Quality](http://npm.packagequality.com/shield/ssuggestor.svg)](http://packagequality.com/#?package=ssuggestor)
 
 `<SSuggestor />` is a React component that enables users to quickly find and select from a pre-populated list of values as they type. It uses [Bootstrap](http://getbootstrap.com/) styles.
 
@@ -17,8 +18,14 @@ CodePen example: [ssuggestor-example](http://codepen.io/carloluis/pen/rjpLYw/) o
 
 ## Instalation
 
-```javascript
+```bash
 npm install ssuggestor --save
+```
+
+You can also use `yarn`:
+
+```bash
+yarn add ssuggestor
 ```
 
 ## Usage 
@@ -32,12 +39,12 @@ import SSuggestor from 'ssuggestor';
 
 render(
 	<SSuggestor 
-		list={['list', 'of', 'string', 'suggestions']}
-		onChange={value => console.log(value)}
-		placeholder="type something..."
-		styles={{width:100}}
-		arrow={true}
-		close={true}
+		list={['suggestion-a', 'suggestion-b', 'suggestion-c', '...', 'suggestion-z']}
+		onChange={console.log}
+		placeholder="type a-z..."
+		styles={{width: 100}}
+		arrow
+		close
 	/>,
 	document.body
 );
@@ -53,21 +60,31 @@ Include `react.js` dependency script and `ssuggestor.js`
 <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.min.js"></script>
 <script src="https://unpkg.com/ssuggestor@0.0.28/dist/ssuggestor.min.js"></script>
 
+<!-- bootstrap styles -->
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 ```
 
 ## Description
 
-SSuggestor (Simple Suggestor) exports two components:
-* __SSuggestor__: `import { SSuggestor } from 'ssuggestor'`
-	* default export handles clicks outside of DOM component: 
-  * `import SSuggestor from 'ssuggestor'`
-* __Suggestor__: `import { Suggestor } from 'ssuggestor'`
+This Simple Suggestor package exports two named components, and one of them as the default export:
 
-Notes: 
-* _**ssuggest**or_ highlights search pattern on **suggest**ions list.
-* case insensitive search: **sSUGGEST**or 
-* strip accents on search: **ssúggèst**or
+```javascript
+import Ssuggestor, { SSuggestor, Suggestor } from 'ssuggestor'
+
+console.info(Ssuggestor === SSuggestor); 
+// true
+```
+
+__SSuggestor__ is also exported as default, and handles clicks outside of DOM component in order to close the suggestion list. __Suggestor__ don't.
+
+
+Notes:
+
+If the search term is `suggest`and following items were part from the suggestion list, then:
+
+* S**Suggest**or highlights search pattern on **suggest**ion list
+* search is case insensitive: **sSUGGEST**or match
+* search also strip accents away: **ssúggèst**or match
 
 #### Props:
 
@@ -94,7 +111,8 @@ close    | bool | `true` | :x: icon - deletes current value
 
 #### Methods
 
-Only has a public method: `focus()`. It focuses the control input element.
+One public method: `focus()`. It focuses the control input:
+
 ```javascript
 instance.focus();
 ```
@@ -103,19 +121,28 @@ instance.focus();
 
 SSuggestor uses some bootstrap classes: 
 
-`input-group`, `form-control`, `dropdown-menu` and `glyphicon` (`glyphicon-triangle-bottom` & `glyphicon-remove`) 
+`input-group`, `form-control`, `dropdown-menu` and `glyphicon` (`glyphicon-triangle-bottom` & `glyphicon-remove`)
 
 ## Development
 
-In order to build locally: clone this repo, then run:
-```javascript
-npm install
-npm run dev
+In order to build locally, first clone this repo and then run:
+
+```bash
+git clone https://github.com/carloluis/ssuggestor.git
+cd ssuggestor
+yarn
+yarn dev
 ```
 
-Then open browser on [localhost:9000](http://localhost:9000/)
+Finally open browser on [localhost:9000](http://localhost:9000/)
 
-###### Links
+## Links
 * [ssuggestor github page](https://carloluis.github.io/ssuggestor/)
 * [ssuggestor-example](http://codepen.io/carloluis/pen/rjpLYw/)
 * [npm](https://www.npmjs.com/package/ssuggestor "ssuggestor@npm")
+
+## License
+
+Licensed under the MIT License, Copyright © 2017 [Carloluis](https://twitter.com/carloluis_).
+
+See [LICENSE](./LICENSE) for more information.
