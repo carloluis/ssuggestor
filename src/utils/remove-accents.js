@@ -1,6 +1,6 @@
 // https://unicode-table.com/es/#basic-latin
 
-let letters_map = {
+const LETTERS_MAP = {
 	A: 'ÁÄÀÃẮẶẰẲẴǍÂẤẬẦẨẪǞȦǠẠȀẢȂĀĄÅǺḀȺ',
 	E: 'ÉËÈĔĚȨḜÊẾỆỀỂỄḘĖẸȄẺȆĒḖḔĘɆẼḚ',
 	I: 'ÍÏÌĬǏÎḮİỊȈỈȊĪĮƗĨḬ',
@@ -15,9 +15,10 @@ let letters_map = {
 	n: 'ñńņ'
 };
 
-let map = {};
-for (let letter in letters_map) {
-	let chars = letters_map[letter];
+const map = {};
+
+for (let letter in LETTERS_MAP) {
+	let chars = LETTERS_MAP[letter];
 	for (let i = 0; i < chars.length; i++) {
 		map[chars[i]] = letter;
 	}
