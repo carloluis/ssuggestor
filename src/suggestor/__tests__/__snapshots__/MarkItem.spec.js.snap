@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MarkItem /> snapshot - plain item <a/> when no match 1`] = `
+<a>
+  https://randomword.com/
+</a>
+`;
+
+exports[`<MarkItem /> snapshot - plain item <a/> when no search pattern 1`] = `
+<a>
+  https://randomword.com/
+</a>
+`;
+
+exports[`<MarkItem /> snapshot - render pattern inside <strong/> when pattern matched 1`] = `
+<a>
+  <span>
+    tempo
+    <strong>
+      rise
+    </strong>
+    
+  </span>
+</a>
+`;
