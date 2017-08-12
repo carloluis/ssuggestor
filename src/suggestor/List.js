@@ -19,10 +19,10 @@ export const List = ({ open, filtered, index, value, onItemClick, onItemMouseEnt
 List.propTypes = {
 	filtered: PropTypes.array.isRequired,
 	index: PropTypes.number.isRequired,
-	value: PropTypes.string.isRequired,
-	open: PropTypes.bool.isRequired,
 	onItemClick: PropTypes.func.isRequired,
-	onItemMouseEnter: PropTypes.func.isRequired
+	onItemMouseEnter: PropTypes.func.isRequired,
+	value: PropTypes.string.isRequired,
+	open: PropTypes.bool.isRequired
 };
 
 export default List;

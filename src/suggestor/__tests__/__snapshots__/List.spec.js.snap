@@ -1,83 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<List /> render with no suggestions list 1`] = `null`;
+exports[`<List /> snapshot - no suggestion list 1`] = `null`;
 
-exports[`<List /> render with suggestions list (open:false) 1`] = `null`;
+exports[`<List /> snapshot - suggestion list closed 1`] = `null`;
 
-exports[`<List /> render with suggestions list (open:true) 1`] = `
-<ul
-  className="dropdown-menu"
-  style={
-    Object {
-      "cursor": "pointer",
-      "display": "block",
-      "maxHeight": 250,
-      "minWidth": 30,
-      "overflow": "auto",
-      "width": "inherit",
-    }
-  }
->
-  <li
-    onClick={[Function]}
-    onMouseEnter={[Function]}
-    style={
-      Object {
-        "backgroundColor": "#f5f5f5",
-      }
-    }
-  >
-    <a>
-      suggest-1
-    </a>
-  </li>
-</ul>
-`;
-
-exports[`<List /> render with suggestions list (open:true, index:0) 1`] = `
-<ul
-  className="dropdown-menu"
-  style={
-    Object {
-      "cursor": "pointer",
-      "display": "block",
-      "maxHeight": 250,
-      "minWidth": 30,
-      "overflow": "auto",
-      "width": "inherit",
-    }
-  }
->
-  <li
-    onClick={[Function]}
-    onMouseEnter={[Function]}
-    style={
-      Object {
-        "backgroundColor": "#f5f5f5",
-      }
-    }
-  >
-    <a>
-      suggest-0
-    </a>
-  </li>
-  <li
-    onClick={[Function]}
-    onMouseEnter={[Function]}
-    style={
-      Object {
-        "backgroundColor": false,
-      }
-    }
-  >
-    <a>
-      suggest-1
-    </a>
-  </li>
-</ul>
-`;
-
-exports[`<List /> render with suggestions list (open:true, index:1) 1`] = `
+exports[`<List /> snapshot - suggestion list open (index 1) 1`] = `
 <ul
   className="dropdown-menu"
   style={
@@ -101,7 +28,7 @@ exports[`<List /> render with suggestions list (open:true, index:1) 1`] = `
     }
   >
     <a>
-      suggest-0
+      locellus
     </a>
   </li>
   <li
@@ -114,8 +41,79 @@ exports[`<List /> render with suggestions list (open:true, index:1) 1`] = `
     }
   >
     <a>
-      suggest-1
+      Lydian
+    </a>
+  </li>
+  <li
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    style={
+      Object {
+        "backgroundColor": false,
+      }
+    }
+  >
+    <a>
+      warray
     </a>
   </li>
 </ul>
 `;
+
+exports[`<List /> snapshot - suggestion list open 1`] = `
+<ul
+  className="dropdown-menu"
+  style={
+    Object {
+      "cursor": "pointer",
+      "display": "block",
+      "maxHeight": 250,
+      "minWidth": 30,
+      "overflow": "auto",
+      "width": "inherit",
+    }
+  }
+>
+  <li
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#f5f5f5",
+      }
+    }
+  >
+    <a>
+      locellus
+    </a>
+  </li>
+  <li
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    style={
+      Object {
+        "backgroundColor": false,
+      }
+    }
+  >
+    <a>
+      Lydian
+    </a>
+  </li>
+  <li
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    style={
+      Object {
+        "backgroundColor": false,
+      }
+    }
+  >
+    <a>
+      warray
+    </a>
+  </li>
+</ul>
+`;
+
+exports[`<List /> snapshot 1`] = `null`;
