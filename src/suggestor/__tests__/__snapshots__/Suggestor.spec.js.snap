@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Ssuggestor /> snapshot - with suggestions 1`] = `
+<div
+  className="classname to apply"
+  onClick={[Function]}
+  onKeyDown={[Function]}
+  style={
+    Object {
+      "color": "#eee",
+    }
+  }
+>
+  <input
+    className="form-control"
+    onChange={[Function]}
+    placeholder="placeholder text"
+    required={false}
+    title="tooltip text"
+    type="text"
+    value=""
+  />
+</div>
+`;
+
+exports[`<Ssuggestor /> snapshot - with suggestions visible 1`] = `
+<div
+  className="classname to apply"
+  onClick={[Function]}
+  onKeyDown={[Function]}
+  style={
+    Object {
+      "color": "#eee",
+    }
+  }
+>
+  <input
+    className="form-control"
+    onChange={[Function]}
+    placeholder="placeholder text"
+    required={false}
+    title="tooltip text"
+    type="text"
+    value=""
+  />
+  <ul
+    className="dropdown-menu"
+    style={
+      Object {
+        "cursor": "pointer",
+        "display": "block",
+        "maxHeight": 250,
+        "minWidth": 30,
+        "overflow": "auto",
+        "width": "inherit",
+      }
+    }
+  >
+    <li
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#f5f5f5",
+        }
+      }
+    >
+      <a>
+        temporise
+      </a>
+    </li>
+    <li
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      style={
+        Object {
+          "backgroundColor": false,
+        }
+      }
+    >
+      <a>
+        whencesoeve
+      </a>
+    </li>
+    <li
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      style={
+        Object {
+          "backgroundColor": false,
+        }
+      }
+    >
+      <a>
+        turophile
+      </a>
+    </li>
+    <li
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      style={
+        Object {
+          "backgroundColor": false,
+        }
+      }
+    >
+      <a>
+        umlaut
+      </a>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`<Ssuggestor /> snapshot - without suggestions 1`] = `
+<div
+  className="classname to apply"
+  onClick={[Function]}
+  onKeyDown={[Function]}
+  style={
+    Object {
+      "color": "#eee",
+    }
+  }
+>
+  <input
+    className="form-control"
+    onChange={[Function]}
+    placeholder="placeholder text"
+    required={false}
+    title="tooltip text"
+    type="text"
+    value=""
+  />
+</div>
+`;

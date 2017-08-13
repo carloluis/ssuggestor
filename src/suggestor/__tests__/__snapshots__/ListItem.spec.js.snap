@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ListItem/> hover snapshot 1`] = `
+<li
+  onClick={[Function]}
+  onMouseEnter={[Function]}
+  style={
+    Object {
+      "backgroundColor": "#f5f5f5",
+    }
+  }
+>
+  <a>
+    fructuary
+  </a>
+</li>
+`;
+
+exports[`<ListItem/> snapshot 1`] = `
+<li
+  onClick={[Function]}
+  onMouseEnter={[Function]}
+  style={
+    Object {
+      "backgroundColor": false,
+    }
+  }
+>
+  <a>
+    fructuary
+  </a>
+</li>
+`;

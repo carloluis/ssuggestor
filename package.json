@@ -1,77 +1,75 @@
 {
-  "name": "ssuggestor",
-  "version": "0.0.28",
-  "description": "react-simple-suggestor",
-  "main": "dist/ssuggestor.js",
-  "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "lint": "eslint .  --cache --ext .js --ignore-path .eslintignore --ignore-pattern '**/__tests__/*'",
-    "dev": "webpack-dev-server",
-    "example": "webpack -p",
-    "build": "npm run build:main & npm run build:prod",
-    "build:main": "webpack --config webpack.config.prod.js",
-    "build:prod": "npm run build:main -- -p --output-filename ssuggestor.min.js",
-    "prepublish": "npm run build",
-    "precommit": "npm run lint",
-    "prepush": "npm run test"
-  },
-  "files": [
-    "dist",
-    "src"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/carloluis/ssuggestor.git"
-  },
-  "keywords": [
-    "suggestor",
-    "react",
-    "react-component",
-    "bootstrap",
-    "search",
-    "highlight",
-    "select",
-    "form",
-    "input",
-    "ui"
-  ],
-  "author": "carloluis <carloluisr@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/carloluis/ssuggestor/issues"
-  },
-  "homepage": "https://github.com/carloluis/ssuggestor#readme",
-  "devDependencies": {
-    "babel-core": "^6.25.0",
-    "babel-jest": "^20.0.3",
-    "babel-loader": "^7.1.1",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "clean-webpack-plugin": "^0.1.16",
-    "enzyme": "^2.9.1",
-    "eslint": "^4.3.0",
-    "eslint-loader": "^1.9.0",
-    "eslint-plugin-react": "^7.1.0",
-    "html-webpack-plugin": "^2.29.0",
-    "husky": "^0.14.3",
-    "jest": "^20.0.4",
-    "prop-types": "^15.5.10",
-    "react": "^15.6.1",
-    "react-addons-test-utils": "^15.6.0",
-    "react-dom": "^15.6.1",
-    "react-test-renderer": "^15.6.1",
-    "webpack": "^3.4.1",
-    "webpack-dev-server": "^2.6.1"
-  },
-  "peerDependencies": {
-    "prop-types": "^15.5.8",
-    "react": "15.x"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js"
-    ]
-  }
+	"name": "ssuggestor",
+	"version": "0.0.28",
+	"description": "react-simple-suggestor",
+	"main": "dist/ssuggestor.js",
+	"scripts": {
+		"test": "jest",
+		"test:snapshot": "npm test -- -u",
+		"test:coverage": "jest --coverage",
+		"tdd": "jest --watch",
+		"lint": "eslint .  --cache --ext .js --ignore-path .eslintignore --ignore-pattern '**/__tests__/*'",
+		"stats": "webpack --profile --json > stats.json",
+		"dev": "webpack-dev-server",
+		"example": "webpack -p",
+		"build": "npm run build:main & npm run build:prod",
+		"build:main": "webpack --config webpack.config.prod.js",
+		"build:prod": "npm run build:main -- -p --output-filename ssuggestor.min.js",
+		"prepublish": "npm run build",
+		"precommit": "npm run lint",
+		"prepush": "npm run test"
+	},
+	"files": ["dist", "src"],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/carloluis/ssuggestor.git"
+	},
+	"keywords": [
+		"suggestor",
+		"react",
+		"react-component",
+		"bootstrap",
+		"search",
+		"highlight",
+		"select",
+		"form",
+		"input",
+		"ui"
+	],
+	"author": "carloluis <carloluisr@gmail.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/carloluis/ssuggestor/issues"
+	},
+	"homepage": "https://github.com/carloluis/ssuggestor#readme",
+	"devDependencies": {
+		"babel-core": "^6.25.0",
+		"babel-jest": "^20.0.3",
+		"babel-loader": "^7.1.1",
+		"babel-preset-es2015": "^6.24.1",
+		"babel-preset-react": "^6.24.1",
+		"babel-preset-stage-2": "^6.24.1",
+		"clean-webpack-plugin": "^0.1.16",
+		"enzyme": "^2.9.1",
+		"eslint": "^4.3.0",
+		"eslint-loader": "^1.9.0",
+		"eslint-plugin-react": "^7.1.0",
+		"html-webpack-plugin": "^2.29.0",
+		"husky": "^0.14.3",
+		"jest": "^20.0.4",
+		"prop-types": "^15.5.10",
+		"react": "^15.6.1",
+		"react-addons-test-utils": "^15.6.0",
+		"react-dom": "^15.6.1",
+		"react-test-renderer": "^15.6.1",
+		"webpack": "^3.4.1",
+		"webpack-dev-server": "^2.6.1"
+	},
+	"peerDependencies": {
+		"prop-types": "^15.5.8",
+		"react": "15.x"
+	},
+	"jest": {
+		"moduleFileExtensions": ["js"]
+	}
 }
