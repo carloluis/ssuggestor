@@ -7,6 +7,7 @@
 		"test": "jest",
 		"test:snapshot": "npm test -- -u",
 		"test:coverage": "jest --coverage",
+		"coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
 		"tdd": "jest --watch",
 		"lint": "eslint .  --cache --ext .js --ignore-path .eslintignore --ignore-pattern '**/__tests__/*'",
 		"stats": "webpack --profile --json > stats.json",
@@ -19,7 +20,10 @@
 		"precommit": "npm run lint",
 		"prepush": "npm run test"
 	},
-	"files": ["dist", "src"],
+	"files": [
+		"dist",
+		"src"
+	],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/carloluis/ssuggestor.git"
@@ -50,6 +54,7 @@
 		"babel-preset-react": "^6.24.1",
 		"babel-preset-stage-2": "^6.24.1",
 		"clean-webpack-plugin": "^0.1.16",
+		"coveralls": "^2.13.1",
 		"enzyme": "^2.9.1",
 		"eslint": "^4.3.0",
 		"eslint-loader": "^1.9.0",
@@ -70,6 +75,8 @@
 		"react": "15.x"
 	},
 	"jest": {
-		"moduleFileExtensions": ["js"]
+		"moduleFileExtensions": [
+			"js"
+		]
 	}
 }

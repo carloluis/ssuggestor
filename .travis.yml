@@ -3,4 +3,4 @@ node_js:
   - 8
 cache: yarn
 install: yarn install
-script: yarn test
+script: yarn coveralls || yarn test
