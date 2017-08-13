@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { EMPTY_STR, KEY_CODES } from '../utils/values';
+import removeAccents from '../utils/remove-accents';
 import { SPIN_STYLES, X_STYLES } from './styles';
 import withClickOut from '../utils/withClickOut';
-import removeAccents from '../utils/remove-accents';
 import List from './List';
 
 export class Suggestor extends PureComponent {
@@ -210,13 +210,13 @@ Suggestor.propTypes = {
 	close: PropTypes.bool
 };
 
-const nop = _ => _;
+const noop = () => {};
 
 Suggestor.defaultProps = {
 	className: 'input-group',
-	onSelect: nop,
-	onChange: nop,
-	onKey: nop,
+	onSelect: noop,
+	onChange: noop,
+	onKey: noop,
 	value: EMPTY_STR,
 	openOnClick: true,
 	selectOnTab: false,
