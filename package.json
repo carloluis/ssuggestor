@@ -5,9 +5,9 @@
 	"main": "dist/ssuggestor.js",
 	"scripts": {
 		"test": "jest",
-		"test:watch": "jest --watch",
 		"test:snapshot": "npm test -- -u",
 		"test:coverage": "jest --coverage",
+		"tdd": "jest --watch",
 		"lint": "eslint .  --cache --ext .js --ignore-path .eslintignore --ignore-pattern '**/__tests__/*'",
 		"stats": "webpack --profile --json > stats.json",
 		"dev": "webpack-dev-server",
