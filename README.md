@@ -1,7 +1,7 @@
 # ssuggestor
 
 [![Travis branch](https://img.shields.io/travis/carloluis/ssuggestor/master.svg)](https://travis-ci.org/carloluis/ssuggestor)
-[![Coverage Status](https://coveralls.io/repos/github/carloluis/ssuggestor/badge.svg?branch=feature%2Fcoveralls)](https://coveralls.io/github/carloluis/ssuggestor?branch=feature%2Fcoveralls)
+[![Coverage Status](https://coveralls.io/repos/github/carloluis/ssuggestor/badge.svg)](https://coveralls.io/github/carloluis/ssuggestor)
 [![npm](https://img.shields.io/npm/dt/ssuggestor.svg)](https://npm-stat.com/charts.html?package=ssuggestor)
 [![npm](https://img.shields.io/npm/v/ssuggestor.svg)](https://www.npmjs.com/package/ssuggestor)
 [![GitHub forks](https://img.shields.io/github/forks/carloluis/ssuggestor.svg)](https://github.com/carloluis/ssuggestor/network)
