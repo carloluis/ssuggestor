@@ -13,6 +13,7 @@
 [![GitHub contributors](https://img.shields.io/github/contributors/carloluis/ssuggestor.svg)](https://github.com/carloluis/ssuggestor/graphs/contributors)
 [![Libraries.io for GitHub](https://img.shields.io/librariesio/github/carloluis/ssuggestor.svg)](https://github.com/carloluis/ssuggestor/blob/master/package.json)
 [![PeerDependencies](https://img.shields.io/david/peer/carloluis/ssuggestor.svg)](https://github.com/carloluis/ssuggestor/blob/master/package.json)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/carloluis/ssuggestor.svg?style=social)](https://twitter.com/intent/tweet?text=ssuggestor%20%23react%20component%20on&url=https%3A%2F%2Ft.co%2FpjuWm9EaCa)
 
 
 `<SSuggestor />` is a React component that enables users to quickly find and select from a pre-populated list of values as they type. It uses [Bootstrap](http://getbootstrap.com/) styles.
