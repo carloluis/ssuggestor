@@ -11,8 +11,8 @@
 [![Package Quality](http://npm.packagequality.com/shield/ssuggestor.svg)](http://packagequality.com/#?package=ssuggestor)
 [![](https://img.shields.io/github/issues-pr-closed-raw/carloluis/ssuggestor.svg)](https://github.com/carloluis/ssuggestor/issues?q=is%3Apr+is%3Aclosed)
 [![GitHub contributors](https://img.shields.io/github/contributors/carloluis/ssuggestor.svg)](https://github.com/carloluis/ssuggestor/graphs/contributors)
-[![Libraries.io for GitHub](https://img.shields.io/librariesio/github/carloluis/ssuggestor.svg)](https://github.com/carloluis/ssuggestor/blob/master/package.json)
 [![PeerDependencies](https://img.shields.io/david/peer/carloluis/ssuggestor.svg)](https://github.com/carloluis/ssuggestor/blob/master/package.json)
+[![DevDependencies](https://img.shields.io/david/dev/carloluis/ssuggestor.svg)](https://github.com/carloluis/ssuggestor/blob/master/package.json)
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/carloluis/ssuggestor.svg?style=social)](https://twitter.com/intent/tweet?text=ssuggestor%20%23react%20component%20on&url=https%3A%2F%2Ft.co%2FpjuWm9EaCa)
 
 
