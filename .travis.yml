@@ -1,13 +1,19 @@
-sudo: false
 dist: trusty
+sudo: false
 
 language: node_js
 node_js:
- - 8
+  - 8
 cache: yarn
 install:
- - yarn install
+  - yarn install
 script:
- - yarn test
+  - yarn test
 after_script:
- - yarn coveralls
+  - echo "coverage -> coveralls"
+  - yarn coveralls
+
+notifications:
+  email:
+    on_success: change
+    on_failure: always
