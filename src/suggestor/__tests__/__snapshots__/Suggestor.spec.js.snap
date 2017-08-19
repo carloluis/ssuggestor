@@ -1,5 +1,86 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<Ssuggestor /> snapshot - with arrow 1`] = `
+<div
+  className="classname to apply"
+  onClick={[Function]}
+  onKeyDown={[Function]}
+  style={
+    Object {
+      "color": "#eee",
+    }
+  }
+>
+  <input
+    className="form-control"
+    onChange={[Function]}
+    placeholder="placeholder text"
+    required={false}
+    title="tooltip text"
+    type="text"
+    value=""
+  />
+  <span
+    className="glyphicon glyphicon-triangle-bottom"
+    style={
+      Object {
+        "bottom": 0,
+        "color": "#ccc",
+        "cursor": "pointer",
+        "fontSize": 16,
+        "height": 14,
+        "margin": "auto",
+        "position": "absolute",
+        "right": 10,
+        "top": 0,
+        "zIndex": 4,
+      }
+    }
+  />
+</div>
+`;
+
+exports[`<Ssuggestor /> snapshot - with close 1`] = `
+<div
+  className="classname to apply"
+  onClick={[Function]}
+  onKeyDown={[Function]}
+  style={
+    Object {
+      "color": "#eee",
+    }
+  }
+>
+  <input
+    className="form-control"
+    onChange={[Function]}
+    placeholder="placeholder text"
+    required={false}
+    title="tooltip text"
+    type="text"
+    value="temp"
+  />
+  <span
+    className="glyphicon glyphicon-remove"
+    onClick={[Function]}
+    style={
+      Object {
+        "bottom": 0,
+        "color": "#ccc",
+        "cursor": "pointer",
+        "fontSize": 14,
+        "height": 14,
+        "margin": "auto",
+        "position": "absolute",
+        "right": 30,
+        "top": 0,
+        "zIndex": 4,
+      }
+    }
+  />
+</div>
+`;
+
 exports[`<Ssuggestor /> snapshot - with suggestions 1`] = `
 <div
   className="classname to apply"
