@@ -8,10 +8,9 @@ cache: yarn
 install:
   - yarn install
 script:
-  - yarn test
+  - yarn coveralls || yarn test
 after_script:
-  - echo "coverage -> coveralls"
-  - yarn coveralls
+  - echo 'coverage -> coveralls'
 
 notifications:
   email:
