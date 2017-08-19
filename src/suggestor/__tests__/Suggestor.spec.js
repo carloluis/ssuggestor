@@ -461,6 +461,15 @@ describe('Suggestor component', () => {
 			expect(result.length).toBe(1);
 			expect(result[0].index).toBeGreaterThanOrEqual(0);
 		});
+
+		it('should return all if search pattern is empty', () => {
+			const component = mount(<Suggestor {...PROPS} />);
+
+			const result = component.instance().filter();
+
+			expect(result.every(item => item.index === 0)).toBeTruthy();
+			expect(result.length).toBe(4);
+		});
 	});
 });
 
