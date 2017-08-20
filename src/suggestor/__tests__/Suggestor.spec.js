@@ -93,6 +93,14 @@ describe('Suggestor component', () => {
 		});
 	});
 
+	it('should call _bind when created', () => {
+		const spy = jest.spyOn(Suggestor.prototype, '_bind');
+
+		const component = shallow(<Suggestor {...PROPS} />);
+
+		expect(spy).toHaveBeenCalled();
+	});
+
 	it('should call changeValue when remove the value: remove -> changeValue', () => {
 		const component = mount(<Suggestor {...PROPS} openOnClick />);
 
@@ -161,6 +169,52 @@ describe('Suggestor component', () => {
 		component.instance().handleClickOut();
 
 		expect(spy).toBeCalled();
+	});
+
+	it('toggleList -> setState (open suggestion list)', () => {
+		const component = shallow(<Suggestor {...PROPS} />);
+
+		const spy = jest.spyOn(component.instance(), 'setState');
+		expect(component.state().open).toBeFalsy();
+
+		component.instance().toggleList();
+
+		expect(spy).toBeCalled();
+		expect(component.state().open).toBeTruthy();
+	});
+
+	it('toggleList -> handleClose (if suggestion list is visible)', () => {
+		const component = shallow(<Suggestor {...PROPS} />);
+
+		const spy = jest.spyOn(component.instance(), 'handleClose');
+
+		component.instance().toggleList();
+
+		expect(spy).not.toBeCalled();
+
+		component.instance().toggleList();
+
+		expect(spy).toBeCalled();
+	});
+
+	it('handleChange -> changeValue', () => {
+		const event = {
+			stopPropagation: jest.fn(),
+			target: {
+				value: 'whencesoeve'
+			}
+		};
+		const component = shallow(<Suggestor {...PROPS} />);
+
+		const spy = jest.spyOn(component.instance(), 'changeValue');
+
+		component.instance().handleChange(event);
+
+		expect(spy).toBeCalled();
+		expect(component.state()).toMatchObject({
+			value: event.target.value,
+			open: true
+		});
 	});
 
 	describe('componentWillReceiveProps', () => {
@@ -470,6 +524,18 @@ describe('Suggestor component', () => {
 			expect(result.every(item => item.index === 0)).toBeTruthy();
 			expect(result.length).toBe(4);
 		});
+	});
+});
+
+describe('Suggestor noop func', () => {
+	it('when not onChange, onSelect, oKey props func provided, then use noop', () => {
+		const { onChange, onSelect, onKey, ...props } = PROPS;
+		const component = shallow(<Suggestor {...props} />);
+
+		expect(component.props().onChange).toBe(component.props().onSelect);
+		expect(component.props().onSelect).toBe(component.props().onKey);
+
+		expect(component.instance().props.onSelect()).toBe(undefined);
 	});
 });
 
