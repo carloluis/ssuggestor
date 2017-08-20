@@ -64,9 +64,9 @@ render(
 Include `react.js` dependency script and `ssuggestor.js` 
 
 ```html
-<script src="https://unpkg.com/react@15.4.2/dist/react.min.js"></script>
-<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.min.js"></script>
-<script src="https://unpkg.com/ssuggestor@0.0.28/dist/ssuggestor.min.js"></script>
+<script src="https://unpkg.com/react@15.6.1/dist/react.min.js"></script>
+<script src="https://unpkg.com/react-dom@15.6.1/dist/react-dom.min.js"></script>
+<script src="https://unpkg.com/ssuggestor@0.0.29/dist/ssuggestor.min.js"></script>
 
 <!-- bootstrap styles -->
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -98,23 +98,23 @@ If the search term is `suggest`and following items were part from the suggestion
 
 Property | Type | Default | Description
 :--------|:-----|:--------|:-----------
-list     | array | -- | array of string suggestions (required)
-onSelect | func | `_ => _` | onSelect handler: `(current_value) => { }`
-onChange | func | `_ => _` | onChange handler: `(new_value) => { }`
-onKey	 | func | `_ => _` | onKey handler: `(keyEvent) => { }`
-value    | string | `''` | initial value
+accents  | bool | `false`| whether to differentiate chars with accents or not
+arrow    | bool | `true` | ▼ icon - open suggestion list
 className| string | `input-group` | css classes for component's root element
-style    | [object](https://facebook.github.io/react/docs/dom-elements.html#style "react style object") | undefined | inline styles for component's root element
-placeholder | string | `''` | input placeholder text
-tooltip  | string | `''` | input title text (simple tooltip)
-suggestOn| number | `1` | minimum length of search string to show suggestions
+close    | bool | `true` | ✖︎ icon - delete current value
+list     | array | -- | array of suggestions strings (_required_)
 openOnClick | bool | `true` | whether suggestion list opens on click or not
-selectOnTab | bool | `false` | whether suggestion is selected by hit `tab` key or not
+onSelect | func | `() => {}` | onSelect handler: `(current_value) => { }`
+onChange | func | `() => {}` | onChange handler: `(new_value) => { }`
+onKey    | func | `() => {}` | onKey handler: `(keyEvent) => { }`
+placeholder | string | `''` | input placeholder text
 required | bool | `false` | wheater to set required prop on input element or not
+selectOnTab | bool | `false` | whether suggestion is selected by hit `tab` key or not
+style    | [object](https://facebook.github.io/react/docs/dom-elements.html#style "react style object") | `undefined` | inline styles for component's root element
+suggestOn| number | `1` | minimum length of search string to show suggestions
+tooltip  | string | `''` | input title text (simple tooltip)
+value    | string | `''` | initial value
 useKeys  | bool | `true` | whether to use keys (`up`/`down`, `enter`, `escape`, `tab`) or not
-accents	 | bool | `false`| whether to differentiate chars with accents or not
-arrow    | bool | `true` | :small_red_triangle_down: icon
-close    | bool | `true` | :x: icon - deletes current value
 
 
 #### Methods
