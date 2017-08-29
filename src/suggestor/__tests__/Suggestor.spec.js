@@ -230,17 +230,26 @@ describe('Suggestor component', () => {
 			expect(component.state()).toMatchObject({ value });
 		});
 
-		xit('do not update state.value if props.value match with state.value', () => {
+		it('update state.filtered if props.list changed', () => {
 			const component = shallow(<Suggestor {...PROPS} />);
 
-			const value = 'hame';
-			component.setState({ value });
+			expect(component.state().filtered.length).toBe(PROPS.list.length);
+
+			const list = ['one', 'two'];
+
+			component.setProps({ list });
+
+			expect(component.state().filtered.length).toBe(list.length);
+		});
+
+		it('should always call setState', () => {
+			const component = shallow(<Suggestor {...PROPS} />);
 
 			const spy = jest.spyOn(component.instance(), 'setState');
 
-			component.setProps({ value });
+			component.setProps({ });
 
-			expect(spy).not.toBeCalled();
+			expect(spy).toBeCalled();
 		});
 	});
 
