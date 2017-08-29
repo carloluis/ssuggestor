@@ -21,7 +21,7 @@ export class Suggestor extends PureComponent {
 		);
 
 		this.state = {
-			filtered: this.filter(props.value, false),
+			filtered: this.filter(props.list, props.value, false),
 			value: props.value,
 			open: false,
 			index: 0
@@ -34,13 +34,20 @@ export class Suggestor extends PureComponent {
 		this.handleClose();
 	}
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.value !== this.state.value) {
-			this.setState({ value: nextProps.value });
+		let value = this.state.value;
+
+		if (nextProps.value !== this.props.value && nextProps.value !== this.state.value) {
+			value = nextProps.value;
 		}
+
+		this.setState({
+			filtered: this.filter(nextProps.list, value, false),
+			value
+		});
 	}
 	handleClose() {
 		if (this.state.open) {
-			let filtered = this.filter(this.state.value, false);
+			let filtered = this.filter(this.props.list, this.state.value, false);
 			this.setState({ open: false, filtered, index: 0 });
 		}
 	}
@@ -120,7 +127,7 @@ export class Suggestor extends PureComponent {
 		this.changeValue(EMPTY_STR, true);
 	}
 	changeValue(value, select = false) {
-		let filtered = this.filter(value);
+		let filtered = this.filter(this.props.list, value);
 
 		let suggest = value.length >= this.props.suggestOn;
 		let open = !!filtered.length && suggest;
@@ -135,9 +142,9 @@ export class Suggestor extends PureComponent {
 			}
 		});
 	}
-	filter(value = '', onlyMatch = true) {
+	filter(list, value = '', onlyMatch = true) {
 		value = value.toLowerCase();
-		let { accents, list } = this.props;
+		let { accents } = this.props;
 		if (!accents) {
 			// todo: same transform for suggestions..
 			value = removeAccents(value);
