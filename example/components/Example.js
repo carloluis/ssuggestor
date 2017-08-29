@@ -1,5 +1,6 @@
 import React from 'react';
 import SSuggestor, { Suggestor } from '../../src/suggestor/Suggestor';
+import ExUpdate from './ExUpdate';
 import Section from './Section';
 import { countries, suggestions, numbers } from '../data/index';
 
@@ -9,7 +10,7 @@ const STYLE_WIDTH = { width: '100%' };
 /* eslint-disable max-len */
 
 const Example = () =>
-	<div style={{ padding: '20px 0 200px' }}>
+	<div style={{ padding: '20px 0 100px' }}>
 		<Section title="Code Example">
 			<pre>
 				{`<SSuggestor list={['list', 'of', 'suggestions', ...]} style={{width:'100%''}} />`}
@@ -135,6 +136,8 @@ const Example = () =>
 				onChange={handleSSuggestorChange}
 			/>
 		</Section>
+
+		<ExUpdate />
 	</div>;
 
 /* eslint-enable max-len */
