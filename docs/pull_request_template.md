@@ -3,6 +3,4 @@
 - 
 - 
 
-Fixes # .
-
-@carloluis :bulb:
+### Fixes # .
