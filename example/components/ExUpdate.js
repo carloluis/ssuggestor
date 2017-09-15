@@ -17,6 +17,7 @@ class ExUpdate extends React.Component {
 		this.updateSuggestions = this.updateSuggestions.bind(this);
 		this.updateValue = this.updateValue.bind(this);
 		this.updateNone = this.updateNone.bind(this);
+		this.autoUpdate = this.autoUpdate.bind(this);
 
 		this.state = {
 			suggestions: countries,
@@ -24,15 +25,20 @@ class ExUpdate extends React.Component {
 		};
 	}
 
-	// componentDidMount() {
-	// 	this.timerId = setInterval(() => {
-	// 		this.updateSuggestions();
-	// 	}, 2000);
-	// }
+	autoUpdate() {
+		if (this.timerId) {
+			clearInterval(this.timerId);
+			this.timerId = undefined;
+		} else {
+			this.timerId = setInterval(() => {
+				this.updateSuggestions();
+			}, 4000);
+		}
+	}
 
-	// componentWillUnmount() {
-	// 	clearInterval(this.timerId);
-	// }
+	componentWillUnmount() {
+		clearInterval(this.timerId);
+	}
 
 	updateSuggestions() {
 		this.setState({
@@ -73,6 +79,9 @@ class ExUpdate extends React.Component {
 						<button onClick={this.updateValue}>Update value...</button>
 						<button onClick={this.updateNone}>Update none...</button>
 					</div>
+					<label title="auto update suggestions list">
+						<input type="checkbox" onClick={this.autoUpdate} /> auto-update
+					</label>
 				</Section>
 			</div>
 		);
