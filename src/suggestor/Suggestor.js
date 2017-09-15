@@ -10,13 +10,13 @@ export class Suggestor extends PureComponent {
 	constructor(props) {
 		super(props);
 		this._bind(
-			'handleClick',
 			'handleChange',
-			'remove',
-			'handleKeyDown',
+			'handleClickOut',
+			'handleClick',
 			'handleItemClick',
 			'handleItemMouseEnter',
-			'handleClickOut',
+			'handleKeyDown',
+			'remove',
 			'focus'
 		);
 
@@ -47,7 +47,7 @@ export class Suggestor extends PureComponent {
 	}
 	handleClose() {
 		if (this.state.open) {
-			let filtered = this.filter(this.props.list, this.state.value, false);
+			const filtered = this.filter(this.props.list, this.state.value, false);
 			this.setState({ open: false, filtered, index: 0 });
 		}
 	}
@@ -55,9 +55,7 @@ export class Suggestor extends PureComponent {
 		if (this.state.open) {
 			this.handleClose();
 		} else {
-			this.setState({
-				open: true
-			});
+			this.setState({	open: true });
 		}
 	}
 	handleClick() {
@@ -70,8 +68,8 @@ export class Suggestor extends PureComponent {
 		if (!this.props.useKeys) {
 			return;
 		}
-		let { open, index, filtered, value } = this.state;
-		let list = filtered.map(item => item.word);
+		const { open, index, filtered, value } = this.state;
+		const list = filtered.map(item => item.word);
 
 		switch (e.keyCode) {
 			case KEY_CODES.TAB:
@@ -120,17 +118,17 @@ export class Suggestor extends PureComponent {
 	handleChange(e) {
 		e.stopPropagation();
 
-		let value = e.target.value;
+		const value = e.target.value;
 		this.changeValue(value);
 	}
 	remove() {
 		this.changeValue(EMPTY_STR, true);
 	}
 	changeValue(value, select = false) {
-		let filtered = this.filter(this.props.list, value);
+		const filtered = this.filter(this.props.list, value);
 
-		let suggest = value.length >= this.props.suggestOn;
-		let open = !!filtered.length && suggest;
+		const suggest = value.length >= this.props.suggestOn;
+		const open = !!filtered.length && suggest;
 
 		this.setState({ value, filtered, open }, () => {
 			this.props.onChange(value);
@@ -144,7 +142,7 @@ export class Suggestor extends PureComponent {
 	}
 	filter(list, value = '', onlyMatch = true) {
 		value = value.toLowerCase();
-		let { accents } = this.props;
+		const { accents } = this.props;
 		if (!accents) {
 			// todo: same transform for suggestions..
 			value = removeAccents(value);
@@ -159,8 +157,8 @@ export class Suggestor extends PureComponent {
 		this.input.focus();
 	}
 	render() {
-		let { className, style, placeholder, arrow, close, tooltip, required } = this.props;
-		let { open, value, index, filtered } = this.state;
+		const { className, style, placeholder, arrow, close, tooltip, required } = this.props;
+		const { open, value, index, filtered } = this.state;
 
 		return (
 			<div
