@@ -4,8 +4,8 @@ import Section from './Section';
 import { countries, suggestions } from '../data/index';
 
 const action_styles = {
-	'display': 'flex',
-	'justify-content': 'space-between'
+	display: 'flex',
+	justifyContent: 'space-between'
 };
 
 const DEFAULT_VALUE = 'default';
@@ -17,6 +17,7 @@ class ExUpdate extends React.Component {
 		this.updateSuggestions = this.updateSuggestions.bind(this);
 		this.updateValue = this.updateValue.bind(this);
 		this.updateNone = this.updateNone.bind(this);
+		this.autoUpdate = this.autoUpdate.bind(this);
 
 		this.state = {
 			suggestions: countries,
@@ -24,15 +25,30 @@ class ExUpdate extends React.Component {
 		};
 	}
 
+	autoUpdate() {
+		if (this.timerId) {
+			clearInterval(this.timerId);
+			this.timerId = undefined;
+		} else {
+			this.timerId = setInterval(() => {
+				this.updateSuggestions();
+			}, 4000);
+		}
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.timerId);
+	}
+
 	updateSuggestions() {
 		this.setState({
-			suggestions: this.state.suggestions.length === suggestions.length? countries: suggestions
+			suggestions: this.state.suggestions.length === suggestions.length ? countries : suggestions
 		});
 	}
 
 	updateValue() {
 		this.setState({
-			value: this.state.value === DEFAULT_VALUE? 'albania': DEFAULT_VALUE
+			value: this.state.value === DEFAULT_VALUE ? 'albania' : DEFAULT_VALUE
 		});
 	}
 
@@ -63,6 +79,9 @@ class ExUpdate extends React.Component {
 						<button onClick={this.updateValue}>Update value...</button>
 						<button onClick={this.updateNone}>Update none...</button>
 					</div>
+					<label title="auto update suggestions list">
+						<input type="checkbox" onClick={this.autoUpdate} /> auto-update
+					</label>
 				</Section>
 			</div>
 		);
