@@ -24,15 +24,25 @@ class ExUpdate extends React.Component {
 		};
 	}
 
+	// componentDidMount() {
+	// 	this.timerId = setInterval(() => {
+	// 		this.updateSuggestions();
+	// 	}, 2000);
+	// }
+
+	// componentWillUnmount() {
+	// 	clearInterval(this.timerId);
+	// }
+
 	updateSuggestions() {
 		this.setState({
-			suggestions: this.state.suggestions.length === suggestions.length? countries: suggestions
+			suggestions: this.state.suggestions.length === suggestions.length ? countries : suggestions
 		});
 	}
 
 	updateValue() {
 		this.setState({
-			value: this.state.value === DEFAULT_VALUE? 'albania': DEFAULT_VALUE
+			value: this.state.value === DEFAULT_VALUE ? 'albania' : DEFAULT_VALUE
 		});
 	}
 
