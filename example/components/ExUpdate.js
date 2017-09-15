@@ -4,8 +4,8 @@ import Section from './Section';
 import { countries, suggestions } from '../data/index';
 
 const action_styles = {
-	'display': 'flex',
-	'justify-content': 'space-between'
+	display: 'flex',
+	justifyContent: 'space-between'
 };
 
 const DEFAULT_VALUE = 'default';
