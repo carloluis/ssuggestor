@@ -41,7 +41,7 @@ export class Suggestor extends PureComponent {
 		}
 
 		this.setState({
-			filtered: this.filter(nextProps.list, value, false),
+			filtered: this.filter(nextProps.list, value, true),
 			value
 		});
 	}
