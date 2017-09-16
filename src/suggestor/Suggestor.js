@@ -64,21 +64,18 @@ export class Suggestor extends PureComponent {
 		}
 	}
 	handleKeyDown(e) {
-		this.props.onKey(e);
-		if (!this.props.useKeys) {
-			return;
+		const { onKey, useKeys } = this.props;
+		onKey(e);
+
+		if (useKeys && this.processKey(e.keyCode)) {
+			e.preventDefault();
 		}
+	}
+	processKey(code) {
 		const { open, index, filtered, value } = this.state;
 		const list = filtered.map(item => item.word);
 
-		switch (e.keyCode) {
-			case KEY_CODES.TAB:
-				if (this.props.selectOnTab && open && list[index]) {
-					this.changeValue(list[index], true);
-				} else {
-					this.handleClose();
-				}
-				return;
+		switch (code) {
 			case KEY_CODES.ENTER:
 				this.toggleList();
 				if (open && list[index]) {
@@ -103,11 +100,17 @@ export class Suggestor extends PureComponent {
 				this.setState({ open: true, index: prev });
 				break;
 			}
+			case KEY_CODES.TAB:
+				if (this.props.selectOnTab && open && list[index]) {
+					this.changeValue(list[index], true);
+				} else {
+					this.handleClose();
+				}
 			default:
-				return;
+				return false;
 		}
 
-		e.preventDefault();
+		return true;
 	}
 	handleItemClick({ word }) {
 		this.changeValue(word, true);
