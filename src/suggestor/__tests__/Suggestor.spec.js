@@ -365,6 +365,26 @@ describe('Suggestor component', () => {
 			expect(PROPS.onKey).toBeCalled();
 		});
 
+		it('should call processKey if useKeys is truthy', () => {
+			const component = shallow(<Suggestor {...PROPS} useKeys />);
+
+			const processKeySpy = jest.spyOn(component.instance(), 'processKey');
+
+			component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.UP });
+
+			expect(processKeySpy).toBeCalledWith(KEY_CODES.UP);
+		});
+
+		it('should call processKey if useKeys is truthy', () => {
+			const component = shallow(<Suggestor {...PROPS} />);
+
+			const processKeySpy = jest.spyOn(component.instance(), 'processKey');
+
+			component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.UP });
+
+			expect(processKeySpy).not.toBeCalledWith();
+		});
+
 		it('should prevent event default action (with keys: ENTER, ESCAPE, UP, DOWN)', () => {
 			const component = shallow(<Suggestor {...PROPS} useKeys />);
 
