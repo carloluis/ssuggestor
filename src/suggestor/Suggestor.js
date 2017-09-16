@@ -1,9 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { EMPTY_STR, KEY_CODES } from '../utils/values';
-import removeAccents from '../utils/remove-accents';
+import { EMPTY_STR, KEY_CODES, noop, removeAccents, withClickOut } from '../utils';
 import { SPIN_STYLES, X_STYLES } from './styles';
-import withClickOut from '../utils/withClickOut';
 import List from './List';
 
 export class Suggestor extends PureComponent {
@@ -91,12 +89,12 @@ export class Suggestor extends PureComponent {
 				}
 				break;
 			case KEY_CODES.DOWN: {
-				let next = (index + open) % list.length;
+				const next = (index + open) % list.length;
 				this.setState({ open: true, index: next });
 				break;
 			}
 			case KEY_CODES.UP: {
-				let prev = (index || list.length) - 1;
+				const prev = (index || list.length) - 1;
 				this.setState({ open: true, index: prev });
 				break;
 			}
@@ -120,7 +118,6 @@ export class Suggestor extends PureComponent {
 	}
 	handleChange(e) {
 		e.stopPropagation();
-
 		const value = e.target.value;
 		this.changeValue(value);
 	}
@@ -129,7 +126,6 @@ export class Suggestor extends PureComponent {
 	}
 	changeValue(value, select = false) {
 		const filtered = this.filter(this.props.list, value);
-
 		const suggest = value.length >= this.props.suggestOn;
 		const open = !!filtered.length && suggest;
 
@@ -143,7 +139,7 @@ export class Suggestor extends PureComponent {
 			}
 		});
 	}
-	filter(list, value = '', onlyMatch = true) {
+	filter(list, value = EMPTY_STR, onlyMatch = true) {
 		value = value.toLowerCase();
 		const { accents } = this.props;
 		if (!accents) {
@@ -217,8 +213,6 @@ Suggestor.propTypes = {
 	arrow: PropTypes.bool,
 	close: PropTypes.bool
 };
-
-const noop = () => {};
 
 Suggestor.defaultProps = {
 	className: 'input-group',
