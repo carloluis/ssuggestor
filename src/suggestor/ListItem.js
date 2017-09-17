@@ -8,18 +8,20 @@ class ListItem extends PureComponent {
 
 		this.handleClick = e => {
 			e.stopPropagation();
-			let { item, onItemClick } = props;
+			const { item, onItemClick } = this.props;
 			onItemClick(item);
 		};
 
 		this.handleMouseEnter = e => {
 			e.stopPropagation();
-			let { index, onItemMouseEnter } = props;
+			const { index, onItemMouseEnter } = this.props;
 			onItemMouseEnter(index);
 		};
 	}
+
 	render() {
-		let { item, overItem, search } = this.props;
+		const { item, overItem, search } = this.props;
+
 		return (
 			<li
 				onClick={this.handleClick}
@@ -31,6 +33,7 @@ class ListItem extends PureComponent {
 		);
 	}
 }
+
 ListItem.propTypes = {
 	item: PropTypes.object.isRequired,
 	index: PropTypes.number.isRequired,

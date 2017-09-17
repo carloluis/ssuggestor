@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const MarkItem = ({ item, search }) => {
-	let { index, word } = item;
+	const { index, word } = item;
 
 	if (!search || index === -1) {
 		return (
@@ -10,7 +10,7 @@ const MarkItem = ({ item, search }) => {
 		);
 	}
 
-	let { length } = search;
+	const { length } = search;
 
 	return (
 		<a>
