@@ -24,7 +24,8 @@ describe('<ListItem/>', () => {
 	});
 });
 
-describe('ListItem component - handle item click', () => {
+describe('ListItem component - item click', () => {
+	const component = shallow(<ListItem {...PROPS} />);
 	const event = {
 		stopPropagation: jest.fn()
 	};
@@ -34,25 +35,30 @@ describe('ListItem component - handle item click', () => {
 		PROPS.onItemClick.mockReset();
 	});
 
-	it('should stop event propagation', () => {
-		const component = shallow(<ListItem {...PROPS} />);
+	it('should call handleClick', () => {
+		const handleClickSpy = jest.spyOn(component.instance(), 'handleClick');
+		component.instance().forceUpdate();
 
+		component.find('li').simulate('click', event);
+
+		expect(handleClickSpy).toBeCalled();
+	});
+
+	it('should stop event propagation', () => {
 		component.find('li').simulate('click', event);
 
 		expect(event.stopPropagation).toHaveBeenCalled();
 	});
 
 	it('should call props.onItemClick', () => {
-		const component = shallow(<ListItem {...PROPS} />);
-
 		component.find('li').simulate('click', event);
 
-		expect(PROPS.onItemClick).toHaveBeenCalled();
 		expect(PROPS.onItemClick).toBeCalledWith(PROPS.item);
 	});
 });
 
-describe('ListItem component - handle mouse enter', () => {
+describe('ListItem component - mouse enter', () => {
+	const component = shallow(<ListItem {...PROPS} />);
 	const event = {
 		stopPropagation: jest.fn()
 	};
@@ -62,20 +68,24 @@ describe('ListItem component - handle mouse enter', () => {
 		PROPS.onItemMouseEnter.mockReset();
 	});
 
-	it('should stop event propagation', () => {
-		const component = shallow(<ListItem {...PROPS} />);
+	it('should call handleMouseEnter', () => {
+		const handleMouseEnterSpy = jest.spyOn(component.instance(), 'handleMouseEnter');
+		component.instance().forceUpdate();
 
+		component.find('li').simulate('mouseEnter', event);
+
+		expect(handleMouseEnterSpy).toBeCalled();
+	});
+
+	it('should stop event propagation', () => {
 		component.find('li').simulate('mouseEnter', event);
 
 		expect(event.stopPropagation).toHaveBeenCalled();
 	});
 
 	it('should call props.onItemClick', () => {
-		const component = shallow(<ListItem {...PROPS} />);
-
 		component.find('li').simulate('mouseEnter', event);
 
-		expect(PROPS.onItemMouseEnter).toHaveBeenCalled();
 		expect(PROPS.onItemMouseEnter).toBeCalledWith(PROPS.index);
 	});
 });

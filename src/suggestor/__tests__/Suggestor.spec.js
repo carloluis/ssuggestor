@@ -5,10 +5,15 @@ import { shallow, mount } from 'enzyme';
 
 import { KEY_CODES } from '../../utils/values';
 import removeAccents from '../../utils/remove-accents';
+import noop from '../../utils/noop';
 import Ssuggestor, { Suggestor } from '../Suggestor';
 
 jest.mock('../../utils/remove-accents', () => {
 	return jest.fn(text => text);
+});
+
+jest.mock('../../utils/noop', () => {
+	return jest.fn();
 });
 
 const PROPS = {
@@ -365,6 +370,26 @@ describe('Suggestor component', () => {
 			expect(PROPS.onKey).toBeCalled();
 		});
 
+		it('should call processKey if useKeys is truthy', () => {
+			const component = shallow(<Suggestor {...PROPS} useKeys />);
+
+			const processKeySpy = jest.spyOn(component.instance(), 'processKey');
+
+			component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.UP });
+
+			expect(processKeySpy).toBeCalledWith(KEY_CODES.UP);
+		});
+
+		it('should call processKey if useKeys is truthy', () => {
+			const component = shallow(<Suggestor {...PROPS} />);
+
+			const processKeySpy = jest.spyOn(component.instance(), 'processKey');
+
+			component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.UP });
+
+			expect(processKeySpy).not.toBeCalledWith();
+		});
+
 		it('should prevent event default action (with keys: ENTER, ESCAPE, UP, DOWN)', () => {
 			const component = shallow(<Suggestor {...PROPS} useKeys />);
 
@@ -536,15 +561,23 @@ describe('Suggestor component', () => {
 	});
 });
 
-describe('Suggestor noop func', () => {
-	it('when not onChange, onSelect, oKey props func provided, then use noop', () => {
-		const { onChange, onSelect, onKey, ...props } = PROPS;
-		const component = shallow(<Suggestor {...props} />);
+describe('Suggestor - default cb props use noop', () => {
+	const { onChange, onSelect, onKey, ...props } = PROPS;
+	const component = shallow(<Suggestor {...props} />);
 
-		expect(component.props().onChange).toBe(component.props().onSelect);
-		expect(component.props().onSelect).toBe(component.props().onKey);
+	beforeEach(() => {
+		noop.mockReset();
+	});
 
+	it('should set noop when not onChange, onSelect, oKey props func provided', () => {
+		const props = component.props();
+		expect(props.onChange).toBe(props.onSelect);
+		expect(props.onSelect).toBe(props.onKey);
+	});
+
+	it('sould call noop func', () => {
 		expect(component.instance().props.onSelect()).toBe(undefined);
+		expect(noop).toBeCalled();
 	});
 });
 

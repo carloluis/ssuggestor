@@ -1,9 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { EMPTY_STR, KEY_CODES } from '../utils/values';
-import removeAccents from '../utils/remove-accents';
-import { SPIN_STYLES, X_STYLES } from './styles';
-import withClickOut from '../utils/withClickOut';
+import { EMPTY_STR, KEY_CODES, noop, removeAccents, withClickOut } from '../utils';
+import { SPIN_STYLES, X_STYLES, glyphicon } from './styles';
 import List from './List';
 
 export class Suggestor extends PureComponent {
@@ -55,7 +53,7 @@ export class Suggestor extends PureComponent {
 		if (this.state.open) {
 			this.handleClose();
 		} else {
-			this.setState({	open: true });
+			this.setState({ open: true });
 		}
 	}
 	handleClick() {
@@ -64,21 +62,18 @@ export class Suggestor extends PureComponent {
 		}
 	}
 	handleKeyDown(e) {
-		this.props.onKey(e);
-		if (!this.props.useKeys) {
-			return;
+		const { onKey, useKeys } = this.props;
+		onKey(e);
+
+		if (useKeys && this.processKey(e.keyCode)) {
+			e.preventDefault();
 		}
+	}
+	processKey(code) {
 		const { open, index, filtered, value } = this.state;
 		const list = filtered.map(item => item.word);
 
-		switch (e.keyCode) {
-			case KEY_CODES.TAB:
-				if (this.props.selectOnTab && open && list[index]) {
-					this.changeValue(list[index], true);
-				} else {
-					this.handleClose();
-				}
-				return;
+		switch (code) {
 			case KEY_CODES.ENTER:
 				this.toggleList();
 				if (open && list[index]) {
@@ -94,20 +89,26 @@ export class Suggestor extends PureComponent {
 				}
 				break;
 			case KEY_CODES.DOWN: {
-				let next = (index + open) % list.length;
+				const next = (index + open) % list.length;
 				this.setState({ open: true, index: next });
 				break;
 			}
 			case KEY_CODES.UP: {
-				let prev = (index || list.length) - 1;
+				const prev = (index || list.length) - 1;
 				this.setState({ open: true, index: prev });
 				break;
 			}
+			case KEY_CODES.TAB:
+				if (this.props.selectOnTab && open && list[index]) {
+					this.changeValue(list[index], true);
+				} else {
+					this.handleClose();
+				}
 			default:
-				return;
+				return false;
 		}
 
-		e.preventDefault();
+		return true;
 	}
 	handleItemClick({ word }) {
 		this.changeValue(word, true);
@@ -117,7 +118,6 @@ export class Suggestor extends PureComponent {
 	}
 	handleChange(e) {
 		e.stopPropagation();
-
 		const value = e.target.value;
 		this.changeValue(value);
 	}
@@ -126,7 +126,6 @@ export class Suggestor extends PureComponent {
 	}
 	changeValue(value, select = false) {
 		const filtered = this.filter(this.props.list, value);
-
 		const suggest = value.length >= this.props.suggestOn;
 		const open = !!filtered.length && suggest;
 
@@ -140,7 +139,7 @@ export class Suggestor extends PureComponent {
 			}
 		});
 	}
-	filter(list, value = '', onlyMatch = true) {
+	filter(list, value = EMPTY_STR, onlyMatch = true) {
 		value = value.toLowerCase();
 		const { accents } = this.props;
 		if (!accents) {
@@ -180,10 +179,8 @@ export class Suggestor extends PureComponent {
 					title={tooltip}
 					required={required}
 				/>
-				{arrow && <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} />}
-				{close &&
-					value &&
-					<span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.remove} />}
+				{arrow && <span className={glyphicon('triangle-bottom')} style={SPIN_STYLES} />}
+				{close && value && <span className={glyphicon('remove')} style={X_STYLES} onClick={this.remove} />}
 				<List
 					{...{ filtered, index, open, value }}
 					onItemClick={this.handleItemClick}
@@ -214,8 +211,6 @@ Suggestor.propTypes = {
 	arrow: PropTypes.bool,
 	close: PropTypes.bool
 };
-
-const noop = () => {};
 
 Suggestor.defaultProps = {
 	className: 'input-group',
