@@ -25,3 +25,5 @@ export const getListStyles = visible => ({
 	overflow: 'auto',
 	cursor: 'pointer'
 });
+
+export const glyphicon = name => `glyphicon glyphicon-${name}`;

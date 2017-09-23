@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { EMPTY_STR, KEY_CODES, noop, removeAccents, withClickOut } from '../utils';
-import { SPIN_STYLES, X_STYLES } from './styles';
+import { SPIN_STYLES, X_STYLES, glyphicon } from './styles';
 import List from './List';
 
 export class Suggestor extends PureComponent {
@@ -53,7 +53,7 @@ export class Suggestor extends PureComponent {
 		if (this.state.open) {
 			this.handleClose();
 		} else {
-			this.setState({	open: true });
+			this.setState({ open: true });
 		}
 	}
 	handleClick() {
@@ -179,10 +179,8 @@ export class Suggestor extends PureComponent {
 					title={tooltip}
 					required={required}
 				/>
-				{arrow && <span className="glyphicon glyphicon-triangle-bottom" style={SPIN_STYLES} />}
-				{close &&
-					value &&
-					<span className="glyphicon glyphicon-remove" style={X_STYLES} onClick={this.remove} />}
+				{arrow && <span className={glyphicon('triangle-bottom')} style={SPIN_STYLES} />}
+				{close && value && <span className={glyphicon('remove')} style={X_STYLES} onClick={this.remove} />}
 				<List
 					{...{ filtered, index, open, value }}
 					onItemClick={this.handleItemClick}
