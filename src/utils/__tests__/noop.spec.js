@@ -1,7 +1,7 @@
 import noop from '../noop';
 
 describe('noop', () => {
-	it('should always return undefined', () => {
+	it('should return nothing', () => {
 		const result = noop();
 		expect(result).toBe(undefined);
 	});
