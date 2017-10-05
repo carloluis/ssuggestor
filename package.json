@@ -71,8 +71,8 @@
 		"webpack-dev-server": "^2.7.1"
 	},
 	"peerDependencies": {
-		"prop-types": "^15.5.8",
-		"react": "15.x"
+		"prop-types": "^15.x",
+		"react": "^15.x"
 	},
 	"jest": {
 		"moduleFileExtensions": [
