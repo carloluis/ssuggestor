@@ -7,6 +7,7 @@
 [![npm](https://img.shields.io/npm/v/ssuggestor.svg)](https://www.npmjs.com/package/ssuggestor)
 [![npm](https://img.shields.io/npm/dt/ssuggestor.svg)](https://npm-stat.com/charts.html?package=ssuggestor)
 [![Package Quality](http://npm.packagequality.com/shield/ssuggestor.svg)](http://packagequality.com/#?package=ssuggestor)
+
 [![PeerDependencies](https://img.shields.io/david/peer/carloluis/ssuggestor.svg)](https://github.com/carloluis/ssuggestor/blob/master/package.json)
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/carloluis/ssuggestor.svg?style=social)](https://twitter.com/intent/tweet?text=ssuggestor%20%23react%20component%20on&url=https%3A%2F%2Ft.co%2FpjuWm9EaCa)
 
@@ -83,7 +84,8 @@ __SSuggestor__ is also exported as default, and handles clicks outside of DOM co
 
 Notes:
 
-If the search term is `suggest`and following items were part from the suggestion list, then:
+
+If the search term is `suggest` and items (*SSuggestor*, *ssuggestion*, *sSUGGESTor*, *ssúggèstor*) were part of the suggestion list, then:
 
 * S**Suggest**or highlights search pattern on **suggest**ion list
 * search is case insensitive: **sSUGGEST**or match
@@ -114,15 +116,15 @@ useKeys  | bool | `true` | whether to use keys (`up`/`down`, `enter`, `escape`, 
 
 #### Methods
 
-One public method: `focus()`. It focuses the control input:
+One public method: `focus()`:
 
 ```javascript
-instance.focus();
+instance.focus(); // focuses the control input
 ```
 
 #### Bootstrap
 
-SSuggestor uses some bootstrap classes: 
+Ssuggestor uses some bootstrap classes: 
 
 `input-group`, `form-control`, `dropdown-menu` and `glyphicon` (`glyphicon-triangle-bottom` & `glyphicon-remove`)
 
