@@ -62,21 +62,22 @@ describe('List component', () => {
 	it('should render nothing when no filtered items', () => {
 		const wrapper = shallow(<List {...PROPS} />);
 
-		expect(wrapper.getNode()).toBeFalsy();
-		expect(wrapper.find('.dropdown-menu').node).toBeFalsy();
+		expect(wrapper.getElement()).toBeFalsy();
+		expect(wrapper.equals(false)).toBeTruthy();
+		expect(wrapper.find('.dropdown-menu').getElements().length).toBeFalsy();
 	});
 
 	it('should render nothing when filtered items are hidden', () => {
 		const wrapper = shallow(<List {...PROPS} filtered={filtered} />);
 
-		expect(wrapper.getNode()).toBeFalsy();
+		expect(wrapper.getElement()).toBeFalsy();
 	});
 
-	it('should render nothing when filtered items are hidden', () => {
+	it('should render when open flag and any filtered items', () => {
 		const wrapper = shallow(<List {...PROPS} filtered={filtered} open />);
 
-		expect(wrapper.getNode()).toBeTruthy();
-		expect(wrapper.find('.dropdown-menu').node).toBeTruthy();
+		expect(wrapper.getElement()).toBeTruthy();
+		expect(wrapper.find('.dropdown-menu').getElement()).toBeTruthy();
 	});
 
 	it('should render each item inside an <li> element', () => {
