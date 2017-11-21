@@ -99,7 +99,10 @@ describe('List component', () => {
 	it('should call onItemClick prop when <ListItem> is clicked', () => {
 		const wrapper = shallow(<List {...PROPS} filtered={filtered} open />);
 
-		wrapper.find('ListItem').first().simulate('itemClick');
+		wrapper
+			.find('ListItem')
+			.first()
+			.simulate('itemClick');
 
 		expect(PROPS.onItemClick).toHaveBeenCalledTimes(1);
 	});
@@ -107,9 +110,18 @@ describe('List component', () => {
 	it('should call onItemClick prop when each <ListItem> is clicked', () => {
 		const wrapper = shallow(<List {...PROPS} filtered={filtered} open />);
 
-		wrapper.find('ListItem').first().simulate('itemClick');
-		wrapper.find('ListItem').at(1).simulate('itemClick');
-		wrapper.find('ListItem').last(2).simulate('itemClick');
+		wrapper
+			.find('ListItem')
+			.first()
+			.simulate('itemClick');
+		wrapper
+			.find('ListItem')
+			.at(1)
+			.simulate('itemClick');
+		wrapper
+			.find('ListItem')
+			.last(2)
+			.simulate('itemClick');
 
 		expect(PROPS.onItemClick).toHaveBeenCalledTimes(3);
 	});
@@ -117,7 +129,10 @@ describe('List component', () => {
 	it('should call onItemMouseEnter prop when mouse enter into <ListItem> area', () => {
 		const wrapper = shallow(<List {...PROPS} filtered={filtered} open />);
 
-		wrapper.find('ListItem').first().simulate('itemMouseEnter');
+		wrapper
+			.find('ListItem')
+			.first()
+			.simulate('itemMouseEnter');
 
 		expect(PROPS.onItemMouseEnter).toHaveBeenCalledTimes(1);
 	});
@@ -125,9 +140,18 @@ describe('List component', () => {
 	it('should call onItemMouseEnter prop when mouse enter into each <ListItem> area', () => {
 		const wrapper = shallow(<List {...PROPS} filtered={filtered} open />);
 
-		wrapper.find('ListItem').first().simulate('itemMouseEnter');
-		wrapper.find('ListItem').at(1).simulate('itemMouseEnter');
-		wrapper.find('ListItem').last().simulate('itemMouseEnter');
+		wrapper
+			.find('ListItem')
+			.first()
+			.simulate('itemMouseEnter');
+		wrapper
+			.find('ListItem')
+			.at(1)
+			.simulate('itemMouseEnter');
+		wrapper
+			.find('ListItem')
+			.last()
+			.simulate('itemMouseEnter');
 
 		expect(PROPS.onItemMouseEnter).toHaveBeenCalledTimes(3);
 	});
