@@ -10,7 +10,7 @@ describe('withClickOut', () => {
 	const WrappedComponent = withClickOut(TestComponent);
 
 	it('should set correct displayName in wrapped component', () => {
-		expect(WrappedComponent.displayName).toBe('ClickOut(TestComponent)');
+		expect(WrappedComponent.displayName).toBe('CO(TestComponent)');
 	});
 
 	it('should render <TestComponent>', () => {
