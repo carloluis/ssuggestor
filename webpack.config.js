@@ -53,10 +53,7 @@ module.exports = {
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				loader: 'babel-loader?cacheDirectory',
-				query: {
-					presets: ['react', 'es2015', 'stage-2']
-				}
+				loader: 'babel-loader?cacheDirectory'
 			}
 		]
 	},
