@@ -19,12 +19,18 @@
 	"rules": {
 		"indent": ["error", "tab", { "SwitchCase": 1 }],
 		"linebreak-style": ["error", "unix"],
-		
+
 		"jsx-quotes": [1, "prefer-double"],
 		"react/jsx-no-undef": 1,
 		"react/jsx-uses-react": "error",
 		"react/jsx-uses-vars": "error",
 		"react/no-find-dom-node": "warn",
+		"react/jsx-no-bind": ["warn", {
+			"ignoreRefs": true,
+			"allowArrowFunctions": false,
+			"allowFunctions": false,
+			"allowBind": false
+		}],
 
 		"no-console": ["warn", { "allow": ["warn", "error", "info", "group", "groupEnd"] }],
 
