@@ -62,21 +62,22 @@ describe('List component', () => {
 	it('should render nothing when no filtered items', () => {
 		const wrapper = shallow(<List {...PROPS} />);
 
-		expect(wrapper.getNode()).toBeFalsy();
-		expect(wrapper.find('.dropdown-menu').node).toBeFalsy();
+		expect(wrapper.getElement()).toBeFalsy();
+		expect(wrapper.equals(false)).toBeTruthy();
+		expect(wrapper.find('.dropdown-menu').getElements().length).toBeFalsy();
 	});
 
 	it('should render nothing when filtered items are hidden', () => {
 		const wrapper = shallow(<List {...PROPS} filtered={filtered} />);
 
-		expect(wrapper.getNode()).toBeFalsy();
+		expect(wrapper.getElement()).toBeFalsy();
 	});
 
-	it('should render nothing when filtered items are hidden', () => {
+	it('should render when open flag and any filtered items', () => {
 		const wrapper = shallow(<List {...PROPS} filtered={filtered} open />);
 
-		expect(wrapper.getNode()).toBeTruthy();
-		expect(wrapper.find('.dropdown-menu').node).toBeTruthy();
+		expect(wrapper.getElement()).toBeTruthy();
+		expect(wrapper.find('.dropdown-menu').getElement()).toBeTruthy();
 	});
 
 	it('should render each item inside an <li> element', () => {
@@ -98,7 +99,10 @@ describe('List component', () => {
 	it('should call onItemClick prop when <ListItem> is clicked', () => {
 		const wrapper = shallow(<List {...PROPS} filtered={filtered} open />);
 
-		wrapper.find('ListItem').first().simulate('itemClick');
+		wrapper
+			.find('ListItem')
+			.first()
+			.simulate('itemClick');
 
 		expect(PROPS.onItemClick).toHaveBeenCalledTimes(1);
 	});
@@ -106,9 +110,18 @@ describe('List component', () => {
 	it('should call onItemClick prop when each <ListItem> is clicked', () => {
 		const wrapper = shallow(<List {...PROPS} filtered={filtered} open />);
 
-		wrapper.find('ListItem').first().simulate('itemClick');
-		wrapper.find('ListItem').at(1).simulate('itemClick');
-		wrapper.find('ListItem').last(2).simulate('itemClick');
+		wrapper
+			.find('ListItem')
+			.first()
+			.simulate('itemClick');
+		wrapper
+			.find('ListItem')
+			.at(1)
+			.simulate('itemClick');
+		wrapper
+			.find('ListItem')
+			.last(2)
+			.simulate('itemClick');
 
 		expect(PROPS.onItemClick).toHaveBeenCalledTimes(3);
 	});
@@ -116,7 +129,10 @@ describe('List component', () => {
 	it('should call onItemMouseEnter prop when mouse enter into <ListItem> area', () => {
 		const wrapper = shallow(<List {...PROPS} filtered={filtered} open />);
 
-		wrapper.find('ListItem').first().simulate('itemMouseEnter');
+		wrapper
+			.find('ListItem')
+			.first()
+			.simulate('itemMouseEnter');
 
 		expect(PROPS.onItemMouseEnter).toHaveBeenCalledTimes(1);
 	});
@@ -124,9 +140,18 @@ describe('List component', () => {
 	it('should call onItemMouseEnter prop when mouse enter into each <ListItem> area', () => {
 		const wrapper = shallow(<List {...PROPS} filtered={filtered} open />);
 
-		wrapper.find('ListItem').first().simulate('itemMouseEnter');
-		wrapper.find('ListItem').at(1).simulate('itemMouseEnter');
-		wrapper.find('ListItem').last().simulate('itemMouseEnter');
+		wrapper
+			.find('ListItem')
+			.first()
+			.simulate('itemMouseEnter');
+		wrapper
+			.find('ListItem')
+			.at(1)
+			.simulate('itemMouseEnter');
+		wrapper
+			.find('ListItem')
+			.last()
+			.simulate('itemMouseEnter');
 
 		expect(PROPS.onItemMouseEnter).toHaveBeenCalledTimes(3);
 	});

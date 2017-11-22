@@ -48,36 +48,41 @@
 	"homepage": "https://github.com/carloluis/ssuggestor#readme",
 	"devDependencies": {
 		"babel-core": "^6.25.0",
-		"babel-jest": "^20.0.3",
+		"babel-jest": "^21.2.0",
 		"babel-loader": "^7.1.1",
 		"babel-plugin-transform-class-properties": "^6.24.1",
 		"babel-preset-env": "^1.6.1",
 		"babel-preset-react": "^6.24.1",
 		"babel-preset-stage-2": "^6.24.1",
 		"clean-webpack-plugin": "^0.1.16",
-		"coveralls": "^2.13.1",
-		"enzyme": "^2.9.1",
+		"coveralls": "^3.0.0",
+		"enzyme": "^3.2.0",
+		"enzyme-adapter-react-16": "^1.1.0",
 		"eslint": "^4.4.1",
 		"eslint-loader": "^1.9.0",
 		"eslint-plugin-react": "^7.2.0",
 		"html-webpack-plugin": "^2.30.1",
 		"husky": "^0.14.3",
-		"jest": "^20.0.4",
-		"prop-types": "^15.5.10",
-		"react": "^15.6.1",
+		"jest": "^21.2.1",
+		"prop-types": "^15.6.0",
+		"react": "^16.1.1",
 		"react-addons-test-utils": "^15.6.0",
-		"react-dom": "^15.6.1",
-		"react-test-renderer": "^15.6.1",
+		"react-dom": "^16.1.1",
+		"react-test-renderer": "^16.1.1",
 		"webpack": "^3.5.4",
 		"webpack-dev-server": "^2.7.1"
 	},
 	"peerDependencies": {
 		"prop-types": "^15.0",
-		"react": "^15.0"
+		"react": "^16.1"
 	},
 	"jest": {
 		"moduleFileExtensions": [
 			"js"
+		],
+		"setupFiles": [
+			"<rootDir>/__setup__/shim.js",
+			"<rootDir>/__setup__/enzyme.js"
 		]
 	}
 }

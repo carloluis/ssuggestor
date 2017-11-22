@@ -38,10 +38,12 @@ describe('ListItem component - item click', () => {
 	it('should call handleClick', () => {
 		const handleClickSpy = jest.spyOn(component.instance(), 'handleClick');
 		component.instance().forceUpdate();
+		component.update();
 
 		component.find('li').simulate('click', event);
 
 		expect(handleClickSpy).toBeCalled();
+		expect(PROPS.onItemClick).toBeCalled();
 	});
 
 	it('should stop event propagation', () => {
@@ -71,6 +73,7 @@ describe('ListItem component - mouse enter', () => {
 	it('should call handleMouseEnter', () => {
 		const handleMouseEnterSpy = jest.spyOn(component.instance(), 'handleMouseEnter');
 		component.instance().forceUpdate();
+		component.update();
 
 		component.find('li').simulate('mouseEnter', event);
 
