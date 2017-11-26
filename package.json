@@ -1,6 +1,6 @@
 {
 	"name": "ssuggestor",
-	"version": "0.0.31",
+	"version": "0.1.0",
 	"description": "react-simple-suggestor",
 	"main": "dist/ssuggestor.js",
 	"scripts": {
@@ -9,7 +9,7 @@
 		"test:coverage": "jest --coverage",
 		"coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
 		"tdd": "jest --watch",
-		"lint": "eslint .  --cache --ext .js --ignore-path .eslintignore --ignore-pattern '**/__tests__/*'",
+		"lint": "eslint . --cache --ext .js --ignore-path .eslintignore --ignore-pattern '**/__tests__/*'",
 		"stats": "webpack --profile --json > stats.json",
 		"dev": "webpack-dev-server",
 		"example": "webpack -p",
@@ -31,7 +31,8 @@
 	"keywords": [
 		"suggestor",
 		"react",
-		"react-component",
+		"react16",
+		"component",
 		"bootstrap",
 		"search",
 		"highlight",
