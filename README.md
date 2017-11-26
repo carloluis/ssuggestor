@@ -9,7 +9,7 @@
 [![Package Quality](http://npm.packagequality.com/shield/ssuggestor.svg)](http://packagequality.com/#?package=ssuggestor)
 
 [![PeerDependencies](https://img.shields.io/david/peer/carloluis/ssuggestor.svg)](https://github.com/carloluis/ssuggestor/blob/master/package.json)
-[![Twitter](https://img.shields.io/twitter/url/https/github.com/carloluis/ssuggestor.svg?style=social)](https://twitter.com/intent/tweet?text=ssuggestor%20%23react%20component%20on&url=https%3A%2F%2Ft.co%2FpjuWm9EaCa)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/carloluis/ssuggestor.svg?style=social)](https://twitter.com/intent/tweet?text=check%20out%20this%20simple%20suggestor%20component%20on&url=https%3A%2F%2Ft.co%2FpjuWm9EaCa&hashtags=react16,ssuggestor)
 
 
 `<SSuggestor />` is a React component that enables users to quickly find and select from a pre-populated list of values as they type. It uses [Bootstrap](http://getbootstrap.com/) styles.
@@ -36,7 +36,7 @@ yarn add ssuggestor
 
 ### npm
 
-```javascript
+```js
 import React from 'react';
 import { render } from 'react-dom';
 import SSuggestor from 'ssuggestor';
@@ -57,12 +57,13 @@ render(
 
 ### browser
 
-Include `react.js` dependency script and `ssuggestor.js` 
+Include `react` dependencies and `ssuggestor.js` scripts:
 
 ```html
-<script src="https://unpkg.com/react@15.6.1/dist/react.min.js"></script>
-<script src="https://unpkg.com/react-dom@15.6.1/dist/react-dom.min.js"></script>
-<script src="https://unpkg.com/ssuggestor@0.0.31/dist/ssuggestor.min.js"></script>
+<script src="https://unpkg.com/react@16.1.1/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16.1.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.6.0/prop-types.min.js"></script>
+<script src="https://unpkg.com/ssuggestor@0.1.0/dist/ssuggestor.min.js"></script>
 
 <!-- bootstrap styles -->
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -72,7 +73,7 @@ Include `react.js` dependency script and `ssuggestor.js`
 
 This Simple Suggestor package exports two named components, and one of them as the default export:
 
-```javascript
+```js
 import Ssuggestor, { SSuggestor, Suggestor } from 'ssuggestor'
 
 console.info(Ssuggestor === SSuggestor); 
@@ -116,29 +117,33 @@ useKeys  | bool | `true` | whether to use keys (`up`/`down`, `enter`, `escape`, 
 
 #### Methods
 
-One public method: `focus()`:
+Just one public method: `focus()`:
 
-```javascript
+```js
 instance.focus(); // focuses the control input
 ```
 
 #### Bootstrap
 
-Ssuggestor uses some bootstrap classes: 
+Ssuggestor uses some bootstrap classes:
 
-`input-group`, `form-control`, `dropdown-menu` and `glyphicon` (`glyphicon-triangle-bottom` & `glyphicon-remove`)
+* `input-group`
+* `form-control`
+* `dropdown-menu`
+* `glyphicon` (`*-triangle-bottom`, `*-remove`)
 
 ## Development
 
-In order to build locally, first clone this repo and then run:
+In order to run this project locally clone this repo, restore dependencies and execute `dev` task:
 
 ```bash
 git clone https://github.com/carloluis/ssuggestor.git
 cd ssuggestor
-yarn && yarn dev
+yarn
+yarn dev
 ```
 
-Finally open browser on [localhost:9000](http://localhost:9000/)
+Open browser on [localhost:9000](http://localhost:9000/)
 
 ## License
 
