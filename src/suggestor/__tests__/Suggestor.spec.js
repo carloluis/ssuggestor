@@ -166,16 +166,6 @@ describe('Suggestor component', () => {
 		expect(PROPS.onSelect).toBeCalledWith(value);
 	});
 
-	it('handleClickOut -> handleClose', () => {
-		const component = mount(<Suggestor {...PROPS} />);
-
-		const spy = jest.spyOn(component.instance(), 'handleClose');
-
-		component.instance().handleClickOut();
-
-		expect(spy).toBeCalled();
-	});
-
 	it('toggleList -> setState (open suggestion list)', () => {
 		const component = shallow(<Suggestor {...PROPS} />);
 
@@ -280,6 +270,34 @@ describe('Suggestor component', () => {
 		});
 	});
 
+	describe('... handleClose', () => {
+		let component, spy;
+		beforeEach(() => {
+			component = mount(<Suggestor {...PROPS} />);
+			spy = jest.spyOn(component.instance(), 'handleClose');
+		});
+
+		it('should call when handleClickOut', () => {
+			component.instance().handleClickOut();
+
+			expect(spy).toBeCalled();
+		});
+
+		it('should call when select value', () => {
+			component.update();
+
+			component.instance().changeValue('temp', true);
+
+			expect(spy).toBeCalled();
+		});
+
+		it('should call when select value (2)', () => {
+			component.instance().changeValue('no match!');
+
+			expect(spy).toBeCalled();
+		});
+	})
+
 	describe('... handles input changes', () => {
 		const event = {
 			stopPropagation: jest.fn(),
@@ -324,27 +342,6 @@ describe('Suggestor component', () => {
 
 			expect(PROPS.onChange).toBeCalled();
 			expect(PROPS.onSelect).toBeCalled();
-		});
-
-		it('should call handleClose when select value', () => {
-			const component = mount(<Suggestor {...PROPS} />);
-
-			const spy = jest.spyOn(component.instance(), 'handleClose');
-			component.update();
-
-			component.instance().changeValue('temp', true);
-
-			expect(spy).toBeCalled();
-		});
-
-		it('should call handleClose when select value (2)', () => {
-			const component = mount(<Suggestor {...PROPS} />);
-
-			const spy = jest.spyOn(component.instance(), 'handleClose');
-
-			component.instance().changeValue('no match!');
-
-			expect(spy).toBeCalled();
 		});
 	});
 
