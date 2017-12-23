@@ -213,38 +213,37 @@ describe('Suggestor component', () => {
 	});
 
 	describe('componentWillReceiveProps', () => {
-		it('update state.value if props.value changed', () => {
-			const component = shallow(<Suggestor {...PROPS} />);
+		let component, setStateSpy;
 
+		beforeEach(() => {
+			component = shallow(<Suggestor {...PROPS} />);
+			setStateSpy = jest.spyOn(component.instance(), 'setState');
+		});
+
+		afterEach(() => {
+			expect(setStateSpy).toBeCalled();
+		});
+
+		it('update state.value if props.value changed', () => {
 			expect(component.state()).toMatchObject({ value: '' });
 
 			const value = 'xesturgy';
-
 			component.setProps({ value });
 
 			expect(component.state()).toMatchObject({ value });
 		});
 
 		it('update state.filtered if props.list changed', () => {
-			const component = shallow(<Suggestor {...PROPS} />);
-
 			expect(component.state().filtered.length).toBe(PROPS.list.length);
 
 			const list = ['one', 'two'];
-
 			component.setProps({ list });
 
 			expect(component.state().filtered.length).toBe(list.length);
 		});
 
 		it('should always call setState', () => {
-			const component = shallow(<Suggestor {...PROPS} />);
-
-			const spy = jest.spyOn(component.instance(), 'setState');
-
 			component.setProps({});
-
-			expect(spy).toBeCalled();
 		});
 	});
 
