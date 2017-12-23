@@ -271,30 +271,27 @@ describe('Suggestor component', () => {
 	});
 
 	describe('... handleClose', () => {
-		let component, spy;
+		let instance, handleCloseSpy;
+
 		beforeEach(() => {
-			component = mount(<Suggestor {...PROPS} />);
-			spy = jest.spyOn(component.instance(), 'handleClose');
+			instance = shallow(<Suggestor {...PROPS} />).instance();
+			handleCloseSpy = jest.spyOn(instance, 'handleClose');
+		});
+
+		afterEach(() => {
+			expect(handleCloseSpy).toBeCalled();
 		});
 
 		it('should call when handleClickOut', () => {
-			component.instance().handleClickOut();
-
-			expect(spy).toBeCalled();
+			instance.handleClickOut();
 		});
 
 		it('should call when select value', () => {
-			component.update();
-
-			component.instance().changeValue('temp', true);
-
-			expect(spy).toBeCalled();
+			instance.changeValue('temp', true);
 		});
 
 		it('should call when select value (2)', () => {
-			component.instance().changeValue('no match!');
-
-			expect(spy).toBeCalled();
+			instance.changeValue('no match!');
 		});
 	});
 
