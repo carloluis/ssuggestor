@@ -18,77 +18,66 @@ describe('<ListItem/>', () => {
 		expect(tree).toMatchSnapshot();
 	});
 
-	it('hover snapshot', () => {
+	it('snapshot - hover', () => {
 		const tree = renderer.create(<ListItem {...PROPS} overItem />).toJSON();
 		expect(tree).toMatchSnapshot();
 	});
 });
 
-describe('ListItem component - item click', () => {
-	const component = shallow(<ListItem {...PROPS} />);
-	const event = {
-		stopPropagation: jest.fn()
-	};
+describe('ListItem', () => {
+	const event = { stopPropagation: jest.fn() };
+	let component;
 
 	beforeEach(() => {
-		event.stopPropagation.mockReset();
 		PROPS.onItemClick.mockReset();
-	});
-
-	it('should call handleClick', () => {
-		const handleClickSpy = jest.spyOn(component.instance(), 'handleClick');
-		component.instance().forceUpdate();
-		component.update();
-
-		component.find('li').simulate('click', event);
-
-		expect(handleClickSpy).toBeCalled();
-		expect(PROPS.onItemClick).toBeCalled();
-	});
-
-	it('should stop event propagation', () => {
-		component.find('li').simulate('click', event);
-
-		expect(event.stopPropagation).toHaveBeenCalled();
-	});
-
-	it('should call props.onItemClick', () => {
-		component.find('li').simulate('click', event);
-
-		expect(PROPS.onItemClick).toBeCalledWith(PROPS.item);
-	});
-});
-
-describe('ListItem component - mouse enter', () => {
-	const component = shallow(<ListItem {...PROPS} />);
-	const event = {
-		stopPropagation: jest.fn()
-	};
-
-	beforeEach(() => {
-		event.stopPropagation.mockReset();
 		PROPS.onItemMouseEnter.mockReset();
+		component = shallow(<ListItem {...PROPS} />);
+		event.stopPropagation.mockClear();
 	});
 
-	it('should call handleMouseEnter', () => {
-		const handleMouseEnterSpy = jest.spyOn(component.instance(), 'handleMouseEnter');
-		component.instance().forceUpdate();
-		component.update();
+	describe('on click', () => {
+		let handleClickSpy;
+		beforeEach(() => {
+			handleClickSpy = jest.spyOn(component.instance(), 'handleClick');
+			component.instance().forceUpdate();
+			component.update();
 
-		component.find('li').simulate('mouseEnter', event);
+			component.find('li').simulate('click', event);
+		});
 
-		expect(handleMouseEnterSpy).toBeCalled();
+		it('should call handleClick', () => {
+			expect(handleClickSpy).toBeCalled();
+		});
+
+		it('should stop event propagation', () => {
+			expect(event.stopPropagation).toHaveBeenCalled();
+		});
+
+		it('should call props.onItemClick', () => {
+			expect(PROPS.onItemClick).toBeCalledWith(PROPS.item);
+		});
 	});
 
-	it('should stop event propagation', () => {
-		component.find('li').simulate('mouseEnter', event);
+	describe('on mouse enter', () => {
+		let handleMouseEnterSpy;
+		beforeEach(() => {
+			handleMouseEnterSpy = jest.spyOn(component.instance(), 'handleMouseEnter');
+			component.instance().forceUpdate();
+			component.update();
 
-		expect(event.stopPropagation).toHaveBeenCalled();
-	});
+			component.find('li').simulate('mouseEnter', event);
+		});
 
-	it('should call props.onItemClick', () => {
-		component.find('li').simulate('mouseEnter', event);
+		it('should call handleMouseEnter', () => {
+			expect(handleMouseEnterSpy).toBeCalled();
+		});
 
-		expect(PROPS.onItemMouseEnter).toBeCalledWith(PROPS.index);
+		it('should stop event propagation', () => {
+			expect(event.stopPropagation).toHaveBeenCalled();
+		});
+
+		it('should call props.onItemClick', () => {
+			expect(PROPS.onItemMouseEnter).toBeCalledWith(PROPS.index);
+		});
 	});
 });
