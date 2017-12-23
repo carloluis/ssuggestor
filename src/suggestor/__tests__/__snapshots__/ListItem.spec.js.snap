@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ListItem/> hover snapshot 1`] = `
+exports[`<ListItem/> snapshot - hover 1`] = `
 <li
   onClick={[Function]}
   onMouseEnter={[Function]}
