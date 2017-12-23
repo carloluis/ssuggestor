@@ -218,6 +218,10 @@ describe('Suggestor component', () => {
 		beforeEach(() => {
 			component = shallow(<Suggestor {...PROPS} />);
 			setStateSpy = jest.spyOn(component.instance(), 'setState');
+
+			const state = component.state();
+			expect(state).toMatchObject({ value: '', filtered: expect.any(Array) });
+			expect(state.filtered.length).toBe(PROPS.list.length);
 		});
 
 		afterEach(() => {
@@ -225,8 +229,6 @@ describe('Suggestor component', () => {
 		});
 
 		it('update state.value if props.value changed', () => {
-			expect(component.state()).toMatchObject({ value: '' });
-
 			const value = 'xesturgy';
 			component.setProps({ value });
 
@@ -234,8 +236,6 @@ describe('Suggestor component', () => {
 		});
 
 		it('update state.filtered if props.list changed', () => {
-			expect(component.state().filtered.length).toBe(PROPS.list.length);
-
 			const list = ['one', 'two'];
 			component.setProps({ list });
 
@@ -250,7 +250,7 @@ describe('Suggestor component', () => {
 	describe('handleClick function', () => {
 		let component, instance, toggleListSpy;
 		beforeEach(() => {
-			component = mount(<Suggestor {...PROPS} />);
+			component = shallow(<Suggestor {...PROPS} />);
 			instance = component.instance();
 			toggleListSpy = jest.spyOn(instance, 'toggleList');
 		});
@@ -304,7 +304,7 @@ describe('Suggestor component', () => {
 		beforeEach(() => {
 			event.stopPropagation.mockReset();
 			PROPS.onChange.mockReset();
-			component = mount(<Suggestor {...PROPS} />);
+			component = shallow(<Suggestor {...PROPS} />);
 		});
 
 		it('should stop event propagation', () => {
@@ -472,32 +472,23 @@ describe('Suggestor component', () => {
 	});
 
 	describe('filter', () => {
+		let component, instance;
 		beforeEach(() => {
 			removeAccents.mockClear();
+			component = shallow(<Suggestor {...PROPS} />);
+			instance = component.instance();
 		});
 
 		it('should call removeAccents (if accents not allowed)', () => {
-			const component = mount(<Suggestor {...PROPS} />);
-
-			component.instance().filter(PROPS.list, 'illaudable');
+			const component = shallow(<Suggestor {...PROPS} />);
+			instance.filter(PROPS.list, 'illaudable');
 
 			expect(removeAccents).toBeCalled();
 		});
 
-		it('should not call removeAccents (if accents support)', () => {
-			const component = mount(<Suggestor {...PROPS} accents />);
-
-			component.instance().filter(PROPS.list, 'illaudable');
-
-			expect(removeAccents).not.toBeCalled();
-		});
-
 		it('should return all item on suggestion list (if onlyMatch arg set to falsy)', () => {
-			const component = mount(<Suggestor {...PROPS} />);
-
 			const value = 'temporise';
-
-			const result = component.instance().filter(PROPS.list, value, false);
+			const result = instance.filter(PROPS.list, value, false);
 
 			expect(result.length).toBe(4);
 
@@ -511,21 +502,26 @@ describe('Suggestor component', () => {
 		});
 
 		it('should return only matches from suggestion list', () => {
-			const component = mount(<Suggestor {...PROPS} />);
-
-			const result = component.instance().filter(PROPS.list, 'temporise');
+			const result = instance.filter(PROPS.list, 'temporise');
 
 			expect(result.length).toBe(1);
 			expect(result[0].index).toBeGreaterThanOrEqual(0);
 		});
 
 		it('should return all if search pattern is empty', () => {
-			const component = mount(<Suggestor {...PROPS} />);
-
-			const result = component.instance().filter(PROPS.list);
+			const result = instance.filter(PROPS.list);
 
 			expect(result.every(item => item.index === 0)).toBeTruthy();
 			expect(result.length).toBe(4);
+		});
+
+		it('should not call removeAccents (if accents support)', () => {
+			component.setProps({ accents: true });
+			removeAccents.mockClear();
+
+			component.instance().filter(PROPS.list, 'illaudable');
+
+			expect(removeAccents).not.toBeCalled();
 		});
 	});
 });
