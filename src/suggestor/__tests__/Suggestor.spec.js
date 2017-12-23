@@ -242,7 +242,7 @@ describe('Suggestor component', () => {
 
 			const spy = jest.spyOn(component.instance(), 'setState');
 
-			component.setProps({ });
+			component.setProps({});
 
 			expect(spy).toBeCalled();
 		});
@@ -296,30 +296,28 @@ describe('Suggestor component', () => {
 
 			expect(spy).toBeCalled();
 		});
-	})
+	});
 
 	describe('... handles input changes', () => {
 		const event = {
 			stopPropagation: jest.fn(),
 			target: { value: 'temp' }
 		};
+		let component;
 
 		beforeEach(() => {
 			event.stopPropagation.mockReset();
 			PROPS.onChange.mockReset();
+			component = mount(<Suggestor {...PROPS} />);
 		});
 
 		it('should stop event propagation', () => {
-			const component = mount(<Suggestor {...PROPS} />);
-
 			component.find('input').simulate('change', event);
 
 			expect(event.stopPropagation).toBeCalled();
 		});
 
 		it('should update state', () => {
-			const component = mount(<Suggestor {...PROPS} />);
-
 			component.find('input').simulate('change', event);
 
 			expect(component.state().value).toBe(event.target.value);
@@ -327,8 +325,6 @@ describe('Suggestor component', () => {
 		});
 
 		it('should call onChange prop callback', () => {
-			const component = mount(<Suggestor {...PROPS} />);
-
 			component.find('input').simulate('change', event);
 
 			expect(PROPS.onChange).toBeCalled();
@@ -336,8 +332,7 @@ describe('Suggestor component', () => {
 		});
 
 		it('should call onSelect prop callback when select value', () => {
-			const component = mount(<Suggestor {...PROPS} openOnClick />);
-
+			component.setProps({ openOnClick: true });
 			component.instance().changeValue('temp', true);
 
 			expect(PROPS.onChange).toBeCalled();
@@ -350,36 +345,25 @@ describe('Suggestor component', () => {
 			preventDefault: jest.fn(),
 			keyCode: KEY_CODES.ENTER
 		};
+		let component;
 
 		beforeEach(() => {
 			event.preventDefault.mockReset();
 			PROPS.onKey.mockReset();
 			PROPS.onChange.mockReset();
 			PROPS.onSelect.mockReset();
+
+			component = shallow(<Suggestor {...PROPS} />);
 		});
 
 		it('should call prop onKey callback', () => {
-			const component = shallow(<Suggestor {...PROPS} />);
-
 			component.find('div').simulate('keyDown', event);
 
 			expect(event.preventDefault).not.toBeCalled();
 			expect(PROPS.onKey).toBeCalled();
 		});
 
-		it('should call processKey if useKeys is truthy', () => {
-			const component = shallow(<Suggestor {...PROPS} useKeys />);
-
-			const processKeySpy = jest.spyOn(component.instance(), 'processKey');
-
-			component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.UP });
-
-			expect(processKeySpy).toBeCalledWith(KEY_CODES.UP);
-		});
-
-		it('should call processKey if useKeys is truthy', () => {
-			const component = shallow(<Suggestor {...PROPS} />);
-
+		it('should not call processKey if useKeys is falsy', () => {
 			const processKeySpy = jest.spyOn(component.instance(), 'processKey');
 
 			component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.UP });
@@ -387,115 +371,107 @@ describe('Suggestor component', () => {
 			expect(processKeySpy).not.toBeCalledWith();
 		});
 
-		it('should prevent event default action (with keys: ENTER, ESCAPE, UP, DOWN)', () => {
-			const component = shallow(<Suggestor {...PROPS} useKeys />);
+		describe('when using keys (useKeys: true)', () => {
+			let processKeySpy, changeValueSpy, handleCloseSpy, toggleListSpy, setStateSpy;
 
-			expect(event.preventDefault).not.toBeCalled();
-
-			const keys = [KEY_CODES.ENTER, KEY_CODES.ESCAPE, KEY_CODES.UP, KEY_CODES.DOWN];
-
-			keys.map((keyCode, index) => {
-				component.find('div').simulate('keyDown', { ...event, keyCode });
-
-				expect(event.preventDefault).toHaveBeenCalledTimes(index + 1);
+			beforeEach(() => {
+				component.setProps({ useKeys: true });
+				processKeySpy = jest.spyOn(component.instance(), 'processKey');
+				changeValueSpy = jest.spyOn(component.instance(), 'changeValue');
+				handleCloseSpy = jest.spyOn(component.instance(), 'handleClose');
+				toggleListSpy = jest.spyOn(component.instance(), 'toggleList');
+				setStateSpy = jest.spyOn(component.instance(), 'setState');
 			});
 
-			expect(event.preventDefault).toBeCalled();
+			afterEach(() => {
+				expect(PROPS.onKey).toBeCalled();
+				expect(processKeySpy).toBeCalled();
+			});
+
+			it('should call processKey if useKeys is truthy', () => {
+				component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.UP });
+
+				expect(processKeySpy).toBeCalledWith(KEY_CODES.UP);
+			});
+
+			it('should prevent event default action (with keys: ENTER, ESCAPE, UP, DOWN)', () => {
+				expect(event.preventDefault).not.toBeCalled();
+				const keys = [KEY_CODES.ENTER, KEY_CODES.ESCAPE, KEY_CODES.UP, KEY_CODES.DOWN];
+
+				keys.map((keyCode, index) => {
+					component.find('div').simulate('keyDown', { ...event, keyCode });
+					expect(event.preventDefault).toHaveBeenCalledTimes(index + 1);
+				});
+
+				expect(event.preventDefault).toBeCalled();
+				expect(event.preventDefault.mock.calls.length).toBe(4);
+			});
+
+			it('should not prevent event default action (with key: TAB)', () => {
+				component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.TAB });
+
+				expect(event.preventDefault).not.toBeCalled();
+			});
+
+			it('should only close suggestion list - if selectOnTab is off (TAB key)', () => {
+				component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.TAB });
+
+				expect(changeValueSpy).not.toBeCalled();
+				expect(handleCloseSpy).toBeCalled();
+			});
+
+			it('should change value (ENTER key)', () => {
+				const selectedItem = PROPS.list[0];
+				component.instance().setState({ open: true, index: 0 });
+
+				component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.ENTER });
+
+				expect(PROPS.onSelect).toBeCalledWith(selectedItem);
+				expect(event.preventDefault).toBeCalled();
+				expect(changeValueSpy).toBeCalledWith(selectedItem, true);
+				expect(toggleListSpy).toBeCalled();
+			});
+
+			it('should only call props.onKey and .processKey for unsupported key', () => {
+				component.find('div').simulate('keyDown', { ...event, keyCode: 0 });
+
+				expect(event.preventDefault).not.toBeCalled();
+				expect(changeValueSpy).not.toBeCalled();
+				expect(handleCloseSpy).not.toBeCalled();
+				expect(toggleListSpy).not.toBeCalled();
+				expect(setStateSpy).not.toBeCalled();
+				expect(PROPS.onSelect).not.toBeCalled();
+			});
 		});
 
-		it('should not prevent event default action (with key: TAB)', () => {
-			const component = shallow(<Suggestor {...PROPS} useKeys />);
+		describe('when keys and selectOnTab props are on', () => {
+			let changeValueSpy, handleCloseSpy;
 
-			component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.TAB });
+			beforeEach(() => {
+				component.setProps({ useKeys: true, selectOnTab: true });
+				changeValueSpy = jest.spyOn(component.instance(), 'changeValue');
+				handleCloseSpy = jest.spyOn(component.instance(), 'handleClose');
+			});
 
-			expect(event.preventDefault).not.toBeCalled();
-		});
+			it('should change value (TAB key)', () => {
+				component.setState({ open: true });
+				component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.TAB });
 
-		it('should only close suggestion list - if selectOnTab is off (TAB key)', () => {
-			const component = shallow(<Suggestor {...PROPS} useKeys />);
+				expect(changeValueSpy).toBeCalled();
+				expect(handleCloseSpy).toBeCalled();
+				expect(PROPS.onChange).toBeCalled();
+				expect(PROPS.onSelect).toBeCalled();
+			});
 
-			const changeValueSpy = jest.spyOn(component.instance(), 'changeValue');
-			const handleCloseSpy = jest.spyOn(component.instance(), 'handleClose');
+			it('should clear selected value if any and suggestion list is closed (ESC key)', () => {
+				component.setState({ open: false, value: 'temporise' });
+				component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.ESCAPE });
 
-			component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.TAB });
-
-			expect(changeValueSpy).not.toBeCalled();
-			expect(handleCloseSpy).toBeCalled();
-		});
-
-		it('should change value (TAB key)', () => {
-			const component = shallow(<Suggestor {...PROPS} useKeys selectOnTab />);
-			component.setState({ open: true });
-
-			const changeValueSpy = jest.spyOn(component.instance(), 'changeValue');
-			const handleCloseSpy = jest.spyOn(component.instance(), 'handleClose');
-
-			component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.TAB });
-
-			expect(changeValueSpy).toBeCalled();
-			expect(handleCloseSpy).toBeCalled();
-			expect(PROPS.onChange).toBeCalled();
-			expect(PROPS.onSelect).toBeCalled();
-		});
-
-		it('should clear selected value if any and suggestion list is closed (ESC key)', () => {
-			const component = shallow(<Suggestor {...PROPS} useKeys selectOnTab />);
-			component.setState({ open: false, value: 'temporise' });
-
-			const changeValueSpy = jest.spyOn(component.instance(), 'changeValue');
-			const handleCloseSpy = jest.spyOn(component.instance(), 'handleClose');
-
-			component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.ESCAPE });
-
-			expect(handleCloseSpy).toBeCalled();
-			expect(changeValueSpy).toBeCalledWith('');
-			expect(PROPS.onChange).toBeCalled();
-			expect(PROPS.onSelect).not.toBeCalled(); // check actual behavior
-		});
-
-		it('should change value (ENTER key)', () => {
-			const component = shallow(<Suggestor {...PROPS} useKeys />);
-			const instance = component.instance();
-
-			component.setState({ open: true, index: 0 });
-
-			const spies = {
-				changeValue: jest.spyOn(instance, 'changeValue'),
-				toggleList: jest.spyOn(instance, 'toggleList')
-			};
-
-			component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.ENTER });
-
-			const selectedItem = PROPS.list[0];
-
-			expect(PROPS.onKey).toBeCalled();
-			expect(spies.toggleList).toBeCalled();
-			expect(spies.changeValue).toBeCalledWith(selectedItem, true);
-			expect(PROPS.onSelect).toBeCalledWith(selectedItem);
-			expect(event.preventDefault).toBeCalled();
-
-		});
-
-		it('should only call props.onKey for unsupported keys', () => {
-			const component = shallow(<Suggestor {...PROPS} useKeys />);
-			const instance = component.instance();
-
-			const spies = {
-				changeValue: jest.spyOn(instance, 'changeValue'),
-				handleClose: jest.spyOn(instance, 'handleClose'),
-				setState: jest.spyOn(instance, 'setState'),
-				toggleList: jest.spyOn(instance, 'toggleList')
-			};
-
-			component.find('div').simulate('keyDown', { ...event, keyCode: 0 });
-
-			expect(event.preventDefault).not.toBeCalled();
-			expect(spies.changeValue).not.toBeCalled();
-			expect(spies.handleClose).not.toBeCalled();
-			expect(spies.setState).not.toBeCalled();
-			expect(spies.toggleList).not.toBeCalled();
-			expect(PROPS.onSelect).not.toBeCalled();
-			expect(PROPS.onKey).toBeCalled();
+				expect(handleCloseSpy).toBeCalled();
+				expect(changeValueSpy).toBeCalledWith('');
+				expect(PROPS.onChange).toBeCalled();
+				expect(PROPS.onSelect).not.toBeCalled();
+			});
 		});
 	});
 
