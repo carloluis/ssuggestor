@@ -249,24 +249,24 @@ describe('Suggestor component', () => {
 	});
 
 	describe('handleClick function', () => {
+		let component, instance, toggleListSpy;
+		beforeEach(() => {
+			component = mount(<Suggestor {...PROPS} />);
+			instance = component.instance();
+			toggleListSpy = jest.spyOn(instance, 'toggleList');
+		});
+
 		it('should not call toggleList (when openOnClick prop is falsy)', () => {
-			const component = mount(<Suggestor {...PROPS} />);
+			instance.handleClick();
 
-			const spy = jest.spyOn(component.instance(), 'toggleList');
-
-			component.instance().handleClick();
-
-			expect(spy).not.toBeCalled();
+			expect(toggleListSpy).not.toBeCalled();
 		});
 
 		it('handleClick -> toggleList (if openOnClick prop is truthy)', () => {
-			const component = mount(<Suggestor {...PROPS} openOnClick />);
+			component.setProps({ openOnClick: true });
+			instance.handleClick();
 
-			const spy = jest.spyOn(component.instance(), 'toggleList');
-
-			component.instance().handleClick();
-
-			expect(spy).toBeCalled();
+			expect(toggleListSpy).toBeCalled();
 		});
 	});
 
