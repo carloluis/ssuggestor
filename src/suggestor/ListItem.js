@@ -1,22 +1,24 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import autoBind from '../utils/auto-bind';
 import MarkItem from './MarkItem';
 
 class ListItem extends PureComponent {
 	constructor(props) {
 		super(props);
+		autoBind(this);
+	}
 
-		this.handleClick = e => {
-			e.stopPropagation();
-			const { item, onItemClick } = this.props;
-			onItemClick(item);
-		};
+	handleClick(event) {
+		event.stopPropagation();
+		const { item, onItemClick } = this.props;
+		onItemClick(item);
+	}
 
-		this.handleMouseEnter = e => {
-			e.stopPropagation();
-			const { index, onItemMouseEnter } = this.props;
-			onItemMouseEnter(index);
-		};
+	handleMouseEnter(event) {
+		event.stopPropagation();
+		const { index, onItemMouseEnter } = this.props;
+		onItemMouseEnter(index);
 	}
 
 	render() {
