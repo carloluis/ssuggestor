@@ -3,14 +3,10 @@ import renderer from 'react-test-renderer';
 import ReactTestUtils from 'react-dom/test-utils';
 import { shallow, mount } from 'enzyme';
 
-import { KEY_CODES } from '../../utils/values';
-import removeAccents from '../../utils/remove-accents';
-import noop from '../../utils/noop';
+import * as utils from '../../utils';
 import Ssuggestor, { Suggestor } from '../Suggestor';
 
-jest.mock('../../utils/remove-accents', () => {
-	return jest.fn(text => text);
-});
+const { KEY_CODES, noop } = utils;
 
 jest.mock('../../utils/noop', () => {
 	return jest.fn();
@@ -77,138 +73,130 @@ describe('Suggestor component', () => {
 		PROPS.onSelect.mockReset();
 	});
 
-	it('should initialize state.open as false', () => {
-		const component = mount(<Suggestor {...PROPS} />);
+	it('should call this.filter on component creation', () => {
+		const filterSpy = jest.spyOn(Suggestor.prototype, 'filter');
+		const component = shallow(<Suggestor {...PROPS} />);
 
-		expect(component.state().open).toBeFalsy();
+		expect(filterSpy).toHaveBeenCalled();
 	});
 
-	it('should filter list into initial state ', () => {
-		const component = mount(<Suggestor {...PROPS} />);
+	describe('mounted component', () => {
+		let mounted;
+		beforeEach(() => {
+			mounted = mount(<Suggestor {...PROPS} />);
+		});
 
-		expect(component.state()).toMatchObject({
-			filtered: [
-				{ word: 'temporise', index: 0 },
-				{ word: 'whencesoeve', index: 0 },
-				{ word: 'turophile', index: 0 },
-				{ word: 'umlaut', index: 0 }
-			],
-			value: PROPS.value,
-			index: 0
+		it('should initialize state.open as false', () => {
+			expect(mounted.state().open).toBeFalsy();
+		});
+
+		it('should filter list into initial state ', () => {
+			expect(mounted.state()).toMatchObject({
+				filtered: [
+					{ word: 'temporise', index: 0 },
+					{ word: 'whencesoeve', index: 0 },
+					{ word: 'turophile', index: 0 },
+					{ word: 'umlaut', index: 0 }
+				],
+				value: PROPS.value,
+				index: 0
+			});
+		});
+
+		it('should call changeValue when remove the value: remove -> changeValue', () => {
+			// mounted.setProps({ openOnClick: true });
+			const spy = jest.spyOn(mounted.instance(), 'changeValue');
+
+			mounted.instance().remove();
+
+			expect(spy).toBeCalled();
+		});
+
+		it('handleItemMouseEnter -> setState', () => {
+			const spy = jest.spyOn(mounted.instance(), 'setState');
+
+			mounted.instance().handleItemMouseEnter(2);
+
+			expect(spy).toBeCalledWith({ index: 2 });
+		});
+
+		it('handleItemClick -> changeValue', () => {
+			const spy = jest.spyOn(mounted.instance(), 'changeValue');
+			const payload = { word: 'decrassify' };
+
+			mounted.instance().handleItemClick(payload);
+
+			expect(spy).toBeCalledWith(payload.word, true);
+		});
+
+		it('focus -> input.focus', () => {
+			const spy = jest.spyOn(mounted.instance().input, 'focus');
+			mounted.instance().focus();
+
+			expect(spy).toBeCalled();
 		});
 	});
 
-	it('should call _bind when created', () => {
-		const spy = jest.spyOn(Suggestor.prototype, '_bind');
+	describe('shallow component', () => {
+		let component, instance;
+		let setStateSpy, handleCloseSpy, changeValueSpy;
+		const autoBindSpy = jest.spyOn(utils, 'autoBind');
 
-		const component = shallow(<Suggestor {...PROPS} />);
+		beforeEach(() => {
+			autoBindSpy.mockClear();
+			component = shallow(<Suggestor {...PROPS} />);
+			instance = component.instance();
+			setStateSpy = jest.spyOn(instance, 'setState');
+			handleCloseSpy = jest.spyOn(instance, 'handleClose');
+			changeValueSpy = jest.spyOn(instance, 'changeValue');
+		});
 
-		expect(spy).toHaveBeenCalled();
-	});
+		afterEach(() => {
+			expect(autoBindSpy).toHaveBeenCalledTimes(1);
+		})
 
-	it('should call changeValue when remove the value: remove -> changeValue', () => {
-		const component = mount(<Suggestor {...PROPS} openOnClick />);
+		it('changeValue -> [setState, props.onChange, props.onSelect]', () => {
+			const value = 'umlaut';
+			instance.changeValue(value, true);
 
-		const spy = jest.spyOn(component.instance(), 'changeValue');
+			expect(setStateSpy).toBeCalled();
+			expect(handleCloseSpy).toBeCalledWith();
+			expect(PROPS.onChange).toBeCalledWith(value);
+			expect(PROPS.onSelect).toBeCalledWith(value);
+		});
 
-		component.instance().remove();
+		it('toggleList -> setState (open suggestion list)', () => {
+			expect(component.state().open).toBeFalsy();
+			instance.toggleList();
 
-		expect(spy).toBeCalled();
-	});
+			expect(setStateSpy).toBeCalled();
+			expect(component.state().open).toBeTruthy();
+		});
 
-	it('handleItemMouseEnter -> setState', () => {
-		const component = mount(<Suggestor {...PROPS} />);
+		it('toggleList -> handleClose (if suggestion list is visible)', () => {
+			instance.toggleList();
 
-		const spy = jest.spyOn(component.instance(), 'setState');
-		const index = 2;
+			expect(handleCloseSpy).not.toBeCalled();
 
-		component.instance().handleItemMouseEnter(index);
+			instance.toggleList();
 
-		expect(spy).toBeCalledWith({ index });
-	});
+			expect(handleCloseSpy).toBeCalled();
+		});
 
-	it('handleItemClick -> changeValue', () => {
-		const component = mount(<Suggestor {...PROPS} />);
+		it('handleChange -> changeValue', () => {
+			const event = {
+				stopPropagation: jest.fn(),
+				target: {
+					value: 'whencesoeve'
+				}
+			};
+			instance.handleChange(event);
 
-		const spy = jest.spyOn(component.instance(), 'changeValue');
-		const payload = { word: 'decrassify' };
-
-		component.instance().handleItemClick(payload);
-
-		expect(spy).toBeCalledWith(payload.word, true);
-	});
-
-	it('focus -> input.focus', () => {
-		const component = mount(<Suggestor {...PROPS} />);
-
-		const spy = jest.spyOn(component.instance().input, 'focus');
-
-		component.instance().focus();
-
-		expect(spy).toBeCalled();
-	});
-
-	it('changeValue -> [setState, props.onChange, props.onSelect]', () => {
-		const component = shallow(<Suggestor {...PROPS} />);
-		const instance = component.instance();
-
-		const spies = {
-			setState: jest.spyOn(instance, 'setState'),
-			handleClose: jest.spyOn(instance, 'handleClose')
-		};
-
-		const value = 'umlaut';
-		instance.changeValue(value, true);
-
-		expect(spies.setState).toBeCalled();
-		expect(spies.handleClose).toBeCalledWith();
-		expect(PROPS.onChange).toBeCalledWith(value);
-		expect(PROPS.onSelect).toBeCalledWith(value);
-	});
-
-	it('toggleList -> setState (open suggestion list)', () => {
-		const component = shallow(<Suggestor {...PROPS} />);
-
-		const spy = jest.spyOn(component.instance(), 'setState');
-		expect(component.state().open).toBeFalsy();
-
-		component.instance().toggleList();
-
-		expect(spy).toBeCalled();
-		expect(component.state().open).toBeTruthy();
-	});
-
-	it('toggleList -> handleClose (if suggestion list is visible)', () => {
-		const component = shallow(<Suggestor {...PROPS} />);
-
-		const spy = jest.spyOn(component.instance(), 'handleClose');
-
-		component.instance().toggleList();
-
-		expect(spy).not.toBeCalled();
-
-		component.instance().toggleList();
-
-		expect(spy).toBeCalled();
-	});
-
-	it('handleChange -> changeValue', () => {
-		const event = {
-			stopPropagation: jest.fn(),
-			target: {
-				value: 'whencesoeve'
-			}
-		};
-		const component = shallow(<Suggestor {...PROPS} />);
-
-		const spy = jest.spyOn(component.instance(), 'changeValue');
-
-		component.instance().handleChange(event);
-
-		expect(spy).toBeCalled();
-		expect(component.state()).toMatchObject({
-			value: event.target.value,
-			open: true
+			expect(changeValueSpy).toBeCalled();
+			expect(component.state()).toMatchObject({
+				value: event.target.value,
+				open: true
+			});
 		});
 	});
 
@@ -472,18 +460,19 @@ describe('Suggestor component', () => {
 	});
 
 	describe('filter', () => {
+		const removeAccentsSpy = jest.spyOn(utils, 'removeAccents');
 		let component, instance;
+
 		beforeEach(() => {
-			removeAccents.mockClear();
+			removeAccentsSpy.mockClear();
 			component = shallow(<Suggestor {...PROPS} />);
 			instance = component.instance();
 		});
 
 		it('should call removeAccents (if accents not allowed)', () => {
-			const component = shallow(<Suggestor {...PROPS} />);
 			instance.filter(PROPS.list, 'illaudable');
 
-			expect(removeAccents).toBeCalled();
+			expect(removeAccentsSpy).toBeCalled();
 		});
 
 		it('should return all item on suggestion list (if onlyMatch arg set to falsy)', () => {
@@ -517,31 +506,31 @@ describe('Suggestor component', () => {
 
 		it('should not call removeAccents (if accents support)', () => {
 			component.setProps({ accents: true });
-			removeAccents.mockClear();
+			removeAccentsSpy.mockClear();
 
 			component.instance().filter(PROPS.list, 'illaudable');
 
-			expect(removeAccents).not.toBeCalled();
+			expect(removeAccentsSpy).not.toBeCalled();
 		});
 	});
 });
 
 describe('Suggestor - default cb props use noop', () => {
-	const { onChange, onSelect, onKey, ...props } = PROPS;
-	const component = shallow(<Suggestor {...props} />);
+	let component, componentProps;
 
 	beforeEach(() => {
-		noop.mockReset();
+		const { onChange, onSelect, onKey, ...props } = PROPS;
+		component = mount(<Suggestor {...props} />);
+		componentProps = component.props();
 	});
 
 	it('should set noop when not onChange, onSelect, oKey props func provided', () => {
-		const props = component.props();
-		expect(props.onChange).toBe(props.onSelect);
-		expect(props.onSelect).toBe(props.onKey);
+		expect(componentProps.onChange).toBe(componentProps.onSelect);
+		expect(componentProps.onSelect).toBe(componentProps.onKey);
 	});
 
 	it('sould call noop func', () => {
-		expect(component.instance().props.onSelect()).toBe(undefined);
+		expect(componentProps.onSelect()).toBe(undefined);
 		expect(noop).toBeCalled();
 	});
 });

@@ -1,22 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { EMPTY_STR, KEY_CODES, noop, removeAccents, withClickOut } from '../utils';
+import { EMPTY_STR, KEY_CODES, noop, removeAccents, withClickOut, autoBind } from '../utils';
 import { SPIN_STYLES, X_STYLES, glyphicon } from './styles';
 import List from './List';
 
 export class Suggestor extends PureComponent {
 	constructor(props) {
 		super(props);
-		this._bind(
-			'handleChange',
-			'handleClickOut',
-			'handleClick',
-			'handleItemClick',
-			'handleItemMouseEnter',
-			'handleKeyDown',
-			'remove',
-			'focus'
-		);
+		autoBind(this);
 
 		this.state = {
 			filtered: this.filter(props.list, props.value, false),
@@ -24,9 +15,6 @@ export class Suggestor extends PureComponent {
 			open: false,
 			index: 0
 		};
-	}
-	_bind(...methods) {
-		methods.forEach(method => (this[method] = this[method].bind(this)));
 	}
 	handleClickOut() {
 		this.handleClose();
