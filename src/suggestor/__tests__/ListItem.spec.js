@@ -27,21 +27,22 @@ describe('<ListItem/>', () => {
 describe('ListItem', () => {
 	const event = { stopPropagation: jest.fn() };
 	let component;
+	let handleClickSpy, handleMouseEnterSpy;
 
 	beforeEach(() => {
 		PROPS.onItemClick.mockReset();
 		PROPS.onItemMouseEnter.mockReset();
-		component = shallow(<ListItem {...PROPS} />);
 		event.stopPropagation.mockClear();
+		component = shallow(<ListItem {...PROPS} />);
+		const instance = component.instance();
+		handleClickSpy = jest.spyOn(instance, 'handleClick');
+		handleMouseEnterSpy = jest.spyOn(instance, 'handleMouseEnter');
+		instance.forceUpdate();
+		component.update();
 	});
 
 	describe('on click', () => {
-		let handleClickSpy;
 		beforeEach(() => {
-			handleClickSpy = jest.spyOn(component.instance(), 'handleClick');
-			component.instance().forceUpdate();
-			component.update();
-
 			component.find('li').simulate('click', event);
 		});
 
@@ -53,18 +54,13 @@ describe('ListItem', () => {
 			expect(event.stopPropagation).toHaveBeenCalled();
 		});
 
-		it('should call props.onItemClick', () => {
+		it('should call onItemClick prop callback', () => {
 			expect(PROPS.onItemClick).toBeCalledWith(PROPS.item);
 		});
 	});
 
 	describe('on mouse enter', () => {
-		let handleMouseEnterSpy;
 		beforeEach(() => {
-			handleMouseEnterSpy = jest.spyOn(component.instance(), 'handleMouseEnter');
-			component.instance().forceUpdate();
-			component.update();
-
 			component.find('li').simulate('mouseEnter', event);
 		});
 
@@ -73,10 +69,10 @@ describe('ListItem', () => {
 		});
 
 		it('should stop event propagation', () => {
-			expect(event.stopPropagation).toHaveBeenCalled();
+			expect(event.stopPropagation.mock.calls.length).toBe(1);
 		});
 
-		it('should call props.onItemClick', () => {
+		it('should call onItemMouseEnter prop callback', () => {
 			expect(PROPS.onItemMouseEnter).toBeCalledWith(PROPS.index);
 		});
 	});
