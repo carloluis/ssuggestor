@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { EMPTY_STR, KEY_CODES, noop, removeAccents, withClickOut, autoBind } from '../utils';
+import { EMPTY_STR, KEY_CODES, noop, removeAccents, autoBind } from '../utils';
 import { SPIN_STYLES, X_STYLES, glyphicon } from './styles';
 import List from './List';
 
@@ -16,8 +16,16 @@ export class Suggestor extends PureComponent {
 			index: 0
 		};
 	}
-	handleClickOut() {
-		this.handleClose();
+	componentDidMount() {
+		document.addEventListener('click', this._onClick);
+	}
+	componentWillUnmount() {
+		document.removeEventListener('click', this._onClick);
+	}
+	_onClick(event) {
+		if (!this.input.parentNode.contains(event.target)) {
+			this.handleClose();
+		}
 	}
 	componentWillReceiveProps(nextProps) {
 		let value = this.state.value;
@@ -143,29 +151,24 @@ export class Suggestor extends PureComponent {
 	focus() {
 		this.input.focus();
 	}
+	refInput(input) {
+		this.input = input;
+	}
 	render() {
 		const { className, style, placeholder, arrow, close, tooltip, required } = this.props;
 		const { open, value, index, filtered } = this.state;
 
 		return (
-			<div
-				className={className}
-				style={style}
-				onClick={this.handleClick}
-				onKeyDown={this.handleKeyDown}
-				ref={this.props.reference}
-			>
+			<div className={className} style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown}>
 				<input
 					type="text"
 					className="form-control"
 					onChange={this.handleChange}
 					value={value}
-					ref={input => {
-						this.input = input;
-					}}
-					placeholder={placeholder}
 					title={tooltip}
+					placeholder={placeholder}
 					required={required}
+					ref={this.refInput}
 				/>
 				{arrow && <span className={glyphicon('triangle-bottom')} style={SPIN_STYLES} />}
 				{close && value && <span className={glyphicon('remove')} style={X_STYLES} onClick={this.remove} />}
@@ -216,6 +219,4 @@ Suggestor.defaultProps = {
 	close: true
 };
 
-export const SSuggestor = withClickOut(Suggestor);
-
-export default SSuggestor;
+export default Suggestor;
