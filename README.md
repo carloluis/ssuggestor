@@ -8,7 +8,6 @@
 [![npm](https://img.shields.io/npm/v/ssuggestor.svg)](https://www.npmjs.com/package/ssuggestor)
 [![npm](https://img.shields.io/npm/dt/ssuggestor.svg)](https://npm-stat.com/charts.html?package=ssuggestor)
 [![Package Quality](http://npm.packagequality.com/shield/ssuggestor.svg)](http://packagequality.com/#?package=ssuggestor)
-
 [![PeerDependencies](https://img.shields.io/david/peer/carloluis/ssuggestor.svg)](https://david-dm.org/carloluis/ssuggestor?type=peer)
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/carloluis/ssuggestor.svg?style=social)](https://twitter.com/intent/tweet?text=check%20out%20this%20simple%20suggestor%20component%20on&url=https%3A%2F%2Ft.co%2FpjuWm9EaCa&hashtags=react16,ssuggestor)
 
@@ -82,7 +81,7 @@ Example:
 
 Then,
 - matches are case insensitive: _auto**Sugge**st_
-- pattern test is performed removing accents: **ssüggèst**or
+- pattern test is performed removing accents: _s**süggè**stor_
 
 #### Props:
 
