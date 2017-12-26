@@ -1,22 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PADDING_STYLE = { padding: '10px 0' };
-
 const Section = ({ title, description = '', children }) => (
-	<div style={PADDING_STYLE}>
-		<h4>
-			{title}
-		</h4>
-		<div>
-			{children}
-		</div>
-		{
-			!!description &&
-			<p style={PADDING_STYLE}>
-				{description}
-			</p>
-		}
+	<div style={{ padding: '10px 0' }}>
+		<h4>{title}</h4>
+		<div>{children}</div>
+		{!!description && <p style={{ padding: '10px' }}>{description}</p>}
 	</div>
 );
 

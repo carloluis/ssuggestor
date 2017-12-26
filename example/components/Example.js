@@ -13,6 +13,7 @@ const Example = () => (
 	<div>
 		<Section title="Code Example">
 			<pre>{`<Suggestor list={['list', 'of', 'suggestions', ...]} style={{width:'100%'}} />`}</pre>
+			<a href="https://codepen.io/carloluis/pen/rjpLYw">CodePen</a>
 		</Section>
 
 		<Section

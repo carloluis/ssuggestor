@@ -61,10 +61,7 @@ class ExUpdate extends React.Component {
 
 		return (
 			<div style={{ padding: '10px 0 160px' }}>
-				<Section
-					title="Suggestor Props"
-					description="Updating props (value, suggestions list)"
-				>
+				<Section title="Suggestor Props" description="Updating props (value, suggestions list)">
 					<SSuggestor
 						value={value}
 						list={suggestions}
