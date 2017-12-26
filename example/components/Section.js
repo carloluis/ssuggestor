@@ -19,6 +19,7 @@ const Section = ({ title, description = '', children }) => (
 		}
 	</div>
 );
+
 Section.propTypes = {
 	title: PropTypes.string.isRequired,
 	description: PropTypes.string,
