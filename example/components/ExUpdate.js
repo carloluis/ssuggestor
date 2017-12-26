@@ -60,7 +60,7 @@ class ExUpdate extends React.Component {
 		const { value, suggestions } = this.state;
 
 		return (
-			<div style={{ padding: '20px 0 200px' }}>
+			<div style={{ padding: '10px 0 160px' }}>
 				<Section
 					title="Suggestor Props"
 					description="Updating values from PROPS  (value, suggestions list)"

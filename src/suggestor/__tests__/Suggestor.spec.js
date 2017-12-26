@@ -4,7 +4,7 @@ import ReactTestUtils from 'react-dom/test-utils';
 import { shallow, mount } from 'enzyme';
 
 import * as utils from '../../utils';
-import Ssuggestor, { Suggestor } from '../Suggestor';
+import Suggestor from '../Suggestor';
 
 const { KEY_CODES, noop } = utils;
 
@@ -35,33 +35,31 @@ const PROPS = {
 
 describe('<Ssuggestor />', () => {
 	it('snapshot - without suggestions', () => {
-		const tree = renderer.create(<Ssuggestor {...PROPS} list={[]} />).toJSON();
+		const tree = renderer.create(<Suggestor {...PROPS} list={[]} />).toJSON();
 		expect(tree).toMatchSnapshot();
 	});
 
 	it('snapshot - with suggestions', () => {
-		const tree = renderer.create(<Ssuggestor {...PROPS} />).toJSON();
+		const tree = renderer.create(<Suggestor {...PROPS} />).toJSON();
 		expect(tree).toMatchSnapshot();
 	});
 
 	it('snapshot - with suggestions visible', () => {
-		const tree = renderer.create(<Ssuggestor {...PROPS} openOnClick />);
-
-		tree.getInstance().wrapped.setState({ open: true });
+		const tree = renderer.create(<Suggestor {...PROPS} openOnClick />);
+		tree.getInstance().setState({ open: true });
 
 		expect(tree).toMatchSnapshot();
 	});
 
 	it('snapshot - with arrow', () => {
-		const tree = renderer.create(<Ssuggestor {...PROPS} arrow />);
+		const tree = renderer.create(<Suggestor {...PROPS} arrow />);
 
 		expect(tree).toMatchSnapshot();
 	});
 
 	it('snapshot - with close', () => {
-		const tree = renderer.create(<Ssuggestor {...PROPS} close />);
-
-		tree.getInstance().wrapped.setState({ value: 'temp' });
+		const tree = renderer.create(<Suggestor {...PROPS} close />);
+		tree.getInstance().setState({ value: 'temp' });
 
 		expect(tree).toMatchSnapshot();
 	});
@@ -261,7 +259,7 @@ describe('Suggestor component', () => {
 		let instance, handleCloseSpy;
 
 		beforeEach(() => {
-			instance = shallow(<Suggestor {...PROPS} />).instance();
+			instance = mount(<Suggestor {...PROPS} />).instance();
 			handleCloseSpy = jest.spyOn(instance, 'handleClose');
 		});
 
@@ -269,8 +267,8 @@ describe('Suggestor component', () => {
 			expect(handleCloseSpy).toBeCalled();
 		});
 
-		it('should call when handleClickOut', () => {
-			instance.handleClickOut();
+		it('should call when _onClick', () => {
+			instance._onClick({ target: {} });
 		});
 
 		it('should call when select value', () => {
@@ -536,7 +534,7 @@ describe('Suggestor - default cb props use noop', () => {
 });
 
 test('Suggestor renders suggestion list closed', () => {
-	const component = ReactTestUtils.renderIntoDocument(<Ssuggestor {...PROPS} />);
+	const component = ReactTestUtils.renderIntoDocument(<Suggestor {...PROPS} />);
 
-	expect(component.wrapped.state.open).toBeFalsy();
+	expect(component.state.open).toBeFalsy();
 });
