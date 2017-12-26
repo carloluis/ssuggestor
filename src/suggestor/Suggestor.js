@@ -4,7 +4,7 @@ import { EMPTY_STR, KEY_CODES, noop, removeAccents, autoBind } from '../utils';
 import { SPIN_STYLES, X_STYLES, glyphicon } from './styles';
 import List from './List';
 
-export class Suggestor extends PureComponent {
+class Suggestor extends PureComponent {
 	constructor(props) {
 		super(props);
 		autoBind(this);

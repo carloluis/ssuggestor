@@ -40,13 +40,13 @@ yarn add ssuggestor
 ```js
 import React from 'react';
 import { render } from 'react-dom';
-import SSuggestor from 'ssuggestor';
+import Suggestor from 'ssuggestor';
 
 render(
-	<SSuggestor 
+	<Suggestor 
 		list={['suggestion-a', 'suggestion-b', 'suggestion-c', '...', 'suggestion-z']}
+		placeholder="type anything to start..."
 		onChange={console.log}
-		placeholder="type a-z..."
 		styles={{width: 100}}
 		arrow
 		close
@@ -58,13 +58,13 @@ render(
 
 ### browser
 
-Include `react` dependencies and `ssuggestor.js` scripts:
+Include `react` dependencies and `ssuggestor` scripts:
 
 ```html
-<script src="https://unpkg.com/react@16.1.1/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@16.1.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/react@16.2.0/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/prop-types@15.6.0/prop-types.min.js"></script>
-<script src="https://unpkg.com/ssuggestor@0.1.0/dist/ssuggestor.min.js"></script>
+<script src="https://unpkg.com/ssuggestor@0.1.1/dist/ssuggestor.min.js"></script>
 
 <!-- bootstrap styles -->
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -72,26 +72,17 @@ Include `react` dependencies and `ssuggestor.js` scripts:
 
 ## Description
 
-This Simple Suggestor package exports two named components, and one of them as the default export:
+This Simple Suggestor package exports a single React component as the default export:
+It handles clicks outside of DOM component in order to close the suggestion list.
+All pattern matches are highlighted.
 
-```js
-import Ssuggestor, { SSuggestor, Suggestor } from 'ssuggestor'
+Example:
+- input pattern: `sugge`
+- items on suggestion list: *autoSuggest*, *ssüggèstor* and *suggests*
 
-console.info(Ssuggestor === SSuggestor); 
-// true
-```
-
-__SSuggestor__ is also exported as default, and handles clicks outside of DOM component in order to close the suggestion list. __Suggestor__ don't.
-
-
-Notes:
-
-
-If the search term is `suggest` and items (*SSuggestor*, *ssuggestion*, *sSUGGESTor*, *ssúggèstor*) were part of the suggestion list, then:
-
-* S**Suggest**or highlights search pattern on **suggest**ion list
-* search is case insensitive: **sSUGGEST**or match
-* search also strip accents away: **ssúggèst**or match
+Then,
+- matches are case insensitive: _auto**Sugge**st_
+- pattern test is performed removing accents: **ssüggèst**or
 
 #### Props:
 
@@ -116,9 +107,9 @@ value    | string | `''` | initial value
 useKeys  | bool | `true` | whether to use keys (`up`/`down`, `enter`, `escape`, `tab`) or not
 
 
-#### Methods
+#### Method
 
-Just one public method: `focus()`:
+One public method for imperative action: `focus()`
 
 ```js
 instance.focus(); // focuses the control input
