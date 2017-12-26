@@ -21,7 +21,7 @@ class ExUpdate extends React.Component {
 
 		this.state = {
 			suggestions: countries,
-			value: DEFAULT_VALUE
+			value: ''
 		};
 	}
 
