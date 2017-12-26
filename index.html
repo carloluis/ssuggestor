@@ -1,31 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>SSuggestor</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="keywords" content="react,reactjs,react component,component,suggestor,ssuggestor,select,form,autocomplete,javascript">
+	<meta name="keywords" content="react,reactjs component,component,suggestor,ssuggestor,select,autocomplete,javascript">
 	<meta name="description" content="SSuggestor - React Simple Suggestor">
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	 crossorigin="anonymous">
 	<style>
+		:root {
+			--light-blue: #5EBDF7;
+			--blue: #1187B9;
+			--grey: #eaeaea;
+			--white: #FFF;
+		}
+
 		.container {
-			padding:20;
-			margin: auto;
-			max-width: 500px;
+			padding: 24px 0 0;
+			margin: 0 auto;
+			max-width: 640px;
 		}
+
 		header {
-			background-color: #5EBDF7;
+			background-color: var(--blue);
 		}
+
 		header .container {
 			padding: 10px 0 30px;
 			text-align: center;
-			color: white;
+			color: var(--white);
 		}
+
 		.info {
-			background-color: #eaeaea;
+			background-color: var(--grey);
 			height: 40px;
 			text-align: center;
 			padding: 10px;
+		}
+
+		@media only screen and (max-width: 720px) {
+			.container {
+				padding: 24px 4px 0;
+				max-width: 90%;
+			}
 		}
 	</style>
 	<style>
@@ -34,34 +53,42 @@
 			font-size: 20px;
 			height: 40px;
 		}
-		.suggestor li{
+
+		.suggestor li {
 			font-size: 16px;
 			height: 26px;
 		}
+
 		.suggestor ::-webkit-input-placeholder {
 			font-weight: normal;
 			font-size: 18px;
 		}
 	</style>
 </head>
+
 <body>
 	<header>
 		<div class="container">
-			<h1>SSuggestor</h1>
+			<h1>&LeftAngleBracket;ssuggestor&RightAngleBracket;</h1>
 			<h3>React Simple Suggestor</h3>
 		</div>
 		<div class="info">
-			<span><a href="https://github.com/carloluis/ssuggestor">Code and Docs on GitHub</a></span>
+			<span>
+				<a href="https://github.com/carloluis/ssuggestor">Code and Docs on GitHub</a>
+			</span>
 		</div>
 	</header>
-	<div class="container">
+	<section class="container">
 		<div id="example">Loading...</div>
-	</div>
+	</section>
 	<footer>
 		<div class="info">
-			<span>Copyright &copy; <a href="https://twitter.com/carloluis_" target="_blank">Carloluis</a> 2017. MIT Licensed.</span>
+			<span>Copyright &copy;
+				<a href="https://twitter.com/carloluis_" target="_blank">Carloluis</a> 2017. MIT Licensed.</span>
 		</div>
 	</footer>
-<script type="text/javascript" src="./vendor.bundle.js"></script><script type="text/javascript" src="./app.bundle.js"></script>
+	<script type="text/javascript" src="./vendor.bundle.js"></script>
+	<script type="text/javascript" src="./app.bundle.js"></script>
 </body>
+
 </html>
