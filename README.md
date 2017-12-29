@@ -85,7 +85,7 @@ Then,
 
 #### Props:
 
-Property | Type | Default | Description
+Prop     | Type | Default | Description
 :--------|:-----|:--------|:-----------
 accents  | bool | `false`| whether to differentiate chars with accents or not
 arrow    | bool | `true` | ▼ icon - open suggestion list
@@ -103,7 +103,7 @@ style    | [object](https://facebook.github.io/react/docs/dom-elements.html#styl
 suggestOn| number | `1` | minimum length of search string to show suggestions
 tooltip  | string | `''` | input title text (simple tooltip)
 value    | string | `''` | initial value
-useKeys  | bool | `true` | whether to use keys (`up`/`down`, `enter`, `escape`, `tab`) or not
+useKeys  | bool | `true` | whether to use keys (<kbd>Up</kbd>, <kbd>Down</kbd>, <kbd>Enter</kbd>, <kbd>Escape</kbd>, <kbd>Tab</kbd>) or not
 
 
 #### Method
