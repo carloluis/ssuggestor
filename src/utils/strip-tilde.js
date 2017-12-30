@@ -24,6 +24,6 @@ for (let letter in LETTERS_MAP) {
 	}
 }
 
-const remove = str => str.replace(/[^\u0000-\u007F]/g, char => map[char] || char);
+const strip = str => str.replace(/[^\u0000-\u007F]/g, char => map[char] || char);
 
-export default remove;
+export default strip;

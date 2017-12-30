@@ -1,6 +1,6 @@
 import autoBind from './auto-bind';
 import noop from './noop';
-import removeAccents from './remove-accents';
+import strip from './strip-tilde';
+import keys from './keys';
 
-export { EMPTY_STR, KEY_CODES } from './values';
-export { autoBind, noop, removeAccents };
+export { autoBind, keys, noop, strip };

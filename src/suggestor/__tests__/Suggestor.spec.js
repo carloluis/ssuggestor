@@ -6,7 +6,7 @@ import { shallow, mount } from 'enzyme';
 import * as utils from '../../utils';
 import Suggestor from '../Suggestor';
 
-const { KEY_CODES, noop } = utils;
+const { keys, noop } = utils;
 
 jest.mock('../../utils/noop', () => {
 	return jest.fn();
@@ -151,7 +151,7 @@ describe('Suggestor component', () => {
 
 		afterEach(() => {
 			expect(autoBindSpy).toHaveBeenCalledTimes(1);
-		})
+		});
 
 		it('changeValue -> [setState, props.onChange, props.onSelect]', () => {
 			const value = 'umlaut';
@@ -325,7 +325,7 @@ describe('Suggestor component', () => {
 	describe('... handles keys', () => {
 		const event = {
 			preventDefault: jest.fn(),
-			keyCode: KEY_CODES.ENTER
+			keyCode: keys.ENTER
 		};
 		let component;
 
@@ -348,7 +348,7 @@ describe('Suggestor component', () => {
 		it('should not call processKey if useKeys is falsy', () => {
 			const processKeySpy = jest.spyOn(component.instance(), 'processKey');
 
-			component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.UP });
+			component.find('div').simulate('keyDown', { ...event, keyCode: keys.UP });
 
 			expect(processKeySpy).not.toBeCalledWith();
 		});
@@ -371,16 +371,16 @@ describe('Suggestor component', () => {
 			});
 
 			it('should call processKey if useKeys is truthy', () => {
-				component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.UP });
+				component.find('div').simulate('keyDown', { ...event, keyCode: keys.UP });
 
-				expect(processKeySpy).toBeCalledWith(KEY_CODES.UP);
+				expect(processKeySpy).toBeCalledWith(keys.UP);
 			});
 
 			it('should prevent event default action (with keys: ENTER, ESCAPE, UP, DOWN)', () => {
 				expect(event.preventDefault).not.toBeCalled();
-				const keys = [KEY_CODES.ENTER, KEY_CODES.ESCAPE, KEY_CODES.UP, KEY_CODES.DOWN];
+				const keyCodes = [keys.ENTER, keys.ESCAPE, keys.UP, keys.DOWN];
 
-				keys.map((keyCode, index) => {
+				keyCodes.map((keyCode, index) => {
 					component.find('div').simulate('keyDown', { ...event, keyCode });
 					expect(event.preventDefault).toHaveBeenCalledTimes(index + 1);
 				});
@@ -390,13 +390,13 @@ describe('Suggestor component', () => {
 			});
 
 			it('should not prevent event default action (with key: TAB)', () => {
-				component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.TAB });
+				component.find('div').simulate('keyDown', { ...event, keyCode: keys.TAB });
 
 				expect(event.preventDefault).not.toBeCalled();
 			});
 
 			it('should only close suggestion list - if selectOnTab is off (TAB key)', () => {
-				component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.TAB });
+				component.find('div').simulate('keyDown', { ...event, keyCode: keys.TAB });
 
 				expect(changeValueSpy).not.toBeCalled();
 				expect(handleCloseSpy).toBeCalled();
@@ -406,7 +406,7 @@ describe('Suggestor component', () => {
 				const selectedItem = PROPS.list[0];
 				component.instance().setState({ open: true, index: 0 });
 
-				component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.ENTER });
+				component.find('div').simulate('keyDown', { ...event, keyCode: keys.ENTER });
 
 				expect(PROPS.onSelect).toBeCalledWith(selectedItem);
 				expect(event.preventDefault).toBeCalled();
@@ -437,7 +437,7 @@ describe('Suggestor component', () => {
 
 			it('should change value (TAB key)', () => {
 				component.setState({ open: true });
-				component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.TAB });
+				component.find('div').simulate('keyDown', { ...event, keyCode: keys.TAB });
 
 				expect(changeValueSpy).toBeCalled();
 				expect(handleCloseSpy).toBeCalled();
@@ -447,7 +447,7 @@ describe('Suggestor component', () => {
 
 			it('should clear selected value if any and suggestion list is closed (ESC key)', () => {
 				component.setState({ open: false, value: 'temporise' });
-				component.find('div').simulate('keyDown', { ...event, keyCode: KEY_CODES.ESCAPE });
+				component.find('div').simulate('keyDown', { ...event, keyCode: keys.ESCAPE });
 
 				expect(handleCloseSpy).toBeCalled();
 				expect(changeValueSpy).toBeCalledWith('');
@@ -458,19 +458,19 @@ describe('Suggestor component', () => {
 	});
 
 	describe('filter', () => {
-		const removeAccentsSpy = jest.spyOn(utils, 'removeAccents');
+		const stripSpy = jest.spyOn(utils, 'strip');
 		let component, instance;
 
 		beforeEach(() => {
-			removeAccentsSpy.mockClear();
+			stripSpy.mockClear();
 			component = shallow(<Suggestor {...PROPS} />);
 			instance = component.instance();
 		});
 
-		it('should call removeAccents (if accents not allowed)', () => {
+		it('should call strip (if accents not allowed)', () => {
 			instance.filter(PROPS.list, 'illaudable');
 
-			expect(removeAccentsSpy).toBeCalled();
+			expect(stripSpy).toBeCalled();
 		});
 
 		it('should return all item on suggestion list (if onlyMatch arg set to falsy)', () => {
@@ -502,13 +502,13 @@ describe('Suggestor component', () => {
 			expect(result.length).toBe(4);
 		});
 
-		it('should not call removeAccents (if accents support)', () => {
+		it('should not call strip (if accents support)', () => {
 			component.setProps({ accents: true });
-			removeAccentsSpy.mockClear();
+			stripSpy.mockClear();
 
 			component.instance().filter(PROPS.list, 'illaudable');
 
-			expect(removeAccentsSpy).not.toBeCalled();
+			expect(stripSpy).not.toBeCalled();
 		});
 	});
 });
