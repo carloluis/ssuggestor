@@ -14,7 +14,6 @@ jest.mock('../../utils/noop', () => {
 
 const PROPS = {
 	list: ['temporise', 'whencesoeve', 'turophile', 'umlaut'],
-	reference: jest.fn(),
 	onChange: jest.fn(),
 	onSelect: jest.fn(),
 	onKey: jest.fn(),
@@ -542,6 +541,30 @@ describe('Suggestor component', () => {
 		it('should remove click listener from document', () => {
 			expect(removeEventListenerSpy.mock.calls.length).toBe(1);
 			expect(removeEventListenerSpy.mock.calls[0][0]).toBe('click');
+		});
+	});
+
+	describe('_onClick', () => {
+		const wrapper = mount(<Suggestor {...PROPS} />);
+		const wrapperInstance = wrapper.instance();
+		let handleCloseSpy;
+
+		beforeEach(() => {
+			handleCloseSpy = jest.spyOn(wrapperInstance, 'handleClose');
+			wrapper.update();
+		});
+		afterEach(() => {
+			handleCloseSpy.mockClear();
+		});
+
+		it('should call handleClose when click outside', () => {
+			wrapperInstance._onClick({ target: {} });
+			expect(handleCloseSpy).toBeCalled();
+		});
+
+		it('should not call handleClose when click inside component', () => {
+			wrapperInstance._onClick({ target: wrapperInstance.input });
+			expect(handleCloseSpy).not.toBeCalled();
 		});
 	});
 });
