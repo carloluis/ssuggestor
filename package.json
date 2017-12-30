@@ -1,6 +1,6 @@
 {
 	"name": "ssuggestor",
-	"version": "0.1.1",
+	"version": "0.2.1",
 	"description": "react-simple-suggestor",
 	"main": "dist/ssuggestor.js",
 	"scripts": {
@@ -20,10 +20,7 @@
 		"precommit": "npm run lint",
 		"prepush": "npm run test"
 	},
-	"files": [
-		"dist",
-		"src"
-	],
+	"files": ["dist", "src"],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/carloluis/ssuggestor.git"
@@ -76,12 +73,7 @@
 		"react": "^16.1"
 	},
 	"jest": {
-		"moduleFileExtensions": [
-			"js"
-		],
-		"setupFiles": [
-			"<rootDir>/__setup__/shim.js",
-			"<rootDir>/__setup__/enzyme.js"
-		]
+		"moduleFileExtensions": ["js"],
+		"setupFiles": ["<rootDir>/__setup__/shim.js", "<rootDir>/__setup__/enzyme.js"]
 	}
 }
