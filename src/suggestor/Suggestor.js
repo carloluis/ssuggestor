@@ -184,7 +184,6 @@ class Suggestor extends PureComponent {
 
 Suggestor.propTypes = {
 	list: PropTypes.arrayOf(PropTypes.string).isRequired,
-	reference: PropTypes.func,
 	onChange: PropTypes.func,
 	onSelect: PropTypes.func,
 	onKey: PropTypes.func,
