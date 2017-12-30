@@ -511,6 +511,39 @@ describe('Suggestor component', () => {
 			expect(stripSpy).not.toBeCalled();
 		});
 	});
+
+	describe('cdm', () => {
+		it('should add click listener to document', () => {
+			const addEventListenerSpy = jest.spyOn(document, 'addEventListener');
+			const component = shallow(<Suggestor {...PROPS} />);
+			expect(addEventListenerSpy).toBeCalled();
+		});
+	});
+
+	describe('cwu', () => {
+		let component, cwuSpy;
+		const removeEventListenerSpy = jest.spyOn(document, 'removeEventListener');
+
+		beforeEach(() => {
+			removeEventListenerSpy.mockClear();
+			component = shallow(<Suggestor {...PROPS} />);
+			cwuSpy = jest.spyOn(component.instance(), 'componentWillUnmount');
+			component.unmount();
+		});
+
+		it('should call componentWillUnmount', () => {
+			expect(cwuSpy).toBeCalled();
+		});
+
+		it('should call removeEventListener', () => {
+			expect(removeEventListenerSpy).toBeCalled();
+		});
+
+		it('should remove click listener from document', () => {
+			expect(removeEventListenerSpy.mock.calls.length).toBe(1);
+			expect(removeEventListenerSpy.mock.calls[0][0]).toBe('click');
+		});
+	});
 });
 
 describe('Suggestor - default cb props use noop', () => {
