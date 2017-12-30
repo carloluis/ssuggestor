@@ -48,7 +48,8 @@ build/Release
 
 # IDEs and editors
 /.idea
-/.vscode
+/.vscode/*
+!/.vscode/settings.json
 .project
 .classpath
 *.launch
