@@ -85,25 +85,25 @@ Then,
 
 #### Props:
 
-Property | Type | Default | Description
+Prop     | Type | Default | Description
 :--------|:-----|:--------|:-----------
-accents  | bool | `false`| whether to differentiate chars with accents or not
-arrow    | bool | `true` | ▼ icon - open suggestion list
-className| string | `input-group` | css classes for component's root element
-close    | bool | `true` | ✖︎ icon - delete current value
-list     | array | -- | array of suggestions strings (_required_)
-openOnClick | bool | `true` | whether suggestion list opens on click or not
-onSelect | func | `() => {}` | onSelect handler: `(current_value) => { }`
-onChange | func | `() => {}` | onChange handler: `(new_value) => { }`
-onKey    | func | `() => {}` | onKey handler: `(keyEvent) => { }`
-placeholder | string | `''` | input placeholder text
-required | bool | `false` | wheater to set required prop on input element or not
-selectOnTab | bool | `false` | whether suggestion is selected by hit `tab` key or not
-style    | [object](https://facebook.github.io/react/docs/dom-elements.html#style "react style object") | `undefined` | inline styles for component's root element
-suggestOn| number | `1` | minimum length of search string to show suggestions
-tooltip  | string | `''` | input title text (simple tooltip)
-value    | string | `''` | initial value
-useKeys  | bool | `true` | whether to use keys (`up`/`down`, `enter`, `escape`, `tab`) or not
+accents  | Boolean | `false`| whether to differentiate chars with accents or not
+arrow    | Boolean | `true` | ▼ icon - open suggestion list
+className| String | `input-group` | css classes for component's root element
+close    | Boolean | `true` | ✖︎ icon - delete current value
+list     | Array | -- | array of suggestions strings (_required_)
+openOnClick | Boolean | `true` | whether suggestion list opens on click or not
+onSelect | Function | `() => {}` | onSelect handler: `(current_value) => { }`
+onChange | Function | `() => {}` | onChange handler: `(new_value) => { }`
+onKey    | Function | `() => {}` | onKey handler: `(keyEvent) => { }`
+placeholder | String | -- | input placeholder text
+required | Boolean | `false` | wheater to set required prop on input element or not
+selectOnTab | Boolean | `false` | whether suggestion is selected by hit `tab` key or not
+style    | [Object](https://facebook.github.io/react/docs/dom-elements.html#style "react style object") | -- | inline styles for component's root element
+suggestOn| Number | `1` | minimum length of search string to show suggestions
+tooltip  | String | -- | input title text (simple tooltip)
+value    | String | `''` | initial value
+useKeys  | Boolean | `true` | whether to use keys (<kbd>Up</kbd>, <kbd>Down</kbd>, <kbd>Enter</kbd>, <kbd>Escape</kbd>, <kbd>Tab</kbd>) or not
 
 
 #### Method
@@ -138,6 +138,6 @@ Open browser on [localhost:9000](http://localhost:9000/)
 
 ## License
 
-Licensed under the MIT License, Copyright © 2017 [Carloluis](https://twitter.com/carloluis_).
+Licensed under the MIT License, Copyright © 2017 [Carloluis](https://twitter.com/carloluis_)
 
 See [LICENSE](./LICENSE) for more information.
