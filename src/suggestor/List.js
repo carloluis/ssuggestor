@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ListItem from './ListItem';
 import { getListStyles } from './styles';
 
-export const List = ({ open, filtered, index, value, onItemClick, onItemMouseEnter }) =>
+const List = ({ open, filtered, index, value, onItemClick, onItemMouseEnter }) =>
 	open &&
 	!!filtered.length && (
 		<ul className="dropdown-menu" style={getListStyles(open)}>

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { EMPTY_STR, KEY_CODES, noop, removeAccents, autoBind } from '../utils';
+import { autoBind, keys, noop, strip } from '../utils';
 import { SPIN_STYLES, X_STYLES, glyphicon } from './styles';
 import List from './List';
 
@@ -70,7 +70,7 @@ class Suggestor extends PureComponent {
 		const list = filtered.map(item => item.word);
 
 		switch (code) {
-			case KEY_CODES.ENTER:
+			case keys.ENTER:
 				this.toggleList();
 				if (open && list[index]) {
 					this.changeValue(list[index], true);
@@ -78,23 +78,23 @@ class Suggestor extends PureComponent {
 					this.props.onSelect(value);
 				}
 				break;
-			case KEY_CODES.ESCAPE:
+			case keys.ESCAPE:
 				this.handleClose();
 				if (!open && value) {
-					this.changeValue(EMPTY_STR);
+					this.changeValue('');
 				}
 				break;
-			case KEY_CODES.DOWN: {
+			case keys.DOWN: {
 				const next = (index + open) % list.length;
 				this.setState({ open: true, index: next });
 				break;
 			}
-			case KEY_CODES.UP: {
+			case keys.UP: {
 				const prev = (index || list.length) - 1;
 				this.setState({ open: true, index: prev });
 				break;
 			}
-			case KEY_CODES.TAB:
+			case keys.TAB:
 				if (this.props.selectOnTab && open && list[index]) {
 					this.changeValue(list[index], true);
 				} else {
@@ -118,7 +118,7 @@ class Suggestor extends PureComponent {
 		this.changeValue(value);
 	}
 	remove() {
-		this.changeValue(EMPTY_STR, true);
+		this.changeValue('', true);
 	}
 	changeValue(value, select = false) {
 		const filtered = this.filter(this.props.list, value);
@@ -135,12 +135,12 @@ class Suggestor extends PureComponent {
 			}
 		});
 	}
-	filter(list, value = EMPTY_STR, onlyMatch = true) {
+	filter(list, value = '', onlyMatch = true) {
 		value = value.toLowerCase();
 		const { accents } = this.props;
 		if (!accents) {
 			// todo: same transform for suggestions..
-			value = removeAccents(value);
+			value = strip(value);
 		}
 		let mapped = list.map(word => ({ word, index: word.toLowerCase().indexOf(value) }));
 		if (onlyMatch) {
@@ -208,7 +208,7 @@ Suggestor.defaultProps = {
 	onSelect: noop,
 	onChange: noop,
 	onKey: noop,
-	value: EMPTY_STR,
+	value: '',
 	openOnClick: true,
 	selectOnTab: false,
 	suggestOn: 1,
