@@ -14,7 +14,6 @@ jest.mock('../../utils/noop', () => {
 
 const PROPS = {
 	list: ['temporise', 'whencesoeve', 'turophile', 'umlaut'],
-	reference: jest.fn(),
 	onChange: jest.fn(),
 	onSelect: jest.fn(),
 	onKey: jest.fn(),
@@ -509,6 +508,63 @@ describe('Suggestor component', () => {
 			component.instance().filter(PROPS.list, 'illaudable');
 
 			expect(stripSpy).not.toBeCalled();
+		});
+	});
+
+	describe('cdm', () => {
+		it('should add click listener to document', () => {
+			const addEventListenerSpy = jest.spyOn(document, 'addEventListener');
+			const component = shallow(<Suggestor {...PROPS} />);
+			expect(addEventListenerSpy).toBeCalled();
+		});
+	});
+
+	describe('cwu', () => {
+		let component, cwuSpy;
+		const removeEventListenerSpy = jest.spyOn(document, 'removeEventListener');
+
+		beforeEach(() => {
+			removeEventListenerSpy.mockClear();
+			component = shallow(<Suggestor {...PROPS} />);
+			cwuSpy = jest.spyOn(component.instance(), 'componentWillUnmount');
+			component.unmount();
+		});
+
+		it('should call componentWillUnmount', () => {
+			expect(cwuSpy).toBeCalled();
+		});
+
+		it('should call removeEventListener', () => {
+			expect(removeEventListenerSpy).toBeCalled();
+		});
+
+		it('should remove click listener from document', () => {
+			expect(removeEventListenerSpy.mock.calls.length).toBe(1);
+			expect(removeEventListenerSpy.mock.calls[0][0]).toBe('click');
+		});
+	});
+
+	describe('_onClick', () => {
+		const wrapper = mount(<Suggestor {...PROPS} />);
+		const wrapperInstance = wrapper.instance();
+		let handleCloseSpy;
+
+		beforeEach(() => {
+			handleCloseSpy = jest.spyOn(wrapperInstance, 'handleClose');
+			wrapper.update();
+		});
+		afterEach(() => {
+			handleCloseSpy.mockClear();
+		});
+
+		it('should call handleClose when click outside', () => {
+			wrapperInstance._onClick({ target: {} });
+			expect(handleCloseSpy).toBeCalled();
+		});
+
+		it('should not call handleClose when click inside component', () => {
+			wrapperInstance._onClick({ target: wrapperInstance.input });
+			expect(handleCloseSpy).not.toBeCalled();
 		});
 	});
 });
