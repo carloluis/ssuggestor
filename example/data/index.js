@@ -1,7 +1,8 @@
 export { countries } from './countries.js';
 
 export const suggestions = [
-	'list of',
+	'list',
+	'of',
 	'suggestions',
 	'with',
 	'default',

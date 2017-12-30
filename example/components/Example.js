@@ -12,12 +12,13 @@ const STYLE_WIDTH = { width: '100%' };
 const Example = () => (
 	<div>
 		<Section title="Code Example">
-			<pre>{`<Suggestor list={['list', 'of', 'suggestions', ...]} style={{width:'100%''}} />`}</pre>
+			<pre>{`<Suggestor list={['list', 'of', 'suggestions', ...]} style={{width:'100%'}} />`}</pre>
+			<a href="https://codepen.io/carloluis/pen/rjpLYw">CodePen</a>
 		</Section>
 
 		<Section
 			title="Suggestor"
-			description="Use `value` prop to set initial value. Click x-icon to delete current value. Use up, down, enter and escape keys."
+			description="Use `value` prop to set initial value. Use up, down, enter and escape keys."
 		>
 			<Suggestor
 				value="default"
@@ -105,8 +106,8 @@ const Example = () => (
 		</Section>
 
 		<Section
-			title="Suggestor with 2K suggestions"
-			description="Long suggestion list (of numbers). Disable keys support and open on click. Waiting until 2nd char for suggestions."
+			title="Suggestor with 2K suggestions (numbers)"
+			description="Disable keys support and open on click props. Waiting until 2nd char to display suggestions."
 		>
 			<Suggestor
 				list={numbers}
