@@ -86,25 +86,29 @@ Then,
 
 #### Props:
 
-| Prop        | Type     | Default       | Description                                                                                                      |
-| :---------- | :------- | :------------ | :--------------------------------------------------------------------------------------------------------------- |
-| accents     | Boolean  | `false`       | whether to differentiate chars with accents or not                                                               |
-| arrow       | Boolean  | `true`        | ▼ icon - open suggestion list                                                                                    |
-| className   | String   | `input-group` | css classes for component's root element                                                                         |
-| close       | Boolean  | `true`        | ✖︎ icon - delete current value                                                                                   |
-| list        | Array    | --            | array of suggestions strings (_required_)                                                                        |
-| openOnClick | Boolean  | `true`        | whether suggestion list opens on click or not                                                                    |
-| onSelect    | Function | `() => {}`    | onSelect handler: `(current_value) => { }`                                                                       |
-| onChange    | Function | `() => {}`    | onChange handler: `(new_value) => { }`                                                                           |
-| onKey       | Function | `() => {}`    | onKey handler: `(keyEvent) => { }`                                                                               |
-| placeholder | String   | --            | input placeholder text                                                                                           |
-| required    | Boolean  | `false`       | wheater to set required prop on input element or not                                                             |
-| selectOnTab | Boolean  | `false`       | whether suggestion is selected by hit `tab` key or not                                                           |
-| style       | Object   | --            | inline styles for component's root element                                                                       |
-| suggestOn   | Number   | `1`           | minimum length of search string to show suggestions                                                              |
-| tooltip     | String   | --            | input title text (simple tooltip)                                                                                |
-| value       | String   | `''`          | initial value                                                                                                    |
-| useKeys     | Boolean  | `true`        | whether to use keys (<kbd>Up</kbd>, <kbd>Down</kbd>, <kbd>Enter</kbd>, <kbd>Escape</kbd>, <kbd>Tab</kbd>) or not |
+| Prop        | Type     | Default       | Description                                                 |
+| :---------- | :------- | :------------ | :---------------------------------------------------------- |
+| accents     | Boolean  | `false`       | whether to differentiate chars with accents or not          |
+| arrow       | Boolean  | `true`        | ▼ icon - open suggestion list                               |
+| className   | String   | `input-group` | css classes for component's root element                    |
+| close       | Boolean  | `true`        | ✖︎ icon - delete current value                              |
+| list        | Array    | --            | suggestions strings (_required_)                            |
+| openOnClick | Boolean  | `true`        | whether suggestion list opens on click or not               |
+| onSelect    | Function | `() => {}`    | onSelect handler: `(currentValue) => { }`                   |
+| onChange    | Function | `() => {}`    | onChange handler: `(newValue) => { }`                       |
+| onKey       | Function | `() => {}`    | onKey handler: `(keyEvent) => { }`                          |
+| placeholder | String   | --            | input placeholder text                                      |
+| required    | Boolean  | `false`       | if `true`, set required attribute on `<input>` element      |
+| selectOnTab | Boolean  | `false`       | if `true`, enables <kbd>Tab</kbd> key to select ssuggestion |
+| style       | Object   | --            | inline styles for component's root element                  |
+| suggestOn   | Number   | `1`           | minimum size of search string to show suggestions           |
+| tooltip     | String   | --            | input title text (simple tooltip)                           |
+| value       | String   | `''`          | initial value                                               |
+| useKeys     | Boolean  | `true`        | whether to use [supported keys](#supported-keys) or not     |
+
+##### Supported Keys
+
+<kbd>Up</kbd>, <kbd>Down</kbd>, <kbd>Enter</kbd>, <kbd>Escape</kbd> & <kbd>Tab</kbd>.
 
 #### Method
 
