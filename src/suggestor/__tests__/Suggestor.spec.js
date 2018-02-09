@@ -255,27 +255,28 @@ describe('Suggestor component', () => {
 	});
 
 	describe('... handleClose', () => {
-		let instance, handleCloseSpy;
+		let mountedInstance, handleCloseSpy;
 
 		beforeEach(() => {
-			instance = mount(<Suggestor {...PROPS} />).instance();
-			handleCloseSpy = jest.spyOn(instance, 'handleClose');
+			mountedInstance = mount(<Suggestor {...PROPS} />).instance();
+			handleCloseSpy = jest.spyOn(mountedInstance, 'handleClose');
 		});
 
 		afterEach(() => {
 			expect(handleCloseSpy).toBeCalled();
 		});
 
-		it('should call when _onClick', () => {
-			instance._onClick({ target: {} });
-		});
-
 		it('should call when select value', () => {
-			instance.changeValue('temp', true);
+			mountedInstance.changeValue('temp', true);
 		});
 
 		it('should call when select value (2)', () => {
-			instance.changeValue('no match!');
+			mountedInstance.changeValue('no match!');
+		});
+
+		it('should call when _onClick', () => {
+			mountedInstance.input = { parentNode: { contains: jest.fn() } };
+			mountedInstance._onClick({ target: {} });
 		});
 	});
 
@@ -557,14 +558,18 @@ describe('Suggestor component', () => {
 			handleCloseSpy.mockClear();
 		});
 
-		it('should call handleClose when click outside', () => {
-			wrapperInstance._onClick({ target: {} });
-			expect(handleCloseSpy).toBeCalled();
-		});
-
 		it('should not call handleClose when click inside component', () => {
 			wrapperInstance._onClick({ target: wrapperInstance.input });
 			expect(handleCloseSpy).not.toBeCalled();
+		});
+
+		it('should call handleClose when click outside', () => {
+			const contains = jest.fn(() => false);
+			wrapperInstance.input = { parentNode: { contains } };
+			wrapperInstance._onClick({ target: {} });
+
+			expect(handleCloseSpy).toBeCalled();
+			expect(contains).toBeCalled();
 		});
 	});
 });
