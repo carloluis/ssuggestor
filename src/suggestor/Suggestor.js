@@ -137,12 +137,15 @@ class Suggestor extends PureComponent {
 	}
 	filter(list, value = '', onlyMatch = true) {
 		value = value.toLowerCase();
-		const { accents } = this.props;
+		const { accents, selector } = this.props;
 		if (!accents) {
 			// todo: same transform for suggestions..
 			value = strip(value);
 		}
-		let mapped = list.map(word => ({ word, index: word.toLowerCase().indexOf(value) }));
+		let mapped = list.map(item => {
+			const word = selector(item);
+			return { word, index: word.toLowerCase().indexOf(value) };
+		});
 		if (onlyMatch) {
 			mapped = mapped.filter(item => item.index !== -1);
 		}
@@ -183,7 +186,8 @@ class Suggestor extends PureComponent {
 }
 
 Suggestor.propTypes = {
-	list: PropTypes.arrayOf(PropTypes.string).isRequired,
+	list: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])).isRequired,
+	selector: PropTypes.func,
 	onChange: PropTypes.func,
 	onSelect: PropTypes.func,
 	onKey: PropTypes.func,
@@ -204,6 +208,7 @@ Suggestor.propTypes = {
 
 Suggestor.defaultProps = {
 	className: 'input-group',
+	selector: s => s,
 	onSelect: noop,
 	onChange: noop,
 	onKey: noop,
