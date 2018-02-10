@@ -14,8 +14,8 @@ jest.mock('../../utils/noop', () => {
 
 const PROPS = {
 	list: ['temporise', 'whencesoeve', 'turophile', 'umlaut'],
-	onChange: jest.fn(),
-	onSelect: jest.fn(),
+	onChange: jest.fn().mockName('oChangeMock'),
+	onSelect: jest.fn().mockName('onSelectMock'),
 	onKey: jest.fn(),
 	value: '',
 	openOnClick: false,
@@ -46,20 +46,17 @@ describe('<Ssuggestor />', () => {
 	it('snapshot - with suggestions visible', () => {
 		const tree = renderer.create(<Suggestor {...PROPS} openOnClick />);
 		tree.getInstance().setState({ open: true });
-
 		expect(tree).toMatchSnapshot();
 	});
 
 	it('snapshot - with arrow', () => {
 		const tree = renderer.create(<Suggestor {...PROPS} arrow />);
-
 		expect(tree).toMatchSnapshot();
 	});
 
 	it('snapshot - with close', () => {
 		const tree = renderer.create(<Suggestor {...PROPS} close />);
 		tree.getInstance().setState({ value: 'temp' });
-
 		expect(tree).toMatchSnapshot();
 	});
 });
