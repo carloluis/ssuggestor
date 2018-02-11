@@ -156,7 +156,7 @@ describe('Suggestor component', () => {
 			expect(setStateSpy).toBeCalled();
 			expect(handleCloseSpy).toBeCalledWith();
 			expect(PROPS.onChange).toBeCalledWith(value);
-			expect(PROPS.onSelect).toBeCalledWith(value);
+			expect(PROPS.onSelect).toBeCalledWith(value, value);
 		});
 
 		it('toggleList -> setState (open suggestion list)', () => {
@@ -405,7 +405,7 @@ describe('Suggestor component', () => {
 
 				component.find('div').simulate('keyDown', { ...event, keyCode: keys.ENTER });
 
-				expect(PROPS.onSelect).toBeCalledWith(selectedItem);
+				expect(PROPS.onSelect).toBeCalledWith(selectedItem, selectedItem);
 				expect(event.preventDefault).toBeCalled();
 				expect(changeValueSpy).toBeCalledWith(selectedItem, true);
 				expect(toggleListSpy).toBeCalled();
@@ -478,7 +478,7 @@ describe('Suggestor component', () => {
 
 			const [first, ...tail] = result;
 
-			expect(first).toEqual({
+			expect(first).toMatchObject({
 				word: value,
 				index: 0
 			});

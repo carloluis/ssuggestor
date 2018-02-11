@@ -121,14 +121,16 @@ class Suggestor extends PureComponent {
 		this.changeValue('', true);
 	}
 	changeValue(value, select = false) {
-		const filtered = this.filter(this.props.list, value);
-		const suggest = value.length >= this.props.suggestOn;
+		const { list, suggestOn } = this.props;
+		const filtered = this.filter(list, value);
+		const suggest = value.length >= suggestOn;
 		const open = !!filtered.length && suggest;
 
 		this.setState({ value, filtered, open }, () => {
 			this.props.onChange(value);
 			if (select) {
-				this.props.onSelect(value);
+				const { item } = filtered.find(({ word }) => word.toLowerCase() === value.toLowerCase()) || {};
+				this.props.onSelect(value, item);
 				this.handleClose();
 			} else if (!open) {
 				this.handleClose();
@@ -144,7 +146,7 @@ class Suggestor extends PureComponent {
 		}
 		let mapped = list.map(item => {
 			const word = selector(item);
-			return { word, index: word.toLowerCase().indexOf(value) };
+			return { word, index: word.toLowerCase().indexOf(value), item };
 		});
 		if (onlyMatch) {
 			mapped = mapped.filter(item => item.index !== -1);
