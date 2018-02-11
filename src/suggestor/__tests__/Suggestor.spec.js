@@ -4,13 +4,13 @@ import ReactTestUtils from 'react-dom/test-utils';
 import { shallow, mount } from 'enzyme';
 
 import * as utils from '../../utils';
+import transform from '../../utils/transform';
 import Suggestor from '../Suggestor';
 
 const { keys, noop } = utils;
 
-jest.mock('../../utils/noop', () => {
-	return jest.fn();
-});
+jest.mock('../../utils/transform', () => jest.fn((_, s) => s));
+jest.mock('../../utils/noop', () => jest.fn());
 
 const PROPS = {
 	list: ['temporise', 'whencesoeve', 'turophile', 'umlaut'],
@@ -455,19 +455,28 @@ describe('Suggestor component', () => {
 	});
 
 	describe('filter', () => {
-		const stripSpy = jest.spyOn(utils, 'strip');
 		let component, instance;
 
 		beforeEach(() => {
-			stripSpy.mockClear();
+			transform.mockClear();
 			component = shallow(<Suggestor {...PROPS} />);
 			instance = component.instance();
+		});
+
+		afterEach(() => {
+			expect(transform).toBeCalled();
+			transform.mockClear();
+		});
+
+		it('should call for every suggestion and the value', () => {
+			expect(transform).toHaveBeenCalledTimes(PROPS.list.length + 1);
 		});
 
 		it('should call strip (if accents not allowed)', () => {
 			instance.filter(PROPS.list, 'illaudable');
 
-			expect(stripSpy).toBeCalled();
+			expect(transform).toHaveBeenCalledTimes(2 * (PROPS.list.length + 1));
+			transform.mock.calls.map(call => expect(call[0]).toBeFalsy());
 		});
 
 		it('should return all item on suggestion list (if onlyMatch arg set to falsy)', () => {
@@ -501,11 +510,12 @@ describe('Suggestor component', () => {
 
 		it('should not call strip (if accents support)', () => {
 			component.setProps({ accents: true });
-			stripSpy.mockClear();
+			transform.mockClear();
 
 			component.instance().filter(PROPS.list, 'illaudable');
 
-			expect(stripSpy).not.toBeCalled();
+			expect(transform).toHaveBeenCalledTimes(PROPS.list.length + 1);
+			transform.mock.calls.map(call => expect(call[0]).toBeTruthy());
 		});
 	});
 
