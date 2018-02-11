@@ -122,16 +122,16 @@ class Suggestor extends PureComponent {
 		this.changeValue('', true);
 	}
 	changeValue(value, select = false) {
-		const { list, suggestOn } = this.props;
+		const { list, suggestOn, accents, onChange, onSelect } = this.props;
 		const filtered = this.filter(list, value);
 		const suggest = value.length >= suggestOn;
 		const open = !!filtered.length && suggest;
 
 		this.setState({ value, filtered, open }, () => {
-			this.props.onChange(value);
+			onChange(value);
 			if (select) {
-				const { item } = filtered.find(({ word }) => word.toLowerCase() === value.toLowerCase()) || {};
-				this.props.onSelect(value, item);
+				const suggestion = filtered.find(({ word }) => transform(accents, word) === transform(accents, value));
+				onSelect(value, suggestion && suggestion.item);
 				this.handleClose();
 			} else if (!open) {
 				this.handleClose();
