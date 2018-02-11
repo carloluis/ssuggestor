@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { autoBind, keys, noop, strip } from '../utils';
+import { autoBind, keys, noop } from '../utils';
+import transform from '../utils/transform';
 import { SPIN_STYLES, X_STYLES, glyphicon } from './styles';
 import List from './List';
 
@@ -139,12 +140,15 @@ class Suggestor extends PureComponent {
 	}
 	filter(list, value = '', onlyMatch = true) {
 		const { accents, selector } = this.props;
-		value = (accents ? value : strip(value)).toLowerCase();
+		value = transform(accents, value);
 
 		let mapped = list.map(item => {
 			const word = selector(item);
-			const word_ = (accents ? word : strip(word)).toLowerCase();
-			return { word, index: word_.indexOf(value), item };
+			return {
+				index: transform(accents, word).indexOf(value),
+				word,
+				item
+			};
 		});
 		if (onlyMatch) {
 			mapped = mapped.filter(item => item.index !== -1);
