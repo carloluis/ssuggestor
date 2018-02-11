@@ -31,7 +31,7 @@ class Suggestor extends PureComponent {
 	componentWillReceiveProps(nextProps) {
 		let value = this.state.value;
 
-		if (nextProps.value !== this.props.value && nextProps.value !== this.state.value) {
+		if (nextProps.value !== this.props.value && nextProps.value !== value) {
 			value = nextProps.value;
 		}
 
@@ -42,20 +42,20 @@ class Suggestor extends PureComponent {
 	}
 	handleClose() {
 		if (this.state.open) {
-			const filtered = this.filter(this.props.list, this.state.value, false);
-			this.setState({ open: false, filtered, index: 0 });
-		}
-	}
-	toggleList() {
-		if (this.state.open) {
-			this.handleClose();
-		} else {
-			this.setState({ open: true });
+			this.setState({
+				open: false,
+				filtered: this.unfilter(),
+				index: 0
+			});
 		}
 	}
 	handleClick() {
 		if (this.props.openOnClick) {
-			this.toggleList();
+			if (this.state.open) {
+				this.handleClose();
+			} else {
+				this.setState({ open: true });
+			}
 		}
 	}
 	handleKeyDown(e) {
@@ -72,11 +72,10 @@ class Suggestor extends PureComponent {
 
 		switch (code) {
 			case keys.ENTER:
-				this.toggleList();
 				if (open && list[index]) {
 					this.changeValue(list[index], true);
 				} else {
-					this.props.onSelect(value);
+					this.setState({ open: true, filtered: this.unfilter() });
 				}
 				break;
 			case keys.ESCAPE:
@@ -138,7 +137,7 @@ class Suggestor extends PureComponent {
 			}
 		});
 	}
-	filter(list, value = '', onlyMatch = true) {
+	filter(list, value, onlyMatch = true) {
 		const { accents, selector } = this.props;
 		value = transform(accents, value);
 
@@ -154,6 +153,9 @@ class Suggestor extends PureComponent {
 			mapped = mapped.filter(item => item.index !== -1);
 		}
 		return mapped;
+	}
+	unfilter() {
+		return this.filter(this.props.list, this.state.value, false);
 	}
 	focus() {
 		this.input.focus();
