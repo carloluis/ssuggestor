@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { autoBind, keys, noop, strip } from '../utils';
+import { autoBind, keys, noop } from '../utils';
+import transform from '../utils/transform';
 import { SPIN_STYLES, X_STYLES, glyphicon } from './styles';
 import List from './List';
 
@@ -121,16 +122,16 @@ class Suggestor extends PureComponent {
 		this.changeValue('', true);
 	}
 	changeValue(value, select = false) {
-		const { list, suggestOn } = this.props;
+		const { list, suggestOn, accents, onChange, onSelect } = this.props;
 		const filtered = this.filter(list, value);
 		const suggest = value.length >= suggestOn;
 		const open = !!filtered.length && suggest;
 
 		this.setState({ value, filtered, open }, () => {
-			this.props.onChange(value);
+			onChange(value);
 			if (select) {
-				const { item } = filtered.find(({ word }) => word.toLowerCase() === value.toLowerCase()) || {};
-				this.props.onSelect(value, item);
+				const suggestion = filtered.find(({ word }) => transform(accents, word) === transform(accents, value));
+				onSelect(value, suggestion && suggestion.item);
 				this.handleClose();
 			} else if (!open) {
 				this.handleClose();
@@ -138,15 +139,16 @@ class Suggestor extends PureComponent {
 		});
 	}
 	filter(list, value = '', onlyMatch = true) {
-		value = value.toLowerCase();
 		const { accents, selector } = this.props;
-		if (!accents) {
-			// todo: same transform for suggestions..
-			value = strip(value);
-		}
+		value = transform(accents, value);
+
 		let mapped = list.map(item => {
 			const word = selector(item);
-			return { word, index: word.toLowerCase().indexOf(value), item };
+			return {
+				index: transform(accents, word).indexOf(value),
+				word,
+				item
+			};
 		});
 		if (onlyMatch) {
 			mapped = mapped.filter(item => item.index !== -1);
