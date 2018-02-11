@@ -138,15 +138,13 @@ class Suggestor extends PureComponent {
 		});
 	}
 	filter(list, value = '', onlyMatch = true) {
-		value = value.toLowerCase();
 		const { accents, selector } = this.props;
-		if (!accents) {
-			// todo: same transform for suggestions..
-			value = strip(value);
-		}
+		value = (accents ? value : strip(value)).toLowerCase();
+
 		let mapped = list.map(item => {
 			const word = selector(item);
-			return { word, index: word.toLowerCase().indexOf(value), item };
+			const word_ = (accents ? word : strip(word)).toLowerCase();
+			return { word, index: word_.indexOf(value), item };
 		});
 		if (onlyMatch) {
 			mapped = mapped.filter(item => item.index !== -1);
