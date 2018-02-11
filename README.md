@@ -23,20 +23,18 @@ CodePen example: [ssuggestor-example](http://codepen.io/carloluis/pen/rjpLYw/) o
 ## Instalation
 
 ```bash
-npm install ssuggestor --save
-```
-
-You can also use `yarn`:
-
-```bash
+# using yarn
 yarn add ssuggestor
+
+# using npm
+npm i ssuggestor
 ```
 
 ## Usage
 
 ### npm
 
-```js
+```jsx
 import React from 'react';
 import { render } from 'react-dom';
 import Suggestor from 'ssuggestor';
@@ -44,8 +42,9 @@ import Suggestor from 'ssuggestor';
 render(
 	<Suggestor
 		list={['suggestion-a', 'suggestion-b', 'suggestion-c', '...', 'suggestion-z']}
-		placeholder="type anything to start..."
+		placeholder="write something to display suggestions..."
 		onChange={console.log}
+		onSelect={(value, suggestion) => console.info(value, suggestion)}
 		styles={{ width: 100 }}
 		arrow
 		close
@@ -62,7 +61,7 @@ Include `react` dependencies and `ssuggestor` scripts:
 <script src="https://unpkg.com/react@16.2.0/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@16.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/prop-types@15.6.0/prop-types.min.js"></script>
-<script src="https://unpkg.com/ssuggestor@0.2.1/dist/ssuggestor.min.js"></script>
+<script src="https://unpkg.com/ssuggestor@0.3.0/dist/ssuggestor.min.js"></script>
 
 <!-- bootstrap styles -->
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -84,6 +83,10 @@ Then,
 * matches are case insensitive: _auto**Sugge**st_
 * pattern test is performed removing accents: _s**süggè**stor_
 
+### Suggestion Objects
+
+Suggestion objects use requires a `selector` function to convert each object into string representation which will be displayed on the suggestion list.
+
 #### Props:
 
 | Prop        | Type     | Default       | Description                                                 |
@@ -92,10 +95,11 @@ Then,
 | arrow       | Boolean  | `true`        | ▼ icon - open suggestion list                               |
 | className   | String   | `input-group` | css classes for component's root element                    |
 | close       | Boolean  | `true`        | ✖︎ icon - delete current value                              |
-| list        | Array    | --            | suggestions strings (_required_)                            |
+| list        | Array    | --            | suggestions (_required_)                                    |
+| selector    | Function | `s => s`      | suggestions selector (must return a string)                 |
 | openOnClick | Boolean  | `true`        | whether suggestion list opens on click or not               |
-| onSelect    | Function | `() => {}`    | onSelect handler: `(currentValue) => { }`                   |
-| onChange    | Function | `() => {}`    | onChange handler: `(newValue) => { }`                       |
+| onSelect    | Function | `() => {}`    | onSelect handler: `(value, suggestion) => { }`              |
+| onChange    | Function | `() => {}`    | onChange handler: `(value) => { }`                          |
 | onKey       | Function | `() => {}`    | onKey handler: `(keyEvent) => { }`                          |
 | placeholder | String   | --            | input placeholder text                                      |
 | required    | Boolean  | `false`       | if `true`, set required attribute on `<input>` element      |
