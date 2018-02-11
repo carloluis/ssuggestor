@@ -40,16 +40,16 @@ import { render } from 'react-dom';
 import Suggestor from 'ssuggestor';
 
 render(
-	<Suggestor
-		list={['suggestion-a', 'suggestion-b', 'suggestion-c', '...', 'suggestion-z']}
-		placeholder="write something to display suggestions..."
-		onChange={console.log}
-		onSelect={(value, suggestion) => console.info(value, suggestion)}
-		styles={{ width: 100 }}
-		arrow
-		close
-	/>,
-	document.body
+    <Suggestor
+        list={['suggestion-a', 'suggestion-b', 'suggestion-c', '...', 'suggestion-z']}
+        placeholder="write something to display suggestions..."
+        onChange={console.log}
+        onSelect={(value, suggestion) => console.info(value, suggestion)}
+        styles={{ width: 100 }}
+        arrow
+        close
+    />,
+    document.body
 );
 ```
 
