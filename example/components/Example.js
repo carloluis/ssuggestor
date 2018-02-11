@@ -4,9 +4,12 @@ import ExUpdate from './ExUpdate';
 import Section from './Section';
 import { countries, suggestions, numbers } from '../data/index';
 
-const handleSuggestorChange = value => console.info(value);
+const handleSuggestorChange = value => console.info('change value to:', value);
+const valueChanged = (value, item) => console.info('%s : %o', value, item);
 
 const STYLE_WIDTH = { width: '100%' };
+const suggestionObjects = [{ x: 'One', y: 1 }, { x: 'Two', y: 2 }];
+const selector = item => `${item.x}:${item.y}`;
 /* eslint-disable max-len */
 
 const Example = () => (
@@ -14,6 +17,18 @@ const Example = () => (
 		<Section title="Code Example">
 			<pre>{`<Suggestor list={['list', 'of', 'suggestions', ...]} style={{width:'100%'}} />`}</pre>
 			<a href="https://codepen.io/carloluis/pen/rjpLYw">CodePen</a>
+		</Section>
+
+		<Section title="Using suggestion objects" description="Use selector prop to display suggestions">
+			<Suggestor
+				list={suggestionObjects}
+				selector={selector}
+				onChange={handleSuggestorChange}
+				onSelect={valueChanged}
+				placeholder="..."
+				style={STYLE_WIDTH}
+				selectOnTab
+			/>
 		</Section>
 
 		<Section
@@ -24,6 +39,7 @@ const Example = () => (
 				value="default"
 				list={suggestions}
 				onChange={handleSuggestorChange}
+				onSelect={valueChanged}
 				placeholder="..."
 				tooltip="type something.."
 				style={STYLE_WIDTH}

@@ -14,8 +14,8 @@ jest.mock('../../utils/noop', () => {
 
 const PROPS = {
 	list: ['temporise', 'whencesoeve', 'turophile', 'umlaut'],
-	onChange: jest.fn(),
-	onSelect: jest.fn(),
+	onChange: jest.fn().mockName('oChangeMock'),
+	onSelect: jest.fn().mockName('onSelectMock'),
 	onKey: jest.fn(),
 	value: '',
 	openOnClick: false,
@@ -46,20 +46,17 @@ describe('<Ssuggestor />', () => {
 	it('snapshot - with suggestions visible', () => {
 		const tree = renderer.create(<Suggestor {...PROPS} openOnClick />);
 		tree.getInstance().setState({ open: true });
-
 		expect(tree).toMatchSnapshot();
 	});
 
 	it('snapshot - with arrow', () => {
 		const tree = renderer.create(<Suggestor {...PROPS} arrow />);
-
 		expect(tree).toMatchSnapshot();
 	});
 
 	it('snapshot - with close', () => {
 		const tree = renderer.create(<Suggestor {...PROPS} close />);
 		tree.getInstance().setState({ value: 'temp' });
-
 		expect(tree).toMatchSnapshot();
 	});
 });
@@ -159,7 +156,7 @@ describe('Suggestor component', () => {
 			expect(setStateSpy).toBeCalled();
 			expect(handleCloseSpy).toBeCalledWith();
 			expect(PROPS.onChange).toBeCalledWith(value);
-			expect(PROPS.onSelect).toBeCalledWith(value);
+			expect(PROPS.onSelect).toBeCalledWith(value, value);
 		});
 
 		it('toggleList -> setState (open suggestion list)', () => {
@@ -408,7 +405,7 @@ describe('Suggestor component', () => {
 
 				component.find('div').simulate('keyDown', { ...event, keyCode: keys.ENTER });
 
-				expect(PROPS.onSelect).toBeCalledWith(selectedItem);
+				expect(PROPS.onSelect).toBeCalledWith(selectedItem, selectedItem);
 				expect(event.preventDefault).toBeCalled();
 				expect(changeValueSpy).toBeCalledWith(selectedItem, true);
 				expect(toggleListSpy).toBeCalled();
@@ -481,7 +478,7 @@ describe('Suggestor component', () => {
 
 			const [first, ...tail] = result;
 
-			expect(first).toEqual({
+			expect(first).toMatchObject({
 				word: value,
 				index: 0
 			});
