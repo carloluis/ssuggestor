@@ -159,24 +159,6 @@ describe('Suggestor component', () => {
 			expect(PROPS.onSelect).toBeCalledWith(value, value);
 		});
 
-		it('toggleList -> setState (open suggestion list)', () => {
-			expect(component.state().open).toBeFalsy();
-			instance.toggleList();
-
-			expect(setStateSpy).toBeCalled();
-			expect(component.state().open).toBeTruthy();
-		});
-
-		it('toggleList -> handleClose (if suggestion list is visible)', () => {
-			instance.toggleList();
-
-			expect(handleCloseSpy).not.toBeCalled();
-
-			instance.toggleList();
-
-			expect(handleCloseSpy).toBeCalled();
-		});
-
 		it('handleChange -> changeValue', () => {
 			const event = {
 				stopPropagation: jest.fn(),
@@ -230,24 +212,39 @@ describe('Suggestor component', () => {
 	});
 
 	describe('handleClick function', () => {
-		let component, instance, toggleListSpy;
+		let component, instance, handleCloseSpy, setStateSpy;
 		beforeEach(() => {
 			component = shallow(<Suggestor {...PROPS} />);
 			instance = component.instance();
-			toggleListSpy = jest.spyOn(instance, 'toggleList');
+			handleCloseSpy = jest.spyOn(instance, 'handleClose');
+			setStateSpy = jest.spyOn(instance, 'setState');
 		});
 
-		it('should not call toggleList (when openOnClick prop is falsy)', () => {
+		it('should not perform any action (when openOnClick prop is falsy)', () => {
 			instance.handleClick();
-
-			expect(toggleListSpy).not.toBeCalled();
+			expect(handleCloseSpy).not.toBeCalled();
 		});
 
-		it('handleClick -> toggleList (if openOnClick prop is truthy)', () => {
+		it('handleClick and openOnClick prop -> set open on when closed', () => {
 			component.setProps({ openOnClick: true });
 			instance.handleClick();
 
-			expect(toggleListSpy).toBeCalled();
+			expect(setStateSpy).toBeCalledWith({ open: true });
+			expect(handleCloseSpy).not.toBeCalled();
+		});
+
+		it('handleClick and openOnClick prop -> toggle open flag', () => {
+			component.setProps({ openOnClick: true });
+			component.setState({ open: true });
+
+			instance.handleClick();
+
+			expect(setStateSpy).toBeCalledWith({
+				filtered: expect.anything(),
+				index: expect.any(Number),
+				open: false
+			});
+			expect(handleCloseSpy).toBeCalled();
 		});
 	});
 
@@ -351,14 +348,14 @@ describe('Suggestor component', () => {
 		});
 
 		describe('when using keys (useKeys: true)', () => {
-			let processKeySpy, changeValueSpy, handleCloseSpy, toggleListSpy, setStateSpy;
+			let processKeySpy, changeValueSpy, handleCloseSpy, unfilterSpy, setStateSpy;
 
 			beforeEach(() => {
 				component.setProps({ useKeys: true });
 				processKeySpy = jest.spyOn(component.instance(), 'processKey');
 				changeValueSpy = jest.spyOn(component.instance(), 'changeValue');
 				handleCloseSpy = jest.spyOn(component.instance(), 'handleClose');
-				toggleListSpy = jest.spyOn(component.instance(), 'toggleList');
+				unfilterSpy = jest.spyOn(component.instance(), 'unfilter');
 				setStateSpy = jest.spyOn(component.instance(), 'setState');
 			});
 
@@ -369,7 +366,6 @@ describe('Suggestor component', () => {
 
 			it('should call processKey if useKeys is truthy', () => {
 				component.find('div').simulate('keyDown', { ...event, keyCode: keys.UP });
-
 				expect(processKeySpy).toBeCalledWith(keys.UP);
 			});
 
@@ -388,7 +384,6 @@ describe('Suggestor component', () => {
 
 			it('should not prevent event default action (with key: TAB)', () => {
 				component.find('div').simulate('keyDown', { ...event, keyCode: keys.TAB });
-
 				expect(event.preventDefault).not.toBeCalled();
 			});
 
@@ -405,10 +400,10 @@ describe('Suggestor component', () => {
 
 				component.find('div').simulate('keyDown', { ...event, keyCode: keys.ENTER });
 
-				expect(PROPS.onSelect).toBeCalledWith(selectedItem, selectedItem);
 				expect(event.preventDefault).toBeCalled();
 				expect(changeValueSpy).toBeCalledWith(selectedItem, true);
-				expect(toggleListSpy).toBeCalled();
+				expect(PROPS.onSelect).toBeCalledWith(selectedItem, selectedItem);
+				expect(unfilterSpy).toBeCalled();
 			});
 
 			it('should only call props.onKey and .processKey for unsupported key', () => {
@@ -417,8 +412,8 @@ describe('Suggestor component', () => {
 				expect(event.preventDefault).not.toBeCalled();
 				expect(changeValueSpy).not.toBeCalled();
 				expect(handleCloseSpy).not.toBeCalled();
-				expect(toggleListSpy).not.toBeCalled();
 				expect(setStateSpy).not.toBeCalled();
+				expect(unfilterSpy).not.toBeCalled();
 				expect(PROPS.onSelect).not.toBeCalled();
 			});
 		});
@@ -502,7 +497,7 @@ describe('Suggestor component', () => {
 		});
 
 		it('should return all if search pattern is empty', () => {
-			const result = instance.filter(PROPS.list);
+			const result = instance.filter(PROPS.list, '');
 
 			expect(result.every(item => item.index === 0)).toBeTruthy();
 			expect(result.length).toBe(4);
@@ -516,6 +511,17 @@ describe('Suggestor component', () => {
 
 			expect(transform).toHaveBeenCalledTimes(PROPS.list.length + 1);
 			transform.mock.calls.map(call => expect(call[0]).toBeTruthy());
+		});
+	});
+
+	describe('unfilter', () => {
+		const component = shallow(<Suggestor {...PROPS} />);
+
+		it('should call component.filter', () => {
+			const filterSpy = jest.spyOn(component.instance(), 'filter');
+			component.instance().unfilter();
+
+			expect(filterSpy).toHaveBeenCalledWith(PROPS.list, component.state().value, false);
 		});
 	});
 
