@@ -229,7 +229,10 @@ describe('Suggestor component', () => {
 			component.setProps({ openOnClick: true });
 			instance.handleClick();
 
-			expect(setStateSpy).toBeCalledWith({ open: true });
+			expect(setStateSpy).toBeCalledWith({
+				filtered: expect.any(Array),
+				open: true
+			});
 			expect(handleCloseSpy).not.toBeCalled();
 		});
 
@@ -252,7 +255,7 @@ describe('Suggestor component', () => {
 		let mountedInstance, handleCloseSpy;
 
 		beforeEach(() => {
-			mountedInstance = mount(<Suggestor {...PROPS} />).instance();
+			mountedInstance = mount(<Suggestor {...PROPS} openOnClick />).instance();
 			handleCloseSpy = jest.spyOn(mountedInstance, 'handleClose');
 		});
 
@@ -264,13 +267,14 @@ describe('Suggestor component', () => {
 			mountedInstance.changeValue('temp', true);
 		});
 
-		it('should call when select value (2)', () => {
-			mountedInstance.changeValue('no match!');
-		});
-
 		it('should call when _onClick', () => {
 			mountedInstance.input = { parentNode: { contains: jest.fn() } };
 			mountedInstance._onClick({ target: {} });
+		});
+
+		it('should call when open and click', () => {
+			mountedInstance.handleClick();
+			mountedInstance.handleClick();
 		});
 	});
 
