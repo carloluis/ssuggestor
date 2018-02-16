@@ -54,7 +54,7 @@ class Suggestor extends PureComponent {
 			if (this.state.open) {
 				this.handleClose();
 			} else {
-				this.setState({ open: true });
+				this.setState({ open: true, filtered: this.unfilter() });
 			}
 		}
 	}
@@ -131,8 +131,6 @@ class Suggestor extends PureComponent {
 			if (select) {
 				const suggestion = filtered.find(({ word }) => transform(accents, word) === transform(accents, value));
 				onSelect(value, suggestion && suggestion.item);
-				this.handleClose();
-			} else if (!open) {
 				this.handleClose();
 			}
 		});
