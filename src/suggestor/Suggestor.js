@@ -25,7 +25,7 @@ class Suggestor extends PureComponent {
 	}
 	_onClick(event) {
 		if (!this.input.parentNode.contains(event.target)) {
-			this.handleClose();
+			this.close();
 		}
 	}
 	componentWillReceiveProps(nextProps) {
@@ -40,19 +40,17 @@ class Suggestor extends PureComponent {
 			value
 		});
 	}
-	handleClose() {
-		if (this.state.open) {
-			this.setState({
-				open: false,
-				filtered: this.unfilter(),
-				index: 0
-			});
-		}
+	close() {
+		this.setState({
+			open: false,
+			filtered: this.unfilter(),
+			index: 0
+		});
 	}
 	handleClick() {
 		if (this.props.openOnClick) {
 			if (this.state.open) {
-				this.handleClose();
+				this.close();
 			} else {
 				this.setState({ open: true, filtered: this.unfilter() });
 			}
@@ -80,7 +78,7 @@ class Suggestor extends PureComponent {
 				}
 				break;
 			case keys.ESCAPE:
-				this.handleClose();
+				this.close();
 				if (!open && value) {
 					this.changeValue('');
 				}
@@ -95,7 +93,7 @@ class Suggestor extends PureComponent {
 				if (this.props.selectOnTab && open && filtered[index]) {
 					this.changeValue(filtered[index].word, true);
 				} else {
-					this.handleClose();
+					this.close();
 				}
 			default:
 				return false;
@@ -132,7 +130,7 @@ class Suggestor extends PureComponent {
 			if (select) {
 				const suggestion = filtered.find(({ word }) => transform(accents, word) === transform(accents, value));
 				onSelect(value, suggestion && suggestion.item);
-				this.handleClose();
+				this.close();
 			}
 		});
 	}
