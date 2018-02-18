@@ -69,6 +69,7 @@ class Suggestor extends PureComponent {
 	processKey(code) {
 		const { open, index, filtered, value } = this.state;
 		const ssuggestions = filtered.length ? filtered : this.unfilter();
+		let nextIndex;
 
 		switch (code) {
 			case keys.ENTER:
@@ -84,16 +85,12 @@ class Suggestor extends PureComponent {
 					this.changeValue('');
 				}
 				break;
-			case keys.DOWN: {
-				const next = (index + open) % ssuggestions.length;
-				this.setState({ open: true, index: next, filtered: ssuggestions });
+			case keys.DOWN:
+				nextIndex = (index + open) % ssuggestions.length;
 				break;
-			}
-			case keys.UP: {
-				const prev = (index || ssuggestions.length) - 1;
-				this.setState({ open: true, index: prev, filtered: ssuggestions });
+			case keys.UP:
+				nextIndex = (index || ssuggestions.length) - 1;
 				break;
-			}
 			case keys.TAB:
 				if (this.props.selectOnTab && open && filtered[index]) {
 					this.changeValue(filtered[index].word, true);
@@ -102,6 +99,10 @@ class Suggestor extends PureComponent {
 				}
 			default:
 				return false;
+		}
+
+		if (nextIndex !== undefined) {
+			this.setState({ open: true, index: nextIndex, filtered: ssuggestions });
 		}
 
 		return true;
