@@ -68,12 +68,13 @@ class Suggestor extends PureComponent {
 	}
 	processKey(code) {
 		const { open, index, filtered, value } = this.state;
-		const list = filtered.map(item => item.word);
+		const ssuggestions = filtered.length ? filtered : this.unfilter();
+		let nextIndex;
 
 		switch (code) {
 			case keys.ENTER:
-				if (open && list[index]) {
-					this.changeValue(list[index], true);
+				if (open && filtered[index]) {
+					this.changeValue(filtered[index].word, true);
 				} else {
 					this.setState({ open: true, filtered: this.unfilter() });
 				}
@@ -84,24 +85,24 @@ class Suggestor extends PureComponent {
 					this.changeValue('');
 				}
 				break;
-			case keys.DOWN: {
-				const next = (index + open) % list.length;
-				this.setState({ open: true, index: next });
+			case keys.DOWN:
+				nextIndex = (index + open) % ssuggestions.length;
 				break;
-			}
-			case keys.UP: {
-				const prev = (index || list.length) - 1;
-				this.setState({ open: true, index: prev });
+			case keys.UP:
+				nextIndex = (index || ssuggestions.length) - 1;
 				break;
-			}
 			case keys.TAB:
-				if (this.props.selectOnTab && open && list[index]) {
-					this.changeValue(list[index], true);
+				if (this.props.selectOnTab && open && filtered[index]) {
+					this.changeValue(filtered[index].word, true);
 				} else {
 					this.handleClose();
 				}
 			default:
 				return false;
+		}
+
+		if (nextIndex !== undefined) {
+			this.setState({ open: true, index: nextIndex, filtered: ssuggestions });
 		}
 
 		return true;

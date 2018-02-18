@@ -420,6 +420,32 @@ describe('Suggestor component', () => {
 				expect(unfilterSpy).not.toBeCalled();
 				expect(PROPS.onSelect).not.toBeCalled();
 			});
+
+			it('should unfilter when no suggestions found for search and press [up]/[down] keys', () => {
+				component.setProps({ openOnClick: true, useKeys: true });
+				component.simulate('click');
+
+				const stopPropagationMock = jest.fn();
+				component.find('input').simulate('change', {
+					stopPropagation: stopPropagationMock,
+					target: { value: 'no-suggestion' }
+				});
+
+				component.simulate('keyDown', { ...event, keyCode: keys.DOWN });
+
+				expect(stopPropagationMock).toBeCalled();
+				expect(unfilterSpy).toBeCalled();
+				expect(unfilterSpy.mock.calls.length).toBe(2);
+			});
+
+			it('should unfilter when no suggestions found for search and press [up] keys', () => {
+				component.setProps({ openOnClick: true, useKeys: true });
+				component.setState({ open: true });
+				component.instance().changeValue('no-suggestions');
+				component.find('div').simulate('keyDown', { ...event, keyCode: keys.UP });
+
+				expect(unfilterSpy).toBeCalled();
+			});
 		});
 
 		describe('when keys and selectOnTab props are on', () => {
