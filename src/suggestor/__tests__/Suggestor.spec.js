@@ -133,7 +133,7 @@ describe('Suggestor component', () => {
 
 	describe('shallow component', () => {
 		let component, instance;
-		let setStateSpy, handleCloseSpy, changeValueSpy;
+		let setStateSpy, closeSpy, changeValueSpy;
 		const autoBindSpy = jest.spyOn(utils, 'autoBind');
 
 		beforeEach(() => {
@@ -141,7 +141,7 @@ describe('Suggestor component', () => {
 			component = shallow(<Suggestor {...PROPS} />);
 			instance = component.instance();
 			setStateSpy = jest.spyOn(instance, 'setState');
-			handleCloseSpy = jest.spyOn(instance, 'handleClose');
+			closeSpy = jest.spyOn(instance, 'close');
 			changeValueSpy = jest.spyOn(instance, 'changeValue');
 		});
 
@@ -154,7 +154,7 @@ describe('Suggestor component', () => {
 			instance.changeValue(value, true);
 
 			expect(setStateSpy).toBeCalled();
-			expect(handleCloseSpy).toBeCalledWith();
+			expect(closeSpy).toBeCalledWith();
 			expect(PROPS.onChange).toBeCalledWith(value);
 			expect(PROPS.onSelect).toBeCalledWith(value, value);
 		});
@@ -212,17 +212,17 @@ describe('Suggestor component', () => {
 	});
 
 	describe('handleClick function', () => {
-		let component, instance, handleCloseSpy, setStateSpy;
+		let component, instance, closeSpy, setStateSpy;
 		beforeEach(() => {
 			component = shallow(<Suggestor {...PROPS} />);
 			instance = component.instance();
-			handleCloseSpy = jest.spyOn(instance, 'handleClose');
+			closeSpy = jest.spyOn(instance, 'close');
 			setStateSpy = jest.spyOn(instance, 'setState');
 		});
 
 		it('should not perform any action (when openOnClick prop is falsy)', () => {
 			instance.handleClick();
-			expect(handleCloseSpy).not.toBeCalled();
+			expect(closeSpy).not.toBeCalled();
 		});
 
 		it('handleClick and openOnClick prop -> set open on when closed', () => {
@@ -233,7 +233,7 @@ describe('Suggestor component', () => {
 				filtered: expect.any(Array),
 				open: true
 			});
-			expect(handleCloseSpy).not.toBeCalled();
+			expect(closeSpy).not.toBeCalled();
 		});
 
 		it('handleClick and openOnClick prop -> toggle open flag', () => {
@@ -247,20 +247,20 @@ describe('Suggestor component', () => {
 				index: expect.any(Number),
 				open: false
 			});
-			expect(handleCloseSpy).toBeCalled();
+			expect(closeSpy).toBeCalled();
 		});
 	});
 
 	describe('... handleClose', () => {
-		let mountedInstance, handleCloseSpy;
+		let mountedInstance, closeSpy;
 
 		beforeEach(() => {
 			mountedInstance = mount(<Suggestor {...PROPS} openOnClick />).instance();
-			handleCloseSpy = jest.spyOn(mountedInstance, 'handleClose');
+			closeSpy = jest.spyOn(mountedInstance, 'close');
 		});
 
 		afterEach(() => {
-			expect(handleCloseSpy).toBeCalled();
+			expect(closeSpy).toBeCalled();
 		});
 
 		it('should call when select value', () => {
@@ -352,14 +352,14 @@ describe('Suggestor component', () => {
 		});
 
 		describe('when using keys (useKeys: true)', () => {
-			let processKeySpy, changeValueSpy, handleCloseSpy, unfilterSpy, setStateSpy;
+			let processKeySpy, changeValueSpy, closeSpy, unfilterSpy, setStateSpy;
 
 			beforeEach(() => {
 				component.setProps({ useKeys: true });
 				processKeySpy = jest.spyOn(component.instance(), 'processKey');
 				changeValueSpy = jest.spyOn(component.instance(), 'changeValue');
-				handleCloseSpy = jest.spyOn(component.instance(), 'handleClose');
 				unfilterSpy = jest.spyOn(component.instance(), 'unfilter');
+				closeSpy = jest.spyOn(component.instance(), 'close');
 				setStateSpy = jest.spyOn(component.instance(), 'setState');
 			});
 
@@ -395,7 +395,7 @@ describe('Suggestor component', () => {
 				component.find('div').simulate('keyDown', { ...event, keyCode: keys.TAB });
 
 				expect(changeValueSpy).not.toBeCalled();
-				expect(handleCloseSpy).toBeCalled();
+				expect(closeSpy).toBeCalled();
 			});
 
 			it('should change value (ENTER key)', () => {
@@ -415,7 +415,7 @@ describe('Suggestor component', () => {
 
 				expect(event.preventDefault).not.toBeCalled();
 				expect(changeValueSpy).not.toBeCalled();
-				expect(handleCloseSpy).not.toBeCalled();
+				expect(closeSpy).not.toBeCalled();
 				expect(setStateSpy).not.toBeCalled();
 				expect(unfilterSpy).not.toBeCalled();
 				expect(PROPS.onSelect).not.toBeCalled();
@@ -449,12 +449,12 @@ describe('Suggestor component', () => {
 		});
 
 		describe('when keys and selectOnTab props are on', () => {
-			let changeValueSpy, handleCloseSpy;
+			let changeValueSpy, closeSpy;
 
 			beforeEach(() => {
 				component.setProps({ useKeys: true, selectOnTab: true });
 				changeValueSpy = jest.spyOn(component.instance(), 'changeValue');
-				handleCloseSpy = jest.spyOn(component.instance(), 'handleClose');
+				closeSpy = jest.spyOn(component.instance(), 'close');
 			});
 
 			it('should change value (TAB key)', () => {
@@ -462,7 +462,7 @@ describe('Suggestor component', () => {
 				component.find('div').simulate('keyDown', { ...event, keyCode: keys.TAB });
 
 				expect(changeValueSpy).toBeCalled();
-				expect(handleCloseSpy).toBeCalled();
+				expect(closeSpy).toBeCalled();
 				expect(PROPS.onChange).toBeCalled();
 				expect(PROPS.onSelect).toBeCalled();
 			});
@@ -471,7 +471,7 @@ describe('Suggestor component', () => {
 				component.setState({ open: false, value: 'temporise' });
 				component.find('div').simulate('keyDown', { ...event, keyCode: keys.ESCAPE });
 
-				expect(handleCloseSpy).toBeCalled();
+				expect(closeSpy).toBeCalled();
 				expect(changeValueSpy).toBeCalledWith('');
 				expect(PROPS.onChange).toBeCalled();
 				expect(PROPS.onSelect).not.toBeCalled();
@@ -591,19 +591,19 @@ describe('Suggestor component', () => {
 	describe('_onClick', () => {
 		const wrapper = mount(<Suggestor {...PROPS} />);
 		const wrapperInstance = wrapper.instance();
-		let handleCloseSpy;
+		let closeSpy;
 
 		beforeEach(() => {
-			handleCloseSpy = jest.spyOn(wrapperInstance, 'handleClose');
+			closeSpy = jest.spyOn(wrapperInstance, 'close');
 			wrapper.update();
 		});
 		afterEach(() => {
-			handleCloseSpy.mockClear();
+			closeSpy.mockClear();
 		});
 
 		it('should not call handleClose when click inside component', () => {
 			wrapperInstance._onClick({ target: wrapperInstance.input });
-			expect(handleCloseSpy).not.toBeCalled();
+			expect(closeSpy).not.toBeCalled();
 		});
 
 		it('should call handleClose when click outside', () => {
@@ -611,7 +611,7 @@ describe('Suggestor component', () => {
 			wrapperInstance.input = { parentNode: { contains } };
 			wrapperInstance._onClick({ target: {} });
 
-			expect(handleCloseSpy).toBeCalled();
+			expect(closeSpy).toBeCalled();
 			expect(contains).toBeCalled();
 		});
 	});
