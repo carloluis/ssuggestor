@@ -1,7 +1,8 @@
 'use strict';
 
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 const path = require('path');
 
 const PATHS = {
@@ -11,7 +12,7 @@ const PATHS = {
 };
 
 const productionFlag = process.argv.indexOf('-p') !== -1;
-const NODE_ENV = productionFlag? 'production': 'development';
+const NODE_ENV = productionFlag ? 'production' : 'development';
 
 const envPluginConfig = new webpack.DefinePlugin({
 	'process.env': {
@@ -57,7 +58,17 @@ module.exports = {
 			}
 		]
 	},
-	plugins: [envPluginConfig, commonsChunkConfig, htmlWebpackPluginConfig],
+	plugins: [
+		envPluginConfig,
+		commonsChunkConfig,
+		htmlWebpackPluginConfig,
+		new CopyWebpackPlugin([
+			{
+				from: path.join(PATHS.example, 'favicon.ico'),
+				to: path.join(PATHS.dist, 'favicon.ico')
+			}
+		])
+	],
 	resolve: {
 		extensions: ['.js', '.jsx']
 	},
