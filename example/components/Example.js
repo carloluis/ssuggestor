@@ -4,8 +4,8 @@ import ExUpdate from './ExUpdate';
 import Section from './Section';
 import { countries, suggestions, numbers } from '../data/index';
 
-const valueSelected = (value, item) => console.info('%s : %o', value, item);
-const valueChanged = value => console.info('change value to:', value);
+const valueSelected = (value, item) => console.info('select: %s -> %o', value, item);
+const valueChanged = value => console.info('change to:', value);
 
 const suggestionObjects = [{ x: 'One', y: 1 }, { x: 'Two', y: 2 }, { x: 'Three', y: 3 }, { x: 'çáëìõû', y: NaN }];
 const selector = item => `${item.x}:${item.y}`;
