@@ -66,7 +66,7 @@ module.exports = {
 	resolve: {
 		extensions: ['.js', '.jsx']
 	},
-	devtool: 'eval-source-map',
+	devtool: 'eval',
 	devServer: {
 		contentBase: PATHS.dist,
 		host: '0.0.0.0',
