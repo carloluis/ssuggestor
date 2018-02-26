@@ -14,24 +14,8 @@ const PATHS = {
 const productionFlag = process.argv.indexOf('-p') !== -1;
 const NODE_ENV = productionFlag ? 'production' : 'development';
 
-const envPluginConfig = new webpack.DefinePlugin({
-	'process.env': {
-		NODE_ENV: JSON.stringify(NODE_ENV)
-	}
-});
-
-const commonsChunkConfig = new webpack.optimize.CommonsChunkPlugin({
-	name: 'vendor',
-	minChunks: module => /node_modules/.test(module.resource)
-});
-
-const htmlWebpackPluginConfig = new HtmlWebpackPlugin({
-	template: PATHS.example + '/index.html',
-	filename: 'index.html',
-	inject: 'body'
-});
-
 module.exports = {
+	mode: 'development',
 	entry: {
 		app: path.join(PATHS.example, 'index.js'),
 		vendor: ['prop-types', 'react', 'react-dom']
@@ -41,6 +25,18 @@ module.exports = {
 		sourceMapFilename: '[file].map',
 		path: PATHS.dist,
 		publicPath: '/'
+	},
+	optimization: {
+		splitChunks: {
+			cacheGroups: {
+				vendors: {
+					test: /[\\/]node_modules[\\/]/,
+					name: 'vendor',
+					enforce: true,
+					chunks: 'all'
+				}
+			}
+		}
 	},
 	module: {
 		rules: [
@@ -59,9 +55,14 @@ module.exports = {
 		]
 	},
 	plugins: [
-		envPluginConfig,
-		commonsChunkConfig,
-		htmlWebpackPluginConfig,
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
+		}),
+		new HtmlWebpackPlugin({
+			template: PATHS.example + '/index.html',
+			filename: 'index.html',
+			inject: 'body'
+		}),
 		new CopyWebpackPlugin([
 			{
 				from: path.join(PATHS.example, 'favicon.ico'),
@@ -79,6 +80,6 @@ module.exports = {
 		port: 9000,
 		openPage: '',
 		inline: true,
-		open: true
+		open: false
 	}
 };
