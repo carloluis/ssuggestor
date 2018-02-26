@@ -43,13 +43,6 @@ module.exports = {
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				include: PATHS.src,
-				loader: 'eslint-loader',
-				enforce: 'pre'
-			},
-			{
-				test: /\.js$/,
-				exclude: /node_modules/,
 				loader: 'babel-loader?cacheDirectory'
 			}
 		]
