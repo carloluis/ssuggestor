@@ -1,6 +1,6 @@
-# ssuggestor
+# ssuggestor 
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/carloluis/ssuggestor/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![GitHub release](https://img.shields.io/github/release/carloluis/ssuggestor.svg)](https://github.com/carloluis/ssuggestor/releases)
 [![Travis branch](https://img.shields.io/travis/carloluis/ssuggestor/master.svg)](https://travis-ci.org/carloluis/ssuggestor)
 [![Coverage Status](https://coveralls.io/repos/github/carloluis/ssuggestor/badge.svg)](https://coveralls.io/github/carloluis/ssuggestor)
@@ -12,7 +12,8 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat)](https://github.com/prettier/prettier)
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/carloluis/ssuggestor.svg?style=social)](https://twitter.com/intent/tweet?text=check%20out%20this%20simple%20suggestor%20component%20on&url=https%3A%2F%2Ft.co%2FpjuWm9EaCa&hashtags=react16,ssuggestor)
 
-`<SSuggestor />` is a React component that enables users to quickly find and select from a pre-populated list of values as they type. It uses [Bootstrap](http://getbootstrap.com/) styles.
+React component that enables users to quickly find and select from a pre-populated list of values as they type.
+Currently uses [Bootstrap](http://getbootstrap.com/) styles.
 
 ## Demo
 
@@ -124,7 +125,7 @@ instance.focus(); // focuses the control input
 
 #### Bootstrap
 
-Ssuggestor uses some bootstrap classes:
+Used bootstrap classes:
 
 * `input-group`
 * `form-control`
@@ -146,6 +147,4 @@ Open browser on [localhost:9000](http://localhost:9000/)
 
 ## License
 
-Licensed under the MIT License, Copyright © 2017 [Carloluis](https://twitter.com/carloluis_)
-
-See [LICENSE](./LICENSE) for more information.
+MIT © [Carloluis](https://github.com/carloluis)
