@@ -25,12 +25,15 @@
 		"react/jsx-uses-react": "error",
 		"react/jsx-uses-vars": "error",
 		"react/no-find-dom-node": "warn",
-		"react/jsx-no-bind": ["warn", {
-			"ignoreRefs": true,
-			"allowArrowFunctions": false,
-			"allowFunctions": false,
-			"allowBind": false
-		}],
+		"react/jsx-no-bind": [
+			"warn",
+			{
+				"ignoreRefs": true,
+				"allowArrowFunctions": false,
+				"allowFunctions": false,
+				"allowBind": false
+			}
+		],
 
 		"no-console": ["warn", { "allow": ["warn", "error", "info", "group", "groupEnd"] }],
 
@@ -151,10 +154,14 @@
 		"one-var": 0, // allow just one var statement per function (off by default)
 		"operator-assignment": 0, // require assignment operator shorthand where possible or prohibit it entirely (off by default)
 		"padded-blocks": 0, // enforce padding within blocks (off by default)
-		"quotes": [2, "single", {
-			"avoidEscape": true,
-			"allowTemplateLiterals": true
-		}], // specify whether double or single quotes should be used
+		"quotes": [
+			2,
+			"single",
+			{
+				"avoidEscape": true,
+				"allowTemplateLiterals": true
+			}
+		], // specify whether double or single quotes should be used
 		"semi": 0, // require or disallow use of semicolons instead of ASI
 		"sort-vars": 0, // sort variables within the same declaration block (off by default)
 		"space-after-function-name": 0, // require a space after function names (off by default)
@@ -172,9 +179,14 @@
 		"generator-star": 0, // enforce the position of the * in generator functions (off by default)
 		// Legacy
 		"max-depth": 0, // specify the maximum depth that blocks can be nested (off by default)
-		"max-len": [1, 120, 4, {
-			"ignoreUrls": true
-		}], // specify the maximum length of a line in your program (off by default)
+		"max-len": [
+			1,
+			120,
+			4,
+			{
+				"ignoreUrls": true
+			}
+		], // specify the maximum length of a line in your program (off by default)
 		"max-params": 0, // limits the number of parameters that can be used in the function declaration. (off by default)
 		"max-statements": 0, // specify the maximum number of statement allowed in a function (off by default)
 		"no-bitwise": 0, // disallow use of bitwise operators (off by default)
