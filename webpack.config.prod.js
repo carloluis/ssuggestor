@@ -1,12 +1,12 @@
 'use strict';
 
-const webpack = require('webpack');
-const packages = require('./package.json');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
 const path = require('path');
+const packages = require('./package.json');
 
 const productionFlag = process.argv.indexOf('-p') !== -1;
-const NODE_ENV = productionFlag? 'production': 'development';
+const NODE_ENV = productionFlag ? 'production' : 'development';
 
 const PATHS = {
 	src: path.join(__dirname, 'src'),
@@ -14,19 +14,8 @@ const PATHS = {
 	cwd: __dirname
 };
 
-const envPluginConfig = new webpack.DefinePlugin({
-	'process.env': {
-		'NODE_ENV': JSON.stringify(NODE_ENV)
-	}
-});
-const cleanWebpackConfig = new CleanWebpackPlugin(['dist'], {
-	root: PATHS.cwd,
-	verbose: true,
-	dry: false,
-	exclude: ['ssuggestor.js', 'ssuggestor.min.js']
-});
-
 module.exports = {
+	mode: 'production',
 	entry: {
 		ssugestor: path.join(PATHS.src, 'suggestor/Suggestor.js')
 	},
@@ -63,7 +52,17 @@ module.exports = {
 			}
 		]
 	},
-	plugins: [cleanWebpackConfig, envPluginConfig],
+	plugins: [
+		new CleanWebpackPlugin(['dist'], {
+			root: PATHS.cwd,
+			verbose: true,
+			dry: false,
+			exclude: ['ssuggestor.js', 'ssuggestor.min.js']
+		}),
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
+		})
+	],
 	resolve: {
 		extensions: ['.js']
 	}
