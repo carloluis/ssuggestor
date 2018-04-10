@@ -3,15 +3,15 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
-const packages = require('./package.json');
+const packages = require('../package.json');
 
 const productionFlag = process.argv.indexOf('-p') !== -1;
 const NODE_ENV = productionFlag ? 'production' : 'development';
 
 const PATHS = {
-	src: path.join(__dirname, 'src'),
-	dist: path.join(__dirname, 'dist'),
-	cwd: __dirname
+	src: path.join(__dirname, '../src'),
+	dist: path.join(__dirname, '../dist'),
+	root: path.join(__dirname, '..')
 };
 
 module.exports = {
@@ -54,7 +54,7 @@ module.exports = {
 	},
 	plugins: [
 		new CleanWebpackPlugin(['dist'], {
-			root: PATHS.cwd,
+			root: PATHS.root,
 			verbose: true,
 			dry: false,
 			exclude: ['ssuggestor.js', 'ssuggestor.min.js']
