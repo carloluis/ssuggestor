@@ -3,10 +3,6 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
-const packages = require('../package.json');
-
-const productionFlag = process.argv.indexOf('-p') !== -1;
-const NODE_ENV = productionFlag ? 'production' : 'development';
 
 const PATHS = {
 	src: path.join(__dirname, '../src'),
@@ -14,16 +10,9 @@ const PATHS = {
 	root: path.join(__dirname, '..')
 };
 
-module.exports = {
-	mode: 'production',
+const shared = {
 	entry: {
 		ssugestor: path.join(PATHS.src, 'suggestor/Suggestor.js')
-	},
-	output: {
-		filename: 'ssuggestor.js',
-		path: PATHS.dist,
-		libraryTarget: 'umd',
-		library: 'SSuggestor'
 	},
 	externals: {
 		react: {
@@ -38,6 +27,12 @@ module.exports = {
 			commonjs: 'prop-types',
 			amd: 'prop-types'
 		}
+	},
+	output: {
+		filename: 'ssuggestor.js',
+		libraryTarget: 'umd',
+		library: 'SSuggestor',
+		path: PATHS.dist
 	},
 	target: 'node',
 	module: {
@@ -58,12 +53,26 @@ module.exports = {
 			verbose: true,
 			dry: false,
 			exclude: ['ssuggestor.js', 'ssuggestor.min.js']
-		}),
-		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
 		})
 	],
 	resolve: {
 		extensions: ['.js']
 	}
 };
+
+const development = {
+	...shared,
+	devtool: 'none',
+	mode: 'development'
+};
+
+const production = {
+	...shared,
+	mode: 'production',
+	output: {
+		...shared.output,
+		filename: 'ssuggestor.min.js'
+	}
+};
+
+module.exports = [development, production];
