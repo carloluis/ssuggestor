@@ -12,10 +12,7 @@
 		"lint": "eslint . --cache --ext .js --ignore-path .eslintignore --ignore-pattern '**/__tests__/*'",
 		"stats": "webpack --profile --json > stats.json",
 		"dev": "webpack-dev-server",
-		"example": "webpack -p",
-		"build": "npm run build:dev & npm run build:prod",
-		"build:dev": "webpack --mode development",
-		"build:prod": "webpack -p --output-filename ssuggestor.min.js",
+		"build": "webpack",
 		"prepublish": "npm run build",
 		"precommit": "npm run lint",
 		"prepush": "npm run test"
