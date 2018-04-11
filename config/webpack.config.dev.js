@@ -11,9 +11,6 @@ const PATHS = {
 	src: path.join(__dirname, '../src')
 };
 
-const productionFlag = process.argv.indexOf('-p') !== -1;
-const NODE_ENV = productionFlag ? 'production' : 'development';
-
 module.exports = {
 	mode: 'development',
 	entry: {
@@ -48,9 +45,6 @@ module.exports = {
 		]
 	},
 	plugins: [
-		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
-		}),
 		new HtmlWebpackPlugin({
 			template: path.join(PATHS.example, 'index.html'),
 			filename: 'index.html',
