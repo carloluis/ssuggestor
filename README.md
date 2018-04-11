@@ -62,7 +62,7 @@ Include `react` dependencies and `ssuggestor` scripts:
 <script src="https://unpkg.com/react@16.2.0/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@16.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/prop-types@15.6.0/prop-types.min.js"></script>
-<script src="https://unpkg.com/ssuggestor@0.3.0/dist/ssuggestor.min.js"></script>
+<script src="https://unpkg.com/ssuggestor@0.7.0/dist/ssuggestor.min.js"></script>
 
 <!-- bootstrap styles -->
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
