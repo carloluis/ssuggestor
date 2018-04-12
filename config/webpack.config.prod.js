@@ -81,7 +81,15 @@ const production = {
 				loader: 'babel-loader',
 				query: {
 					presets: ['env', 'stage-2', 'react'],
-					plugins: ['transform-react-remove-prop-types']
+					plugins: [
+						[
+							'transform-react-remove-prop-types',
+							{
+								mode: 'remove',
+								removeImport: true
+							}
+						]
+					]
 				}
 			}
 		]
