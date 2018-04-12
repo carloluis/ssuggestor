@@ -34,7 +34,7 @@ const shared = {
 		library: 'SSuggestor',
 		path: PATHS.dist
 	},
-	target: 'node',
+	target: 'web',
 	module: {
 		rules: [
 			{
