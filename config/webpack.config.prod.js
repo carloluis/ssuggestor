@@ -72,6 +72,19 @@ const production = {
 	output: {
 		...shared.output,
 		filename: 'ssuggestor.min.js'
+	},
+	module: {
+		rules: [
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				loader: 'babel-loader',
+				query: {
+					presets: ['env', 'stage-2', 'react'],
+					plugins: ['transform-react-remove-prop-types']
+				}
+			}
+		]
 	}
 };
 
