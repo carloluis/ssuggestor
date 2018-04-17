@@ -1,5 +1,7 @@
 'use strict';
 
+require('./build-externals-helpers');
+
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
@@ -12,7 +14,7 @@ const PATHS = {
 
 const shared = {
 	entry: {
-		ssugestor: path.join(PATHS.src, 'suggestor/Suggestor.js')
+		ssugestor: ['./helpers.js', path.join(PATHS.src, 'suggestor/Suggestor.js')]
 	},
 	externals: {
 		react: {
@@ -35,18 +37,6 @@ const shared = {
 		path: PATHS.dist
 	},
 	target: 'web',
-	module: {
-		rules: [
-			{
-				test: /\.js$/,
-				exclude: /node_modules/,
-				loader: 'babel-loader',
-				query: {
-					presets: ['env', 'stage-2', 'react']
-				}
-			}
-		]
-	},
 	plugins: [
 		new CleanWebpackPlugin(['dist'], {
 			root: PATHS.root,
@@ -63,7 +53,20 @@ const shared = {
 const development = {
 	...shared,
 	devtool: 'none',
-	mode: 'development'
+	mode: 'development',
+	module: {
+		rules: [
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				loader: 'babel-loader',
+				query: {
+					presets: ['env', 'stage-2', 'react'],
+					plugins: ['external-helpers']
+				}
+			}
+		]
+	}
 };
 
 const production = {
@@ -88,7 +91,8 @@ const production = {
 								mode: 'remove',
 								removeImport: true
 							}
-						]
+						],
+						'external-helpers'
 					]
 				}
 			}
