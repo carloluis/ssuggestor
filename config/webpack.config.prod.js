@@ -3,19 +3,20 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
-const buildHelpers = require('./build-externals-helpers');
-
-const helpersFilename = buildHelpers();
+const buildHelpers = require('./build-external-helpers');
 
 const PATHS = {
+	root: path.join(__dirname, '..'),
 	src: path.join(__dirname, '../src'),
 	dist: path.join(__dirname, '../dist'),
-	root: path.join(__dirname, '..')
+	helpers: path.join(__dirname, 'helpers.js')
 };
+
+buildHelpers(PATHS.helpers);
 
 const shared = {
 	entry: {
-		ssugestor: [path.join(__dirname, helpersFilename), path.join(PATHS.src, 'suggestor/Suggestor.js')]
+		ssugestor: [PATHS.helpers, path.join(PATHS.src, 'suggestor/Suggestor.js')]
 	},
 	externals: {
 		react: {

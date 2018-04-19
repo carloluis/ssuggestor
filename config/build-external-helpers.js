@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { buildExternalHelpers } = require('babel-core');
 
-function buildHelpers() {
+function buildHelpers(filename = 'helpers.js') {
 	const code = buildExternalHelpers([
 		'classCallCheck',
 		'createClass',
@@ -11,11 +11,7 @@ function buildHelpers() {
 		'possibleConstructorReturn'
 	]);
 
-	const filename = 'helpers.js';
-
 	fs.writeFileSync(filename, code);
-
-	return filename;
 }
 
 module.exports = buildHelpers;
