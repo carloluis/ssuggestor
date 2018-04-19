@@ -3,3 +3,5 @@ dist/*
 **/__tests__/*
 node_modules/*
 coverage
+config/helpers.js
+helpers.js

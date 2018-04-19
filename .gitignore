@@ -77,4 +77,5 @@ Thumbs.db
 
 # WIP
 helpers.js
+config/helpers.js
 todo
