@@ -50,7 +50,7 @@ render(
         arrow
         close
     />,
-    document.body
+    document.querySelector('#app')
 );
 ```
 
@@ -61,7 +61,6 @@ Include `react` dependencies and `ssuggestor` scripts:
 ```html
 <script src="https://unpkg.com/react@16.2.0/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@16.2.0/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/prop-types@15.6.0/prop-types.min.js"></script>
 <script src="https://unpkg.com/ssuggestor@0.7.0/dist/ssuggestor.min.js"></script>
 
 <!-- bootstrap styles -->
@@ -130,7 +129,9 @@ Used bootstrap classes:
 * `input-group`
 * `form-control`
 * `dropdown-menu`
-* `glyphicon` (`*-triangle-bottom`, `*-remove`)
+* `glyphicon`
+    * `glyphicon-triangle-bottom`
+    * `glyphicon--remove`
 
 ## Development
 
