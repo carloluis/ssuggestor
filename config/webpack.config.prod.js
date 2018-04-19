@@ -1,10 +1,11 @@
 'use strict';
 
-require('./build-externals-helpers');
-
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
+const buildHelpers = require('./build-externals-helpers');
+
+const helpersFilename = buildHelpers();
 
 const PATHS = {
 	src: path.join(__dirname, '../src'),
@@ -14,7 +15,7 @@ const PATHS = {
 
 const shared = {
 	entry: {
-		ssugestor: ['./helpers.js', path.join(PATHS.src, 'suggestor/Suggestor.js')]
+		ssugestor: [path.join(__dirname, helpersFilename), path.join(PATHS.src, 'suggestor/Suggestor.js')]
 	},
 	externals: {
 		react: {

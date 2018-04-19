@@ -1,13 +1,21 @@
 const fs = require('fs');
 const { buildExternalHelpers } = require('babel-core');
 
-const code = buildExternalHelpers([
-	'classCallCheck',
-	'createClass',
-	'extends',
-	'inherits',
-	'interopRequireDefault',
-	'possibleConstructorReturn'
-]);
+function buildHelpers() {
+	const code = buildExternalHelpers([
+		'classCallCheck',
+		'createClass',
+		'extends',
+		'inherits',
+		'interopRequireDefault',
+		'possibleConstructorReturn'
+	]);
 
-fs.writeFileSync('helpers.js', code);
+	const filename = 'helpers.js';
+
+	fs.writeFileSync(filename, code);
+
+	return filename;
+}
+
+module.exports = buildHelpers;
