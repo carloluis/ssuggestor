@@ -1,11 +1,11 @@
 {
 	"name": "ssuggestor",
-	"version": "0.8.0",
+	"version": "0.9.0",
 	"description": "react-simple-suggestor",
 	"main": "dist/ssuggestor.js",
 	"scripts": {
 		"test": "jest",
-		"test:snapshot": "npm test -- -u",
+		"test:snapshot": "jest -u",
 		"test:coverage": "jest --coverage",
 		"coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
 		"tdd": "jest --watch",
