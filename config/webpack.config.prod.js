@@ -36,7 +36,13 @@ const shared = {
 		filename: 'ssuggestor.js',
 		libraryTarget: 'umd',
 		library: 'SSuggestor',
-		path: PATHS.dist
+		path: PATHS.dist,
+		auxiliaryComment: {
+			root: 'Root export',
+			commonjs: 'CommonJS export',
+			commonjs2: 'CommonJS2 export',
+			amd: 'AMD export'
+		}
 	},
 	target: 'web',
 	plugins: [
