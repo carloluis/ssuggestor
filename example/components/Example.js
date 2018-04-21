@@ -1,5 +1,5 @@
 import React from 'react';
-import Suggestor from '../../src/suggestor/Suggestor';
+import Suggestor from '../../src';
 import ExUpdate from './ExUpdate';
 import Section from './Section';
 import { countries, suggestions, numbers } from '../data/index';
