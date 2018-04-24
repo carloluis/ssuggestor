@@ -12,6 +12,7 @@
 		"lint": "eslint . --cache --ext .js --ignore-path .eslintignore --ignore-pattern '**/__tests__/*'",
 		"stats": "webpack --profile --json > stats.json",
 		"dev": "webpack-dev-server",
+		"page": "webpack --mode production",
 		"build": "webpack",
 		"prepublish": "npm run build",
 		"precommit": "npm run lint",
