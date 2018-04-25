@@ -16,7 +16,7 @@ buildHelpers(PATHS.helpers);
 
 const shared = {
 	entry: {
-		ssugestor: [PATHS.helpers, path.join(PATHS.src, 'suggestor/Suggestor.js')]
+		ssugestor: [PATHS.helpers, path.join(PATHS.src, 'suggestor/Suggestor.jsx')]
 	},
 	externals: {
 		react: {
@@ -54,7 +54,7 @@ const shared = {
 		})
 	],
 	resolve: {
-		extensions: ['.js']
+		extensions: ['.js', '.jsx']
 	}
 };
 
