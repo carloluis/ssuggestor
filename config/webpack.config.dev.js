@@ -7,15 +7,13 @@ const path = require('path');
 
 const PATHS = {
 	example: path.join(__dirname, '../example'),
-	dist: path.join(__dirname, '../dist'),
-	src: path.join(__dirname, '../src')
+	dist: path.join(__dirname, '../dist')
 };
 
 module.exports = {
 	mode: 'development',
 	entry: {
-		app: path.join(PATHS.example, 'index.js'),
-		vendor: ['prop-types', 'react', 'react-dom']
+		app: PATHS.example
 	},
 	output: {
 		filename: '[name].bundle.js',
@@ -28,7 +26,7 @@ module.exports = {
 			cacheGroups: {
 				vendors: {
 					test: /[\\/]node_modules[\\/]/,
-					name: 'vendor',
+					name: 'vendors',
 					enforce: true,
 					chunks: 'all'
 				}
@@ -64,9 +62,10 @@ module.exports = {
 	devServer: {
 		contentBase: PATHS.dist,
 		host: '0.0.0.0',
-		port: 9000,
-		openPage: '',
 		inline: true,
-		open: false
+		openPage: '',
+		open: false,
+		overlay: true,
+		port: 9000
 	}
 };
