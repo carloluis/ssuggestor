@@ -88,7 +88,7 @@
 	},
 	"jest": {
 		"moduleFileExtensions": [
-			"js"
+			"js", "jsx"
 		],
 		"setupFiles": [
 			"<rootDir>/__setup__/shim.js",

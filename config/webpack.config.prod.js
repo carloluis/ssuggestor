@@ -65,7 +65,7 @@ const development = {
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
+				test: /\.jsx?$/,
 				exclude: /node_modules/,
 				loader: 'babel-loader',
 				query: {
@@ -87,7 +87,7 @@ const production = {
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
+				test: /\.jsx?$/,
 				exclude: /node_modules/,
 				loader: 'babel-loader',
 				query: {
