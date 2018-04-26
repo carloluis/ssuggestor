@@ -2,7 +2,7 @@ import React from 'react';
 import Suggestor from '../../src';
 import ExUpdate from './ExUpdate';
 import Section from './Section';
-import { countries, suggestions, numbers } from '../data/index';
+import { countries, suggestions, numbers } from '../data';
 
 const valueSelected = (value, item) => console.info('select: %s -> %o', value, item);
 const valueChanged = value => console.info('change to:', value);

@@ -1,7 +1,7 @@
 import React from 'react';
 import SSuggestor from '../../src';
 import Section from './Section';
-import { countries, suggestions } from '../data/index';
+import { countries, suggestions } from '../data';
 
 const action_styles = {
 	display: 'flex',
