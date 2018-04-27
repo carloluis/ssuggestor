@@ -84,7 +84,7 @@
 	},
 	"peerDependencies": {
 		"prop-types": "^15.0",
-		"react": "^16.1"
+		"react": "^16.0"
 	},
 	"jest": {
 		"moduleFileExtensions": [
