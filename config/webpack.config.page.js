@@ -2,6 +2,7 @@
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const path = require('path');
 
@@ -39,6 +40,21 @@ module.exports = {
 				test: /\.jsx?$/,
 				exclude: /node_modules/,
 				loader: 'babel-loader'
+			},
+			{
+				test: /.css$/,
+				use: [
+					MiniCssExtractPlugin.loader,
+					{
+						loader: 'css-loader',
+						options: {
+							modules: true,
+							camelCase: 'dashes',
+							localIdentName: '[path][name]__[local]',
+							minimize: true
+						}
+					}
+				]
 			}
 		]
 	},
@@ -53,7 +69,10 @@ module.exports = {
 				from: path.join(PATHS.example, 'favicon.ico'),
 				to: path.join(PATHS.dist, 'favicon.ico')
 			}
-		])
+		]),
+		new MiniCssExtractPlugin({
+			filename: '[name].[chunkhash].css'
+		})
 	],
 	resolve: {
 		extensions: ['.js', '.jsx']
