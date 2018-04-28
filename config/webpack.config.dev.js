@@ -39,6 +39,22 @@ module.exports = {
 				test: /\.jsx?$/,
 				exclude: /node_modules/,
 				loader: 'babel-loader?cacheDirectory'
+			},
+			{
+				test: /.css$/,
+				use: [
+					{
+						loader: 'style-loader'
+					},
+					{
+						loader: 'css-loader',
+						options: {
+							modules: true,
+							camelCase: 'dashes',
+							localIdentName: '[path][name]__[local]'
+						}
+					}
+				]
 			}
 		]
 	},
