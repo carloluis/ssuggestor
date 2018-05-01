@@ -1,7 +1,7 @@
 import React from 'react';
-import SSuggestor from '../../src';
-import Section from './Section';
-import { countries, suggestions } from '../data';
+import Suggestor from '../../../src';
+import Section from '../section/Section';
+import { countries, suggestions } from '../../data';
 
 const action_styles = {
 	display: 'flex',
@@ -10,7 +10,7 @@ const action_styles = {
 
 const DEFAULT_VALUE = 'default';
 
-class ExUpdate extends React.Component {
+class Update extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -62,7 +62,7 @@ class ExUpdate extends React.Component {
 		return (
 			<div style={{ padding: '10px 0 160px' }}>
 				<Section title="Suggestor Props" description="Updating props (value, suggestions list)">
-					<SSuggestor
+					<Suggestor
 						value={value}
 						list={suggestions}
 						onChange={console.info}
@@ -85,4 +85,4 @@ class ExUpdate extends React.Component {
 	}
 }
 
-export default ExUpdate;
+export default Update;

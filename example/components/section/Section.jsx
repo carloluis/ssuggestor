@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './section.css';
 
 const Section = ({ title, description = '', children }) => (
-	<div style={{ padding: '10px 0' }}>
+	<div className={styles.container}>
 		<h4>{title}</h4>
 		<div>{children}</div>
-		{!!description && <p style={{ padding: '10px' }}>{description}</p>}
+		{!!description && <p>{description}</p>}
 	</div>
 );
 
