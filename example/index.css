@@ -13,7 +13,7 @@
 	height: 26px;
 }
 
-.suggestor ::-webkit-input-placeholder {
+:global .suggestor ::-webkit-input-placeholder {
 	font-weight: normal;
 	font-size: 18px;
 }
