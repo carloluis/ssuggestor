@@ -2,18 +2,18 @@
 	box-sizing: border-box;
 }
 
-:global(.suggestor) input {
+:global .suggestor input {
 	font-weight: 600;
 	font-size: 20px;
 	height: 40px;
 }
 
-:global(.suggestor) li {
+:global .suggestor li {
 	font-size: 16px;
 	height: 26px;
 }
 
-:global(.suggestor) ::-webkit-input-placeholder {
+.suggestor ::-webkit-input-placeholder {
 	font-weight: normal;
 	font-size: 18px;
 }
