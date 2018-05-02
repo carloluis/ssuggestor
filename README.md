@@ -1,4 +1,4 @@
-# ssuggestor 
+# ssuggestor
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![GitHub release](https://img.shields.io/github/release/carloluis/ssuggestor.svg)](https://github.com/carloluis/ssuggestor/releases)
@@ -59,9 +59,9 @@ render(
 Include `react` dependencies and `ssuggestor` scripts:
 
 ```html
-<script src="https://unpkg.com/react@16.2.0/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@16.2.0/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/ssuggestor@0.7.0/dist/ssuggestor.min.js"></script>
+<script src="https://unpkg.com/react@16.3.0/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16.3.0/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/ssuggestor@0.9.0/dist/ssuggestor.min.js"></script>
 
 <!-- bootstrap styles -->
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -69,7 +69,7 @@ Include `react` dependencies and `ssuggestor` scripts:
 
 ## Description
 
-This Simple Suggestor package exports a single React component as the default export:
+This Simple Suggestor package provides a React component as default export:
 It handles clicks outside of DOM component in order to close the suggestion list.
 All pattern matches are highlighted.
 
@@ -114,12 +114,12 @@ Suggestion objects use requires a `selector` function to convert each object int
 
 <kbd>Up</kbd>, <kbd>Down</kbd>, <kbd>Enter</kbd>, <kbd>Escape</kbd> & <kbd>Tab</kbd>.
 
-#### Method
+#### Focus
 
-One public method for imperative action: `focus()`
+Use public method `focus` to set focus in `<input>` element.
 
 ```js
-instance.focus(); // focuses the control input
+<suggestor-instance>.focus();
 ```
 
 #### Bootstrap
