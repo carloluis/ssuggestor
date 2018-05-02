@@ -10,6 +10,8 @@ class Suggestor extends PureComponent {
 		super(props);
 		autoBind(this);
 
+		this.input = React.createRef();
+
 		this.state = {
 			filtered: this.filter(props.list, props.value, false),
 			value: props.value,
@@ -24,7 +26,7 @@ class Suggestor extends PureComponent {
 		document.removeEventListener('click', this._onClick);
 	}
 	_onClick(event) {
-		if (!this.input.parentNode.contains(event.target)) {
+		if (!this.input.current.parentNode.contains(event.target)) {
 			this.close();
 		}
 	}
@@ -155,10 +157,7 @@ class Suggestor extends PureComponent {
 		return this.filter(this.props.list, this.state.value, false);
 	}
 	focus() {
-		this.input.focus();
-	}
-	refInput(input) {
-		this.input = input;
+		this.input.current.focus();
 	}
 	render() {
 		const { className, style, placeholder, arrow, close, tooltip, required } = this.props;
@@ -174,7 +173,7 @@ class Suggestor extends PureComponent {
 					title={tooltip}
 					placeholder={placeholder}
 					required={required}
-					ref={this.refInput}
+					ref={this.input}
 				/>
 				{arrow && <span className={glyphicon('triangle-bottom')} style={SPIN_STYLES} />}
 				{close && value && <span className={glyphicon('remove')} style={X_STYLES} onClick={this.remove} />}
