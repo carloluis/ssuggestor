@@ -19,6 +19,8 @@ class Update extends React.Component {
 		this.updateNone = this.updateNone.bind(this);
 		this.autoUpdate = this.autoUpdate.bind(this);
 
+		this.suggestor = React.createRef();
+
 		this.state = {
 			suggestions: countries,
 			value: ''
@@ -53,6 +55,7 @@ class Update extends React.Component {
 	}
 
 	updateNone() {
+		this.suggestor.current.focus();
 		this.forceUpdate();
 	}
 
@@ -67,15 +70,17 @@ class Update extends React.Component {
 						list={suggestions}
 						onChange={console.info}
 						placeholder="..."
-						tooltip="type something.."
+						tooltip="Type Something"
 						style={{ width: '100%' }}
+						ref={this.suggestor}
 					/>
 					<br />
 					<div style={action_styles}>
-						<button onClick={this.updateSuggestions}>Update suggestions...</button>
-						<button onClick={this.updateValue}>Update value...</button>
-						<button onClick={this.updateNone}>Update none...</button>
+						<button onClick={this.updateSuggestions}>Update suggestions</button>
+						<button onClick={this.updateValue}>Update value</button>
+						<button onClick={this.updateNone}>Focus</button>
 					</div>
+					<br />
 					<label title="auto update suggestions list">
 						<input type="checkbox" onClick={this.autoUpdate} /> auto-update
 					</label>
