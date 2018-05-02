@@ -124,7 +124,7 @@ describe('Suggestor component', () => {
 		});
 
 		it('focus -> input.focus', () => {
-			const spy = jest.spyOn(mounted.instance().input, 'focus');
+			const spy = jest.spyOn(mounted.instance().input.current, 'focus');
 			mounted.instance().focus();
 
 			expect(spy).toBeCalled();
@@ -268,7 +268,7 @@ describe('Suggestor component', () => {
 		});
 
 		it('should call when _onClick', () => {
-			mountedInstance.input = { parentNode: { contains: jest.fn() } };
+			mountedInstance.input = { current: { parentNode: { contains: jest.fn() } } };
 			mountedInstance._onClick({ target: {} });
 		});
 
@@ -602,13 +602,13 @@ describe('Suggestor component', () => {
 		});
 
 		it('should not call handleClose when click inside component', () => {
-			wrapperInstance._onClick({ target: wrapperInstance.input });
+			wrapperInstance._onClick({ target: wrapperInstance.input.current });
 			expect(closeSpy).not.toBeCalled();
 		});
 
 		it('should call handleClose when click outside', () => {
 			const contains = jest.fn(() => false);
-			wrapperInstance.input = { parentNode: { contains } };
+			wrapperInstance.input = { current: { parentNode: { contains } } };
 			wrapperInstance._onClick({ target: {} });
 
 			expect(closeSpy).toBeCalled();
