@@ -23,7 +23,7 @@ const SuggestorWrapper = props => (
 /* eslint-disable max-len */
 
 const Example = () => (
-	<div>
+	<React.Fragment>
 		<Section title="Code Example">
 			<pre>{`<Suggestor list={['list', 'of', 'suggestions', ...]} style={{width:'100%'}} />`}</pre>
 			<a href="https://codepen.io/carloluis/pen/rjpLYw">CodePen</a>
@@ -115,7 +115,7 @@ const Example = () => (
 		</Section>
 
 		<Update />
-	</div>
+	</React.Fragment>
 );
 
 /* eslint-enable max-len */

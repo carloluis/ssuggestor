@@ -2,13 +2,7 @@ import React from 'react';
 import Suggestor from '../../../src';
 import Section from '../section/Section';
 import { countries, suggestions } from '../../data';
-
-const action_styles = {
-	display: 'flex',
-	justifyContent: 'space-between'
-};
-
-const DEFAULT_VALUE = 'default';
+import styles from './update.css';
 
 class Update extends React.Component {
 	constructor(props) {
@@ -28,13 +22,11 @@ class Update extends React.Component {
 	}
 
 	autoUpdate() {
-		if (this.timerId) {
+		if (!this.timerId) {
+			this.timerId = setInterval(this.updateSuggestions, 4000);
+		} else {
 			clearInterval(this.timerId);
 			this.timerId = undefined;
-		} else {
-			this.timerId = setInterval(() => {
-				this.updateSuggestions();
-			}, 4000);
 		}
 	}
 
@@ -43,15 +35,15 @@ class Update extends React.Component {
 	}
 
 	updateSuggestions() {
-		this.setState({
-			suggestions: this.state.suggestions.length === suggestions.length ? countries : suggestions
-		});
+		this.setState(state => ({
+			suggestions: state.suggestions.length === suggestions.length ? countries : suggestions
+		}));
 	}
 
 	updateValue() {
-		this.setState({
-			value: this.state.value === DEFAULT_VALUE ? 'albania' : DEFAULT_VALUE
-		});
+		this.setState(({ value }) => ({
+			value: value === 'default' ? 'albania' : 'default'
+		}));
 	}
 
 	updateNone() {
@@ -63,8 +55,8 @@ class Update extends React.Component {
 		const { value, suggestions } = this.state;
 
 		return (
-			<div style={{ padding: '10px 0 160px' }}>
-				<Section title="Suggestor Props" description="Updating props (value, suggestions list)">
+			<div className={styles.container}>
+				<Section title="Suggestor Props" description="Updating <Suggestor> Props">
 					<Suggestor
 						value={value}
 						list={suggestions}
@@ -75,14 +67,14 @@ class Update extends React.Component {
 						ref={this.suggestor}
 					/>
 					<br />
-					<div style={action_styles}>
+					<div className={styles.actions}>
 						<button onClick={this.updateSuggestions}>Update suggestions</button>
 						<button onClick={this.updateValue}>Update value</button>
 						<button onClick={this.updateNone}>Focus</button>
 					</div>
 					<br />
-					<label title="auto update suggestions list">
-						<input type="checkbox" onClick={this.autoUpdate} /> auto-update
+					<label title="auto-update every 4s">
+						<input type="checkbox" onClick={this.autoUpdate} /> auto-update the suggestions
 					</label>
 				</Section>
 			</div>
