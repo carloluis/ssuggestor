@@ -1,6 +1,6 @@
 import React from 'react';
 import Example from '../example/Example';
-import styles from './app.css';
+import styles from './app.scss';
 
 const App = () => (
 	<React.Fragment>

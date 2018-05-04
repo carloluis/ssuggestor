@@ -2,7 +2,7 @@ import React from 'react';
 import Suggestor from '../../../src';
 import Section from '../section/Section';
 import { countries, suggestions } from '../../data';
-import styles from './update.css';
+import styles from './update.scss';
 
 class Update extends React.Component {
 	constructor(props) {
