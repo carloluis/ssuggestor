@@ -1,19 +1,12 @@
+@import './styles/palette.css';
+
 * {
 	box-sizing: border-box;
 }
 
-:global .suggestor input {
-	font-weight: 600;
-	font-size: 20px;
-	height: 40px;
-}
-
-:global .suggestor li {
-	font-size: 16px;
-	height: 26px;
-}
-
-:global .suggestor ::-webkit-input-placeholder {
-	font-weight: normal;
-	font-size: 18px;
+body {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.42857143;
+	overflow-x: hidden;
 }

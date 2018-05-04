@@ -1,3 +1,3 @@
-import Example from './example/Example';
+import App from './app/App';
 
-export default Example;
+export default App;
