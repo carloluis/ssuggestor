@@ -1,5 +1,3 @@
-@import '../../styles/palette.css';
-
 .header {
 	background-color: var(--blue);
 	text-align: center;
