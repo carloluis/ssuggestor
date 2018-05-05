@@ -42,7 +42,7 @@ module.exports = {
 				loader: 'babel-loader'
 			},
 			{
-				test: /.css$/,
+				test: /.scss$/,
 				use: [
 					MiniCssExtractPlugin.loader,
 					{
@@ -53,6 +53,9 @@ module.exports = {
 							localIdentName: '[path][name]__[local]',
 							minimize: true
 						}
+					},
+					{
+						loader: 'sass-loader'
 					}
 				]
 			}

@@ -3,7 +3,7 @@ import Suggestor from '../../../src';
 import Section from '../section/Section';
 import Update from '../update/Update';
 import { countries, suggestions, numbers } from '../../data';
-import './example.css';
+import './example.scss';
 
 const valueSelected = (value, item) => console.info('select: %s -> %o', value, item);
 const valueChanged = value => console.info('change to:', value);

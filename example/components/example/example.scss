@@ -1,0 +1,17 @@
+:global .suggestor {
+	input {
+		font-weight: 600;
+		font-size: 20px;
+		height: 40px;
+	}
+
+	li {
+		font-size: 16px;
+		height: 26px;
+	}
+
+	& ::-webkit-input-placeholder {
+		font-weight: normal;
+		font-size: 18px;
+	}
+}
