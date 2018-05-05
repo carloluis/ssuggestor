@@ -50,7 +50,7 @@ module.exports = {
 						options: {
 							modules: true,
 							camelCase: 'dashes',
-							localIdentName: '[path][name]__[local]',
+							localIdentName: '[hash:base64:6]',
 							minimize: true
 						}
 					},
