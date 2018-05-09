@@ -1,30 +1,17 @@
 import React from 'react';
-import Suggestor from '../../../src';
 import Section from '../section/Section';
+import SuggestorWrapper from './suggestor-wrapper/SuggestorWrapper';
 import Update from '../update/Update';
 import { countries, suggestions, numbers } from '../../data';
-import './example.scss';
+import styles from './example.scss';
 
-const valueSelected = (value, item) => console.info('select: %s -> %o', value, item);
-const valueChanged = value => console.info('change to:', value);
-
-const suggestionObjects = [{ x: 'One', y: 1 }, { x: 'Two', y: 2 }, { x: 'Three', y: 3 }, { x: 'çáëìõû', y: NaN }];
+const suggestionObjects = [{ x: 'One', y: 1 }, { x: 'Two', y: 2 }, { x: 'Three', y: 3 }, { x: 'çáëìõû', y: 4 }];
 const selector = item => `${item.x}:${item.y}`;
-
-const SuggestorWrapper = props => (
-	<Suggestor
-		style={{ width: '100%' }}
-		onChange={valueChanged}
-		onSelect={valueSelected}
-		placeholder="..."
-		{...props}
-	/>
-);
 
 /* eslint-disable max-len */
 
 const Example = () => (
-	<React.Fragment>
+	<section className={styles.container}>
 		<Section title="Code Example">
 			<pre>{`<Suggestor list={['list', 'of', 'suggestions', ...]} style={{width:'100%'}} />`}</pre>
 			<a href="https://codepen.io/carloluis/pen/rjpLYw">CodePen</a>
@@ -116,7 +103,7 @@ const Example = () => (
 		</Section>
 
 		<Update />
-	</React.Fragment>
+	</section>
 );
 
 /* eslint-enable max-len */
