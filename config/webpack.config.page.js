@@ -1,12 +1,14 @@
 'use strict';
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const path = require('path');
 
 const PATHS = {
+	root: path.join(__dirname, '..'),
 	example: path.join(__dirname, '../example'),
 	dist: path.join(__dirname, '../dist')
 };
@@ -75,6 +77,9 @@ module.exports = {
 		]),
 		new MiniCssExtractPlugin({
 			filename: '[name].[chunkhash].css'
+		}),
+		new CleanWebpackPlugin(['dist'], {
+			root: PATHS.root
 		})
 	],
 	resolve: {
