@@ -6,7 +6,7 @@
 	padding: 24px 24px 0;
 	margin-bottom: 24px;
 	position: sticky;
-	top: -50px;
+	top: -40px;
 	z-index: 11;
 
 	&::after {
@@ -44,13 +44,6 @@
 			font-weight: 500;
 		}
 	}
-}
-
-.container {
-	max-width: 640px;
-	width: 90%;
-	margin: 0 auto;
-	padding: 16px;
 }
 
 .footer {

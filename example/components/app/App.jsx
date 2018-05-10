@@ -18,9 +18,7 @@ const App = () => (
 				Code and Docs on GitHub
 			</a>
 		</header>
-		<section className={styles.container}>
-			<Example />
-		</section>
+		<Example />
 		<footer className={styles.footer}>
 			<span>
 				MIT &copy;{' '}
