@@ -26,9 +26,9 @@ class ListItem extends PureComponent {
 
 		return (
 			<li
+				className={overItem ? 'ss-over-item' : undefined}
 				onClick={this.handleClick}
 				onMouseEnter={this.handleMouseEnter}
-				style={{ backgroundColor: overItem && '#f5f5f5' }}
 			>
 				<MarkItem {...{ item, search }} />
 			</li>
