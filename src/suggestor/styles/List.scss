@@ -1,0 +1,8 @@
+:global .ss-list {
+	display: block;
+	max-height: 250px;
+	min-width: 30px;
+	width: inherit;
+	overflow: auto;
+	cursor: pointer;
+}

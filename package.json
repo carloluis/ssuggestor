@@ -3,6 +3,7 @@
 	"version": "0.9.1",
 	"description": "react-simple-suggestor",
 	"main": "dist/ssuggestor.js",
+	"style": "dist/styles.css",
 	"scripts": {
 		"test": "jest",
 		"test:snapshot": "jest -u",

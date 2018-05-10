@@ -1,6 +1,7 @@
 'use strict';
 
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const path = require('path');
 const buildHelpers = require('./build-external-helpers');
@@ -13,6 +14,36 @@ const PATHS = {
 };
 
 buildHelpers(PATHS.helpers);
+
+const styles = {
+	entry: path.join(PATHS.src, 'suggestor/styles/index.scss'),
+	module: {
+		rules: [
+			{
+				test: /.scss$/,
+				use: [
+					MiniCssExtractPlugin.loader,
+					{
+						loader: 'css-loader',
+						options: {
+							modules: true,
+							camelCase: 'dashes',
+							localIdentName: '[local]'
+						}
+					},
+					{
+						loader: 'sass-loader'
+					}
+				]
+			}
+		]
+	},
+	plugins: [
+		new MiniCssExtractPlugin({
+			filename: 'styles.css'
+		})
+	]
+};
 
 const shared = {
 	entry: {
@@ -108,4 +139,4 @@ const production = {
 	}
 };
 
-module.exports = [development, production];
+module.exports = [development, production, styles];

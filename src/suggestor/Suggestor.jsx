@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { autoBind, keys, noop } from '../utils';
 import transform from '../utils/transform';
-import { SPIN_STYLES, X_STYLES, glyphicon } from './styles';
+import { glyphicon } from '../utils/styles';
 import List from './List';
 
 class Suggestor extends PureComponent {
@@ -164,7 +164,7 @@ class Suggestor extends PureComponent {
 		const { open, value, index, filtered } = this.state;
 
 		return (
-			<div className={className} style={style} onClick={this.handleClick} onKeyDown={this.handleKeyDown}>
+			<div className={className} onClick={this.handleClick} onKeyDown={this.handleKeyDown} style={style}>
 				<input
 					type="text"
 					className="form-control"
@@ -175,8 +175,8 @@ class Suggestor extends PureComponent {
 					required={required}
 					ref={this.input}
 				/>
-				{arrow && <span className={glyphicon('triangle-bottom')} style={SPIN_STYLES} />}
-				{close && value && <span className={glyphicon('remove')} style={X_STYLES} onClick={this.remove} />}
+				{arrow && <span className={'ss-triangle ' + glyphicon('triangle-bottom')} />}
+				{close && value && <span className={'ss-remove ' + glyphicon('remove')} onClick={this.remove} />}
 				<List
 					{...{ filtered, index, open, value }}
 					onItemClick={this.handleItemClick}
