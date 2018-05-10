@@ -1,10 +1,7 @@
 import React from 'react';
 import List from '../List';
-import { getListStyles } from '../styles';
 import renderer from 'react-test-renderer';
 import { shallow, mount } from 'enzyme';
-
-jest.mock('../styles');
 
 const PROPS = {
 	filtered: [{ word: 'locellus', index: 0 }, { word: 'Lydian', index: 0 }, { word: 'warray', index: -1 }],
@@ -46,7 +43,6 @@ describe('List component', () => {
 	let wrapper;
 
 	beforeEach(() => {
-		getListStyles.mockReset();
 		PROPS.onItemClick.mockClear();
 		PROPS.onItemMouseEnter.mockClear();
 
