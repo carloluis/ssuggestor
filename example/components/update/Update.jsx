@@ -56,13 +56,13 @@ class Update extends React.Component {
 
 		return (
 			<div className={styles.container}>
-				<Section title="Suggestor Props" description="Updating <Suggestor> Props">
+				<Section title="Updating props">
 					<Suggestor
 						value={value}
 						list={suggestions}
 						onChange={console.info}
 						placeholder="..."
-						tooltip="Type Something"
+						tooltip="type something"
 						style={{ width: '100%' }}
 						ref={this.suggestor}
 					/>

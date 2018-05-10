@@ -5,38 +5,34 @@ import Update from '../update/Update';
 import { countries, suggestions, numbers } from '../../data';
 import styles from './example.scss';
 
-const suggestionObjects = [{ x: 'One', y: 1 }, { x: 'Two', y: 2 }, { x: 'Three', y: 3 }, { x: 'çáëìõû', y: 4 }];
-const selector = item => `${item.x}:${item.y}`;
+const suggestionObjects = [{ x: 'One', y: 1 }, { x: 'Two', y: 2 }, { x: 'Three', y: 3 }, { x: 'Four', y: 4 }];
+const selector = item => item.x;
 
 /* eslint-disable max-len */
 
 const Example = () => (
 	<section className={styles.container}>
-		<Section title="Code Example">
-			<pre>{`<Suggestor list={['list', 'of', 'suggestions', ...]} style={{width:'100%'}} />`}</pre>
-			<a href="https://codepen.io/carloluis/pen/rjpLYw">CodePen</a>
-		</Section>
-
-		<Section title="Using suggestion objects" description="Use selector prop to display suggestions">
-			<SuggestorWrapper list={suggestionObjects} selector={selector} selectOnTab />
-		</Section>
-
 		<Section
-			title="Suggestor"
-			description="Use `value` prop to set initial value. Use up, down, enter and escape keys."
+			title="Using custom suggestion objects"
+			description="When using objects as suggestions it's required to provide a selector property"
 		>
-			<SuggestorWrapper value="default" list={suggestions} tooltip="type something.." />
+			<SuggestorWrapper
+				list={suggestionObjects}
+				selector={selector}
+				selectOnTab
+				tooltip="using custom suggestions"
+			/>
 		</Section>
 
 		<Section
-			title="Suggestor with `selectOnTab` enabled"
-			description="Select element hovered pressing `tab`. List of all countries."
+			title="Select suggestion on <tab>"
+			description="Select element hovered when hit the <tab> key. Prop selectOnTab is on."
 		>
-			<SuggestorWrapper list={countries} placeholder="countries..." tooltip="type a country name" selectOnTab />
+			<SuggestorWrapper list={countries} placeholder="Select a country..." tooltip="country names" selectOnTab />
 		</Section>
 
 		<Section
-			title="Suggestor with custom styles"
+			title="Using custom styles"
 			description="Use className and style props to change component appearance."
 		>
 			<SuggestorWrapper
@@ -47,56 +43,51 @@ const Example = () => (
 		</Section>
 
 		<Section
-			title="Suggestor without keys navigation"
-			description="You can only type or use mouse to view/navigate over suggestions."
+			title="Disabling keys navigation"
+			description="You can only type or use mouse to view/navigate through suggestions."
 		>
 			<SuggestorWrapper
 				list={countries}
-				placeholder="countries..."
+				placeholder="type a country..."
 				tooltip="no keys: type/scroll over list"
 				useKeys={false}
 			/>
 		</Section>
 
-		<Section title="Suggestor without icons" description="No arrow nor close icon. ">
+		<Section title="Minimalistic" description="No arrow nor close icons.">
 			<SuggestorWrapper
-				list={suggestions}
-				placeholder="type a letter or number..."
-				tooltip="no arrow and no x"
+				list={countries}
+				placeholder="what's your country?"
+				tooltip="what's your country?"
 				arrow={false}
 				close={false}
 			/>
 		</Section>
 
-		<Section title="Suggestor start suggestions on two characters" description="suggestOn prop.">
+		<Section
+			title="Display suggestions with the second letter"
+			description="Play with suggestOn and openOnClick properties."
+		>
 			<SuggestorWrapper
 				list={countries}
 				placeholder="countries..."
-				tooltip="display suggestions on 2nd char"
-				suggestOn={2}
-			/>
-		</Section>
-
-		<Section title="Suggestor without click support" description="openOnClick prop.">
-			<SuggestorWrapper
-				list={suggestions}
-				placeholder="type a letter or number..."
-				tooltip="type something (or use navigation keys) to display suggestions"
+				tooltip="Type two letters to show up some completions"
 				openOnClick={false}
+				suggestOn={2}
 			/>
 		</Section>
 
 		<Section
-			title="Suggestor with 2K suggestions (numbers)"
-			description="Disable keys support and open on click props. Waiting until 2nd char to display suggestions."
+			title="Large suggestion list"
+			description="Using a list with 2k numbers. Waiting until 2nd digit to display suggestions."
 		>
 			<SuggestorWrapper
 				list={numbers}
 				placeholder="enter two digits..."
-				tooltip="numbers between 0 and 2000. (no icons, no keys, no click)"
+				tooltip="numbers between 10 and 2010. (no icons, no keys, no click)"
+				openOnClick={false}
 				useKeys={false}
 				suggestOn={2}
-				openOnClick={false}
 				arrow={false}
 				close={false}
 			/>
