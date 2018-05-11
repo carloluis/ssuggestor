@@ -6,52 +6,30 @@ exports[`<List /> snapshot - suggestion list closed 1`] = `null`;
 
 exports[`<List /> snapshot - suggestion list open (index 1) 1`] = `
 <ul
-  className="dropdown-menu"
-  style={
-    Object {
-      "cursor": "pointer",
-      "display": "block",
-      "maxHeight": 250,
-      "minWidth": 30,
-      "overflow": "auto",
-      "width": "inherit",
-    }
-  }
+  className="dropdown-menu ss-list"
 >
   <li
+    className={undefined}
     onClick={[Function]}
     onMouseEnter={[Function]}
-    style={
-      Object {
-        "backgroundColor": false,
-      }
-    }
   >
     <a>
       locellus
     </a>
   </li>
   <li
+    className="ss-over-item"
     onClick={[Function]}
     onMouseEnter={[Function]}
-    style={
-      Object {
-        "backgroundColor": "#f5f5f5",
-      }
-    }
   >
     <a>
       Lydian
     </a>
   </li>
   <li
+    className={undefined}
     onClick={[Function]}
     onMouseEnter={[Function]}
-    style={
-      Object {
-        "backgroundColor": false,
-      }
-    }
   >
     <a>
       warray
@@ -62,52 +40,30 @@ exports[`<List /> snapshot - suggestion list open (index 1) 1`] = `
 
 exports[`<List /> snapshot - suggestion list open 1`] = `
 <ul
-  className="dropdown-menu"
-  style={
-    Object {
-      "cursor": "pointer",
-      "display": "block",
-      "maxHeight": 250,
-      "minWidth": 30,
-      "overflow": "auto",
-      "width": "inherit",
-    }
-  }
+  className="dropdown-menu ss-list"
 >
   <li
+    className="ss-over-item"
     onClick={[Function]}
     onMouseEnter={[Function]}
-    style={
-      Object {
-        "backgroundColor": "#f5f5f5",
-      }
-    }
   >
     <a>
       locellus
     </a>
   </li>
   <li
+    className={undefined}
     onClick={[Function]}
     onMouseEnter={[Function]}
-    style={
-      Object {
-        "backgroundColor": false,
-      }
-    }
   >
     <a>
       Lydian
     </a>
   </li>
   <li
+    className={undefined}
     onClick={[Function]}
     onMouseEnter={[Function]}
-    style={
-      Object {
-        "backgroundColor": false,
-      }
-    }
   >
     <a>
       warray

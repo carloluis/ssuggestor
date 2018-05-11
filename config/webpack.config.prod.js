@@ -1,6 +1,7 @@
 'use strict';
 
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const path = require('path');
 const buildHelpers = require('./build-external-helpers');
@@ -16,7 +17,11 @@ buildHelpers(PATHS.helpers);
 
 const shared = {
 	entry: {
-		ssugestor: [PATHS.helpers, path.join(PATHS.src, 'suggestor/Suggestor.jsx')]
+		ssugestor: [
+			path.join(PATHS.src, 'suggestor/styles/index.scss'),
+			PATHS.helpers,
+			path.join(PATHS.src, 'suggestor/Suggestor.jsx')
+		]
 	},
 	externals: {
 		react: {
@@ -72,9 +77,32 @@ const development = {
 					presets: ['env', 'stage-2', 'react'],
 					plugins: ['external-helpers']
 				}
+			},
+			{
+				test: /.scss$/,
+				use: [
+					MiniCssExtractPlugin.loader,
+					{
+						loader: 'css-loader',
+						options: {
+							modules: true,
+							camelCase: 'dashes',
+							localIdentName: '[local]'
+						}
+					},
+					{
+						loader: 'sass-loader'
+					}
+				]
 			}
 		]
-	}
+	},
+	plugins: [
+		...shared.plugins,
+		new MiniCssExtractPlugin({
+			filename: 'styles.css'
+		})
+	]
 };
 
 const production = {
@@ -103,9 +131,33 @@ const production = {
 						'external-helpers'
 					]
 				}
+			},
+			{
+				test: /.scss$/,
+				use: [
+					MiniCssExtractPlugin.loader,
+					{
+						loader: 'css-loader',
+						options: {
+							modules: true,
+							camelCase: 'dashes',
+							localIdentName: '[local]',
+							minimize: true
+						}
+					},
+					{
+						loader: 'sass-loader'
+					}
+				]
 			}
 		]
-	}
+	},
+	plugins: [
+		...shared.plugins,
+		new MiniCssExtractPlugin({
+			filename: 'styles.min.css'
+		})
+	]
 };
 
 module.exports = [development, production];

@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ListItem from './ListItem';
-import { getListStyles } from './styles';
 
 const List = ({ open, filtered, index, value, onItemClick, onItemMouseEnter }) =>
 	open &&
 	!!filtered.length && (
-		<ul className="dropdown-menu" style={getListStyles(open)}>
+		<ul className="dropdown-menu ss-list">
 			{filtered.map((item, i) => (
 				<ListItem
 					key={item.word}

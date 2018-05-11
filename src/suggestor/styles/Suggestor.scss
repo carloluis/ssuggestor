@@ -1,0 +1,18 @@
+:global .ss-triangle,
+:global .ss-remove {
+	position: absolute;
+	cursor: pointer;
+	margin: auto;
+	color: #ccc;
+	font-size: 16px;
+	right: 10px;
+	top: 0;
+	bottom: 0;
+	height: 14px;
+	z-index: 4;
+}
+
+:global .ss-remove {
+	font-size: 14px;
+	right: 30px;
+}
