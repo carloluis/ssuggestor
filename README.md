@@ -38,17 +38,16 @@ npm i ssuggestor
 ```jsx
 import React from 'react';
 import { render } from 'react-dom';
+import 'ssuggestor/dist/styles.css';
 import Suggestor from 'ssuggestor';
 
 render(
     <Suggestor
         list={['suggestion-a', 'suggestion-b', 'suggestion-c', '...', 'suggestion-z']}
-        placeholder="write something to display suggestions..."
-        onChange={console.log}
-        onSelect={(value, suggestion) => console.info(value, suggestion)}
+        onChange={value => {}}
+        onSelect={(value, suggestion) => {}}
+        placeholder="placeholder text..."
         styles={{ width: 100 }}
-        arrow
-        close
     />,
     document.querySelector('#app')
 );
