@@ -1,9 +1,11 @@
+@import './_palette.scss';
+
 :global .ss-triangle,
 :global .ss-remove {
 	position: absolute;
 	cursor: pointer;
 	margin: auto;
-	color: #ccc;
+	color: $grey;
 	font-size: 16px;
 	right: 10px;
 	top: 0;
