@@ -1,7 +1,8 @@
 import React from 'react';
-import List from '../List';
 import renderer from 'react-test-renderer';
 import { shallow, mount } from 'enzyme';
+import classSchema from '../../class-schema/bootstrap-3';
+import List from '../List';
 
 const PROPS = {
 	filtered: [{ word: 'locellus', index: 0 }, { word: 'Lydian', index: 0 }, { word: 'warray', index: -1 }],
@@ -9,7 +10,8 @@ const PROPS = {
 	onItemClick: jest.fn(),
 	onItemMouseEnter: jest.fn(),
 	open: false,
-	value: ''
+	value: '',
+	classSchema
 };
 
 describe('<List />', () => {

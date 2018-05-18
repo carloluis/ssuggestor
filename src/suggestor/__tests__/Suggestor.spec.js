@@ -3,6 +3,7 @@ import renderer from 'react-test-renderer';
 import ReactTestUtils from 'react-dom/test-utils';
 import { shallow, mount } from 'enzyme';
 
+import classSchema from '../../class-schema/bootstrap-3';
 import * as utils from '../../utils';
 import transform from '../../utils/transform';
 import Suggestor from '../Suggestor';
@@ -29,7 +30,8 @@ const PROPS = {
 	useKeys: false,
 	accents: false,
 	arrow: false,
-	close: false
+	close: false,
+	classSchema
 };
 
 describe('<Ssuggestor />', () => {

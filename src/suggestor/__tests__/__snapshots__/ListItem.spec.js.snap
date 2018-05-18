@@ -14,7 +14,7 @@ exports[`<ListItem/> snapshot - hover 1`] = `
 
 exports[`<ListItem/> snapshot 1`] = `
 <li
-  className={undefined}
+  className=""
   onClick={[Function]}
   onMouseEnter={[Function]}
 >

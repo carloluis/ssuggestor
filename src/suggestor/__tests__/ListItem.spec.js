@@ -1,7 +1,8 @@
 import React from 'react';
-import ListItem from '../ListItem';
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
+import classSchema from '../../class-schema/bootstrap-3';
+import ListItem from '../ListItem';
 
 const PROPS = {
 	item: { word: 'fructuary', index: -1 },
@@ -9,7 +10,8 @@ const PROPS = {
 	overItem: false,
 	onItemClick: jest.fn(),
 	onItemMouseEnter: jest.fn(),
-	search: 'ss'
+	search: 'ss',
+	classSchema
 };
 
 describe('<ListItem/>', () => {

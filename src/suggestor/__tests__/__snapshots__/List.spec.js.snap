@@ -9,7 +9,7 @@ exports[`<List /> snapshot - suggestion list open (index 1) 1`] = `
   className="dropdown-menu ss-list"
 >
   <li
-    className={undefined}
+    className=""
     onClick={[Function]}
     onMouseEnter={[Function]}
   >
@@ -27,7 +27,7 @@ exports[`<List /> snapshot - suggestion list open (index 1) 1`] = `
     </a>
   </li>
   <li
-    className={undefined}
+    className=""
     onClick={[Function]}
     onMouseEnter={[Function]}
   >
@@ -52,7 +52,7 @@ exports[`<List /> snapshot - suggestion list open 1`] = `
     </a>
   </li>
   <li
-    className={undefined}
+    className=""
     onClick={[Function]}
     onMouseEnter={[Function]}
   >
@@ -61,7 +61,7 @@ exports[`<List /> snapshot - suggestion list open 1`] = `
     </a>
   </li>
   <li
-    className={undefined}
+    className=""
     onClick={[Function]}
     onMouseEnter={[Function]}
   >

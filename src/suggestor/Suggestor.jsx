@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { autoBind, keys, noop } from '../utils';
 import transform from '../utils/transform';
-import { glyphicon } from '../utils/styles';
 import List from './List';
 
 class Suggestor extends PureComponent {
@@ -160,14 +159,14 @@ class Suggestor extends PureComponent {
 		this.input.current.focus();
 	}
 	render() {
-		const { className, style, placeholder, arrow, close, tooltip, required } = this.props;
+		const { classSchema, style, placeholder, arrow, close, tooltip, required } = this.props;
 		const { open, value, index, filtered } = this.state;
 
 		return (
-			<div className={className} onClick={this.handleClick} onKeyDown={this.handleKeyDown} style={style}>
+			<div className={classSchema.root} onClick={this.handleClick} onKeyDown={this.handleKeyDown} style={style}>
 				<input
 					type="text"
-					className="form-control"
+					className={classSchema.input}
 					onChange={this.handleChange}
 					value={value}
 					title={tooltip}
@@ -175,10 +174,10 @@ class Suggestor extends PureComponent {
 					required={required}
 					ref={this.input}
 				/>
-				{arrow && <span className={'ss-triangle ' + glyphicon('triangle-bottom')} />}
-				{close && value && <span className={'ss-remove ' + glyphicon('remove')} onClick={this.remove} />}
+				{arrow && <span className={classSchema.arrow} />}
+				{close && value && <span className={classSchema.close} onClick={this.remove} />}
 				<List
-					{...{ filtered, index, open, value }}
+					{...{ filtered, index, open, value, classSchema }}
 					onItemClick={this.handleItemClick}
 					onItemMouseEnter={this.handleItemMouseEnter}
 				/>
@@ -198,7 +197,14 @@ Suggestor.propTypes = {
 	selectOnTab: PropTypes.bool,
 	placeholder: PropTypes.string,
 	tooltip: PropTypes.string,
-	className: PropTypes.string,
+	classSchema: PropTypes.shape({
+		root: PropTypes.string,
+		arrow: PropTypes.string,
+		close: PropTypes.string,
+		list: PropTypes.string,
+		item: PropTypes.string,
+		activeItem: PropTypes.string
+	}),
 	suggestOn: PropTypes.number,
 	style: PropTypes.object,
 	required: PropTypes.bool,
@@ -209,7 +215,7 @@ Suggestor.propTypes = {
 };
 
 Suggestor.defaultProps = {
-	className: 'input-group',
+	classSchema: {},
 	selector: s => s,
 	onSelect: noop,
 	onChange: noop,
