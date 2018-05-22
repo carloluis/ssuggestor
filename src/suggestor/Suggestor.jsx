@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { autoBind, keys, noop } from '../utils';
 import transform from '../utils/transform';
-import List from './List';
+import ListItem from './ListItem';
 
 class Suggestor extends PureComponent {
 	constructor(props) {
@@ -161,6 +161,7 @@ class Suggestor extends PureComponent {
 	render() {
 		const { classSchema, style, placeholder, arrow, close, tooltip, required } = this.props;
 		const { open, value, index, filtered } = this.state;
+		const displaySuggestions = open && !!filtered.length;
 
 		return (
 			<div className={classSchema.root} onClick={this.handleClick} onKeyDown={this.handleKeyDown} style={style}>
@@ -176,11 +177,22 @@ class Suggestor extends PureComponent {
 				/>
 				{arrow && <span className={classSchema.arrow} />}
 				{close && value && <span className={classSchema.close} onClick={this.remove} />}
-				<List
-					{...{ filtered, index, open, value, classSchema }}
-					onItemClick={this.handleItemClick}
-					onItemMouseEnter={this.handleItemMouseEnter}
-				/>
+				{displaySuggestions && (
+					<ul className={classSchema.list}>
+						{filtered.map((item, i) => (
+							<ListItem
+								key={item.word}
+								classSchema={classSchema}
+								item={item}
+								index={i}
+								onItemClick={this.handleItemClick}
+								onItemMouseEnter={this.handleItemMouseEnter}
+								overItem={i === index}
+								search={value}
+							/>
+						))}
+					</ul>
+				)}
 			</div>
 		);
 	}
