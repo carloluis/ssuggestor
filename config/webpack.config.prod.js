@@ -160,4 +160,18 @@ const production = {
 	]
 };
 
-module.exports = [development, production];
+const themes = {
+	entry: {
+		bootstrap3: path.join(PATHS.src, 'themes/bootstrap-3.js'),
+		bootstrap4: path.join(PATHS.src, 'themes/bootstrap-4.js')
+	},
+	mode: 'production',
+	output: {
+		filename: '[name].js',
+		libraryTarget: 'umd',
+		library: 'Theme',
+		path: PATHS.dist
+	}
+};
+
+module.exports = [development, production, themes];
