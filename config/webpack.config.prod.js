@@ -18,7 +18,7 @@ buildHelpers(PATHS.helpers);
 const shared = {
 	entry: {
 		ssugestor: [
-			path.join(PATHS.src, 'suggestor/styles/index.scss'),
+			path.join(PATHS.src, 'styles/index.scss'),
 			PATHS.helpers,
 			path.join(PATHS.src, 'suggestor/Suggestor.jsx')
 		]
