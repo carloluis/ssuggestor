@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
-import classSchema from '../../class-schema/bootstrap-3';
+import classSchema from '../../themes/bootstrap-3.json';
 import ListItem from '../ListItem';
 
 const PROPS = {

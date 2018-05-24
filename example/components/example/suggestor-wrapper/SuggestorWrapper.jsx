@@ -1,7 +1,7 @@
 import React from 'react';
 import Suggestor from '../../../../src';
-import '../../../../src/suggestor/styles/index.scss';
-import { bootstrap3 as classSchema } from '../../../../src/class-schema';
+import '../../../../src/styles/index.scss';
+import { bootstrap3 as classSchema } from '../../../../src/themes';
 
 const valueSelected = (value, item) => console.info('select: %s -> %o', value, item);
 

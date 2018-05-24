@@ -1,6 +1,7 @@
 'use strict';
 
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const path = require('path');
@@ -18,7 +19,7 @@ buildHelpers(PATHS.helpers);
 const shared = {
 	entry: {
 		ssugestor: [
-			path.join(PATHS.src, 'suggestor/styles/index.scss'),
+			path.join(PATHS.src, 'styles/index.scss'),
 			PATHS.helpers,
 			path.join(PATHS.src, 'suggestor/Suggestor.jsx')
 		]
@@ -156,7 +157,17 @@ const production = {
 		...shared.plugins,
 		new MiniCssExtractPlugin({
 			filename: 'styles.min.css'
-		})
+		}),
+		new CopyWebpackPlugin([
+			{
+				from: path.join(PATHS.src, 'themes/bootstrap-3.json'),
+				to: path.join(PATHS.dist, 'bootstrap-3.json')
+			},
+			{
+				from: path.join(PATHS.src, 'themes/bootstrap-4.json'),
+				to: path.join(PATHS.dist, 'bootstrap-4.json')
+			}
+		])
 	]
 };
 
