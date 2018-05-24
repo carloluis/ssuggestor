@@ -1,6 +1,7 @@
 'use strict';
 
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const path = require('path');
@@ -156,22 +157,18 @@ const production = {
 		...shared.plugins,
 		new MiniCssExtractPlugin({
 			filename: 'styles.min.css'
-		})
+		}),
+		new CopyWebpackPlugin([
+			{
+				from: path.join(PATHS.src, 'themes/bootstrap-3.json'),
+				to: path.join(PATHS.dist, 'bootstrap-3.json')
+			},
+			{
+				from: path.join(PATHS.src, 'themes/bootstrap-4.json'),
+				to: path.join(PATHS.dist, 'bootstrap-4.json')
+			}
+		])
 	]
 };
 
-const themes = {
-	entry: {
-		bootstrap3: path.join(PATHS.src, 'themes/bootstrap-3.js'),
-		bootstrap4: path.join(PATHS.src, 'themes/bootstrap-4.js')
-	},
-	mode: 'production',
-	output: {
-		filename: '[name].js',
-		libraryTarget: 'umd',
-		library: 'Theme',
-		path: PATHS.dist
-	}
-};
-
-module.exports = [development, production, themes];
+module.exports = [development, production];

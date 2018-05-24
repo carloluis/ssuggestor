@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import ReactTestUtils from 'react-dom/test-utils';
 import { shallow, mount } from 'enzyme';
 
-import classSchema from '../../themes/bootstrap-3';
+import classSchema from '../../themes/bootstrap-3.json';
 import * as utils from '../../utils';
 import transform from '../../utils/transform';
 import Suggestor from '../Suggestor';
