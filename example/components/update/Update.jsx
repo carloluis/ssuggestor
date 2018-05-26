@@ -1,6 +1,6 @@
 import React from 'react';
-import Suggestor from '../../../src';
 import Section from '../section/Section';
+import SuggestorWrapper from '../wrapper';
 import { countries, suggestions } from '../../data';
 import styles from './update.scss';
 
@@ -57,14 +57,12 @@ class Update extends React.Component {
 		return (
 			<div className={styles.container}>
 				<Section title="Updating props">
-					<Suggestor
+					<SuggestorWrapper
 						value={value}
 						list={suggestions}
-						onChange={console.info}
 						placeholder="..."
 						tooltip="type something"
-						style={{ width: '100%' }}
-						ref={this.suggestor}
+						ssRef={this.suggestor}
 					/>
 					<br />
 					<div className={styles.actions}>

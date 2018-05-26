@@ -1,7 +1,8 @@
 import React from 'react';
-import Suggestor from '../../../../src';
-import '../../../../src/styles/index.scss';
-import { bootstrap3 as classSchema } from '../../../../src/themes';
+import PropTypes from 'prop-types';
+import Suggestor from '../../../src';
+import '../../../src/styles/index.scss';
+import { bootstrap3 as classSchema } from '../../../src/themes';
 
 const valueSelected = (value, item) => console.info('select: %s -> %o', value, item);
 
@@ -14,8 +15,13 @@ const SuggestorWrapper = props => (
 		onSelect={valueSelected}
 		placeholder="..."
 		style={{ width: '100%' }}
+		ref={props.ssRef}
 		{...props}
 	/>
 );
+
+SuggestorWrapper.propTypes = {
+	ssRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+};
 
 export default SuggestorWrapper;
