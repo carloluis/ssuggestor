@@ -1,6 +1,6 @@
 import React from 'react';
 import Section from '../section/Section';
-import SuggestorWrapper from './suggestor-wrapper/SuggestorWrapper';
+import SuggestorWrapper from '../wrapper';
 import Update from '../update/Update';
 import { countries, suggestions, numbers } from '../../data';
 import styles from './example.scss';

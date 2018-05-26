@@ -2,7 +2,7 @@
 
 exports[`<Ssuggestor /> snapshot - with arrow 1`] = `
 <div
-  className="classname to apply"
+  className="input-group"
   onClick={[Function]}
   onKeyDown={[Function]}
   style={
@@ -21,14 +21,14 @@ exports[`<Ssuggestor /> snapshot - with arrow 1`] = `
     value=""
   />
   <span
-    className="ss-triangle glyphicon glyphicon-triangle-bottom"
+    className="glyphicon glyphicon-triangle-bottom ss-triangle"
   />
 </div>
 `;
 
 exports[`<Ssuggestor /> snapshot - with close 1`] = `
 <div
-  className="classname to apply"
+  className="input-group"
   onClick={[Function]}
   onKeyDown={[Function]}
   style={
@@ -47,7 +47,7 @@ exports[`<Ssuggestor /> snapshot - with close 1`] = `
     value="temp"
   />
   <span
-    className="ss-remove glyphicon glyphicon-remove"
+    className="glyphicon glyphicon-remove ss-remove"
     onClick={[Function]}
   />
 </div>
@@ -55,7 +55,7 @@ exports[`<Ssuggestor /> snapshot - with close 1`] = `
 
 exports[`<Ssuggestor /> snapshot - with suggestions 1`] = `
 <div
-  className="classname to apply"
+  className="input-group"
   onClick={[Function]}
   onKeyDown={[Function]}
   style={
@@ -78,7 +78,7 @@ exports[`<Ssuggestor /> snapshot - with suggestions 1`] = `
 
 exports[`<Ssuggestor /> snapshot - with suggestions visible 1`] = `
 <div
-  className="classname to apply"
+  className="input-group"
   onClick={[Function]}
   onKeyDown={[Function]}
   style={
@@ -109,7 +109,7 @@ exports[`<Ssuggestor /> snapshot - with suggestions visible 1`] = `
       </a>
     </li>
     <li
-      className={undefined}
+      className=""
       onClick={[Function]}
       onMouseEnter={[Function]}
     >
@@ -118,7 +118,7 @@ exports[`<Ssuggestor /> snapshot - with suggestions visible 1`] = `
       </a>
     </li>
     <li
-      className={undefined}
+      className=""
       onClick={[Function]}
       onMouseEnter={[Function]}
     >
@@ -127,7 +127,7 @@ exports[`<Ssuggestor /> snapshot - with suggestions visible 1`] = `
       </a>
     </li>
     <li
-      className={undefined}
+      className=""
       onClick={[Function]}
       onMouseEnter={[Function]}
     >
@@ -141,7 +141,7 @@ exports[`<Ssuggestor /> snapshot - with suggestions visible 1`] = `
 
 exports[`<Ssuggestor /> snapshot - without suggestions 1`] = `
 <div
-  className="classname to apply"
+  className="input-group"
   onClick={[Function]}
   onKeyDown={[Function]}
   style={

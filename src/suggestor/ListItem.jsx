@@ -22,14 +22,16 @@ class ListItem extends PureComponent {
 	}
 
 	render() {
-		const { item, overItem, search } = this.props;
+		const {
+			item,
+			overItem,
+			search,
+			classSchema: { item: li, activeItem: liActive }
+		} = this.props;
+		const classes = [li, overItem && liActive].filter(classname => !!classname).join(' ');
 
 		return (
-			<li
-				className={overItem ? 'ss-over-item' : undefined}
-				onClick={this.handleClick}
-				onMouseEnter={this.handleMouseEnter}
-			>
+			<li className={classes} onClick={this.handleClick} onMouseEnter={this.handleMouseEnter}>
 				<MarkItem {...{ item, search }} />
 			</li>
 		);
@@ -42,7 +44,11 @@ ListItem.propTypes = {
 	overItem: PropTypes.bool.isRequired,
 	onItemClick: PropTypes.func.isRequired,
 	onItemMouseEnter: PropTypes.func.isRequired,
-	search: PropTypes.string.isRequired
+	search: PropTypes.string.isRequired,
+	classSchema: PropTypes.shape({
+		item: PropTypes.string,
+		activeItem: PropTypes.string
+	})
 };
 
 export default ListItem;
