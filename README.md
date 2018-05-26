@@ -115,6 +115,22 @@ Suggestion objects use requires a `selector` function to convert each object int
 
 <kbd>Up</kbd>, <kbd>Down</kbd>, <kbd>Enter</kbd>, <kbd>Escape</kbd> & <kbd>Tab</kbd>.
 
+##### Class Schema
+
+Provide classes for styling as `JSON`:
+
+```json
+{
+	"root": "class(es) used on wrapper element",
+	"input": "<input> element class(es)",
+	"arrow": "open <span> indicator class(es)",
+	"close": "remove <span> indicator",
+	"list": "<ul> class(es)",
+	"item": "<li> class(es)",
+	"activeItem": "active <li> class(es)"
+}
+```
+
 #### Focus
 
 Use public method `focus` to set focus in `<input>` element.
@@ -132,7 +148,7 @@ Provided theme for Bootstrap 3 use the following classes:
 * `dropdown-menu`
 * `glyphicon`
     * `glyphicon-triangle-bottom`
-    * `glyphicon--remove`
+    * `glyphicon-remove`
 
 ## Development
 
