@@ -39,11 +39,13 @@ npm i ssuggestor
 import React from 'react';
 import { render } from 'react-dom';
 import 'ssuggestor/dist/styles.css';
+import b3Schema from 'ssuggestor/dist/bootstrap-3.json';
 import Suggestor from 'ssuggestor';
 
 render(
     <Suggestor
         list={['suggestion-a', 'suggestion-b', 'suggestion-c', '...', 'suggestion-z']}
+        classSchema={b3Schema}
         onChange={value => {}}
         onSelect={(value, suggestion) => {}}
         placeholder="placeholder text..."
@@ -92,8 +94,8 @@ Suggestion objects use requires a `selector` function to convert each object int
 | :---------- | :------- | :------------ | :---------------------------------------------------------- |
 | accents     | Boolean  | `false`       | whether to differentiate chars with accents or not          |
 | arrow       | Boolean  | `true`        | ▼ icon - open suggestion list                               |
-| className   | String   | `input-group` | css classes for component's root element                    |
-| close       | Boolean  | `true`        | ✖︎ icon - delete current value                              |
+| classSchema | Object   | `{}`          | JSON theme with css classes for each dom element            |
+| close       | Boolean  | `true`        | ✖︎ icon - delete current value                               |
 | list        | Array    | --            | suggestions (_required_)                                    |
 | selector    | Function | `s => s`      | suggestions selector (must return a string)                 |
 | openOnClick | Boolean  | `true`        | whether suggestion list opens on click or not               |
@@ -123,7 +125,7 @@ Use public method `focus` to set focus in `<input>` element.
 
 #### Bootstrap
 
-Used bootstrap classes:
+Provided theme for Bootstrap 3 use the following classes:
 
 * `input-group`
 * `form-control`
