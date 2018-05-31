@@ -45,11 +45,10 @@ import Suggestor from 'ssuggestor';
 render(
     <Suggestor
         list={['suggestion-a', 'suggestion-b', 'suggestion-c', '...', 'suggestion-z']}
-        theme={b3STheme}
+        theme={b3Theme}
         onChange={value => {}}
         onSelect={(value, suggestion) => {}}
         placeholder="placeholder text..."
-        styles={{ width: 100 }}
     />,
     document.querySelector('#app')
 );
@@ -149,6 +148,23 @@ Provided theme for Bootstrap 3 use the following classes:
 * `glyphicon`
     * `glyphicon-triangle-bottom`
     * `glyphicon-remove`
+
+<details>
+<summary>Bootstrap 3 Theme</summary>
+
+```json
+{
+	"root": "input-group ss-root",
+	"input": "form-control ss-input",
+	"arrow": "glyphicon glyphicon-triangle-bottom ss-triangle",
+	"close": "glyphicon glyphicon-remove ss-remove",
+	"list": "dropdown-menu ss-list",
+	"item": "",
+	"activeItem": "ss-over-item"
+}
+```
+
+</details>
 
 ## Development
 
