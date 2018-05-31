@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
-import classSchema from '../../themes/bootstrap-3.json';
+import theme from '../../themes/bootstrap-3.json';
 import ListItem from '../ListItem';
 
 const PROPS = {
@@ -11,7 +11,7 @@ const PROPS = {
 	onItemClick: jest.fn(),
 	onItemMouseEnter: jest.fn(),
 	search: 'ss',
-	classSchema
+	theme
 };
 
 describe('<ListItem/>', () => {

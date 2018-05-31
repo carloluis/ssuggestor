@@ -39,13 +39,13 @@ npm i ssuggestor
 import React from 'react';
 import { render } from 'react-dom';
 import 'ssuggestor/dist/styles.css';
-import b3Schema from 'ssuggestor/dist/bootstrap-3.json';
+import b3Theme from 'ssuggestor/dist/bootstrap-3.json';
 import Suggestor from 'ssuggestor';
 
 render(
     <Suggestor
         list={['suggestion-a', 'suggestion-b', 'suggestion-c', '...', 'suggestion-z']}
-        classSchema={b3Schema}
+        theme={b3STheme}
         onChange={value => {}}
         onSelect={(value, suggestion) => {}}
         placeholder="placeholder text..."
@@ -94,7 +94,7 @@ Suggestion objects use requires a `selector` function to convert each object int
 | :---------- | :------- | :------------ | :---------------------------------------------------------- |
 | accents     | Boolean  | `false`       | whether to differentiate chars with accents or not          |
 | arrow       | Boolean  | `true`        | ▼ icon - open suggestion list                               |
-| classSchema | Object   | `{}`          | JSON theme with css classes for each dom element            |
+| theme       | Object   | `{}`          | JSON theme with css classes for each dom element            |
 | close       | Boolean  | `true`        | ✖︎ icon - delete current value                               |
 | list        | Array    | --            | suggestions (_required_)                                    |
 | selector    | Function | `s => s`      | suggestions selector (must return a string)                 |
@@ -115,7 +115,7 @@ Suggestion objects use requires a `selector` function to convert each object int
 
 <kbd>Up</kbd>, <kbd>Down</kbd>, <kbd>Enter</kbd>, <kbd>Escape</kbd> & <kbd>Tab</kbd>.
 
-##### Class Schema
+##### Theme
 
 Provide classes for styling as `JSON`:
 
