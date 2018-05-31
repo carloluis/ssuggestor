@@ -4,21 +4,23 @@
 	width: 100%;
 }
 
+:global .ss-input {
+	padding-right: 48px;
+}
+
 :global .ss-triangle,
 :global .ss-remove {
 	position: absolute;
 	cursor: pointer;
 	margin: auto;
 	color: $grey;
-	font-size: 16px;
-	right: 10px;
-	top: 0;
-	bottom: 0;
-	height: 14px;
+	right: 6px;
+	top: 50%;
+	transform: translateY(-50%);
 	z-index: 4;
+	padding: 2px;
 }
 
 :global .ss-remove {
-	font-size: 14px;
-	right: 30px;
+	right: 26px;
 }
