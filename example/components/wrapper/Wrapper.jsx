@@ -14,7 +14,6 @@ const SuggestorWrapper = props => (
 		onChange={valueChanged}
 		onSelect={valueSelected}
 		placeholder="..."
-		style={{ width: '100%' }}
 		ref={props.ssRef}
 		{...props}
 	/>

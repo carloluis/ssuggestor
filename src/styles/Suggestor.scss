@@ -1,5 +1,9 @@
 @import './_palette.scss';
 
+:global .ss-root {
+	width: 100%;
+}
+
 :global .ss-triangle,
 :global .ss-remove {
 	position: absolute;
