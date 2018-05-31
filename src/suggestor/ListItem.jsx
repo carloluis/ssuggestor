@@ -26,7 +26,7 @@ class ListItem extends PureComponent {
 			item,
 			overItem,
 			search,
-			classSchema: { item: li, activeItem: liActive }
+			theme: { item: li, activeItem: liActive }
 		} = this.props;
 		const classes = [li, overItem && liActive].filter(classname => !!classname).join(' ');
 
@@ -45,7 +45,7 @@ ListItem.propTypes = {
 	onItemClick: PropTypes.func.isRequired,
 	onItemMouseEnter: PropTypes.func.isRequired,
 	search: PropTypes.string.isRequired,
-	classSchema: PropTypes.shape({
+	theme: PropTypes.shape({
 		item: PropTypes.string,
 		activeItem: PropTypes.string
 	})

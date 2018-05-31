@@ -6,7 +6,7 @@ const App = () => (
 	<React.Fragment>
 		<header className={styles.header}>
 			<div className={styles.title}>
-				<h1>{'<ssuggestor>'}</h1>
+				<h1>⟨ ssuggestor ⟩</h1>
 				<h2>React Simple Suggestor</h2>
 			</div>
 			<a

@@ -159,15 +159,15 @@ class Suggestor extends PureComponent {
 		this.input.current.focus();
 	}
 	render() {
-		const { classSchema, style, placeholder, arrow, close, tooltip, required } = this.props;
+		const { theme, style, placeholder, arrow, close, tooltip, required } = this.props;
 		const { open, value, index, filtered } = this.state;
 		const displaySuggestions = open && !!filtered.length;
 
 		return (
-			<div className={classSchema.root} onClick={this.handleClick} onKeyDown={this.handleKeyDown} style={style}>
+			<div className={theme.root} onClick={this.handleClick} onKeyDown={this.handleKeyDown} style={style}>
 				<input
 					type="text"
-					className={classSchema.input}
+					className={theme.input}
 					onChange={this.handleChange}
 					value={value}
 					title={tooltip}
@@ -175,14 +175,14 @@ class Suggestor extends PureComponent {
 					required={required}
 					ref={this.input}
 				/>
-				{arrow && <span className={classSchema.arrow} />}
-				{close && value && <span className={classSchema.close} onClick={this.remove} />}
+				{arrow && <span className={theme.arrow} />}
+				{close && value && <span className={theme.close} onClick={this.remove} />}
 				{displaySuggestions && (
-					<ul className={classSchema.list}>
+					<ul className={theme.list}>
 						{filtered.map((item, i) => (
 							<ListItem
 								key={item.word}
-								classSchema={classSchema}
+								theme={theme}
 								item={item}
 								index={i}
 								onItemClick={this.handleItemClick}
@@ -209,7 +209,7 @@ Suggestor.propTypes = {
 	selectOnTab: PropTypes.bool,
 	placeholder: PropTypes.string,
 	tooltip: PropTypes.string,
-	classSchema: PropTypes.shape({
+	theme: PropTypes.shape({
 		root: PropTypes.string,
 		arrow: PropTypes.string,
 		close: PropTypes.string,
@@ -227,7 +227,7 @@ Suggestor.propTypes = {
 };
 
 Suggestor.defaultProps = {
-	classSchema: {},
+	theme: {},
 	selector: s => s,
 	onSelect: noop,
 	onChange: noop,

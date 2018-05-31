@@ -1,6 +1,6 @@
 {
-	"root": "input-group",
-	"input": "form-control",
+	"root": "input-group ss-root",
+	"input": "form-control ss-input",
 	"arrow": "glyphicon glyphicon-triangle-bottom ss-triangle",
 	"close": "glyphicon glyphicon-remove ss-remove",
 	"list": "dropdown-menu ss-list",

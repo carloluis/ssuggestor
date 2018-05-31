@@ -2,7 +2,7 @@
 
 exports[`<Ssuggestor /> snapshot - with arrow 1`] = `
 <div
-  className="input-group"
+  className="input-group ss-root"
   onClick={[Function]}
   onKeyDown={[Function]}
   style={
@@ -12,7 +12,7 @@ exports[`<Ssuggestor /> snapshot - with arrow 1`] = `
   }
 >
   <input
-    className="form-control"
+    className="form-control ss-input"
     onChange={[Function]}
     placeholder="placeholder text"
     required={false}
@@ -28,7 +28,7 @@ exports[`<Ssuggestor /> snapshot - with arrow 1`] = `
 
 exports[`<Ssuggestor /> snapshot - with close 1`] = `
 <div
-  className="input-group"
+  className="input-group ss-root"
   onClick={[Function]}
   onKeyDown={[Function]}
   style={
@@ -38,7 +38,7 @@ exports[`<Ssuggestor /> snapshot - with close 1`] = `
   }
 >
   <input
-    className="form-control"
+    className="form-control ss-input"
     onChange={[Function]}
     placeholder="placeholder text"
     required={false}
@@ -55,7 +55,7 @@ exports[`<Ssuggestor /> snapshot - with close 1`] = `
 
 exports[`<Ssuggestor /> snapshot - with suggestions 1`] = `
 <div
-  className="input-group"
+  className="input-group ss-root"
   onClick={[Function]}
   onKeyDown={[Function]}
   style={
@@ -65,7 +65,7 @@ exports[`<Ssuggestor /> snapshot - with suggestions 1`] = `
   }
 >
   <input
-    className="form-control"
+    className="form-control ss-input"
     onChange={[Function]}
     placeholder="placeholder text"
     required={false}
@@ -78,7 +78,7 @@ exports[`<Ssuggestor /> snapshot - with suggestions 1`] = `
 
 exports[`<Ssuggestor /> snapshot - with suggestions visible 1`] = `
 <div
-  className="input-group"
+  className="input-group ss-root"
   onClick={[Function]}
   onKeyDown={[Function]}
   style={
@@ -88,7 +88,7 @@ exports[`<Ssuggestor /> snapshot - with suggestions visible 1`] = `
   }
 >
   <input
-    className="form-control"
+    className="form-control ss-input"
     onChange={[Function]}
     placeholder="placeholder text"
     required={false}
@@ -141,7 +141,7 @@ exports[`<Ssuggestor /> snapshot - with suggestions visible 1`] = `
 
 exports[`<Ssuggestor /> snapshot - without suggestions 1`] = `
 <div
-  className="input-group"
+  className="input-group ss-root"
   onClick={[Function]}
   onKeyDown={[Function]}
   style={
@@ -151,7 +151,7 @@ exports[`<Ssuggestor /> snapshot - without suggestions 1`] = `
   }
 >
   <input
-    className="form-control"
+    className="form-control ss-input"
     onChange={[Function]}
     placeholder="placeholder text"
     required={false}
