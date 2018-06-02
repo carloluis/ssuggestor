@@ -12,14 +12,14 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat)](https://github.com/prettier/prettier)
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/carloluis/ssuggestor.svg?style=social)](https://twitter.com/intent/tweet?text=check%20out%20this%20simple%20suggestor%20component%20on&url=https%3A%2F%2Ft.co%2FpjuWm9EaCa&hashtags=react16,ssuggestor)
 
-React component that enables users to quickly find and select from a pre-populated list of values as they type.
-Currently uses [Bootstrap](http://getbootstrap.com/) styles.
+> React component that enables users to quickly find and select from a pre-populated list of values as they type.
+> Current theme provided use [Bootstrap](http://getbootstrap.com/) styles.
 
 ## Demo
 
 Live Demo: [carloluis.github.io/ssuggestor](https://carloluis.github.io/ssuggestor/)
 
-CodePen example: [ssuggestor-example](http://codepen.io/carloluis/pen/rjpLYw/) on [CodePen](http://codepen.io)
+Suggestor example on [CodePen](http://codepen.io/carloluis/pen/rjpLYw/)
 
 ## Instalation
 
@@ -87,7 +87,7 @@ Then,
 
 Suggestion objects use requires a `selector` function to convert each object into string representation which will be displayed on the suggestion list.
 
-#### Props:
+### Props:
 
 | Prop        | Type     | Default       | Description                                                 |
 | :---------- | :------- | :------------ | :---------------------------------------------------------- |
@@ -110,61 +110,58 @@ Suggestion objects use requires a `selector` function to convert each object int
 | value       | String   | `''`          | initial value                                               |
 | useKeys     | Boolean  | `true`        | whether to use [supported keys](#supported-keys) or not     |
 
-##### Supported Keys
+#### Supported Keys
 
 <kbd>Up</kbd>, <kbd>Down</kbd>, <kbd>Enter</kbd>, <kbd>Escape</kbd> & <kbd>Tab</kbd>.
 
-##### Theme
+#### Theme
 
-Provide classes for styling as `JSON`:
+Provide `JSON` with classes for styling the component:
 
 ```json
 {
-	"root": "class(es) used on wrapper element",
-	"input": "<input> element class(es)",
-	"arrow": "open <span> indicator class(es)",
-	"close": "remove <span> indicator",
-	"list": "<ul> class(es)",
-	"item": "<li> class(es)",
-	"activeItem": "active <li> class(es)"
+    "root": "class(es) used on wrapper element",
+    "input": "<input> element class(es)",
+    "arrow": "open <span> indicator class(es)",
+    "close": "remove <span> indicator class(es)",
+    "list": "<ul> class(es)",
+    "item": "<li> class(es)",
+    "activeItem": "active <li> class(es)"
 }
 ```
 
-#### Focus
-
-Use public method `focus` to set focus in `<input>` element.
-
-```js
-<suggestor-instance>.focus();
-```
-
-#### Bootstrap
-
-Provided theme for Bootstrap 3 use the following classes:
-
-* `input-group`
-* `form-control`
-* `dropdown-menu`
-* `glyphicon`
-    * `glyphicon-triangle-bottom`
-    * `glyphicon-remove`
+This package also provides a theme using custom classes from `styles.css` and others from Bootstrap 3:
 
 <details>
 <summary>Bootstrap 3 Theme</summary>
 
 ```json
 {
-	"root": "input-group ss-root",
-	"input": "form-control ss-input",
-	"arrow": "glyphicon glyphicon-triangle-bottom ss-triangle",
-	"close": "glyphicon glyphicon-remove ss-remove",
-	"list": "dropdown-menu ss-list",
-	"item": "",
-	"activeItem": "ss-over-item"
+    "root": "input-group ss-root",
+    "input": "form-control ss-input",
+    "arrow": "glyphicon glyphicon-triangle-bottom ss-triangle",
+    "close": "glyphicon glyphicon-remove ss-remove",
+    "list": "dropdown-menu ss-list",
+    "item": "",
+    "activeItem": "ss-over-item"
 }
 ```
 
+Custom classes start with `ss-` prefix. Bootstrap classes: `input-group`, `form-group`, `dropdown-menu` and `glaphycon`s.
+
+Note that you need to import custom styles from `ssuggestor/dist/styles.css` and the Bootstrap3 theme from `ssuggestor/dist/bootstrap-3.json`
+
+Check usage on [npm](#npm) section.
+
 </details>
+
+### Focus
+
+Use public method `focus` to set focus in `<input>` element.
+
+```js
+<suggestor-instance>.focus();
+```
 
 ## Development
 
