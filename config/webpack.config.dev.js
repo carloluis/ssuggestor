@@ -1,8 +1,6 @@
 'use strict';
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const webpack = require('webpack');
 const path = require('path');
 
 const PATHS = {
@@ -88,13 +86,7 @@ module.exports = {
 				html5: true
 			},
 			mobile: true
-		}),
-		new CopyWebpackPlugin([
-			{
-				from: path.join(PATHS.example, 'favicon.ico'),
-				to: path.join(PATHS.dist, 'favicon.ico')
-			}
-		])
+		})
 	],
 	resolve: {
 		extensions: ['.js', '.jsx']
