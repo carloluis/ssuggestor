@@ -1,8 +1,8 @@
 {
-	"root": "input-group",
-	"input": "form-control",
-	"arrow": "dropdown-toggle ss-triangle",
-	"close": "",
+	"root": "input-group ss-root",
+	"input": "form-control ss-input",
+	"arrow": "ss-arrow",
+	"close": "ss-remove",
 	"list": "dropdown-menu ss-list",
 	"item": "dropdown-item",
 	"activeItem": "ss-over-item"
