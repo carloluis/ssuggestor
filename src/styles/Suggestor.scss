@@ -5,22 +5,33 @@
 }
 
 :global .ss-input {
-	padding-right: 48px;
+	padding-right: 42px;
 }
 
-:global .ss-triangle,
+:global .ss-arrow,
 :global .ss-remove {
 	position: absolute;
 	cursor: pointer;
-	margin: auto;
 	color: $grey;
 	right: 6px;
 	top: 50%;
 	transform: translateY(-50%);
 	z-index: 4;
-	padding: 2px;
 }
 
 :global .ss-remove {
 	right: 26px;
+	&::after {
+		content: '\D7';
+		font-size: 16px;
+		font-weight: 500;
+	}
+}
+
+:global .ss-arrow {
+	border-top: 8px solid $grey;
+	border-right: 6px solid transparent;
+	border-left: 6px solid transparent;
+	border-bottom: 0;
+	margin: 2px;
 }
