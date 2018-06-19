@@ -21,7 +21,7 @@ exports[`<Ssuggestor /> snapshot - with arrow 1`] = `
     value=""
   />
   <span
-    className="glyphicon glyphicon-triangle-bottom ss-triangle"
+    className="ss-arrow"
   />
 </div>
 `;
@@ -47,7 +47,7 @@ exports[`<Ssuggestor /> snapshot - with close 1`] = `
     value="temp"
   />
   <span
-    className="glyphicon glyphicon-remove ss-remove"
+    className="ss-remove"
     onClick={[Function]}
   />
 </div>
