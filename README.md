@@ -130,7 +130,9 @@ Provide `JSON` with classes for styling the component:
 }
 ```
 
-This package also provides a theme using custom classes from `styles.css` and others from Bootstrap 3:
+This package also provides a theme using custom classes from `styles.css` and others from Bootstrap.
+- Custom class names start with the `ss-` prefix. Required to import `ssuggestor/dist/styles.css`
+- Bootstrap classes: `input-group`, `form-group` and `dropdown-menu`.
 
 <details>
 <summary>Bootstrap 3 Theme</summary>
@@ -139,17 +141,36 @@ This package also provides a theme using custom classes from `styles.css` and ot
 {
     "root": "input-group ss-root",
     "input": "form-control ss-input",
-    "arrow": "glyphicon glyphicon-triangle-bottom ss-triangle",
-    "close": "glyphicon glyphicon-remove ss-remove",
+    "arrow": "ss-arrow",
+    "close": "ss-remove",
     "list": "dropdown-menu ss-list",
     "item": "",
     "activeItem": "ss-over-item"
 }
 ```
 
-Custom classes start with `ss-` prefix. Bootstrap classes: `input-group`, `form-group`, `dropdown-menu` and `glaphycon`s.
+Note that you need to import the _Bootstrap3_ theme from `ssuggestor/dist/bootstrap-3.json`
 
-Note that you need to import custom styles from `ssuggestor/dist/styles.css` and the Bootstrap3 theme from `ssuggestor/dist/bootstrap-3.json`
+Check usage on [npm](#npm) section.
+
+</details>
+
+<details>
+<summary>Bootstrap 4 Theme</summary>
+
+```json
+{
+    "root": "input-group ss-root",
+    "input": "form-control ss-input",
+    "arrow": "ss-arrow",
+    "close": "ss-remove",
+    "list": "dropdown-menu ss-list",
+    "item": "dropdown-item",
+    "activeItem": "ss-over-item"
+}
+```
+
+Note that you need to import the _Bootstrap4_ theme from `ssuggestor/dist/bootstrap-4.json`
 
 Check usage on [npm](#npm) section.
 
