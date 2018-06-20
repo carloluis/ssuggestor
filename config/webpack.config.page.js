@@ -4,7 +4,6 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const webpack = require('webpack');
 const path = require('path');
 
 const PATHS = {
@@ -65,9 +64,29 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: path.join(PATHS.example, 'index.html'),
+			template: './node_modules/html-webpack-template/index.ejs',
+			title: 'ssuggestor',
+			appMountId: 'app',
+			favicon: path.join(PATHS.example, 'favicon.ico'),
 			filename: 'index.html',
-			inject: 'body'
+			inject: false,
+			links: ['https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'],
+			meta: [
+				{ name: 'robots', content: 'index, follow' },
+				{
+					name: 'keywords',
+					content: 'react,reactjs component,component,suggestor,ssuggestor,select,autocomplete,javascript'
+				},
+				{ name: 'description', content: 'ssuggestor - React Simple Suggestor' }
+			],
+			minify: {
+				collapseWhitespace: true,
+				conservativeCollapse: true,
+				preserveLineBreaks: true,
+				useShortDoctype: true,
+				html5: true
+			},
+			mobile: true
 		}),
 		new CopyWebpackPlugin([
 			{
