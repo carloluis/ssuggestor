@@ -13,13 +13,11 @@
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/carloluis/ssuggestor.svg?style=social)](https://twitter.com/intent/tweet?text=check%20out%20this%20simple%20suggestor%20component%20on&url=https%3A%2F%2Ft.co%2FpjuWm9EaCa&hashtags=react16,ssuggestor)
 
 > React component that enables users to quickly find and select from a pre-populated list of values as they type.
-> Current theme provided use [Bootstrap](http://getbootstrap.com/) styles.
+> Current themes provided use [Bootstrap](http://getbootstrap.com/) and custom styles.
 
 ## Demo
 
 Live Demo: [carloluis.github.io/ssuggestor](https://carloluis.github.io/ssuggestor/)
-
-Suggestor example on [CodePen](http://codepen.io/carloluis/pen/rjpLYw/)
 
 ## Instalation
 
@@ -32,6 +30,8 @@ npm i ssuggestor
 ```
 
 ## Usage
+
+Include `react` dependencies and `ssuggestor` script. Also include `ssuggestor` styles and theme if required.
 
 ### npm
 
@@ -56,22 +56,24 @@ render(
 
 ### browser
 
-Include `react` dependencies and `ssuggestor` scripts:
-
 ```html
-<script src="https://unpkg.com/react@16.3.0/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@16.3.0/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/ssuggestor@0.9.0/dist/ssuggestor.min.js"></script>
+<!-- scripts: react, react-dom, ssuggestor -->
+<script src="https://unpkg.com/react@16.4.0/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16.4.0/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/ssuggestor@1.0.0/dist/ssuggestor.min.js"></script>
 
-<!-- bootstrap styles -->
+<!-- styles: bootstrap, custom -->
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://unpkg.com/ssuggestor@1.0.0/dist/styles.min.css">
 ```
+
+Check suggestor example on [CodePen](http://codepen.io/carloluis/pen/rjpLYw/).
 
 ## Description
 
-This Simple Suggestor package provides a React component as default export:
-It handles clicks outside of DOM component in order to close the suggestion list.
-All pattern matches are highlighted.
+Simple Suggestor package provides a React component as default export.
+Clicks outside of DOM component are tracked in order to close the suggestion list.
+Pattern matches are highlighted in bold.
 
 Example:
 
@@ -85,7 +87,7 @@ Then,
 
 ### Suggestion Objects
 
-Suggestion objects use requires a `selector` function to convert each object into string representation which will be displayed on the suggestion list.
+The usage of suggestion objects requires a `selector` function to convert each object into string representation which will be displayed on the suggestion list.
 
 ### Props:
 
@@ -186,7 +188,7 @@ Use public method `focus` to set focus in `<input>` element.
 
 ## Development
 
-In order to run this project locally clone this repo, restore dependencies and execute `dev` task:
+In order to run locally: first clone the [git repo](https://github.com/carloluis/ssuggestor.git), then restore dependencies and execute the `dev` task:
 
 ```bash
 git clone https://github.com/carloluis/ssuggestor.git
