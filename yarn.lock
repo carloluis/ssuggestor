@@ -204,13 +204,9 @@ acorn@^3.0.4:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-3.3.0.tgz#45e37fb39e8da3f25baee3ff5369e2bb5f22017a"
 
-acorn@^5.0.0, acorn@^5.3.0, acorn@^5.6.2:
+acorn@^5.0.0, acorn@^5.3.0, acorn@^5.5.0, acorn@^5.6.2:
   version "5.7.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.1.tgz#f095829297706a7c9776958c0afc8930a9b9d9d8"
-
-acorn@^5.5.0:
-  version "5.5.3"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.5.3.tgz#f473dd47e0277a08e28e9bec5aeeb04751f0b8c9"
 
 ajv-keywords@^2.1.0:
   version "2.1.1"
@@ -1333,12 +1329,13 @@ browserify-cipher@^1.0.0:
     evp_bytestokey "^1.0.0"
 
 browserify-des@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/browserify-des/-/browserify-des-1.0.1.tgz#3343124db6d7ad53e26a8826318712bdc8450f9c"
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/browserify-des/-/browserify-des-1.0.2.tgz#3af4f1f59839403572f1c66204375f7a7f703e9c"
   dependencies:
     cipher-base "^1.0.1"
     des.js "^1.0.0"
     inherits "^2.0.1"
+    safe-buffer "^5.1.2"
 
 browserify-rsa@^4.0.0:
   version "4.0.1"
@@ -3235,8 +3232,8 @@ global-modules-path@^2.1.0:
   resolved "https://registry.yarnpkg.com/global-modules-path/-/global-modules-path-2.1.0.tgz#923ec524e8726bb0c1a4ed4b8e21e1ff80c88bbb"
 
 globals@^11.0.1:
-  version "11.4.0"
-  resolved "https://registry.yarnpkg.com/globals/-/globals-11.4.0.tgz#b85c793349561c16076a3c13549238a27945f1bc"
+  version "11.7.0"
+  resolved "https://registry.yarnpkg.com/globals/-/globals-11.7.0.tgz#a583faa43055b1aca771914bf68258e2fc125673"
 
 globals@^9.18.0:
   version "9.18.0"
@@ -3393,11 +3390,11 @@ hash-base@^3.0.0:
     safe-buffer "^5.0.1"
 
 hash.js@^1.0.0, hash.js@^1.0.3:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/hash.js/-/hash.js-1.1.4.tgz#8b50e1f35d51bd01e5ed9ece4dbe3549ccfa0a3c"
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/hash.js/-/hash.js-1.1.5.tgz#e38ab4b85dfb1e0c40fe9265c0e9b54854c23812"
   dependencies:
     inherits "^2.0.3"
-    minimalistic-assert "^1.0.0"
+    minimalistic-assert "^1.0.1"
 
 hawk@~3.1.3:
   version "3.1.3"
@@ -3612,11 +3609,7 @@ ignore-walk@^3.0.1:
   dependencies:
     minimatch "^3.0.4"
 
-ignore@^3.3.3:
-  version "3.3.8"
-  resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.8.tgz#3f8e9c35d38708a3a7e0e9abb6c73e7ee7707b2b"
-
-ignore@^3.3.5:
+ignore@^3.3.3, ignore@^3.3.5:
   version "3.3.10"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.10.tgz#0a97fb876986e8081c631160f8f9f389157f0043"
 
@@ -4388,16 +4381,9 @@ js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
 
-js-yaml@^3.11.0, js-yaml@^3.7.0:
+js-yaml@^3.11.0, js-yaml@^3.7.0, js-yaml@^3.9.1:
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.12.0.tgz#eaed656ec8344f10f527c6bfa1b6e2244de167d1"
-  dependencies:
-    argparse "^1.0.7"
-    esprima "^4.0.0"
-
-js-yaml@^3.9.1:
-  version "3.11.0"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.11.0.tgz#597c1a8bd57152f26d622ce4117851a51f5ebaef"
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
@@ -4894,7 +4880,7 @@ mini-css-extract-plugin@^0.4.0:
     loader-utils "^1.1.0"
     webpack-sources "^1.1.0"
 
-minimalistic-assert@^1.0.0:
+minimalistic-assert@^1.0.0, minimalistic-assert@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/minimalistic-assert/-/minimalistic-assert-1.0.1.tgz#2e194de044626d4a10e7f7fbc00ce73e83e4d5c7"
 
@@ -5036,7 +5022,7 @@ nearley@^2.7.10:
     railroad-diagrams "^1.0.0"
     randexp "^0.4.2"
 
-needle@^2.2.0:
+needle@^2.2.0, needle@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/needle/-/needle-2.2.1.tgz#b5e325bd3aae8c2678902fa296f729455d1d3a7d"
   dependencies:
@@ -5136,12 +5122,12 @@ node-notifier@^5.2.1:
     which "^1.3.0"
 
 node-pre-gyp@^0.10.0:
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.10.2.tgz#e8945c20ef6795a20aac2b44f036eb13cf5146e3"
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.10.3.tgz#3070040716afdc778747b61b6887bf78880b80fc"
   dependencies:
     detect-libc "^1.0.2"
     mkdirp "^0.5.1"
-    needle "^2.2.0"
+    needle "^2.2.1"
     nopt "^4.0.1"
     npm-packlist "^1.1.6"
     npmlog "^4.0.2"
@@ -7619,8 +7605,8 @@ webpack-sources@^1.0.1, webpack-sources@^1.1.0:
     source-map "~0.6.1"
 
 webpack@^4.6.0:
-  version "4.15.1"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.15.1.tgz#dc716779a3b88827c369f18c71a6137fa7e582fd"
+  version "4.16.0"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.16.0.tgz#660dae90890e55b8ed17c6f9d17bebb01dab5b4c"
   dependencies:
     "@webassemblyjs/ast" "1.5.13"
     "@webassemblyjs/helper-module-context" "1.5.13"
