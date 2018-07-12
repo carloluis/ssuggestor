@@ -5,3 +5,4 @@ node_modules/*
 coverage
 config/helpers.js
 helpers.js
+_config_
