@@ -24,10 +24,9 @@
 		}
 	},
 	"files": [
+		"dist",
 		"LICENSE",
-		"README.md",
-		"dist/",
-		"src/"
+		"README.md"
 	],
 	"repository": {
 		"type": "git",
